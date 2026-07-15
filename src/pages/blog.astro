@@ -1,0 +1,44 @@
+---
+import Base from "../layouts/Base.astro";
+
+// As blog posts are published, add them here.
+const posts: { title: string; href: string; blurb: string; date: string }[] = [];
+---
+
+<Base
+  title="Blog — Smart Shopping, Explained | The Life Insider"
+  description="Practical guides on how to research products, spot fake reviews, time your purchases, and shop smarter."
+>
+  <section class="section">
+    <div class="container">
+      <div class="kicker">The Insider Blog</div>
+      <h1>Smart shopping, explained</h1>
+      <p class="lede" style="max-width: 640px;">
+        Practical, no-hype guides on researching products, spotting fake
+        reviews, and getting the most for your money.
+      </p>
+
+      {
+        posts.length === 0 ? (
+          <div class="card" style="padding: 36px; margin-top: 28px; text-align: center;">
+            <h3>First articles publishing soon.</h3>
+            <p style="margin-bottom: 0;">
+              Our first guides are being finalized. In the meantime, see
+              <a href="/how-we-rate/">how our product ratings work</a>.
+            </p>
+          </div>
+        ) : (
+          <div style="margin-top: 28px;">
+            {posts.map((p) => (
+              <a href={p.href} class="card" style="display:block; padding: 22px 26px; margin-bottom: 14px;">
+                <h3 style="margin-bottom: 4px;">{p.title}</h3>
+                <p style="margin-bottom: 4px;">{p.blurb}</p>
+                <span class="review-count">{p.date}</span>
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+</Base>

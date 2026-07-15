@@ -1,0 +1,46 @@
+---
+import Base from "../layouts/Base.astro";
+
+// As review pages are published, add them here.
+const guides: { title: string; href: string; blurb: string; updated: string }[] = [];
+---
+
+<Base
+  title="Product Reviews & Buying Guides | The Life Insider"
+  description="Data-driven buying guides ranking the best products in each category, scored from verified customer reviews."
+>
+  <section class="section">
+    <div class="container">
+      <div class="kicker">Buying Guides</div>
+      <h1>Product Reviews</h1>
+      <p class="lede" style="max-width: 640px;">
+        Every guide below ranks the leading products in its category using our
+        <a href="/how-we-rate/">Insider Score methodology</a> — built from
+        verified customer reviews, value analysis, and brand reliability.
+      </p>
+
+      {
+        guides.length === 0 ? (
+          <div class="card" style="padding: 36px; margin-top: 28px; text-align: center;">
+            <h3>Our first buying guides are in final research now.</h3>
+            <p style="margin-bottom: 0;">
+              We're currently analyzing verified review data across our launch
+              categories. Check back shortly — or read
+              <a href="/how-we-rate/">how our ratings work</a> in the meantime.
+            </p>
+          </div>
+        ) : (
+          <div style="margin-top: 28px;">
+            {guides.map((g) => (
+              <a href={g.href} class="card" style="display:block; padding: 22px 26px; margin-bottom: 14px;">
+                <h3 style="margin-bottom: 4px;">{g.title}</h3>
+                <p style="margin-bottom: 4px;">{g.blurb}</p>
+                <span class="review-count">Updated {g.updated}</span>
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+</Base>

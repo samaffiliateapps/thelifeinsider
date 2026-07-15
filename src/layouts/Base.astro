@@ -1,0 +1,115 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const year = new Date().getFullYear();
+
+// Set to your GA4 Measurement ID (e.g. "G-XXXXXXXXXX") to activate analytics.
+const GA4_ID = "";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {
+      GA4_ID && (
+        <>
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`} />
+          <script is:inline define:vars={{ GA4_ID }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag("js", new Date());
+            gtag("config", GA4_ID);
+          </script>
+        </>
+      )
+    }
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="container">
+        <span>Independent reviews, powered by real customer data.</span>
+        <a href="/advertising-disclosure/">Advertising Disclosure</a>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="container">
+        <a href="/" class="logo">
+          <span class="mark">TL</span>
+          <span><span class="ti-the">The</span> Life Insider</span>
+        </a>
+        <nav class="main-nav">
+          <a href="/reviews/">Reviews</a>
+          <a href="/blog/">Blog</a>
+          <a href="/how-we-rate/">How We Rate</a>
+          <a href="/about/">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-brand">The Life Insider</div>
+            <p>
+              We help shoppers make smarter buying decisions by analyzing
+              thousands of verified customer reviews, comparing specifications,
+              and tracking real prices — so you don't have to.
+            </p>
+          </div>
+          <div>
+            <div class="footer-heading">Company</div>
+            <ul class="footer-links">
+              <li><a href="/about/">About Us</a></li>
+              <li><a href="/how-we-rate/">How We Rate</a></li>
+              <li><a href="/blog/">Blog</a></li>
+              <li><a href="/contact/">Contact Us</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="footer-heading">Legal</div>
+            <ul class="footer-links">
+              <li><a href="/privacy/">Privacy Policy</a></li>
+              <li><a href="/terms/">Terms of Service</a></li>
+              <li><a href="/advertising-disclosure/">Advertising Disclosure</a></li>
+              <li><a href="/affiliate-disclosure/">Affiliate Disclosure</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-legal">
+          <p>
+            The Life Insider is a review and comparison publication. We are a
+            marketing and research service, not a retailer — we do not sell
+            products directly. When you purchase through links on our site, we
+            may earn an affiliate commission, which may influence which
+            products we feature and where they appear. See our
+            <a href="/advertising-disclosure/">Advertising Disclosure</a>.
+          </p>
+          <p>
+            As an Amazon Associate, The Life Insider earns from qualifying
+            purchases. Amazon, Amazon Prime, the Amazon logo and Amazon Prime
+            logo are trademarks of Amazon.com, Inc. or its affiliates.
+          </p>
+          <p>© {year} TheLifeInsider.com. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
