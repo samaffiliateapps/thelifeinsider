@@ -1,0 +1,51 @@
+========================================================================
+ AFFILIATE LINK REPLACEMENT MANIFEST — The Life Insider
+ Every placeholder that must be swapped for a REAL tracking link before
+ driving paid traffic. (Joey's rule: never send Google Ads traffic to a
+ page with dead/placeholder monetization.)
+========================================================================
+
+WHAT YOU NEED FIRST
+-------------------
+1. Vault Media (Powerhouse Affiliate) — your Pocket Hose Copper Bullet
+   tracking link. In Vault Media, open the Pocket Hose offer, grab YOUR
+   tracking URL (it will contain your Affid). Rule: NO brand bidding.
+2. Amazon Associates tag — your store ID, e.g. "thelifeinsider-20" (US)
+   and/or "thelifeinsider0e-21" (AU). Both accounts already exist.
+
+------------------------------------------------------------------------
+FILE: src/pages/reviews/best-expandable-garden-hoses.astro
+------------------------------------------------------------------------
+[ ] POCKETHOSE_CPA  → replace "https://REPLACE-WITH-VAULT-MEDIA-TRACKING-LINK"
+       with your Vault Media Pocket Hose Copper Bullet link.
+       (This is the HERO / #1 pick — the $36/sale money-maker.)
+
+[ ] AMZ() tag       → replace "REPLACE-AMZ-TAG-20" with your Amazon
+       Associates store tag (e.g. thelifeinsider-20).
+
+[ ] AMZ() ASINs     → the 4 Amazon products use placeholder ASINs
+       (B0C6MEXAMPLE2..5). Replace each with the REAL ASIN of the exact
+       product you want to link (find the ASIN in the Amazon URL:
+       amazon.com/dp/<ASIN>). Current placeholders + intended product:
+         rank 2  copperhead100 → Pocket Hose Copper Head 100ft
+         rank 3  hoselinkreel  → Hoselink Retractable Hose Reel
+         rank 4  bullet50      → Pocket Hose Bullet 50ft
+         rank 5  budget100     → your chosen budget 100ft expandable hose
+
+------------------------------------------------------------------------
+DATA TO VERIFY AT PUBLISH (real as of Jul 2026 AU listings — confirm live)
+------------------------------------------------------------------------
+[ ] Star ratings + review counts on ranks 2–5 (they change; keep honest).
+[ ] Do NOT hard-code Amazon prices in the page (Amazon ToS) — cards use
+    "Check Price" CTAs by design. The hero discount ("Up to $64 Off") is
+    the offer's own promotion and is fine to show.
+
+------------------------------------------------------------------------
+SITE-WIDE (do once)
+------------------------------------------------------------------------
+[ ] src/layouts/Base.astro → set GA4_ID = "G-XXXXXXXXXX" (your GA4 id).
+[ ] src/components/EmailCapture.astro → set the form `action` to your
+    email provider / Cloudflare Worker endpoint.
+[ ] Add Google Ads conversion tracking (via GA4 import or CPV Lab Pro)
+    before spending.
+========================================================================

@@ -1,0 +1,112 @@
+---
+import Base from "./Base.astro";
+import ProductCard from "../components/ProductCard.astro";
+import EmailCapture from "../components/EmailCapture.astro";
+import type { Product } from "../components/ProductCard.astro";
+
+export interface Props {
+  title: string;
+  description: string;
+  h1: string;
+  updated: string;
+  intro: string[]; // paragraphs
+  products: Product[];
+  deepDive?: { heading: string; body: string[] }; // deep-dive on #1 pick
+  faqs?: { q: string; a: string }[];
+}
+
+const { title, description, h1, updated, intro, products, deepDive, faqs } = Astro.props;
+const top = products.find((p) => p.rank === 1);
+---
+
+<Base title={title} description={description}>
+  <article>
+    <!-- Header -->
+    <section class="section" style="padding-bottom:24px;">
+      <div class="container">
+        <div class="kicker">Buying Guide</div>
+        <h1>{h1}</h1>
+        <p class="updated">Last updated: {updated}</p>
+        <div class="disclosure-inline">
+          The Life Insider is reader-supported. When you buy through links on our
+          site, we may earn an affiliate commission, which may influence which
+          products we feature. Our scores are based on verified customer review
+          data — <a href="/how-we-rate/">see how we rate</a>.
+        </div>
+        <div class="prose" style="max-width:820px;">
+          {intro.map((para) => <p set:html={para} />)}
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick picks summary -->
+    <section style="padding:0 0 8px;">
+      <div class="container">
+        <div class="card" style="padding:20px 24px;background:var(--bg-soft);">
+          <strong style="color:var(--ink);">Our Top Picks:</strong>
+          <div style="display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:10px;">
+            {products.map((p) => (
+              <a href={`#rank-${p.rank}`} style="font-size:0.95rem;">
+                <strong>#{p.rank}</strong> {p.badge ? `${p.badge}: ` : ""}{p.brand ?? p.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ranked list -->
+    <section class="section" style="padding-top:28px;">
+      <div class="container">
+        {products.map((p) => <ProductCard product={p} />)}
+      </div>
+    </section>
+
+    <!-- Deep dive on #1 -->
+    {deepDive && top && (
+      <section class="section section-soft">
+        <div class="container-narrow prose">
+          <div class="kicker">Our #1 Pick</div>
+          <h2>{deepDive.heading}</h2>
+          {deepDive.body.map((para) => <p set:html={para} />)}
+          <div style="text-align:center;margin-top:24px;">
+            <a href={top.url} class="btn" rel="sponsored nofollow noopener" target="_blank">
+              {top.ctaLabel ?? "Check Price"}
+            </a>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- How we rate strip -->
+    <section class="section">
+      <div class="container-narrow" style="text-align:center;">
+        <h2>How We Rated These Products</h2>
+        <p>
+          Every Insider Score is built from four weighted inputs: verified
+          customer ratings (50%), review volume and consistency (20%), value for
+          money (15%), and brand reliability (15%). We don't fabricate test
+          results or invent ratings. <a href="/how-we-rate/">Read our full methodology →</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Email capture -->
+    <EmailCapture />
+
+    <!-- FAQ -->
+    {faqs && faqs.length > 0 && (
+      <section class="section">
+        <div class="container-narrow prose">
+          <h2>Frequently Asked Questions</h2>
+          {faqs.map((f) => (
+            <>
+              <h3>{f.q}</h3>
+              <p set:html={f.a} />
+            </>
+          ))}
+        </div>
+      </section>
+    )}
+  </article>
+</Base>

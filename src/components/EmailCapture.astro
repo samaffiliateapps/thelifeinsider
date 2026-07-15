@@ -1,0 +1,33 @@
+---
+// Deal-alert email capture. Wire `action` to your ESP (or a Cloudflare Worker) before launch.
+const { heading, sub } = Astro.props;
+---
+
+<section class="section section-soft">
+  <div class="container-narrow" style="text-align:center;">
+    <div class="card" style="padding:32px 28px;">
+      <h2 style="margin-bottom:8px;">{heading ?? "Never overpay again."}</h2>
+      <p class="lede" style="margin-bottom:20px;">
+        {sub ?? "Get our best-rated picks and real price-drop alerts sent to your inbox. Free, no spam, unsubscribe anytime."}
+      </p>
+      <form
+        action="#"
+        method="post"
+        style="display:flex;gap:10px;max-width:440px;margin:0 auto;flex-wrap:wrap;justify-content:center;"
+        data-email-capture
+      >
+        <input
+          type="email"
+          name="email"
+          required
+          placeholder="Your email address"
+          style="flex:1;min-width:220px;padding:13px 16px;border:1px solid var(--border);border-radius:10px;font-size:1rem;"
+        />
+        <button type="submit" class="btn">Get Deal Alerts</button>
+      </form>
+      <p style="font-size:0.78rem;color:var(--muted);margin-top:12px;margin-bottom:0;">
+        By subscribing you agree to our <a href="/privacy/">Privacy Policy</a>.
+      </p>
+    </div>
+  </div>
+</section>

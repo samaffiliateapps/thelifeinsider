@@ -1,0 +1,70 @@
+---
+// A single ranked product card for review pages.
+export interface Product {
+  rank: number;
+  name: string;
+  brand?: string;
+  image?: string;
+  score: number; // out of 10 (real: derived from verified ratings — see how-we-rate)
+  scoreLabel?: string; // Outstanding / Excellent / Very Good / Good / Decent
+  starRating?: number; // out of 5, real average
+  reviewCount?: number; // real count
+  badge?: string; // "Best Overall" | "Best Value" | "Editor's Choice"
+  price?: string;
+  discount?: string; // e.g. "50% Off" — only if genuinely running
+  url: string; // affiliate link (hero) or Amazon link (backfill) — includes subid
+  ctaLabel?: string;
+  pros: string[];
+  cons?: string[];
+  blurb?: string;
+}
+const { product } = Astro.props as { product: Product };
+const p = product;
+const stars = p.starRating
+  ? "★".repeat(Math.round(p.starRating)) + "☆".repeat(5 - Math.round(p.starRating))
+  : null;
+---
+
+<div class:list={["card", "rank-card", { "is-top": p.rank === 1 }]} id={`rank-${p.rank}`}>
+  <div class="rank-num">#{p.rank}</div>
+
+  <div class="rank-body">
+    {p.badge && (
+      <span class:list={["badge", p.rank === 1 ? "badge-choice" : "badge-value"]}>{p.badge}</span>
+    )}
+    {p.discount && <span class="badge badge-deal" style="margin-left:6px;">{p.discount}</span>}
+    <div class="product-title">{p.name}</div>
+
+    {p.image && (
+      <img src={p.image} alt={p.name} loading="lazy" width="220" height="150" style="border-radius:8px;margin-bottom:10px;object-fit:contain;" />
+    )}
+
+    <ul class="pros">
+      {p.pros.map((pro) => <li>{pro}</li>)}
+    </ul>
+    {p.cons && p.cons.length > 0 && (
+      <ul class="pros cons">
+        {p.cons.map((con) => <li>{con}</li>)}
+      </ul>
+    )}
+    {p.blurb && <p style="font-size:0.92rem;color:var(--muted);margin-top:8px;margin-bottom:0;">{p.blurb}</p>}
+  </div>
+
+  <div class="rank-side">
+    <div class="score-pill">
+      <span class="num">{p.score.toFixed(1)}</span>
+      <span class="label">/ 10</span>
+    </div>
+    {p.scoreLabel && <div style="font-weight:700;color:var(--ink);font-size:0.9rem;">{p.scoreLabel}</div>}
+    {stars && (
+      <div>
+        <div class="stars">{stars}</div>
+        {p.reviewCount && <div class="review-count">{p.reviewCount.toLocaleString()} reviews</div>}
+      </div>
+    )}
+    {p.price && <div style="font-weight:700;color:var(--ink);">{p.price}</div>}
+    <a href={p.url} class="btn btn-block" rel="sponsored nofollow noopener" target="_blank">
+      {p.ctaLabel ?? "Check Price"}
+    </a>
+  </div>
+</div>
