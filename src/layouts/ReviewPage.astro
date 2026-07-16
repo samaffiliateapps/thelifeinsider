@@ -27,12 +27,11 @@ const top = products.find((p) => p.rank === 1);
         <div class="kicker">Buying Guide</div>
         <h1>{h1}</h1>
         <p class="updated">Last updated: {updated}</p>
-        <div class="disclosure-inline">
-          The Life Insider is reader-supported. When you buy through links on our
-          site, we may earn an affiliate commission, which may influence which
-          products we feature. Our scores are based on verified customer review
-          data — <a href="/how-we-rate/">see how we rate</a>.
-        </div>
+        <p class="disclosure-line disclosure-line--review">
+          Reader-supported: we may earn a commission when you buy through our
+          links, at no extra cost to you — it never affects our{" "}
+          <a href="/how-we-rate/">verified-data scores</a>.
+        </p>
         <div class="prose" style="max-width:820px;">
           {intro.map((para) => <p set:html={para} />)}
         </div>

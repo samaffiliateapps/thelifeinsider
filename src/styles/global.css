@@ -112,11 +112,23 @@ img { max-width: 100%; height: auto; }
 .prose li { margin-bottom: 0.4em; }
 .updated { font-size: 0.85rem; color: var(--muted); margin-bottom: 24px; }
 
-/* ---- Disclosure box ---- */
+/* ---- Disclosure box (legacy, kept for any inline use) ---- */
 .disclosure-inline {
   font-size: 0.8rem; color: var(--muted);
   background: var(--bg-soft); border: 1px solid var(--border);
   border-radius: 8px; padding: 10px 14px; margin: 14px 0 22px;
+}
+
+/* ---- Disclosure line (discreet, present-not-shouted) ---- */
+.disclosure-line {
+  font-size: 0.78rem; color: var(--muted); line-height: 1.5;
+  margin: -2px 0 22px;
+}
+.disclosure-line a { color: var(--muted); text-decoration: underline; }
+/* Money/review pages: a touch more visible + a subtle left accent for FTC "conspicuous" */
+.disclosure-line--review {
+  font-size: 0.82rem; padding-left: 10px;
+  border-left: 2px solid var(--border); margin: 6px 0 22px;
 }
 
 /* ---- Footer ---- */
@@ -151,3 +163,27 @@ img { max-width: 100%; height: auto; }
 .rank-card .pros li::before { content: "✓"; position: absolute; left: 0; color: #16a34a; font-weight: 800; }
 .rank-card .cons li::before { content: "✕"; color: #dc2626; }
 .rank-side { display: flex; flex-direction: column; align-items: center; gap: 10px; justify-content: center; text-align: center; }
+
+/* ---- Homepage: hero split, trust strip, step icons, categories ---- */
+.hero-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 44px; align-items: center; }
+@media (max-width: 760px) { .hero-grid { grid-template-columns: 1fr; gap: 30px; } }
+.hero-grid h1 { margin-bottom: 14px; }
+
+.step-icon { width: 48px; height: 48px; border-radius: 12px; background: #eaf1f8; color: var(--brand); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+.step-icon svg { width: 26px; height: 26px; }
+.step-icon.is-accent { background: #fdecdf; color: var(--accent); }
+
+.trust-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+@media (max-width: 720px) { .trust-strip { grid-template-columns: repeat(2, 1fr); gap: 14px; } }
+.trust-item { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; font-weight: 600; color: var(--ink); }
+.trust-item svg { width: 24px; height: 24px; color: var(--brand); flex-shrink: 0; }
+
+.cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 24px; }
+@media (max-width: 720px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
+.cat-tile { border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 16px; text-align: center; background: #fff; color: var(--ink); display: block; }
+a.cat-tile { transition: border-color 0.15s ease, transform 0.1s ease; }
+a.cat-tile:hover { border-color: var(--brand); transform: translateY(-2px); text-decoration: none; }
+.cat-tile svg { width: 30px; height: 30px; color: var(--teal); }
+.cat-tile.is-soon { opacity: 0.62; }
+.cat-tile .cat-name { font-size: 0.95rem; font-weight: 700; margin-top: 12px; }
+.cat-tile .cat-sub { font-size: 0.72rem; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; }

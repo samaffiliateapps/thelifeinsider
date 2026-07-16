@@ -1,8 +1,44 @@
 ---
 import Base from "../layouts/Base.astro";
 
-// As blog posts are published, add them here.
-const posts: { title: string; href: string; blurb: string; date: string }[] = [];
+// As blog posts are published, add them here (newest first).
+const posts: { title: string; href: string; blurb: string; date: string }[] = [
+  {
+    title: "How to Spot a Fake Product Review",
+    href: "/blog/how-to-spot-fake-reviews/",
+    blurb:
+      "Nine reliable tells that separate a genuine customer review from a planted one — and a faster way to read any review section.",
+    date: "July 2026",
+  },
+  {
+    title: "What a Star Rating Doesn't Tell You",
+    href: "/blog/star-ratings-review-volume/",
+    blurb:
+      "A 4.8 with 40 reviews is not better than a 4.6 with 12,000. How to read ratings using volume, distribution, and recency.",
+    date: "July 2026",
+  },
+  {
+    title: "How to Tell If a Discount Is Actually a Deal",
+    href: "/blog/is-that-discount-really-a-deal/",
+    blurb:
+      "'50% off' is often theater. How to check whether a sale price is genuine using price history, anchor pricing, and timing.",
+    date: "July 2026",
+  },
+  {
+    title: "Why Expandable Garden Hoses Kink, Leak, and Burst",
+    href: "/blog/why-expandable-hoses-kink/",
+    blurb:
+      "How expandable hoses actually work, why cheap ones fail in a season, and how to make a good one last for years.",
+    date: "July 2026",
+  },
+  {
+    title: "How to Choose a Garden Hose That Lasts",
+    href: "/blog/garden-hose-buying-guide/",
+    blurb:
+      "Length, diameter, material, connectors, and safety — the five specs that decide whether a hose lasts a decade or a summer.",
+    date: "July 2026",
+  },
+];
 ---
 
 <Base

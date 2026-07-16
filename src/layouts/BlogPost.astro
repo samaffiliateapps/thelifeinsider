@@ -1,0 +1,95 @@
+---
+import Base from "./Base.astro";
+import EmailCapture from "../components/EmailCapture.astro";
+
+export interface Props {
+  title: string; // <title> tag
+  description: string; // meta description
+  h1: string;
+  dateLabel: string; // human date, e.g. "July 2026"
+  dateISO: string; // machine date, e.g. "2026-07-16"
+  readTime: string; // e.g. "6 min read"
+  lede: string; // opening summary line (may contain HTML)
+  related?: { label: string; href: string }[]; // internal "keep reading" links
+}
+
+const { title, description, h1, dateLabel, dateISO, readTime, lede, related } =
+  Astro.props;
+
+const author = "The Life Insider Editorial Team";
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: h1,
+  description,
+  datePublished: dateISO,
+  dateModified: dateISO,
+  author: { "@type": "Organization", name: author },
+  publisher: {
+    "@type": "Organization",
+    name: "The Life Insider",
+  },
+  mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
+};
+---
+
+<Base title={title} description={description}>
+  <article>
+    <section class="section" style="padding-bottom:24px;">
+      <div class="container-narrow prose">
+        <div class="kicker">The Insider Blog</div>
+        <h1>{h1}</h1>
+        <p class="updated" style="margin-bottom:16px;">
+          By {author} · {dateLabel} · {readTime}
+        </p>
+        <p class="disclosure-line">
+          Reader-supported — we may earn a commission from some links, at no
+          cost to you. <a href="/how-we-rate/">How we rate</a>.
+        </p>
+        <p class="lede" set:html={lede} />
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0;">
+      <div class="container-narrow prose">
+        <slot />
+      </div>
+    </section>
+
+    {
+      related && related.length > 0 && (
+        <section class="section" style="padding-top:0;">
+          <div class="container-narrow">
+            <div class="card" style="padding:24px 26px;background:var(--bg-soft);">
+              <div class="footer-heading" style="color:var(--muted);">
+                Keep reading
+              </div>
+              <ul class="footer-links" style="margin-top:6px;">
+                {related.map((r) => (
+                  <li style="margin-bottom:10px;">
+                    <a href={r.href} style="font-weight:600;">
+                      {r.label} →
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+      )
+    }
+
+    <EmailCapture
+      heading="Shop smarter, not harder."
+      sub="Get our latest buying guides and real price-drop alerts sent to your inbox. Free, no spam, unsubscribe anytime."
+    />
+  </article>
+
+  <script
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(articleSchema)}
+  />
+</Base>
