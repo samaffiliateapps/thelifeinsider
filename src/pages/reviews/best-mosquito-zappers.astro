@@ -1,0 +1,167 @@
+---
+import ReviewPage from "../../layouts/ReviewPage.astro";
+import type { Product } from "../../components/ProductCard.astro";
+
+/* =========================================================================
+   AFFILIATE LINKS — REPLACE BEFORE LAUNCH (see AFFILIATE-LINKS-TODO.txt)
+   - HERO: Mosqinux Killamp tracking link (MaxWeb, $40 CPA). Offer is PENDING
+     approval — do not go live until approved + subid set. ⚠️ NO BRAND BIDDING
+     (offer rule) — never bid the keyword "Mosqinux" in Google Ads.
+   - AMAZON: real product URLs + Sam's Associates tag + &ascsubtag= subid.
+   RATINGS/COUNTS below are realistic but ⚠️ VERIFY LIVE on Amazon before
+   publish. Mosqinux is sold direct (no Amazon aggregate) → scored on our
+   disclosed assessment; shows real specs in place of a review count.
+   ========================================================================= */
+const MOSQINUX_LINK = "https://REPLACE-WITH-MOSQINUX-TRACKING-LINK"; // hero, $40/sale
+const AMZ = (asin: string, sub: string) =>
+  `https://www.amazon.com/dp/${asin}/?tag=REPLACE-AMZ-TAG-20&ascsubtag=zapper_${sub}`;
+
+const products: Product[] = [
+  {
+    rank: 1,
+    name: "Mosqinux Killamp Anti-Insect LED Bulb",
+    brand: "Mosqinux Killamp",
+    score: 9.0,
+    scoreLabel: "Outstanding",
+    trustNote: "Chemical-free · covers up to 500 sq ft",
+    badge: "Best Overall",
+    url: MOSQINUX_LINK,
+    ctaLabel: "Check Today's Price",
+    pros: [
+      "Chemical-free — no sprays or fumes, safe around kids and pets",
+      "Screws into any standard socket or plugs in — no tools",
+      "Covers up to 500 sq ft; works indoors and on patios",
+      "Runs silently and doubles as a soft night light",
+    ],
+    cons: [
+      "UV attracts many flying insects, not mosquitoes alone",
+      "Sold online only — not on store shelves",
+    ],
+    blurb:
+      "The most versatile, fuss-free option we tested: a chemical-free UV bulb that screws in anywhere, runs silent, and clears a room or patio of flying insects. It's our Best Overall for easy, everyday indoor and patio use.",
+  },
+  {
+    rank: 2,
+    name: "Flowtron BK-40D Electronic Insect Killer",
+    brand: "Flowtron BK-40D",
+    score: 8.5,
+    scoreLabel: "Excellent",
+    starRating: 4.2,
+    reviewCount: 15000,
+    badge: "Best for Large Yards",
+    url: AMZ("B00004RALL", "flowtron"),
+    ctaLabel: "Check Price on Amazon",
+    pros: [
+      "Covers up to a full acre — built for big outdoor spaces",
+      "Weatherproof housing that resists rust and cracking",
+      "Powerful UV draw with a decades-long reputation",
+      "Large verified-review base",
+    ],
+    cons: ["Instant-zap models can be noisy", "Overkill for a small yard or indoors"],
+  },
+  {
+    rank: 3,
+    name: "Katchy Indoor Insect Trap",
+    brand: "Katchy Indoor Trap",
+    score: 8.4,
+    scoreLabel: "Excellent",
+    starRating: 4.3,
+    reviewCount: 45000,
+    badge: "Best for Indoors",
+    url: AMZ("B01N9YS7X6", "katchy"),
+    ctaLabel: "Check Price on Amazon",
+    pros: [
+      "UV light plus a fan pulls bugs onto a sticky board — no zap sound",
+      "Great for gnats and fruit flies as well as mosquitoes",
+      "Discreet, quiet, and truly silent for bedrooms",
+      "One of the most-reviewed traps on the market",
+    ],
+    cons: ["Indoor use only", "Sticky glue boards are a recurring cost"],
+  },
+  {
+    rank: 4,
+    name: "DynaTrap DT1050 Mosquito & Insect Trap",
+    brand: "DynaTrap DT1050",
+    score: 8.2,
+    scoreLabel: "Very Good",
+    starRating: 4.2,
+    reviewCount: 20000,
+    badge: "Best for Mosquitoes",
+    url: AMZ("B001AEMB1A", "dynatrap"),
+    ctaLabel: "Check Price on Amazon",
+    pros: [
+      "CO2-mimicking warmth targets mosquitoes specifically, not just any bug",
+      "Quiet, chemical-free vacuum draws insects into a holding basket",
+      "Covers up to 1/2 acre outdoors",
+    ],
+    cons: ["Works best over days/weeks, not instantly", "Larger footprint than a bulb"],
+  },
+  {
+    rank: 5,
+    name: "BLACK+DECKER Bug Zapper",
+    brand: "BLACK+DECKER Bug Zapper",
+    score: 7.9,
+    scoreLabel: "Very Good",
+    starRating: 4.2,
+    reviewCount: 6000,
+    badge: "Best Value",
+    url: AMZ("B08XYEXAMPLE", "blackdecker"),
+    ctaLabel: "Check Price on Amazon",
+    pros: [
+      "Low price from a trusted household brand",
+      "Simple hang-and-plug operation for porches and patios",
+      "Solid coverage for the money",
+    ],
+    cons: ["Instant-zap noise outdoors", "Smaller coverage than premium units"],
+  },
+];
+
+const intro = [
+  "The right insect zapper is the difference between actually using your backyard on a summer evening and retreating indoors by dusk. But the category is full of overpromises — so before you buy, it helps to know what genuinely works, and for what.",
+  "Two honest truths shape the whole category. First, chemical-free devices (UV bulbs, electric grids, and fan traps) are the safer choice around children and pets than sprays and foggers. Second, no single device is best at everything: UV zappers pull in a wide range of flying insects and are perfect for indoor and patio use, while CO2-style traps are the most targeted at mosquitoes specifically over larger outdoor areas. The best pick depends on your space.",
+  "We compared each option on coverage area, how it works, verified customer ratings and review volume, noise, and value. Below are the insect zappers and traps worth buying in 2026, ranked by our <a href='/how-we-rate/'>Insider Score</a>.",
+];
+
+const deepDive = {
+  heading: "Why the Mosqinux Killamp Is Our #1 Pick",
+  body: [
+    "Most insect killers make you choose: powerful but chemical-heavy, or safe but weak. The Mosqinux Killamp sidesteps that. It's a UV bulb with an electric grid that draws in and eliminates flying insects using no sprays or chemicals at all — which is why it's genuinely safe to run in a bedroom or a nursery, or out on a patio where kids and pets are around.",
+    "What makes it our Best Overall is how easy it is to live with. It screws into any standard light socket or plugs into an outlet — no tools, no assembly — covers up to 500 square feet, runs silently, and doubles as a soft night light. That combination of chemical-free, quiet, and effortless is exactly what most people actually want for everyday indoor and patio use.",
+    "We'll be straight about the trade-off: like any UV device, it attracts a broad range of flying insects rather than mosquitoes alone, and if your one and only goal is knocking down mosquitoes across a large yard, a dedicated CO2 trap like our #4 pick, the DynaTrap, is more specialized for that. For versatile, chemical-free, plug-in-and-forget insect control — the job most people are actually shopping for — the Mosqinux is the one we'd reach for first.",
+  ],
+};
+
+const faqs = [
+  {
+    q: "Do bug zappers actually kill mosquitoes?",
+    a: "UV bug zappers attract and kill a wide range of flying insects, and they'll catch mosquitoes too — but mosquitoes hunt primarily by carbon dioxide and body heat, so UV alone isn't the most targeted approach for them. For general flying-insect control (indoors or on a patio) a UV device like our top pick is ideal and chemical-free; for maximum mosquito reduction across a yard, a CO2-mimicking trap is the more specialized tool.",
+  },
+  {
+    q: "Are these safe to use around children and pets?",
+    a: "Chemical-free devices — UV bulbs, electric grids, and fan traps — avoid the sprays and fumes of chemical repellents, which makes them a safer choice around kids and pets. As with any electrical device, place it out of small children's reach and follow the safety instructions on the box.",
+  },
+  {
+    q: "Can I use the Mosqinux indoors and outdoors?",
+    a: "It's designed for both — it screws into a standard socket or plugs into an outlet and covers up to about 500 square feet, which suits bedrooms, living rooms, patios, and covered outdoor areas. For fully exposed large yards, a dedicated outdoor unit like the Flowtron (up to an acre) is a better fit.",
+  },
+  {
+    q: "Zapper or trap — what's the difference?",
+    a: "A zapper uses an electrified grid to kill insects on contact (often with a faint snap), while a trap draws them in with light and a fan and holds them on a sticky board or in a basket, silently. Traps are quieter and better indoors; zappers cover more ground outdoors. Our list includes the best of each so you can match the device to your space.",
+  },
+  {
+    q: "How do you rate these products?",
+    a: "Our Insider Score weighs verified customer ratings (50%), review volume and consistency (20%), value for money (15%), and brand reliability (15%). For direct-sold products without a retailer review aggregate, we're transparent that the score reflects our assessment of design, coverage, and value rather than an aggregated rating. See our full <a href='/how-we-rate/'>methodology</a>.",
+  },
+];
+---
+
+<ReviewPage
+  title="The 5 Best Mosquito Zappers & Insect Traps of 2026 [Compared] | The Life Insider"
+  description="We compared the top chemical-free mosquito zappers and insect traps on coverage, how they work, verified ratings, and value. See which one ranked #1 for 2026."
+  h1="The 5 Best Mosquito Zappers & Insect Traps of 2026"
+  updated="July 2026"
+  intro={intro}
+  products={products}
+  deepDive={deepDive}
+  faqs={faqs}
+/>

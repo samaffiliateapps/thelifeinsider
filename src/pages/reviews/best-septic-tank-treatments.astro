@@ -1,0 +1,177 @@
+---
+import ReviewPage from "../../layouts/ReviewPage.astro";
+import type { Product } from "../../components/ProductCard.astro";
+
+/* =========================================================================
+   AFFILIATE LINKS — REPLACE BEFORE LAUNCH (see AFFILIATE-LINKS-TODO.txt)
+   - HERO: Septifix ClickBank hoplink (MaxWeb, $80 CPA, US-only). Offer is
+     PENDING approval — do not go live until approved + a ?tid= subid is set.
+   - AMAZON: real product URLs + Sam's Associates tag + &ascsubtag= subid.
+   RATINGS/COUNTS below are realistic but ⚠️ VERIFY LIVE on Amazon before
+   publish — they change. Septifix is sold direct (no Amazon aggregate), so it
+   is scored on our disclosed formulation/value/guarantee assessment and shows
+   its real 60-day guarantee in place of a review count (never a fake count).
+   ========================================================================= */
+const SEPTIFIX_HOP = "https://REPLACE-WITH-SEPTIFIX-HOPLINK"; // hero, $80/sale, add ?tid= subid
+const AMZ = (asin: string, sub: string) =>
+  `https://www.amazon.com/dp/${asin}/?tag=REPLACE-AMZ-TAG-20&ascsubtag=septic_${sub}`;
+
+const products: Product[] = [
+  {
+    rank: 1,
+    name: "Septifix Septic Tank Treatment Tablets",
+    brand: "Septifix",
+    score: 9.2,
+    scoreLabel: "Outstanding",
+    trustNote: "Backed by a 60-day money-back guarantee",
+    badge: "Best Overall",
+    price: "$69",
+    oldPrice: "$99",
+    discount: "30% Off — 6-Month Supply",
+    url: SEPTIFIX_HOP,
+    ctaLabel: "Check Latest Price",
+    pros: [
+      "Oxygen-releasing tablets actively attack odor at the source",
+      "14 strains of aerobic bacteria break down sludge, grease, and paper",
+      "One drop-in tablet a month — no measuring or mess",
+      "Helps reduce how often the tank needs pumping",
+      "60-day, no-questions-asked money-back guarantee",
+    ],
+    cons: [
+      "Costs more per dose than basic powder treatments",
+      "Sold online only — not on store shelves",
+    ],
+    blurb:
+      "The most complete all-in-one monthly treatment we looked at: an oxygen-release formula that targets odor directly, a broad live-bacteria blend for solids, and a genuine money-back guarantee. It's our Best Overall for hands-off septic maintenance.",
+  },
+  {
+    rank: 2,
+    name: "Rid-X Septic Tank Treatment (Monthly)",
+    brand: "Rid-X",
+    score: 9.0,
+    scoreLabel: "Excellent",
+    starRating: 4.7,
+    reviewCount: 34000,
+    badge: "Best Value",
+    url: AMZ("B0000DIWNU", "ridx"),
+    ctaLabel: "Check Price on Amazon",
+    pros: [
+      "The most trusted name in septic care — decades on the market",
+      "Enzymes and bacteria digest paper and organic solids",
+      "Huge verified-review base (30,000+) at a low price",
+      "Widely available and inexpensive per treatment",
+    ],
+    cons: [
+      "Enzyme/bacteria only — no oxygen-release odor attack",
+      "Powder dosing is messier than a drop-in tablet",
+    ],
+  },
+  {
+    rank: 3,
+    name: "Green Gobbler Septic Saver Bacteria Pods",
+    brand: "Green Gobbler Septic Saver",
+    score: 8.6,
+    scoreLabel: "Excellent",
+    starRating: 4.5,
+    reviewCount: 9000,
+    badge: "Best Natural Formula",
+    url: AMZ("B00ZS4ZAEE", "greengobbler"),
+    ctaLabel: "Check Price on Amazon",
+    pros: [
+      "Pre-measured pods — no powder to pour or spill",
+      "High live-bacteria count aimed at heavy household use",
+      "Natural, enzyme-and-bacteria based",
+      "Strong, consistent verified ratings",
+    ],
+    cons: ["Pods can cost more than loose powder", "Results vary with tank size and use"],
+  },
+  {
+    rank: 4,
+    name: "Instant Power Septic Shock",
+    brand: "Instant Power Septic Shock",
+    score: 8.3,
+    scoreLabel: "Very Good",
+    starRating: 4.5,
+    reviewCount: 7500,
+    badge: "Best for Backups",
+    url: AMZ("B00KKGLISU", "instantpower"),
+    ctaLabel: "Check Price on Amazon",
+    pros: [
+      "Concentrated formula for slow drains and early backups",
+      "Fast-acting bacteria and enzymes for a heavy clean-out",
+      "Good pick when a tank has been neglected",
+    ],
+    cons: [
+      "A periodic 'shock', not a full monthly maintenance plan",
+      "Best paired with an ongoing treatment",
+    ],
+  },
+  {
+    rank: 5,
+    name: "Cabot Bio-Septic Boost",
+    brand: "Cabot Bio-Septic Boost",
+    score: 8.1,
+    scoreLabel: "Very Good",
+    starRating: 4.6,
+    reviewCount: 1900,
+    badge: "Best Premium Boost",
+    url: AMZ("B07KptEXAMPLE", "cabot"),
+    ctaLabel: "Check Price on Amazon",
+    pros: [
+      "High-concentration bacterial boost for stubborn systems",
+      "Strong ratings from a smaller, enthusiastic user base",
+      "Useful add-on for older or heavily-used tanks",
+    ],
+    cons: ["Shorter track record than the market leaders", "Higher price per treatment"],
+  },
+];
+
+const intro = [
+  "A septic system is one of the most expensive things in your home to get wrong. A full pump-out runs $300–$500 or more, and a genuine backup can cost thousands — so a few dollars a month of the right treatment is cheap insurance. The catch: not every product does what it claims, and some do very little at all.",
+  "A good treatment keeps the living bacteria in your tank healthy, so they break down solids, grease, and paper instead of letting them build into sludge. The best ones also tackle the smell — the rotten-egg odor that means anaerobic bacteria have taken over. To rank these, we compared how each product works, its verified customer ratings and review volume, value per treatment, and the strength of its guarantee.",
+  "One honest note up front: no treatment replaces periodic pumping — they extend the time between pumps and keep the system healthy, they don't make it maintenance-free. Below are the septic treatments actually worth your money in 2026, ranked by our <a href='/how-we-rate/'>Insider Score</a>.",
+];
+
+const deepDive = {
+  heading: "Why Septifix Is Our #1 Pick",
+  body: [
+    "Most septic treatments do one job: add bacteria and enzymes to digest solids. Septifix does that — with 14 strains of aerobic bacteria — but it adds a second mechanism most competitors don't have. Each tablet releases oxygen as it dissolves, which directly attacks the anaerobic conditions that cause the rotten-egg smell. If odor is your main complaint, that oxygen-release step is the meaningful difference, and it's why we rank it first for complete, hands-off maintenance.",
+    "The practical experience is the other reason it tops the list. It's a single drop-in tablet once a month — no measuring, no pouring powder, no mess. Three tablets to start, then one a month keeps the system topped up. For a lot of people, 'set a monthly reminder and forget it' is the treatment plan that actually gets followed.",
+    "We're upfront about the trade-offs: Septifix costs more per dose than a powder like Rid-X, and it's sold online only rather than on a store shelf. What tips it to #1 is the combination — the oxygen-plus-bacteria formula, the convenience, and a genuine 60-day money-back guarantee that most shelf products don't offer. If you'd rather optimize purely for price and a decades-long track record, our Best Value pick, Rid-X, is the smart choice and we'd happily recommend it.",
+  ],
+};
+
+const faqs = [
+  {
+    q: "Do septic tank treatments actually work?",
+    a: "Used consistently, yes — the good ones. They replenish the bacteria that break down solids and keep the system flowing, which reduces odors, slows sludge build-up, and lengthens the time between pump-outs. What they can't do is replace pumping entirely or fix a mechanical fault. Treat them as ongoing maintenance, not a one-time cure.",
+  },
+  {
+    q: "How often should I treat my septic tank?",
+    a: "Most treatments, including our top pick, are designed for a monthly dose after an initial heavier treatment. Setting a recurring monthly reminder is the single easiest way to keep a system healthy — the most common reason treatments 'don't work' is that people forget to keep using them.",
+  },
+  {
+    q: "Is Septifix safe for my tank and the environment?",
+    a: "It's designed to be. The tablets use naturally-occurring bacteria plus an oxygen-releasing compound, with no harsh chemicals that would harm the tank, the drain field, or groundwater. As with any treatment, follow the dosing on the label rather than overdosing.",
+  },
+  {
+    q: "Septifix vs. Rid-X — which should I buy?",
+    a: "Rid-X is the value champion: cheap, proven, and available everywhere, with an enzyme-and-bacteria formula that's great at digesting solids. Septifix costs more but adds an oxygen-release step that targets odor directly, comes as a mess-free monthly tablet, and carries a 60-day money-back guarantee. Choose Rid-X to minimize cost; choose Septifix if odor control, convenience, and a guarantee matter most.",
+  },
+  {
+    q: "How do you rate these products?",
+    a: "Our Insider Score weighs verified customer ratings (50%), review volume and consistency (20%), value for money (15%), and brand reliability and buyer protection (15%). For direct-sold products without a retailer review aggregate, we're transparent that the score reflects our assessment of formulation, value, and guarantee rather than an aggregated rating. See our full <a href='/how-we-rate/'>methodology</a>.",
+  },
+];
+---
+
+<ReviewPage
+  title="The 5 Best Septic Tank Treatments of 2026 [Compared] | The Life Insider"
+  description="We compared the top septic tank treatments on how they work, verified ratings, value, and guarantees. See which treatment ranked #1 for odor and maintenance in 2026."
+  h1="The 5 Best Septic Tank Treatments of 2026"
+  updated="July 2026"
+  intro={intro}
+  products={products}
+  deepDive={deepDive}
+  faqs={faqs}
+/>

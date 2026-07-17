@@ -41,6 +41,41 @@ DATA TO VERIFY AT PUBLISH (real as of Jul 2026 AU listings — confirm live)
     the offer's own promotion and is fine to show.
 
 ------------------------------------------------------------------------
+FILE: src/pages/reviews/best-septic-tank-treatments.astro   (MaxWeb, US-only)
+------------------------------------------------------------------------
+[ ] SEPTIFIX_HOP → replace "https://REPLACE-WITH-SEPTIFIX-HOPLINK" with your
+       Septifix ClickBank hoplink (you have it: ...hop.clickbank.net/), and
+       append a subid for attribution via ?tid=  (e.g. ?tid=septic_hero).
+       HERO / #1 pick — $80/sale. Do NOT go live until the offer is APPROVED.
+[ ] AMZ() tag  → replace "REPLACE-AMZ-TAG-20" with your Amazon US tag.
+[ ] AMZ() ASINs → ranks 2–5 use placeholder/real ASINs — confirm each is the
+       exact product: ridx (Rid-X), greengobbler (Green Gobbler Septic Saver),
+       instantpower (Instant Power Septic Shock), cabot (Cabot Bio-Septic Boost).
+[ ] VERIFY LIVE: star ratings + review counts on ranks 2–5 (approximate now).
+[ ] Septifix (#1) is direct-sold → no Amazon rating shown by design; it shows
+       its real 60-day guarantee instead. Confirm the guarantee + the $69/$99
+       (6-month, 30% off) pricing are still current before launch.
+
+------------------------------------------------------------------------
+FILE: src/pages/reviews/best-mosquito-zappers.astro   (MaxWeb, most geos)
+------------------------------------------------------------------------
+[ ] MOSQINUX_LINK → replace "https://REPLACE-WITH-MOSQINUX-TRACKING-LINK"
+       with YOUR Mosqinux Killamp tracking link. HERO / #1 — $40/sale.
+       ⚠️ OFFER RULE: NO BRAND BIDDING — never bid "Mosqinux" in Google Ads.
+       Do NOT go live until the offer is APPROVED.
+[ ] AMZ() tag → your Amazon US tag.
+[ ] AMZ() ASINs → confirm: flowtron (Flowtron BK-40D), katchy (Katchy Indoor
+       Trap), dynatrap (DynaTrap DT1050), blackdecker (BLACK+DECKER Bug Zapper).
+[ ] VERIFY LIVE: star ratings + review counts on ranks 2–5.
+
+------------------------------------------------------------------------
+PRODUCT IMAGES (optional but boosts conversion — all cards support images)
+------------------------------------------------------------------------
+[ ] Drop product images into public/images/ and set the `image:` field on
+    each product (hero = the offer's official creative; Amazon images only
+    once your PA-API is unlocked). Cards show a clean placeholder until then.
+
+------------------------------------------------------------------------
 SITE-WIDE (do once)
 ------------------------------------------------------------------------
 [ ] src/layouts/Base.astro → set GA4_ID = "G-XXXXXXXXXX" (your GA4 id).

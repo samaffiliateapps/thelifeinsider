@@ -1,17 +1,19 @@
 ---
-// A single ranked product card for review pages.
+// A single ranked product card for review pages (4-zone: media | body | side).
 export interface Product {
   rank: number;
   name: string;
   brand?: string;
-  image?: string;
-  score: number; // out of 10 (real: derived from verified ratings — see how-we-rate)
+  image?: string; // /images/... in public. Omit → tasteful placeholder box.
+  score: number; // out of 10 (real: derived from verified ratings / disclosed assessment — see how-we-rate)
   scoreLabel?: string; // Outstanding / Excellent / Very Good / Good / Decent
-  starRating?: number; // out of 5, real average
-  reviewCount?: number; // real count
+  starRating?: number; // out of 5, real average (retailer-listed products)
+  reviewCount?: number; // real count (retailer-listed products)
+  trustNote?: string; // shown instead of a review count for direct-sold offers (no retailer aggregate)
   badge?: string; // "Best Overall" | "Best Value" | "Editor's Choice"
-  price?: string;
-  discount?: string; // e.g. "50% Off" — only if genuinely running
+  price?: string; // current price — ONLY direct-sold offers (Amazon ToS forbids static Amazon prices)
+  oldPrice?: string; // strikethrough anchor price (direct-sold only)
+  discount?: string; // e.g. "30% Off" — only if genuinely running
   url: string; // affiliate link (hero) or Amazon link (backfill) — includes subid
   ctaLabel?: string;
   pros: string[];
@@ -26,45 +28,60 @@ const stars = p.starRating
 ---
 
 <div class:list={["card", "rank-card", { "is-top": p.rank === 1 }]} id={`rank-${p.rank}`}>
-  <div class="rank-num">#{p.rank}</div>
+  <div class="rank-media">
+    {
+      p.image ? (
+        <img class="rank-img" src={p.image} alt={p.name} loading="lazy" width="150" height="150" />
+      ) : (
+        <div class="rank-ph" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 8 12 3 3 8v8l9 5 9-5V8Z" />
+            <path d="m3 8 9 5 9-5" />
+            <path d="M12 13v8" />
+          </svg>
+        </div>
+      )
+    }
+    {p.rank === 1 ? <span class="rank-flag top">#1 Best</span> : <span class="rank-flag num">#{p.rank}</span>}
+  </div>
 
   <div class="rank-body">
     {p.badge && (
       <span class:list={["badge", p.rank === 1 ? "badge-choice" : "badge-value"]}>{p.badge}</span>
     )}
-    {p.discount && <span class="badge badge-deal" style="margin-left:6px;">{p.discount}</span>}
     <div class="product-title">{p.name}</div>
-
-    {p.image && (
-      <img src={p.image} alt={p.name} loading="lazy" width="220" height="150" style="border-radius:8px;margin-bottom:10px;object-fit:contain;" />
+    {p.price && (
+      <p class="rank-price">
+        <span class="now">{p.price}</span>
+        {p.oldPrice && <span class="was">{p.oldPrice}</span>}
+      </p>
     )}
-
-    <ul class="pros">
-      {p.pros.map((pro) => <li>{pro}</li>)}
-    </ul>
-    {p.cons && p.cons.length > 0 && (
-      <ul class="pros cons">
-        {p.cons.map((con) => <li>{con}</li>)}
-      </ul>
-    )}
-    {p.blurb && <p style="font-size:0.92rem;color:var(--muted);margin-top:8px;margin-bottom:0;">{p.blurb}</p>}
+    <div class="proscons">
+      <ul class="pros">{p.pros.map((pro) => <li>{pro}</li>)}</ul>
+      {p.cons && p.cons.length > 0 && (
+        <ul class="cons">{p.cons.map((con) => <li>{con}</li>)}</ul>
+      )}
+    </div>
+    {p.blurb && <p style="font-size:0.92rem;color:var(--muted);margin:12px 0 0;">{p.blurb}</p>}
   </div>
 
   <div class="rank-side">
+    {p.scoreLabel && <div class="score-label">{p.scoreLabel}</div>}
     <div class="score-pill">
       <span class="num">{p.score.toFixed(1)}</span>
-      <span class="label">/ 10</span>
+      <span class="label">out of 10</span>
     </div>
-    {p.scoreLabel && <div style="font-weight:700;color:var(--ink);font-size:0.9rem;">{p.scoreLabel}</div>}
-    {stars && (
-      <div>
-        <div class="stars">{stars}</div>
-        {p.reviewCount && <div class="review-count">{p.reviewCount.toLocaleString()} reviews</div>}
-      </div>
-    )}
-    {p.price && <div style="font-weight:700;color:var(--ink);">{p.price}</div>}
+    {stars && <div class="stars">{stars}</div>}
+    {
+      p.reviewCount ? (
+        <div class="rank-trust">{p.reviewCount.toLocaleString()} verified reviews</div>
+      ) : p.trustNote ? (
+        <div class="rank-trust">{p.trustNote}</div>
+      ) : null
+    }
     <a href={p.url} class="btn btn-block" rel="sponsored nofollow noopener" target="_blank">
       {p.ctaLabel ?? "Check Price"}
     </a>
+    {p.discount && <div class="rank-offer">{p.discount}</div>}
   </div>
 </div>
