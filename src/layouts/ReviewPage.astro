@@ -27,11 +27,6 @@ const top = products.find((p) => p.rank === 1);
         <div class="kicker">Buying Guide</div>
         <h1>{h1}</h1>
         <p class="updated">Last updated: {updated}</p>
-        <p class="disclosure-line disclosure-line--review">
-          Reader-supported: we may earn a commission when you buy through our
-          links, at no extra cost to you — it never affects our{" "}
-          <a href="/how-we-rate/">verified-data scores</a>.
-        </p>
         <div class="prose" style="max-width:820px;">
           {intro.map((para) => <p set:html={para} />)}
         </div>
@@ -107,5 +102,16 @@ const top = products.find((p) => p.rank === 1);
         </div>
       </section>
     )}
+
+    <section class="section" style="padding-top:0;">
+      <div class="container-narrow">
+        <p class="disclosure-line" style="text-align:center;margin:0;">
+          Reader-supported: we may earn a commission when you buy through our
+          links, at no extra cost to you — it never affects our{" "}
+          <a href="/how-we-rate/">verified-data scores</a>. See our{" "}
+          <a href="/advertising-disclosure/">Advertising Disclosure</a>.
+        </p>
+      </div>
+    </section>
   </article>
 </Base>

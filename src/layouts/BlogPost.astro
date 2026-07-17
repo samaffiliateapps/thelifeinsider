@@ -44,10 +44,6 @@ const articleSchema = {
         <p class="updated" style="margin-bottom:16px;">
           By {author} · {dateLabel} · {readTime}
         </p>
-        <p class="disclosure-line">
-          Reader-supported — we may earn a commission from some links, at no
-          cost to you. <a href="/how-we-rate/">How we rate</a>.
-        </p>
         <p class="lede" set:html={lede} />
       </div>
     </section>
@@ -85,6 +81,16 @@ const articleSchema = {
       heading="Shop smarter, not harder."
       sub="Get our latest buying guides and real price-drop alerts sent to your inbox. Free, no spam, unsubscribe anytime."
     />
+
+    <section class="section" style="padding-top:0;">
+      <div class="container-narrow">
+        <p class="disclosure-line" style="text-align:center;margin:0;">
+          Reader-supported: we may earn a commission from some links, at no cost
+          to you. See our{" "}
+          <a href="/advertising-disclosure/">Advertising Disclosure</a>.
+        </p>
+      </div>
+    </section>
   </article>
 
   <script
