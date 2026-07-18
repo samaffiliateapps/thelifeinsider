@@ -13,9 +13,11 @@ export interface Props {
   products: Product[];
   deepDive?: { heading: string; body: string[] }; // deep-dive on #1 pick
   faqs?: { q: string; a: string }[];
+  highlights?: { title: string; text: string }[]; // 3 key strengths of the #1 pick
 }
 
-const { title, description, h1, updated, intro, products, deepDive, faqs } = Astro.props;
+const { title, description, h1, updated, intro, products, deepDive, faqs, highlights } =
+  Astro.props;
 const top = products.find((p) => p.rank === 1);
 ---
 
@@ -55,6 +57,45 @@ const top = products.find((p) => p.rank === 1);
         {products.map((p) => <ProductCard product={p} />)}
       </div>
     </section>
+
+    <!-- Best option on the market: repeat the #1 pick + its key strengths -->
+    {top && (
+      <section class="section" style="padding-top:0;">
+        <div class="container">
+          <div class="best-band">The Best Option on the Market</div>
+          <ProductCard product={top} repeat />
+          {highlights && highlights.length > 0 && (
+            <div class="highlights">
+              {highlights.map((h, i) => (
+                <div class="highlight">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    {i === 0 && (
+                      <>
+                        <path d="M9 3v6M15 3v6" />
+                        <path d="M6 9h12v3a6 6 0 0 1-12 0z" />
+                        <path d="M12 18v3" />
+                      </>
+                    )}
+                    {i === 1 && (
+                      <>
+                        <path d="M5 8h9a4 4 0 0 1 0 8H8" />
+                        <path d="m10 13-2 3 2 3" />
+                        <circle cx="18" cy="6" r="2" />
+                      </>
+                    )}
+                    {i === 2 && <path d="M13 2 4 14h7l-1 8 9-12h-7z" />}
+                  </svg>
+                  <div>
+                    <div class="h-title">{h.title}</div>
+                    <div class="h-text">{h.text}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+    )}
 
     <!-- Deep dive on #1 -->
     {deepDive && top && (

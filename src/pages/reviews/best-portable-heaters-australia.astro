@@ -27,10 +27,16 @@ const products: Product[] = [
     brand: "Clima Mini Heater",
     score: 9.0,
     scoreLabel: "Outstanding",
+    image: "/images/clima-1.png",
     trustNote: "30-day money-back guarantee · 1-year warranty",
     badge: "Best Overall",
+    price: "$79.99",
+    oldPrice: "$139.99",
+    discount: "43% Off Today",
     url: CLIMA_CPA,
-    ctaLabel: "Check Today's Price",
+    ctaLabel: "View Site",
+    awardBadge: "/images/best-seller-badge.webp",
+    awardNote: "Our #1 rated pick for 2026",
     pros: [
       "Heats up to 200 sq ft — sized for bedrooms, offices and nurseries",
       "Plugs straight into a wall outlet — no installation, no tools",
@@ -55,7 +61,7 @@ const products: Product[] = [
     reviewCount: 679,
     badge: "Best Rated",
     url: AMZ("B0DK1Y66F6", "dreo"),
-    ctaLabel: "Check Price on Amazon",
+    ctaLabel: "View on Amazon",
     pros: [
       "Highest verified rating here — 4.6 stars from 679 buyers",
       "Genuinely quiet at 34 dB — bedroom-friendly",
@@ -74,7 +80,7 @@ const products: Product[] = [
     reviewCount: 4450,
     badge: "Most Proven",
     url: AMZ("B0742JBJMV", "delonghi"),
-    ctaLabel: "Check Price on Amazon",
+    ctaLabel: "View on Amazon",
     pros: [
       "By far the most-reviewed heater here — 4,450 verified ratings",
       "De'Longhi is a long-established, trusted heating brand",
@@ -96,7 +102,7 @@ const products: Product[] = [
     reviewCount: 254,
     badge: "Best Value",
     url: AMZ("B0BZRHSHDG", "stormhero"),
-    ctaLabel: "Check Price on Amazon",
+    ctaLabel: "View on Amazon",
     pros: [
       "The best value here by a wide margin",
       "Dual 1500 W / 750 W settings to suit different rooms",
@@ -115,7 +121,7 @@ const products: Product[] = [
     reviewCount: 170,
     badge: "Best Oscillating",
     url: AMZ("B07BRM2Z2D", "bitzong"),
-    ctaLabel: "Check Price on Amazon",
+    ctaLabel: "View on Amazon",
     pros: [
       "Oscillates to spread heat across a wider area",
       "SAA approved to Australian electrical standards",
@@ -140,6 +146,21 @@ const deepDive = {
     "We'll be straight about the trade-offs, because they matter. It's sold direct online rather than through Australian retailers, which means there's no independent retailer review aggregate to cross-check the manufacturer's own numbers against — so we've scored it on its verifiable specifications, safety certification, and guarantee rather than on a customer-rating average. If you specifically want the option with the strongest independent review evidence behind it, our #2 pick, the Dreo Atom 316, holds a 4.6-star average from 679 verified buyers and is an excellent choice.",
   ],
 };
+
+const highlights = [
+  {
+    title: "Easy Setup",
+    text: "Plug it into any wall socket, set the temperature, and it's running. No installation, no tools, no assembly.",
+  },
+  {
+    title: "Genuinely Portable",
+    text: "Light and compact enough to unplug and carry to whichever room you're actually using.",
+  },
+  {
+    title: "Small but Mighty",
+    text: "Covers up to 200 sq ft — sized for a bedroom, home office or nursery rather than a whole house.",
+  },
+];
 
 const faqs = [
   {
@@ -173,5 +194,6 @@ const faqs = [
   intro={intro}
   products={products}
   deepDive={deepDive}
+  highlights={highlights}
   faqs={faqs}
 />

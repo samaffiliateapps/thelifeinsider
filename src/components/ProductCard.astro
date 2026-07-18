@@ -16,18 +16,22 @@ export interface Product {
   discount?: string; // e.g. "30% Off" — only if genuinely running
   url: string; // affiliate link (hero) or Amazon link (backfill) — includes subid
   ctaLabel?: string;
+  awardBadge?: string; // /images/... our own editorial badge (top pick only)
+  awardNote?: string; // short, substantiated line under the badge
   pros: string[];
   cons?: string[];
   blurb?: string;
 }
-const { product } = Astro.props as { product: Product };
+// `repeat` = this is the duplicated "best option" block; omit the id so the
+// anchor target stays unique and the top-picks jump links keep working.
+const { product, repeat } = Astro.props as { product: Product; repeat?: boolean };
 const p = product;
 const stars = p.starRating
   ? "★".repeat(Math.round(p.starRating)) + "☆".repeat(5 - Math.round(p.starRating))
   : null;
 ---
 
-<div class:list={["card", "rank-card", { "is-top": p.rank === 1 }]} id={`rank-${p.rank}`}>
+<div class:list={["card", "rank-card", { "is-top": p.rank === 1 }]} id={repeat ? undefined : `rank-${p.rank}`}>
   <div class="rank-media">
     {
       p.image ? (
@@ -80,8 +84,12 @@ const stars = p.starRating
       ) : null
     }
     <a href={p.url} class="btn btn-block" rel="sponsored nofollow noopener" target="_blank">
-      {p.ctaLabel ?? "Check Price"}
+      {p.ctaLabel ?? "View Site"}
     </a>
     {p.discount && <div class="rank-offer">{p.discount}</div>}
+    {p.awardBadge && (
+      <img class="award-badge" src={p.awardBadge} alt="The Life Insider top pick" loading="lazy" width="78" height="78" />
+    )}
+    {p.awardNote && <div class="rank-trust">{p.awardNote}</div>}
   </div>
 </div>
