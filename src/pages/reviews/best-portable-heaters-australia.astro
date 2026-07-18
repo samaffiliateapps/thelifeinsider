@@ -1,0 +1,177 @@
+---
+import ReviewPage from "../../layouts/ReviewPage.astro";
+import type { Product } from "../../components/ProductCard.astro";
+
+/* =========================================================================
+   AFFILIATE LINKS
+   - HERO: Clima Mini Heater — MaxWeb, $90 CPA, INSTANT ACCESS (live link
+     below, subid appended). Offer GEOs incl. AU, US, CA, UK + most of EU.
+     Restriction: No SMS. TSL split-test variants available:
+       /7/  = TSL 1   |  /11/ = TSL 2  |  /15/ = TSL 3
+   - AMAZON AU: ASINs + ratings/review counts are REAL, pulled live from
+     amazon.com.au (18 Jul 2026). Swap REPLACE-AMZ-AU-TAG-22 for Sam's AU
+     Associates tag. Re-verify ratings at publish — they change.
+   ⚠️ CLIMA PRICE NOT SHOWN: the offer page quotes USD ($79.99 from $139.99)
+   and "free USA shipping". AU-facing price/currency/shipping is unconfirmed —
+   Sam to open the link from AU and confirm, then add `price`/`oldPrice`.
+   ⚠️ NO ENERGY-SAVINGS CLAIMS anywhere on this page (policy + honesty).
+   ========================================================================= */
+const CLIMA_CPA = "https://mwebtrackerhq.com/12169/1234/3/?subid=heater_au_hero";
+const AMZ = (asin: string, sub: string) =>
+  `https://www.amazon.com.au/dp/${asin}/?tag=REPLACE-AMZ-AU-TAG-22&ascsubtag=heater_${sub}`;
+
+const products: Product[] = [
+  {
+    rank: 1,
+    name: "Clima Mini Heater",
+    brand: "Clima Mini Heater",
+    score: 9.0,
+    scoreLabel: "Outstanding",
+    trustNote: "30-day money-back guarantee · 1-year warranty",
+    badge: "Best Overall",
+    url: CLIMA_CPA,
+    ctaLabel: "Check Today's Price",
+    pros: [
+      "Heats up to 200 sq ft — sized for bedrooms, offices and nurseries",
+      "Plugs straight into a wall outlet — no installation, no tools",
+      "UL safety certified with built-in overheat protection",
+      "Whisper-quiet, so it can run in a bedroom overnight",
+      "30-day money-back guarantee plus a 1-year warranty",
+    ],
+    cons: [
+      "Sold direct online only — not on Australian store shelves",
+      "No independent retailer review data to cross-check",
+    ],
+    blurb:
+      "The most flexible pick here: a compact plug-in heater you can move room to room in seconds, with proper safety certification and the strongest buyer protection in this guide. Best for warming the room you're actually in.",
+  },
+  {
+    rank: 2,
+    name: "Dreo Atom 316 Fan Heater",
+    brand: "Dreo Atom 316",
+    score: 8.9,
+    scoreLabel: "Excellent",
+    starRating: 4.6,
+    reviewCount: 679,
+    badge: "Best Rated",
+    url: AMZ("B0DK1Y66F6", "dreo"),
+    ctaLabel: "Check Price on Amazon",
+    pros: [
+      "Highest verified rating here — 4.6 stars from 679 buyers",
+      "Genuinely quiet at 34 dB — bedroom-friendly",
+      "1500 W PTC ceramic with thermostat and 12-hour timer",
+      "Overheating and tilt protection built in",
+    ],
+    cons: ["Premium price for a compact heater", "Bigger footprint than a plug-in unit"],
+  },
+  {
+    rank: 3,
+    name: "De'Longhi Capsule Fan Heater",
+    brand: "De'Longhi Capsule",
+    score: 8.6,
+    scoreLabel: "Excellent",
+    starRating: 4.1,
+    reviewCount: 4450,
+    badge: "Most Proven",
+    url: AMZ("B0742JBJMV", "delonghi"),
+    ctaLabel: "Check Price on Amazon",
+    pros: [
+      "By far the most-reviewed heater here — 4,450 verified ratings",
+      "De'Longhi is a long-established, trusted heating brand",
+      "1800 W self-regulating ceramic with anti-frost mode",
+      "Compact capsule shape with carry handles",
+    ],
+    cons: [
+      "4.1-star average is the lowest in this guide",
+      "Fan is noticeable on the high setting",
+    ],
+  },
+  {
+    rank: 4,
+    name: "STORMHERO Portable Fan Heater",
+    brand: "STORMHERO",
+    score: 8.3,
+    scoreLabel: "Very Good",
+    starRating: 4.3,
+    reviewCount: 254,
+    badge: "Best Value",
+    url: AMZ("B0BZRHSHDG", "stormhero"),
+    ctaLabel: "Check Price on Amazon",
+    pros: [
+      "The best value here by a wide margin",
+      "Dual 1500 W / 750 W settings to suit different rooms",
+      "Compact with a carry handle — good for desks and bathrooms",
+      "Solid 4.3-star average from verified buyers",
+    ],
+    cons: ["Smaller review base than the leaders", "Lesser-known brand, shorter track record"],
+  },
+  {
+    rank: 5,
+    name: "Bitzong Oscillating Ceramic Heater",
+    brand: "Bitzong",
+    score: 8.0,
+    scoreLabel: "Very Good",
+    starRating: 4.2,
+    reviewCount: 170,
+    badge: "Best Oscillating",
+    url: AMZ("B07BRM2Z2D", "bitzong"),
+    ctaLabel: "Check Price on Amazon",
+    pros: [
+      "Oscillates to spread heat across a wider area",
+      "SAA approved to Australian electrical standards",
+      "Suits home, office and camping use",
+    ],
+    cons: ["Highest price in this guide", "Modest review base (170)"],
+  },
+];
+
+const intro = [
+  "Australian homes are famously bad at holding heat, and running ducted heating or a reverse-cycle system to warm one room you're sitting in is an expensive way to stay comfortable. A good portable heater fixes that — you heat the room you're in, when you're in it, and leave the rest of the house alone.",
+  "The catch is that the category is full of noise. Every heater claims to be efficient, silent and powerful. So we compared what's actually checkable: verified customer ratings and review volume from Australian buyers, heat output and coverage, safety features like tilt and overheat protection, noise, and value for money.",
+  "One honest thing worth knowing before you spend: <strong>every electric resistance heater converts essentially all the electricity it draws into heat.</strong> A 1500 W heater from one brand does not produce meaningfully more warmth than a 1500 W heater from another. Real savings come from heating a smaller space for less time — not from a proprietary technology. Be sceptical of any heater sold on the promise of slashing your power bill.",
+  "With that in mind, here are the portable heaters worth buying in Australia this winter, ranked by our <a href='/how-we-rate/'>Insider Score</a>.",
+];
+
+const deepDive = {
+  heading: "Why the Clima Mini Heater Is Our #1 Pick",
+  body: [
+    "The Clima earns the top spot on flexibility rather than raw power. It plugs directly into a wall outlet with no installation, no assembly and no tools, and it's small enough to unplug and carry to another room in seconds. If your actual problem is 'the room I'm sitting in is cold' — a home office in the morning, a bedroom at night, a nursery — that's the problem it's built for, and it covers up to about 200 square feet.",
+    "The safety and support side is what separates it from the cheap plug-in heaters that flood this category. It's UL safety certified with built-in overheat protection and runs quietly enough to leave on in a bedroom. It's backed by a 30-day money-back guarantee, a free replacement warranty and a 1-year manufacturer warranty — the strongest buyer protection of anything in this guide.",
+    "We'll be straight about the trade-offs, because they matter. It's sold direct online rather than through Australian retailers, which means there's no independent retailer review aggregate to cross-check the manufacturer's own numbers against — so we've scored it on its verifiable specifications, safety certification, and guarantee rather than on a customer-rating average. If you specifically want the option with the strongest independent review evidence behind it, our #2 pick, the Dreo Atom 316, holds a 4.6-star average from 679 verified buyers and is an excellent choice.",
+  ],
+};
+
+const faqs = [
+  {
+    q: "Are portable electric heaters expensive to run?",
+    a: "It's simple maths you can do yourself. A 1500 W heater uses 1.5 kilowatt-hours per hour of use. At a typical Australian rate of roughly 30–35c per kWh, that's about <strong>45–53 cents an hour</strong>. Running one heater in the room you're using for a few hours an evening is usually far cheaper than heating the whole house — that's where the saving comes from, not from the heater itself being special.",
+  },
+  {
+    q: "Do 'energy saving' heaters actually save money?",
+    a: "Not in the way the marketing implies. All electric resistance heaters are close to 100% efficient at turning electricity into heat, so a 1500 W unit from one brand produces essentially the same warmth as any other 1500 W unit. What genuinely reduces your bill is heating a smaller area, for less time, with a thermostat and timer so it isn't running when you don't need it. Treat any claim of dramatic bill reductions with suspicion.",
+  },
+  {
+    q: "Is it safe to leave a portable heater on overnight?",
+    a: "Look for tilt protection and overheat protection — both are standard on every heater in this guide — and a thermostat so it cycles rather than running flat out. Even so, manufacturers generally advise against leaving heaters unattended for long periods. Keep it clear of curtains, bedding and furniture, never run it from an extension lead, and follow the instructions that came with it.",
+  },
+  {
+    q: "What size heater do I need for my room?",
+    a: "As a rough guide, a compact 1200–1500 W heater comfortably handles a bedroom, home office or study of roughly 15–20 m². Larger open-plan living areas need either a higher-output unit, an oscillating model to move the heat around, or simply more time. Trying to heat a big open space with a small personal heater is the most common reason people conclude a heater 'doesn't work'.",
+  },
+  {
+    q: "How do you rate these products?",
+    a: "Our Insider Score weighs verified customer ratings (50%), review volume and consistency (20%), value for money (15%), and brand reliability and buyer protection (15%). For direct-sold products with no retailer review aggregate, we say so plainly and score on verifiable specifications, certification and guarantee instead. See our full <a href='/how-we-rate/'>methodology</a>.",
+  },
+];
+---
+
+<ReviewPage
+  title="The 5 Best Portable Heaters in Australia (2026) [Compared] | The Life Insider"
+  description="We compared the best portable heaters in Australia on verified ratings, heat output, safety, noise and running cost. See which compact heater ranked #1 for winter 2026."
+  h1="The 5 Best Portable Heaters in Australia for 2026"
+  updated="July 2026"
+  intro={intro}
+  products={products}
+  deepDive={deepDive}
+  faqs={faqs}
+/>
