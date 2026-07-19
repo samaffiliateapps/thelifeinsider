@@ -1,0 +1,232 @@
+---
+import ReviewPage from "../../layouts/ReviewPage.astro";
+import type { Product } from "../../components/ProductCard.astro";
+
+/* =========================================================================
+   AFFILIATE LINKS
+   - HERO: HauSafe Cam HD — MaxWeb, $45 CPA, INSTANT ACCESS (live link below).
+     ✅ CHECKOUT VERIFIED 19 Jul 2026: order form loads, offer live, funnel
+     auto-localises (countryDefault=AU) and prices render in AUD.
+     Restrictions: No Incent, No Adult, No Co Reg. Blocked geos = MaxWeb's
+     Do-Not-Ship list (US/UK/CA/AU/most of W. Europe all fine).
+   - AMAZON AU: ASINs + ratings pulled live from amazon.com.au (19 Jul 2026).
+     Links carry Sam's tag (thelifeinside-22) + per-product ascsubtag.
+   ⚠️ The offer page runs a rolling "offer ends <tomorrow>" countdown. We do
+   NOT replicate that — the 50% discount is real, the deadline is not.
+   ========================================================================= */
+const HAUSAFE_CPA = "https://mwebtrackerhq.com/7624/2654/2/?subid=cam_au_hero";
+const AMZ = (asin: string, sub: string) =>
+  `https://www.amazon.com.au/dp/${asin}?tag=thelifeinside-22&ascsubtag=cam_${sub}`;
+
+const products: Product[] = [
+  {
+    rank: 1,
+    name: "HauSafe Cam HD",
+    brand: "HauSafe Cam HD",
+    score: 9.0,
+    scoreLabel: "Outstanding",
+    trustNote: "64 GB card included · free shipping",
+    badge: "Best Overall",
+    price: "AUD 99",
+    oldPrice: "AUD 198",
+    discount: "50% Off",
+    url: HAUSAFE_CPA,
+    ctaLabel: "View Site",
+    awardBadge: "/images/best-seller-badge.webp",
+    awardNote: "Our #1 rated pick for 2026",
+    pros: [
+      "Screws into a standard light socket — no wiring, no drilling, no battery",
+      "Mains-powered from the socket, so it never needs recharging",
+      "Doubles as a bright LED bulb that lights the area it's watching",
+      "Full night vision for round-the-clock coverage",
+      "64 GB memory card included in the box",
+    ],
+    cons: [
+      "Needs an accessible light socket where you want coverage",
+      "Sold direct online — no independent retailer review data",
+    ],
+    blurb:
+      "The simplest way to get a camera up: screw it into a light fitting and it's powered, lit and recording. No drilling, no wiring, no batteries to change — which is why it's our Best Overall for most homes.",
+  },
+  {
+    rank: 2,
+    name: "5G Security Bulb 2K Wireless Camera",
+    brand: "5G Security Bulb 2K",
+    score: 8.6,
+    scoreLabel: "Excellent",
+    starRating: 4.2,
+    reviewCount: 665,
+    url: AMZ("B0D17CJWB1", "5gbulb"),
+    ctaLabel: "View on Amazon",
+    pros: [
+      "Strong 4.2-star average across 665 verified buyers",
+      "2K resolution — sharper detail than most bulb cameras",
+      "Best price-to-rating balance in this guide",
+      "Dual-band wireless for a more stable connection",
+    ],
+    cons: ["Unbranded — limited support if it fails", "App can be fiddly to set up"],
+  },
+  {
+    rank: 3,
+    name: "Noonkey 2K Security Bulb (2 Pack)",
+    brand: "Noonkey 2K Security Bulb",
+    score: 8.4,
+    scoreLabel: "Excellent",
+    starRating: 4.0,
+    reviewCount: 1187,
+    url: AMZ("B0BM4M4CV3", "noonkey"),
+    ctaLabel: "View on Amazon",
+    pros: [
+      "By far the most-reviewed option here — 1,187 verified ratings",
+      "Two cameras in the box for front and back coverage",
+      "360° pan and Alexa compatibility",
+      "The most proven track record of any bulb camera we found",
+    ],
+    cons: [
+      "4.0-star average is middling",
+      "Two units means two app setups",
+    ],
+  },
+  {
+    rank: 4,
+    name: "Imou 2K Light Bulb Security Camera",
+    brand: "Imou 2K Light Bulb Camera",
+    score: 8.2,
+    scoreLabel: "Very Good",
+    starRating: 4.4,
+    reviewCount: 59,
+    url: AMZ("B0CJRCCQ7Q", "imou"),
+    ctaLabel: "View on Amazon",
+    pros: [
+      "Highest star rating in this guide — 4.4 stars",
+      "Imou is an established camera brand with real support",
+      "AI human detection cuts down false alerts",
+    ],
+    cons: [
+      "Only 59 ratings — promising but not yet proven",
+      "Priced above better-reviewed rivals",
+    ],
+  },
+  {
+    rank: 5,
+    name: "Reolink Spotlight Solar Security Camera",
+    brand: "Reolink Spotlight Solar",
+    score: 8.0,
+    scoreLabel: "Very Good",
+    starRating: 4.1,
+    reviewCount: 319,
+    url: AMZ("B08VD5TZ4C", "reolink"),
+    ctaLabel: "View on Amazon",
+    pros: [
+      "Solar and battery powered — mount it anywhere, no socket needed",
+      "Reolink is a trusted, well-supported camera brand",
+      "Genuinely weatherproof for exposed outdoor spots",
+    ],
+    cons: [
+      "Most expensive option here by a wide margin",
+      "Needs real sun exposure to stay charged",
+    ],
+  },
+];
+
+const intro = [
+  "A break-in takes about 90 seconds, and the single biggest deterrent is a camera an intruder can actually see. The problem is that most security cameras mean drilling, running cable, or climbing a ladder every few months to recharge a battery — so a lot of people never get around to it.",
+  "Light-socket cameras solve that. They screw into an existing light fitting, draw power from it permanently, and light the area they're watching. We compared the leading options available in Australia on verified customer ratings, resolution, night vision, power and value.",
+  "Here are the top 5 of the year, with a full review of our #1 pick further down the page.",
+];
+
+const deepDive = {
+  heading: "Why the HauSafe Cam HD Is Our #1 Pick",
+  body: [
+    "The HauSafe wins on the thing that actually determines whether a camera protects your home: whether it ever gets installed. It screws into a standard light socket like a bulb. No drilling, no wiring, no mounting bracket, no electrician — you stand on a chair, twist it in, and it's live.",
+    "Because it draws mains power from the socket, it never needs recharging. That's the quiet failure point of most consumer cameras: battery units get installed enthusiastically, then die three months later and stay dead. It also works as a genuine LED bulb, so it lights the area it's monitoring — and a lit doorway is itself a deterrent. Night vision covers the hours that actually matter, and a 64 GB card is included, so there's no surprise subscription to record footage.",
+    "The honest trade-offs: you need a light socket where you want coverage, which rules out the middle of a lawn or a fence line. And because it's sold direct rather than through retailers, there's no independent review aggregate to cross-check — we've scored it on verifiable specifications and what's included. If you need coverage somewhere with no socket, our #5 pick, the Reolink Spotlight Solar, is the better tool for that job.",
+  ],
+};
+
+const highlights = [
+  {
+    title: "Two-Minute Install",
+    text: "Screws into any standard light socket. No drilling, no wiring, no electrician, no mounting hardware.",
+  },
+  {
+    title: "Never Needs Charging",
+    text: "Mains-powered from the socket itself, so it can't go flat and quietly stop protecting your home.",
+  },
+  {
+    title: "Camera and Light in One",
+    text: "A working LED bulb plus full night vision — it lights the area it watches, and a lit entry is a deterrent by itself.",
+  },
+];
+
+const editorial = {
+  heading: "Why We Keep Coming Back to the Socket Camera",
+  html: `
+<p>Most home security cameras fail for a boring reason. Not because the picture is bad — because they're never actually installed.</p>
+
+<p>Look at what buying a typical outdoor camera really involves. You choose a spot. You drill into brick or weatherboard. You either run a cable to a power point or you accept a battery you'll be pulling down and charging every few months. Somewhere between the drill and the ladder, the camera ends up in a cupboard.</p>
+
+<p>Then there's the second failure, the sneakier one: the battery camera that <em>was</em> installed, went flat in month four, and has been a decorative plastic box ever since. The homeowner believes they're covered. They aren't.</p>
+
+<h3>What changes when the camera lives in a light socket</h3>
+
+<p>Every one of those problems disappears at once. There's already a fitting above your front door, your back step, your garage, your carport. It already has power running to it. The HauSafe screws into it the way a bulb does — and the install is genuinely done in the time it takes to change a lightbulb, because that is literally what you're doing.</p>
+
+<p>It can't go flat, because it's drawing mains power continuously. There's no charging routine to forget. And because it doubles as a working LED bulb, you're not giving up the light to gain the camera — you get both from the same fitting.</p>
+
+<div class="pull-note">The best security camera is the one that's actually mounted, powered and recording six months from now. Most aren't.</div>
+
+<h3>What we looked at across the category</h3>
+
+<p>We weighted verified customer ratings and review volume most heavily — a 4.4-star average from 59 buyers tells you far less than a 4.0 from 1,187, and we've said so plainly on each card above. Then resolution, night vision, how power is supplied, and what's actually in the box.</p>
+
+<p>That last one matters more than people expect. Plenty of cameras arrive needing a memory card you didn't know to buy, or push you toward a monthly cloud subscription to see your own footage. The HauSafe ships with a 64 GB card included — you record locally, from day one, with nothing further to pay.</p>
+
+<h3>Where we'd point you elsewhere</h3>
+
+<p>If the spot you need covered has no light fitting — the far end of a driveway, a fence line, a shed with no power — a socket camera physically can't help you, and no amount of enthusiasm changes that. That's what the <strong>Reolink Spotlight Solar</strong> at #5 is for: solar and battery powered, mount it anywhere, from a brand with genuine support behind it. It costs meaningfully more, and for that specific job it's worth it.</p>
+
+<p>And if raw review evidence is what you weight most, the <strong>Noonkey 2-pack</strong> at #3 carries 1,187 verified ratings — more than anything else here — and gives you two cameras to cover front and back.</p>
+
+<h3>Our verdict</h3>
+
+<p>For the common case — you want a visible, permanently-powered camera over a door or driveway, up today, without tools or a tradesman — the HauSafe Cam HD is the most practical option we compared. It's currently AUD 99, down from AUD 198, with the memory card and free shipping included.</p>
+`,
+};
+
+const faqs = [
+  {
+    q: "How does a light bulb security camera actually work?",
+    a: "It screws into a standard light socket exactly like a bulb, and draws its power from that fitting. That gives it permanent mains power with no wiring and no battery, and it connects to your home Wi-Fi so you can view the feed from your phone. Most, including our top pick, also function as a real LED light.",
+  },
+  {
+    q: "Do I need an electrician to install one?",
+    a: "No. If you can change a lightbulb, you can install one. There's no drilling, no cabling and no mounting bracket — you turn the fitting off at the switch, screw the camera in, turn it back on, and pair it with the app.",
+  },
+  {
+    q: "Will it work outdoors in the rain?",
+    a: "It's designed for covered outdoor fittings — porches, entryways, carports, garages and eaves — where the fitting itself is sheltered. For fully exposed positions with no cover or no socket at all, a purpose-built weatherproof unit like our #5 pick is the safer choice.",
+  },
+  {
+    q: "Is there a monthly subscription to view footage?",
+    a: "Not with our top pick — it records to a memory card, and a 64 GB card is included in the box, so you can record locally from the first day. Some competing brands push a cloud plan to unlock recording or history, so it's worth checking that before you buy any camera.",
+  },
+  {
+    q: "How do you rate these products?",
+    a: "Our Insider Score weighs verified customer ratings (50%), review volume and consistency (20%), value for money (15%), and brand reliability and buyer protection (15%). For direct-sold products with no retailer review aggregate, we say so plainly and score on verifiable specifications and what's included. See our full <a href='/how-we-rate/'>methodology</a>.",
+  },
+];
+---
+
+<ReviewPage
+  title="The 5 Best Light Bulb Security Cameras in Australia (2026) | The Life Insider"
+  description="We compared the best light bulb security cameras in Australia on verified ratings, resolution, night vision and value. See which socket camera ranked #1 for 2026."
+  h1="The 5 Best Light Bulb Security Cameras in Australia for 2026"
+  updated="July 2026"
+  intro={intro}
+  products={products}
+  deepDive={deepDive}
+  highlights={highlights}
+  editorial={editorial}
+  faqs={faqs}
+/>
