@@ -50,9 +50,8 @@ const stars = p.starRating
   </div>
 
   <div class="rank-body">
-    {p.badge && (
-      <span class:list={["badge", p.rank === 1 ? "badge-choice" : "badge-value"]}>{p.badge}</span>
-    )}
+    {/* Only the #1 pick carries a label — keeps all attention on the top pick. */}
+    {p.badge && p.rank === 1 && <span class="badge badge-choice">{p.badge}</span>}
     <div class="product-title">{p.name}</div>
     {p.price && (
       <p class="rank-price">

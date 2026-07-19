@@ -4,8 +4,10 @@
   --body: #3a4a63;         /* body text */
   --muted: #6b7a94;
   --brand: #0f4c81;        /* links / brand blue */
-  --accent: #e8590c;       /* primary CTA orange */
+  --accent: #e8590c;       /* urgency/deal accent (kickers, discount flashes) */
   --accent-dark: #c94b08;
+  --cta: #16a34a;          /* action green — buttons (matches the ✓ semantics) */
+  --cta-dark: #15803d;
   --gold: #f5a623;         /* stars / score */
   --teal: #0e7490;
   --bg: #ffffff;
@@ -63,7 +65,7 @@ img { max-width: 100%; height: auto; }
 /* ---- Buttons ---- */
 .btn {
   display: inline-block;
-  background: var(--accent);
+  background: var(--cta);
   color: #fff !important;
   font-weight: 700;
   padding: 13px 28px;
@@ -75,7 +77,7 @@ img { max-width: 100%; height: auto; }
   transition: background 0.15s ease, transform 0.1s ease;
   text-decoration: none !important;
 }
-.btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
+.btn:hover { background: var(--cta-dark); transform: translateY(-1px); }
 .btn-secondary { background: var(--brand); }
 .btn-secondary:hover { background: #0c3d68; }
 .btn-block { display: block; width: 100%; }
