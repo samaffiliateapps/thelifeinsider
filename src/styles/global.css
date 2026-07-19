@@ -186,6 +186,15 @@ img { max-width: 100%; height: auto; }
 .rank-offer { font-size: 0.82rem; font-weight: 700; color: var(--accent-dark); }
 .award-badge { width: 78px; height: 78px; object-fit: contain; margin-top: 2px; }
 
+/* ---- Editorial pull-note (used inside long-form editorial HTML) ---- */
+.pull-note {
+  background: #fdf6e9; border-left: 4px solid var(--gold); border-radius: 0 8px 8px 0;
+  padding: 14px 18px; margin: 22px 0; font-size: 1.02rem; color: var(--ink); font-weight: 600;
+}
+.editorial-figure { margin: 24px 0; }
+.editorial-figure img { border-radius: 12px; border: 1px solid var(--border); width: 100%; }
+.editorial-figure figcaption { font-size: 0.82rem; color: var(--muted); margin-top: 8px; text-align: center; }
+
 /* ---- "Best option on the market" repeat block + highlights ---- */
 .best-band {
   background: var(--brand); color: #fff; text-align: center;

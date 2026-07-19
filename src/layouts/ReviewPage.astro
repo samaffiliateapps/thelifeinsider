@@ -14,9 +14,10 @@ export interface Props {
   deepDive?: { heading: string; body: string[] }; // deep-dive on #1 pick
   faqs?: { q: string; a: string }[];
   highlights?: { title: string; text: string }[]; // 3 key strengths of the #1 pick
+  editorial?: { heading: string; html: string }; // long-form editorial sell (our voice, never a persona)
 }
 
-const { title, description, h1, updated, intro, products, deepDive, faqs, highlights } =
+const { title, description, h1, updated, intro, products, deepDive, faqs, highlights, editorial } =
   Astro.props;
 const top = products.find((p) => p.rank === 1);
 ---
@@ -108,6 +109,22 @@ const top = products.find((p) => p.rank === 1);
             <a href={top.url} class="btn" rel="sponsored nofollow noopener" target="_blank">
               {top.ctaLabel ?? "Check Price"}
             </a>
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Long-form editorial sell -->
+    {editorial && top && (
+      <section class="section" style="padding-top:0;">
+        <div class="container-narrow prose">
+          <h2>{editorial.heading}</h2>
+          <div set:html={editorial.html} />
+          <div style="text-align:center;margin:30px 0 0;">
+            <a href={top.url} class="btn" rel="sponsored nofollow noopener" target="_blank">
+              {top.ctaLabel ?? "View Site"}
+            </a>
+            {top.discount && <div class="rank-offer" style="margin-top:8px;">{top.discount}</div>}
           </div>
         </div>
       </section>
