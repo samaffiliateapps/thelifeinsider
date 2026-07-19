@@ -8,17 +8,25 @@ import type { Product } from "../../components/ProductCard.astro";
      below, subid appended). Offer GEOs incl. AU, US, CA, UK + most of EU.
      Restriction: No SMS. TSL split-test variants available:
        /7/  = TSL 1   |  /11/ = TSL 2  |  /15/ = TSL 3
-   - AMAZON AU: ASINs + ratings/review counts are REAL, pulled live from
-     amazon.com.au (18 Jul 2026). Swap REPLACE-AMZ-AU-TAG-22 for Sam's AU
-     Associates tag. Re-verify ratings at publish — they change.
-   ⚠️ CLIMA PRICE NOT SHOWN: the offer page quotes USD ($79.99 from $139.99)
-   and "free USA shipping". AU-facing price/currency/shipping is unconfirmed —
-   Sam to open the link from AU and confirm, then add `price`/`oldPrice`.
+   - AMAZON AU: LIVE Associates links (tag thelifeinside-22). ASINs + ratings
+     pulled live from amazon.com.au (18 Jul 2026) — re-verify periodically.
+   ⚠️ PRICE SHOWN ($79.99 from $139.99) is the offer page's USD pricing.
+   Confirm what AU visitors actually see and update if it differs.
    ⚠️ NO ENERGY-SAVINGS CLAIMS anywhere on this page (policy + honesty).
    ========================================================================= */
-const CLIMA_CPA = "https://mwebtrackerhq.com/12169/1234/3/?subid=heater_au_hero";
-const AMZ = (asin: string, sub: string) =>
-  `https://www.amazon.com.au/dp/${asin}/?tag=REPLACE-AMZ-AU-TAG-22&ascsubtag=heater_${sub}`;
+// HERO: Clima via MaxWeb tracker — TSL 1 variant (/7/). To split-test, swap this
+// one line for the direct product page (/3/) or TSL 2/3 (/11/, /15/).
+const CLIMA_CPA = "https://mwebtrackerhq.com/12169/1234/7/?subid=heater_au_hero";
+
+// AMAZON AU — live Associates links (tag: thelifeinside-22), ascsubtag per product.
+const AMZ_DREO =
+  "https://www.amazon.com.au/dp/B0DK1Y66F6?ascsubtag=heater_dreo&th=1&linkCode=ll2&tag=thelifeinside-22&linkId=488833883734cea26f0dab4a92529e8c&ref_=as_li_ss_tl";
+const AMZ_DELONGHI =
+  "https://www.amazon.com.au/dp/B0742JBJMV?ascsubtag=heater_delonghi&th=1&linkCode=ll2&tag=thelifeinside-22&linkId=1433fbb5268d32ef1cdab45575baf2f8&ref_=as_li_ss_tl";
+const AMZ_STORMHERO =
+  "https://www.amazon.com.au/dp/B0BZRHSHDG?ascsubtag=heater_stormhero&linkCode=ll2&tag=thelifeinside-22&linkId=9193378d3d5431015e0713de775ea386&ref_=as_li_ss_tl";
+const AMZ_BITZONG =
+  "https://www.amazon.com.au/dp/B07BRM2Z2D?ascsubtag=heater_bitzong&th=1&linkCode=ll2&tag=thelifeinside-22&linkId=15757e9391d510bc6f7b0ba72593714f&ref_=as_li_ss_tl";
 
 const products: Product[] = [
   {
@@ -60,7 +68,7 @@ const products: Product[] = [
     starRating: 4.6,
     reviewCount: 679,
     badge: "Best Rated",
-    url: AMZ("B0DK1Y66F6", "dreo"),
+    url: AMZ_DREO,
     ctaLabel: "View on Amazon",
     pros: [
       "Highest verified rating here — 4.6 stars from 679 buyers",
@@ -79,7 +87,7 @@ const products: Product[] = [
     starRating: 4.1,
     reviewCount: 4450,
     badge: "Most Proven",
-    url: AMZ("B0742JBJMV", "delonghi"),
+    url: AMZ_DELONGHI,
     ctaLabel: "View on Amazon",
     pros: [
       "By far the most-reviewed heater here — 4,450 verified ratings",
@@ -101,7 +109,7 @@ const products: Product[] = [
     starRating: 4.3,
     reviewCount: 254,
     badge: "Best Value",
-    url: AMZ("B0BZRHSHDG", "stormhero"),
+    url: AMZ_STORMHERO,
     ctaLabel: "View on Amazon",
     pros: [
       "The best value here by a wide margin",
@@ -120,7 +128,7 @@ const products: Product[] = [
     starRating: 4.2,
     reviewCount: 170,
     badge: "Best Oscillating",
-    url: AMZ("B07BRM2Z2D", "bitzong"),
+    url: AMZ_BITZONG,
     ctaLabel: "View on Amazon",
     pros: [
       "Oscillates to spread heat across a wider area",
