@@ -130,19 +130,6 @@ const top = products.find((p) => p.rank === 1);
       </section>
     )}
 
-    <!-- How we rate strip -->
-    <section class="section">
-      <div class="container-narrow" style="text-align:center;">
-        <h2>How We Rated These Products</h2>
-        <p>
-          Every Insider Score is built from four weighted inputs: verified
-          customer ratings (50%), review volume and consistency (20%), value for
-          money (15%), and brand reliability (15%). We don't fabricate test
-          results or invent ratings. <a href="/how-we-rate/">Read our full methodology →</a>
-        </p>
-      </div>
-    </section>
-
     <!-- Email capture -->
     <EmailCapture />
 
@@ -160,6 +147,19 @@ const top = products.find((p) => p.rank === 1);
         </div>
       </section>
     )}
+
+    <!-- How we rate strip (trust footer — placed after the close, not mid-funnel) -->
+    <section class="section" style="padding-top:0;">
+      <div class="container-narrow" style="text-align:center;">
+        <h2>How We Rated These Products</h2>
+        <p>
+          Every Insider Score is built from four weighted inputs: verified
+          customer ratings (50%), review volume and consistency (20%), value for
+          money (15%), and brand reliability (15%). We don't fabricate test
+          results or invent ratings. <a href="/how-we-rate/">Read our full methodology →</a>
+        </p>
+      </div>
+    </section>
 
     <section class="section" style="padding-top:0;">
       <div class="container-narrow">
