@@ -14,7 +14,11 @@ import type { Product } from "../../components/ProductCard.astro";
    ⚠️ The offer page runs a rolling "offer ends <tomorrow>" countdown. We do
    NOT replicate that — the 50% discount is real, the deadline is not.
    ========================================================================= */
-const HAUSAFE_CPA = "https://mwebtrackerhq.com/7624/2654/2/?subid=cam_au_hero";
+// Hero CTA routes through CPV One (campaign id 5). CPV One logs the click,
+// attaches its click ID, and forwards to the MaxWeb HauSafe offer configured
+// inside the tracker — that click ID is what MaxWeb's postback returns.
+// Direct MaxWeb link (kept for reference): https://mwebtrackerhq.com/7624/2654/2/
+const HAUSAFE_CPA = "https://cli-1900.clprdr.com/base2.php";
 const AMZ = (asin: string, sub: string) =>
   `https://www.amazon.com.au/dp/${asin}?tag=thelifeinside-22&ascsubtag=cam_${sub}`;
 
@@ -229,4 +233,13 @@ const faqs = [
   highlights={highlights}
   editorial={editorial}
   faqs={faqs}
-/>
+>
+  {/* CPV One landing-page tracking (campaign 5, landing page 1) */}
+  <Fragment slot="body-end">
+    <script is:inline>
+      var clpconfig = { "clroot": "https://cli-1900.clprdr.com/", "engsec": "5" };
+    </script>
+    <script is:inline src="https://cli-1900.clprdr.com/landing.js"></script>
+    <script is:inline>checkdirect(5, 1)</script>
+  </Fragment>
+</ReviewPage>

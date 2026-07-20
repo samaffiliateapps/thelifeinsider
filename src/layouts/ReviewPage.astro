@@ -172,4 +172,7 @@ const top = products.find((p) => p.rank === 1);
       </div>
     </section>
   </article>
+
+  {/* Forward page-level tracker scripts through to Base */}
+  <slot name="body-end" slot="body-end" />
 </Base>
