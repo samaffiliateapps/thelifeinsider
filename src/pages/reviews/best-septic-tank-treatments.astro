@@ -7,16 +7,26 @@ import type { Product } from "../../components/ProductCard.astro";
    - HERO: Septifix via MaxWeb tracker ($80 CPA, US-only). ✅ APPROVED + live
      link in place. Restrictions: No Spam, No Incent.
    ⚠️ STILL NEEDED BEFORE PAID TRAFFIC: US Amazon Associates tag (currently
-     REPLACE-AMZ-TAG-20), real ASINs for ranks 2-5, and verified live ratings.
+     thelifeinside-20), real ASINs for ranks 2-5, and verified live ratings.
    - AMAZON: real product URLs + Sam's Associates tag + &ascsubtag= subid.
    RATINGS/COUNTS below are realistic but ⚠️ VERIFY LIVE on Amazon before
    publish — they change. Septifix is sold direct (no Amazon aggregate), so it
    is scored on our disclosed formulation/value/guarantee assessment and shows
    its real 60-day guarantee in place of a review count (never a fake count).
+   ⚠️⚠️ US AMAZON DATA IS UNVERIFIED — DO NOT DRIVE PAID TRAFFIC YET.
+   Amazon geo-redirects amazon.com -> amazon.com.au from this machine, so US
+   ratings/review counts below are ESTIMATES, not verified US figures. One ASIN
+   (B00004RALL) turned out to be a Weber grill, so all unverified deep-links
+   were replaced with tagged Amazon SEARCH links (always land on the right
+   product, still earn commission). TO FINISH: Sam sends real amazon.com
+   product links w/ tag thelifeinside-20 -> restore deep-links, real titles,
+   verified ratings, and product images.
    ========================================================================= */
 const SEPTIFIX_HOP = "https://mwebtrackerhq.com/7350/4210/2/?subid=septic_us_hero"; // hero, $80/sale, US only
 const AMZ = (asin: string, sub: string) =>
-  `https://www.amazon.com/dp/${asin}/?tag=REPLACE-AMZ-TAG-20&ascsubtag=septic_${sub}`;
+  `https://www.amazon.com/dp/${asin}/?tag=thelifeinside-20&ascsubtag=septic_${sub}`;
+const AMZ_SEARCH = (q: string, sub: string, ns: string) =>
+  `https://www.amazon.com/s?k=${encodeURIComponent(q)}&tag=thelifeinside-20&ascsubtag=${ns}_${sub}`;
 
 const products: Product[] = [
   {
@@ -55,7 +65,7 @@ const products: Product[] = [
     starRating: 4.7,
     reviewCount: 34000,
     badge: "Best Value",
-    url: AMZ("B0000DIWNU", "ridx"),
+    url: AMZ("B0057UUHGK", "ridx"),
     ctaLabel: "View on Amazon",
     pros: [
       "The most trusted name in septic care — decades on the market",
@@ -96,7 +106,7 @@ const products: Product[] = [
     starRating: 4.5,
     reviewCount: 7500,
     badge: "Best for Backups",
-    url: AMZ("B00KKGLISU", "instantpower"),
+    url: AMZ_SEARCH("Instant Power Septic Shock", "instantpower", "septic"),
     ctaLabel: "View on Amazon",
     pros: [
       "Concentrated formula for slow drains and early backups",
@@ -117,7 +127,7 @@ const products: Product[] = [
     starRating: 4.6,
     reviewCount: 1900,
     badge: "Best Premium Boost",
-    url: AMZ("B07KptEXAMPLE", "cabot"),
+    url: AMZ_SEARCH("Cabot Bio-Septic Boost", "cabot", "septic"),
     ctaLabel: "View on Amazon",
     pros: [
       "High-concentration bacterial boost for stubborn systems",

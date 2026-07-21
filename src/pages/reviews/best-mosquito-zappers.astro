@@ -7,15 +7,25 @@ import type { Product } from "../../components/ProductCard.astro";
    - HERO: Mosqinux Killamp via MaxWeb tracker ($40 CPA). ✅ APPROVED + live
      link in place. ⚠️ NO BRAND BIDDING — never bid "Mosqinux" in Google Ads.
    ⚠️ STILL NEEDED BEFORE PAID TRAFFIC: US Amazon Associates tag (currently
-     REPLACE-AMZ-TAG-20), real ASINs for ranks 2-5, and verified live ratings.
+     thelifeinside-20), real ASINs for ranks 2-5, and verified live ratings.
    - AMAZON: real product URLs + Sam's Associates tag + &ascsubtag= subid.
    RATINGS/COUNTS below are realistic but ⚠️ VERIFY LIVE on Amazon before
    publish. Mosqinux is sold direct (no Amazon aggregate) → scored on our
    disclosed assessment; shows real specs in place of a review count.
+   ⚠️⚠️ US AMAZON DATA IS UNVERIFIED — DO NOT DRIVE PAID TRAFFIC YET.
+   Amazon geo-redirects amazon.com -> amazon.com.au from this machine, so US
+   ratings/review counts below are ESTIMATES, not verified US figures. One ASIN
+   (B00004RALL) turned out to be a Weber grill, so all unverified deep-links
+   were replaced with tagged Amazon SEARCH links (always land on the right
+   product, still earn commission). TO FINISH: Sam sends real amazon.com
+   product links w/ tag thelifeinside-20 -> restore deep-links, real titles,
+   verified ratings, and product images.
    ========================================================================= */
 const MOSQINUX_LINK = "https://mwebtrackerhq.com/8293/3526/2/?subid=zapper_us_hero"; // hero, $40/sale — NO BRAND BIDDING
 const AMZ = (asin: string, sub: string) =>
-  `https://www.amazon.com/dp/${asin}/?tag=REPLACE-AMZ-TAG-20&ascsubtag=zapper_${sub}`;
+  `https://www.amazon.com/dp/${asin}/?tag=thelifeinside-20&ascsubtag=zapper_${sub}`;
+const AMZ_SEARCH = (q: string, sub: string, ns: string) =>
+  `https://www.amazon.com/s?k=${encodeURIComponent(q)}&tag=thelifeinside-20&ascsubtag=${ns}_${sub}`;
 
 const products: Product[] = [
   {
@@ -51,7 +61,7 @@ const products: Product[] = [
     starRating: 4.2,
     reviewCount: 15000,
     badge: "Best for Large Yards",
-    url: AMZ("B00004RALL", "flowtron"),
+    url: AMZ_SEARCH("Flowtron Electronic Insect Killer", "flowtron", "zapper"),
     ctaLabel: "View on Amazon",
     pros: [
       "Covers up to a full acre — built for big outdoor spaces",
@@ -70,7 +80,7 @@ const products: Product[] = [
     starRating: 4.3,
     reviewCount: 45000,
     badge: "Best for Indoors",
-    url: AMZ("B01N9YS7X6", "katchy"),
+    url: AMZ_SEARCH("Katchy Indoor Insect Trap", "katchy", "zapper"),
     ctaLabel: "View on Amazon",
     pros: [
       "UV light plus a fan pulls bugs onto a sticky board — no zap sound",
@@ -89,7 +99,7 @@ const products: Product[] = [
     starRating: 4.2,
     reviewCount: 20000,
     badge: "Best for Mosquitoes",
-    url: AMZ("B001AEMB1A", "dynatrap"),
+    url: AMZ_SEARCH("DynaTrap Mosquito Insect Trap", "dynatrap", "zapper"),
     ctaLabel: "View on Amazon",
     pros: [
       "CO2-mimicking warmth targets mosquitoes specifically, not just any bug",
@@ -107,7 +117,7 @@ const products: Product[] = [
     starRating: 4.2,
     reviewCount: 6000,
     badge: "Best Value",
-    url: AMZ("B08XYEXAMPLE", "blackdecker"),
+    url: AMZ_SEARCH("BLACK+DECKER Bug Zapper", "blackdecker", "zapper"),
     ctaLabel: "View on Amazon",
     pros: [
       "Low price from a trusted household brand",
