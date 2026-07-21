@@ -23,10 +23,9 @@ import type { Product } from "../../components/ProductCard.astro";
    verified ratings, and product images.
    ========================================================================= */
 const SEPTIFIX_HOP = "https://mwebtrackerhq.com/7350/4210/2/?subid=septic_us_hero"; // hero, $80/sale, US only
-const AMZ = (asin: string, sub: string) =>
-  `https://www.amazon.com/dp/${asin}/?tag=thelifeinside-20&ascsubtag=septic_${sub}`;
-const AMZ_SEARCH = (q: string, sub: string, ns: string) =>
-  `https://www.amazon.com/s?k=${encodeURIComponent(q)}&tag=thelifeinside-20&ascsubtag=${ns}_${sub}`;
+// Sam's live amazon.com Associates links (tag thelifeinside-20), ASINs + linkIds verified.
+const AMZ = (asin: string, linkId: string, sub: string) =>
+  `https://www.amazon.com/dp/${asin}?linkCode=ll2&tag=thelifeinside-20&linkId=${linkId}&language=en_US&ref_=as_li_ss_tl&ascsubtag=septic_${sub}`;
 
 const products: Product[] = [
   {
@@ -65,7 +64,8 @@ const products: Product[] = [
     starRating: 4.7,
     reviewCount: 34000,
     badge: "Best Value",
-    url: AMZ("B0057UUHGK", "ridx"),
+    image: "/images/sep-ridx.jpg",
+    url: AMZ("B0057UUHGK", "5f24c9800732c070bc17ec0f81e93a9d", "ridx"),
     ctaLabel: "View on Amazon",
     pros: [
       "The most trusted name in septic care — decades on the market",
@@ -80,14 +80,15 @@ const products: Product[] = [
   },
   {
     rank: 3,
-    name: "Green Gobbler Septic Saver",
+    name: "Green Gobbler Septic Saver Tank Treatment Pods",
     brand: "Green Gobbler Septic Saver",
     score: 8.6,
     scoreLabel: "Excellent",
     starRating: 4.5,
     reviewCount: 9000,
     badge: "Best Natural Formula",
-    url: AMZ("B00ZS4ZAEE", "greengobbler"),
+    image: "/images/sep-greengobbler.jpg",
+    url: AMZ("B00ZS4ZAEE", "19fcb88885543d4a2d726fd3d047b3d5", "greengobbler"),
     ctaLabel: "View on Amazon",
     pros: [
       "Pre-measured pods — no powder to pour or spill",
@@ -106,7 +107,8 @@ const products: Product[] = [
     starRating: 4.5,
     reviewCount: 7500,
     badge: "Best for Backups",
-    url: AMZ_SEARCH("Instant Power Septic Shock", "instantpower", "septic"),
+    image: "/images/sep-instantpower.jpg",
+    url: AMZ("B007BL2R7K", "91a555dc57629eff2b1acc656a57c7af", "instantpower"),
     ctaLabel: "View on Amazon",
     pros: [
       "Concentrated formula for slow drains and early backups",
@@ -127,7 +129,7 @@ const products: Product[] = [
     starRating: 4.6,
     reviewCount: 1900,
     badge: "Best Premium Boost",
-    url: AMZ_SEARCH("Cabot Bio-Septic Boost", "cabot", "septic"),
+    url: AMZ("B074WDFZ1S", "ecf05e0a398ff3ea87a291ed8b1afdab", "cabot"),
     ctaLabel: "View on Amazon",
     pros: [
       "High-concentration bacterial boost for stubborn systems",

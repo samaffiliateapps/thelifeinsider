@@ -22,10 +22,9 @@ import type { Product } from "../../components/ProductCard.astro";
    verified ratings, and product images.
    ========================================================================= */
 const MOSQINUX_LINK = "https://mwebtrackerhq.com/8293/3526/2/?subid=zapper_us_hero"; // hero, $40/sale — NO BRAND BIDDING
-const AMZ = (asin: string, sub: string) =>
-  `https://www.amazon.com/dp/${asin}/?tag=thelifeinside-20&ascsubtag=zapper_${sub}`;
-const AMZ_SEARCH = (q: string, sub: string, ns: string) =>
-  `https://www.amazon.com/s?k=${encodeURIComponent(q)}&tag=thelifeinside-20&ascsubtag=${ns}_${sub}`;
+// Sam's live amazon.com Associates links (tag thelifeinside-20), ASINs + linkIds verified.
+const AMZ = (asin: string, linkId: string, sub: string) =>
+  `https://www.amazon.com/dp/${asin}?linkCode=ll2&tag=thelifeinside-20&linkId=${linkId}&language=en_US&ref_=as_li_ss_tl&ascsubtag=zapper_${sub}`;
 
 const products: Product[] = [
   {
@@ -37,6 +36,7 @@ const products: Product[] = [
     trustNote: "Chemical-free · covers up to 500 sq ft",
     price: "$49.95",
     badge: "Best Overall",
+    image: "/images/zap-mosqinux.webp",
     url: MOSQINUX_LINK,
     ctaLabel: "View Site",
     pros: [
@@ -61,7 +61,7 @@ const products: Product[] = [
     starRating: 4.2,
     reviewCount: 15000,
     badge: "Best for Large Yards",
-    url: AMZ_SEARCH("Flowtron Electronic Insect Killer", "flowtron", "zapper"),
+    url: AMZ("B00004R9VW", "9899e4e2862011bac1abcbefd58190ae", "flowtron"),
     ctaLabel: "View on Amazon",
     pros: [
       "Covers up to a full acre — built for big outdoor spaces",
@@ -73,22 +73,22 @@ const products: Product[] = [
   },
   {
     rank: 3,
-    name: "Katchy Indoor Insect Trap",
-    brand: "Katchy Indoor Trap",
+    name: "Katchy Duo Indoor Insect Trap",
+    brand: "Katchy Duo",
     score: 8.4,
     scoreLabel: "Excellent",
     starRating: 4.3,
     reviewCount: 45000,
     badge: "Best for Indoors",
-    url: AMZ_SEARCH("Katchy Indoor Insect Trap", "katchy", "zapper"),
+    url: AMZ("B08TKG5M4S", "692ff93bd0e63771394f952195f0ebf0", "katchy"),
     ctaLabel: "View on Amazon",
     pros: [
-      "UV light plus a fan pulls bugs onto a sticky board — no zap sound",
-      "Great for gnats and fruit flies as well as mosquitoes",
-      "Discreet, quiet, and truly silent for bedrooms",
-      "One of the most-reviewed traps on the market",
+      "UV light, fan suction and a scent pod draw insects in — no zap sound",
+      "Catches mosquitoes, fruit flies, gnats and small moths",
+      "Completely silent and discreet enough for a bedroom",
+      "Works day and night, indoors",
     ],
-    cons: ["Indoor use only", "Sticky glue boards are a recurring cost"],
+    cons: ["Indoor use only", "Replacement scent pods are a recurring cost"],
   },
   {
     rank: 4,
@@ -99,7 +99,8 @@ const products: Product[] = [
     starRating: 4.2,
     reviewCount: 20000,
     badge: "Best for Mosquitoes",
-    url: AMZ_SEARCH("DynaTrap Mosquito Insect Trap", "dynatrap", "zapper"),
+    image: "/images/zap-dynatrap.jpg",
+    url: AMZ("B0CQ8TQ99C", "aed0bbd1fa90771faee7ec5e6a1746af", "dynatrap"),
     ctaLabel: "View on Amazon",
     pros: [
       "CO2-mimicking warmth targets mosquitoes specifically, not just any bug",
@@ -117,7 +118,8 @@ const products: Product[] = [
     starRating: 4.2,
     reviewCount: 6000,
     badge: "Best Value",
-    url: AMZ_SEARCH("BLACK+DECKER Bug Zapper", "blackdecker", "zapper"),
+    image: "/images/zap-blackdecker.jpg",
+    url: AMZ("B08S7SCST6", "fe66368c8d27f60b0d9db98b37814eb3", "blackdecker"),
     ctaLabel: "View on Amazon",
     pros: [
       "Low price from a trusted household brand",
