@@ -4,15 +4,17 @@ import type { Product } from "../../components/ProductCard.astro";
 
 /* =========================================================================
    AFFILIATE LINKS — REPLACE BEFORE LAUNCH (see AFFILIATE-LINKS-TODO.txt)
-   - HERO: Septifix ClickBank hoplink (MaxWeb, $80 CPA, US-only). Offer is
-     PENDING approval — do not go live until approved + a ?tid= subid is set.
+   - HERO: Septifix via MaxWeb tracker ($80 CPA, US-only). ✅ APPROVED + live
+     link in place. Restrictions: No Spam, No Incent.
+   ⚠️ STILL NEEDED BEFORE PAID TRAFFIC: US Amazon Associates tag (currently
+     REPLACE-AMZ-TAG-20), real ASINs for ranks 2-5, and verified live ratings.
    - AMAZON: real product URLs + Sam's Associates tag + &ascsubtag= subid.
    RATINGS/COUNTS below are realistic but ⚠️ VERIFY LIVE on Amazon before
    publish — they change. Septifix is sold direct (no Amazon aggregate), so it
    is scored on our disclosed formulation/value/guarantee assessment and shows
    its real 60-day guarantee in place of a review count (never a fake count).
    ========================================================================= */
-const SEPTIFIX_HOP = "https://REPLACE-WITH-SEPTIFIX-HOPLINK"; // hero, $80/sale, add ?tid= subid
+const SEPTIFIX_HOP = "https://mwebtrackerhq.com/7350/4210/2/?subid=septic_us_hero"; // hero, $80/sale, US only
 const AMZ = (asin: string, sub: string) =>
   `https://www.amazon.com/dp/${asin}/?tag=REPLACE-AMZ-TAG-20&ascsubtag=septic_${sub}`;
 

@@ -4,15 +4,16 @@ import type { Product } from "../../components/ProductCard.astro";
 
 /* =========================================================================
    AFFILIATE LINKS — REPLACE BEFORE LAUNCH (see AFFILIATE-LINKS-TODO.txt)
-   - HERO: Mosqinux Killamp tracking link (MaxWeb, $40 CPA). Offer is PENDING
-     approval — do not go live until approved + subid set. ⚠️ NO BRAND BIDDING
-     (offer rule) — never bid the keyword "Mosqinux" in Google Ads.
+   - HERO: Mosqinux Killamp via MaxWeb tracker ($40 CPA). ✅ APPROVED + live
+     link in place. ⚠️ NO BRAND BIDDING — never bid "Mosqinux" in Google Ads.
+   ⚠️ STILL NEEDED BEFORE PAID TRAFFIC: US Amazon Associates tag (currently
+     REPLACE-AMZ-TAG-20), real ASINs for ranks 2-5, and verified live ratings.
    - AMAZON: real product URLs + Sam's Associates tag + &ascsubtag= subid.
    RATINGS/COUNTS below are realistic but ⚠️ VERIFY LIVE on Amazon before
    publish. Mosqinux is sold direct (no Amazon aggregate) → scored on our
    disclosed assessment; shows real specs in place of a review count.
    ========================================================================= */
-const MOSQINUX_LINK = "https://REPLACE-WITH-MOSQINUX-TRACKING-LINK"; // hero, $40/sale
+const MOSQINUX_LINK = "https://mwebtrackerhq.com/8293/3526/2/?subid=zapper_us_hero"; // hero, $40/sale — NO BRAND BIDDING
 const AMZ = (asin: string, sub: string) =>
   `https://www.amazon.com/dp/${asin}/?tag=REPLACE-AMZ-TAG-20&ascsubtag=zapper_${sub}`;
 
