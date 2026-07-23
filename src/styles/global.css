@@ -49,8 +49,15 @@ img { max-width: 100%; height: auto; }
   font-size: 0.78rem;
   color: var(--muted);
 }
-.topbar .container { display: flex; justify-content: space-between; align-items: center; padding-top: 6px; padding-bottom: 6px; }
-.topbar a { color: var(--muted); text-decoration: underline; }
+.topbar .container { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 6px; padding-bottom: 6px; }
+.topbar .tagline { min-width: 0; }
+.topbar a { color: var(--muted); text-decoration: underline; white-space: nowrap; flex-shrink: 0; }
+/* Mobile: the tagline + link both wrapped and misaligned — hide the tagline,
+   keep just the (legally required) disclosure link centred on one clean line. */
+@media (max-width: 640px) {
+  .topbar .container { justify-content: center; }
+  .topbar .tagline { display: none; }
+}
 
 .site-header { border-bottom: 1px solid var(--border); background: #fff; position: sticky; top: 0; z-index: 50; }
 .site-header .container { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; padding-bottom: 14px; }
@@ -60,7 +67,16 @@ img { max-width: 100%; height: auto; }
 .logo .ti-the { color: var(--brand); }
 .main-nav { display: flex; gap: 26px; align-items: center; }
 .main-nav a { color: var(--ink); font-weight: 600; font-size: 0.95rem; }
-@media (max-width: 640px) { .main-nav { gap: 14px; } .main-nav a { font-size: 0.85rem; } }
+/* Mobile: the logo + 4 links can't share one row without the brand wrapping and
+   the nav cramming. Stack into two centred rows, and drop sticky so the review
+   content gets the full viewport as the user scrolls. */
+@media (max-width: 640px) {
+  .site-header { position: static; }
+  .site-header .container { flex-direction: column; gap: 10px; padding-top: 12px; padding-bottom: 12px; }
+  .logo { font-size: 1.25rem; }
+  .main-nav { gap: 20px; justify-content: center; flex-wrap: wrap; }
+  .main-nav a { font-size: 0.9rem; }
+}
 
 /* ---- Buttons ---- */
 .btn {
