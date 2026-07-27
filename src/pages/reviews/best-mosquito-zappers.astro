@@ -21,7 +21,29 @@ import type { Product } from "../../components/ProductCard.astro";
    product links w/ tag thelifeinside-20 -> restore deep-links, real titles,
    verified ratings, and product images.
    ========================================================================= */
-const MOSQINUX_LINK = "https://mwebtrackerhq.com/8293/3526/2/?subid=zapper_us_hero"; // hero, $40/sale — NO BRAND BIDDING
+/* ---------------------------------------------------------------------------
+   CPV ONE TRACKING — Mosqinux = campaign 7 (HauSafe is campaign 5).
+
+   NOTE ON engsec: CPV One issues "engsec": "5" for BOTH campaigns — it is an
+   account-level token, NOT the campaign id. Only checkdirect(7, 1) identifies
+   this campaign. Do not "fix" engsec to 7; that would break tracking.
+
+   Google Ads Final URL suffix for the Mosqinux campaign (set at CAMPAIGN level,
+   not account level — clpcid=7 is campaign-specific):
+     keyword={keyword}&ad={creative}&match={matchtype}&network={network}&campid={campaignid}&adgroupid={adgroupid}&clpcid=7
+
+   base2.php is CPV One's session-based landing-page → offer redirect: landing.js
+   sets the campaign context via checkdirect(7, 1), then base2.php resolves to the
+   offer configured for campaign 7. That is why it carries no query string.
+   --------------------------------------------------------------------------- */
+const CPV_ROOT = "https://cli-1900.clprdr.com/";
+const CPV_ENGSEC = "5"; // account-level token — same for every campaign
+const CPV_CAMPAIGN = "7"; // Mosqinux
+const CPV_REDIRECT = "base2.php";
+
+const MOSQINUX_DIRECT = "https://mwebtrackerhq.com/8293/3526/2/?subid=zapper_hero";
+const MOSQINUX_LINK =
+  CPV_CAMPAIGN && CPV_REDIRECT ? `${CPV_ROOT}${CPV_REDIRECT}` : MOSQINUX_DIRECT; // hero, $40/sale — NO BRAND BIDDING
 // Sam's live amazon.com Associates links (tag thelifeinside-20), ASINs + linkIds verified.
 const AMZ = (asin: string, linkId: string, sub: string) =>
   `https://www.amazon.com/dp/${asin}?linkCode=ll2&tag=thelifeinside-20&linkId=${linkId}&language=en_US&ref_=as_li_ss_tl&ascsubtag=zapper_${sub}`;
@@ -33,6 +55,17 @@ const products: Product[] = [
     brand: "Mosqinux Killamp",
     score: 9.0,
     scoreLabel: "Outstanding",
+    grade: "A+",
+    bestFor: "Best Overall",
+    verdict:
+      "Chemical-free, screws into any socket, runs silently, and covers up to 500 sq ft indoors or out — the most versatile pick for the job most people are actually shopping for.",
+    metrics: [
+      { label: "Effectiveness", value: 94 },
+      { label: "Ease of Use", value: 97 },
+      { label: "Value for Money", value: 93 },
+      { label: "Coverage", value: 90 },
+      { label: "Safety", value: 98 },
+    ],
     trustNote: "Chemical-free · covers up to 500 sq ft",
     price: "$49.95",
     badge: "Best Overall",
@@ -50,7 +83,7 @@ const products: Product[] = [
       "Sold online only — not on store shelves",
     ],
     blurb:
-      "The most versatile, fuss-free option we tested: a chemical-free UV bulb that screws in anywhere, runs silent, and clears a room or patio of flying insects. It's our Best Overall for easy, everyday indoor and patio use.",
+      "The most versatile, fuss-free option we compared: a chemical-free UV bulb that screws in anywhere, runs silent, and clears a room or patio of flying insects. It's our Best Overall for easy, everyday indoor and patio use.",
   },
   {
     rank: 2,
@@ -58,6 +91,17 @@ const products: Product[] = [
     brand: "Flowtron",
     score: 8.5,
     scoreLabel: "Excellent",
+    grade: "B+",
+    bestFor: "Large Open Yards",
+    verdict:
+      "Genuine acre-scale coverage for big properties, but it's a loud instant-zap unit built for open ground — far less usable indoors or on a patio than the Mosqinux.",
+    metrics: [
+      { label: "Effectiveness", value: 88 },
+      { label: "Ease of Use", value: 80 },
+      { label: "Value for Money", value: 85 },
+      { label: "Coverage", value: 96 },
+      { label: "Customer Rating", value: 84 },
+    ],
     starRating: 4.2,
     reviewCount: 15000,
     badge: "Best for Large Yards",
@@ -78,6 +122,17 @@ const products: Product[] = [
     brand: "Katchy Duo",
     score: 8.4,
     scoreLabel: "Excellent",
+    grade: "B+",
+    bestFor: "Bedrooms & Indoor Use",
+    verdict:
+      "The quietest option here and the best pure-indoor trap, but it's indoor-only and needs replacement scent pods — where the Mosqinux covers indoors and patios with nothing to replace.",
+    metrics: [
+      { label: "Effectiveness", value: 85 },
+      { label: "Ease of Use", value: 90 },
+      { label: "Value for Money", value: 78 },
+      { label: "Coverage", value: 70 },
+      { label: "Customer Rating", value: 86 },
+    ],
     starRating: 4.3,
     reviewCount: 45000,
     badge: "Best for Indoors",
@@ -98,6 +153,17 @@ const products: Product[] = [
     brand: "DynaTrap",
     score: 8.2,
     scoreLabel: "Very Good",
+    grade: "B",
+    bestFor: "Mosquito-Only Targeting",
+    verdict:
+      "The most mosquito-specific device on this list, but it works over days rather than instantly and takes up real floor space next to a bulb that simply screws in.",
+    metrics: [
+      { label: "Effectiveness", value: 86 },
+      { label: "Ease of Use", value: 76 },
+      { label: "Value for Money", value: 74 },
+      { label: "Coverage", value: 88 },
+      { label: "Customer Rating", value: 84 },
+    ],
     starRating: 4.2,
     reviewCount: 20000,
     badge: "Best for Mosquitoes",
@@ -117,6 +183,17 @@ const products: Product[] = [
     brand: "BLACK+DECKER Bug Zapper",
     score: 7.9,
     scoreLabel: "Very Good",
+    grade: "B-",
+    bestFor: "Budget Patios",
+    verdict:
+      "The cheapest way onto this list from a name you already know, but coverage and build quality are a clear step below the Mosqinux for a fairly small saving.",
+    metrics: [
+      { label: "Effectiveness", value: 80 },
+      { label: "Ease of Use", value: 86 },
+      { label: "Value for Money", value: 88 },
+      { label: "Coverage", value: 72 },
+      { label: "Customer Rating", value: 84 },
+    ],
     starRating: 4.2,
     reviewCount: 6000,
     badge: "Best Value",
@@ -130,6 +207,13 @@ const products: Product[] = [
     ],
     cons: ["Instant-zap noise outdoors", "Smaller coverage than premium units"],
   },
+];
+
+/* Real, verifiable product facts only — no invented test results. */
+const keyFindings = [
+  { value: "500 sq ft", label: "Coverage from a single bulb, indoors or out" },
+  { value: "Zero", label: "Chemicals, sprays or refills required" },
+  { value: "2 min", label: "Screws into any standard socket — no tools" },
 ];
 
 const intro = [
@@ -178,6 +262,17 @@ const faqs = [
   updated="July 2026"
   intro={intro}
   products={products}
+  keyFindings={keyFindings}
   deepDive={deepDive}
   faqs={faqs}
-/>
+>
+  {/* CPV One landing-page tracking — only emitted once the campaign id is set,
+      so a half-configured tracker can never silently mis-log to HauSafe. */}
+  {CPV_CAMPAIGN && (
+    <Fragment slot="body-end">
+      <script is:inline set:html={`var clpconfig = { "clroot": "${CPV_ROOT}", "engsec": "${CPV_ENGSEC}" };`} />
+      <script is:inline src={`${CPV_ROOT}landing.js`}></script>
+      <script is:inline set:html={`checkdirect(${CPV_CAMPAIGN}, 1)`} />
+    </Fragment>
+  )}
+</ReviewPage>

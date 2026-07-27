@@ -21,6 +21,11 @@ export interface Product {
   pros: string[];
   cons?: string[];
   blurb?: string;
+  // ---- Structural elements proven on high-traffic competitor landers ----
+  grade?: string; // "A+" | "B+" | "B" | "B-" — derived from our Insider Score
+  metrics?: { label: string; value: number }[]; // OUR disclosed assessment (0-100), never claimed lab results
+  bestFor?: string; // "Best Overall" for hero; a NARROW use case for rivals ("Camping & Patios")
+  verdict?: string; // one-line close. For rivals, reference the hero by name.
 }
 // `repeat` = this is the duplicated "best option" block; omit the id so the
 // anchor target stays unique and the top-picks jump links keep working.
@@ -59,6 +64,17 @@ const stars = p.starRating
         {p.oldPrice && <span class="was">{p.oldPrice}</span>}
       </p>
     )}
+    {p.metrics && p.metrics.length > 0 && (
+      <div class="metrics">
+        {p.metrics.map((m) => (
+          <div class="metric">
+            <span class="m-label">{m.label}</span>
+            <span class="m-bar"><span class="m-fill" style={`width:${m.value}%`}></span></span>
+            <span class="m-val">{m.value}%</span>
+          </div>
+        ))}
+      </div>
+    )}
     <div class="proscons">
       <ul class="pros">{p.pros.map((pro) => <li>{pro}</li>)}</ul>
       {p.cons && p.cons.length > 0 && (
@@ -66,9 +82,21 @@ const stars = p.starRating
       )}
     </div>
     {p.blurb && <p style="font-size:0.92rem;color:var(--muted);margin:12px 0 0;">{p.blurb}</p>}
+    {p.verdict && (
+      <div class:list={["verdict", { "verdict-top": p.rank === 1 }]}>
+        {p.bestFor && <span class="v-label">Best For: {p.bestFor}</span>}
+        <p class="v-text">{p.verdict}</p>
+      </div>
+    )}
   </div>
 
   <div class="rank-side">
+    {p.grade && (
+      <div class="grade-wrap">
+        <span class="grade-cap">Overall Grade</span>
+        <span class:list={["grade", { "grade-a": p.rank === 1 }]}>{p.grade}</span>
+      </div>
+    )}
     {p.scoreLabel && <div class="score-label">{p.scoreLabel}</div>}
     <div class="score-pill">
       <span class="num">{p.score.toFixed(1)}</span>

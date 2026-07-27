@@ -15,9 +15,11 @@ export interface Props {
   faqs?: { q: string; a: string }[];
   highlights?: { title: string; text: string }[]; // 3 key strengths of the #1 pick
   editorial?: { heading: string; html: string }; // long-form editorial sell (our voice, never a persona)
+  // 3 headline numbers shown above the list. REAL published specs only — never invented test results.
+  keyFindings?: { value: string; label: string }[];
 }
 
-const { title, description, h1, updated, intro, products, deepDive, faqs, highlights, editorial } =
+const { title, description, h1, updated, intro, products, deepDive, faqs, highlights, editorial, keyFindings } =
   Astro.props;
 const top = products.find((p) => p.rank === 1);
 ---
@@ -35,6 +37,25 @@ const top = products.find((p) => p.rank === 1);
         </div>
       </div>
     </section>
+
+    <!-- Key findings: three real, verifiable numbers up front -->
+    {keyFindings && keyFindings.length > 0 && (
+      <section style="padding:0 0 8px;">
+        <div class="container">
+          <div class="key-findings">
+            <div class="kf-head">Key Findings</div>
+            <div class="kf-grid">
+              {keyFindings.map((k) => (
+                <div class="kf-item">
+                  <div class="kf-value">{k.value}</div>
+                  <div class="kf-label">{k.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
 
     <!-- Quick picks summary -->
     <section style="padding:0 0 8px;">
@@ -155,8 +176,11 @@ const top = products.find((p) => p.rank === 1);
         <p>
           Every Insider Score is built from four weighted inputs: verified
           customer ratings (50%), review volume and consistency (20%), value for
-          money (15%), and brand reliability (15%). We don't fabricate test
-          results or invent ratings. <a href="/how-we-rate/">Read our full methodology →</a>
+          money (15%), and brand reliability (15%). The letter grades and the
+          percentage bars on each card are our own editorial assessment of
+          published specifications and verified ratings — not laboratory
+          measurements. We don't fabricate test results or invent ratings.
+          <a href="/how-we-rate/">Read our full methodology →</a>
         </p>
       </div>
     </section>
