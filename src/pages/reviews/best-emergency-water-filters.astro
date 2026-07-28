@@ -27,18 +27,21 @@ import type { Product } from "../../components/ProductCard.astro";
    ========================================================================= */
 
 /* ---------------------------------------------------------------------------
-   CPV ONE TRACKING — ⚠️ SAM: paste the Survival Sip campaign id below.
-   HauSafe = 5, Mosqinux = 7. This one will be 8 or higher.
+   CPV ONE TRACKING — Survival Sip = CPV campaign 9 (HauSafe 5, Mosqinux 7).
    engsec is the install-level token (stays "5" for every campaign).
    Until CPV_CAMPAIGN is set, no tracker scripts are emitted and the hero CTA
    falls back to the direct AdsBranded link, so the page is safe to deploy.
 
    Google Ads Final URL suffix, CAMPAIGN level only (it pins clpcid):
-     keyword={keyword}&ad={creative}&match={matchtype}&network={network}&campid={campaignid}&adgroupid={adgroupid}&clpcid=<ID>
+     keyword={keyword}&ad={creative}&match={matchtype}&network={network}&campid={campaignid}&adgroupid={adgroupid}&clpcid=9
+
+   ⚠️ EVERFLOW — set as a GLOBAL postback in the AdsBranded/Everflow panel, or
+   no sale ever reaches CPV One and nothing imports to Google Ads:
+     https://cli-1900.clprdr.com/adclick.php?subid={sub1}&revenue={payout_amount}&txid={transaction_id}
    --------------------------------------------------------------------------- */
 const CPV_ROOT = "https://cli-1900.clprdr.com/";
 const CPV_ENGSEC = "5";
-const CPV_CAMPAIGN = ""; // e.g. "8" — from CPV One
+const CPV_CAMPAIGN = "9"; // Survival Sip — CPV One campaign 9
 
 // Traffic goes to the INTERSTITIAL, not straight to checkout: the 10% CVR was
 // measured on that funnel, so bypassing it would invalidate the number we bid against.
