@@ -237,6 +237,38 @@ img { max-width: 100%; height: auto; }
 .grade { font-size: 2rem; font-weight: 900; line-height: 1; color: var(--muted); letter-spacing: -0.03em; }
 .grade-a { color: var(--cta); }
 
+/* ---- Collapsible FAQ ---- */
+.faq-list { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: #fff; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-item:last-child { border-bottom: none; }
+.faq-item > summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 16px 20px; cursor: pointer; list-style: none;
+  font-weight: 700; color: var(--ink); font-size: 1.02rem; line-height: 1.4;
+  transition: background 0.12s ease;
+}
+.faq-item > summary::-webkit-details-marker { display: none; }
+.faq-item > summary:hover { background: var(--bg-soft); }
+.faq-item[open] > summary { background: var(--bg-soft); }
+.faq-chev { width: 20px; height: 20px; flex-shrink: 0; color: var(--muted); transition: transform 0.18s ease; }
+.faq-item[open] .faq-chev { transform: rotate(180deg); }
+.faq-a { padding: 0 20px 18px; }
+.faq-a p { margin: 0; color: var(--body); line-height: 1.65; }
+
+/* ---- "See the rest of the list" disclosure ---- */
+.more-picks > summary {
+  display: block; cursor: pointer; list-style: none; text-align: center;
+  padding: 15px 24px; border: 1px solid var(--border); border-radius: 10px;
+  background: #fff; color: var(--brand); font-weight: 700; font-size: 1rem;
+  box-shadow: var(--shadow); transition: border-color 0.15s ease, background 0.15s ease;
+}
+.more-picks > summary::-webkit-details-marker { display: none; }
+.more-picks > summary:hover { border-color: var(--brand); background: var(--bg-soft); }
+.more-picks .mp-open { display: none; }
+.more-picks[open] .mp-closed { display: none; }
+.more-picks[open] .mp-open { display: inline; }
+.more-picks .mp-body { padding-top: 20px; }
+
 /* ---- Editorial pull-note (used inside long-form editorial HTML) ---- */
 .pull-note {
   background: #fdf6e9; border-left: 4px solid var(--gold); border-radius: 0 8px 8px 0;

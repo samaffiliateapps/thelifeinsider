@@ -73,10 +73,22 @@ const top = products.find((p) => p.rank === 1);
       </div>
     </section>
 
-    <!-- Ranked list -->
+    <!-- Ranked list. Top 3 shown; the rest sit behind a disclosure so the page
+         reaches the #1 pick faster and doesn't front-load choice paralysis. -->
     <section class="section" style="padding-top:28px;">
       <div class="container">
-        {products.map((p) => <ProductCard product={p} />)}
+        {products.slice(0, 3).map((p) => <ProductCard product={p} />)}
+        {products.length > 3 && (
+          <details class="more-picks">
+            <summary>
+              <span class="mp-closed">See the rest of the list ({products.length - 3} more)</span>
+              <span class="mp-open">Hide the rest of the list</span>
+            </summary>
+            <div class="mp-body">
+              {products.slice(3).map((p) => <ProductCard product={p} />)}
+            </div>
+          </details>
+        )}
       </div>
     </section>
 
@@ -157,33 +169,24 @@ const top = products.find((p) => p.rank === 1);
     <!-- FAQ -->
     {faqs && faqs.length > 0 && (
       <section class="section">
-        <div class="container-narrow prose">
-          <h2>Frequently Asked Questions</h2>
-          {faqs.map((f) => (
-            <>
-              <h3>{f.q}</h3>
-              <p set:html={f.a} />
-            </>
-          ))}
+        <div class="container-narrow">
+          <h2 style="margin-bottom:20px;">Frequently Asked Questions</h2>
+          <div class="faq-list">
+            {faqs.map((f) => (
+              <details class="faq-item">
+                <summary>
+                  <span class="faq-q">{f.q}</span>
+                  <svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="faq-a"><p set:html={f.a} /></div>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
     )}
-
-    <!-- How we rate strip (trust footer — placed after the close, not mid-funnel) -->
-    <section class="section" style="padding-top:0;">
-      <div class="container-narrow" style="text-align:center;">
-        <h2>How We Rated These Products</h2>
-        <p>
-          Every Insider Score is built from four weighted inputs: verified
-          customer ratings (50%), review volume and consistency (20%), value for
-          money (15%), and brand reliability (15%). The letter grades and the
-          percentage bars on each card are our own editorial assessment of
-          published specifications and verified ratings — not laboratory
-          measurements. We don't fabricate test results or invent ratings.
-          <a href="/how-we-rate/">Read our full methodology →</a>
-        </p>
-      </div>
-    </section>
 
     <section class="section" style="padding-top:0;">
       <div class="container-narrow">
