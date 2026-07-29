@@ -18,12 +18,12 @@ import type { Product } from "../../components/ProductCard.astro";
    says 99.99%, table says 99.9999%. We use the CONSERVATIVE figure in both
    cases (1,800 is their headline claim so it is cited as "up to", and 99.99%).
 
-   ⚠️ AMAZON: ranks 2-5 use tagged SEARCH links, not deep links. This is the
-   safe pattern we adopted after an unverified ASIN once pointed at a grill.
-   They always land on the right product and still earn commission. Replace
-   with real deep-links + verified ratings when Sam supplies them. No star
-   ratings or review counts are shown for these, because we have not verified
-   them and "X verified reviews" is a factual claim, not an opinion.
+   AMAZON: ranks 2-5 use verified deep links (ASINs resolved from Sam's
+   link.amazon short links on 29 Jul 2026 and confirmed against each product
+   page). Built against amazon.com explicitly rather than the short links,
+   which geo-bounce to amazon.com.au and drop the tag. Still no star ratings
+   or review counts: "X verified reviews" is a factual claim we have not
+   independently verified, unlike the Insider Score which is our opinion.
    ========================================================================= */
 
 /* ---------------------------------------------------------------------------
@@ -48,8 +48,11 @@ const CPV_CAMPAIGN = "9"; // Survival Sip — CPV One campaign 9
 const SIP_DIRECT = "https://unbindgear.com/survivalsip/inter?oid=159&affid=1&oidab2=1035&affidab2=1241";
 const SIP_LINK = CPV_CAMPAIGN ? `${CPV_ROOT}base2.php` : SIP_DIRECT;
 
-const AMZ = (q: string, sub: string) =>
-  `https://www.amazon.com/s?k=${encodeURIComponent(q)}&tag=thelifeinside-20&ascsubtag=sip_${sub}`;
+// Verified 29 Jul 2026 by resolving Sam's link.amazon short links and reading the
+// ASIN off each product page. Built against amazon.com explicitly (not the short
+// links) so US traffic can't be geo-bounced and the US tag can't be stripped.
+const AMZ = (asin: string, sub: string) =>
+  `https://www.amazon.com/dp/${asin}?tag=thelifeinside-20&ascsubtag=sip_${sub}&language=en_US`;
 
 /* Manufacturer-published specs, cited as theirs. */
 const keyFindings = [
@@ -101,7 +104,7 @@ const products: Product[] = [
   },
   {
     rank: 2,
-    name: "LifeStraw Personal Water Filter",
+    name: "LifeStraw Personal Water Filter (2-Pack)",
     brand: "LifeStraw",
     score: 8.8,
     scoreLabel: "Excellent",
@@ -116,8 +119,9 @@ const products: Product[] = [
       { label: "Value for Money", value: 93 },
       { label: "Buyer Protection", value: 85 },
     ],
+    image: "/images/sip-lifestraw.jpg",
     trustNote: "The most recognised brand in personal filtration",
-    url: AMZ("LifeStraw Personal Water Filter", "lifestraw"),
+    url: AMZ("B07C56LR6N", "lifestraw"),
     ctaLabel: "View on Amazon",
     pros: [
       "The most established and widely tested name in the category",
@@ -133,7 +137,7 @@ const products: Product[] = [
   },
   {
     rank: 3,
-    name: "Sawyer Mini Water Filtration System",
+    name: "Sawyer Mini Water Filtration System (2-Pack)",
     brand: "Sawyer Mini",
     score: 8.6,
     scoreLabel: "Excellent",
@@ -148,8 +152,9 @@ const products: Product[] = [
       { label: "Value for Money", value: 95 },
       { label: "Buyer Protection", value: 84 },
     ],
+    image: "/images/sip-sawyer.jpg",
     trustNote: "Rated for a far longer service life than typical straw filters",
-    url: AMZ("Sawyer Mini Water Filtration System", "sawyer"),
+    url: AMZ("B01CWFR92M", "sawyer"),
     ctaLabel: "View on Amazon",
     pros: [
       "Exceptional rated filter lifespan, well beyond the rest of this list",
@@ -180,8 +185,9 @@ const products: Product[] = [
       { label: "Value for Money", value: 76 },
       { label: "Buyer Protection", value: 84 },
     ],
+    image: "/images/sip-katadyn.jpg",
     trustNote: "Swiss brand with a long history in field filtration",
-    url: AMZ("Katadyn BeFree Water Filter", "katadyn"),
+    url: AMZ("B075X5R67T", "katadyn"),
     ctaLabel: "View on Amazon",
     pros: [
       "Noticeably faster flow than straw-style filters",
@@ -212,8 +218,9 @@ const products: Product[] = [
       { label: "Value for Money", value: 58 },
       { label: "Buyer Protection", value: 86 },
     ],
+    image: "/images/sip-grayl.jpg",
     trustNote: "Purifier rather than filter — also rated against viruses",
-    url: AMZ("Grayl GeoPress Water Purifier Bottle", "grayl"),
+    url: AMZ("B0C1JHC2M6", "grayl"),
     ctaLabel: "View on Amazon",
     pros: [
       "A true purifier: rated against viruses as well as bacteria and parasites",
@@ -286,11 +293,11 @@ const editorial = {
 
 <h3>Where we would send you elsewhere</h3>
 
-<p>If price is the only thing that matters, the <a href="${AMZ("LifeStraw Personal Water Filter", "lifestraw_editorial")}" rel="sponsored nofollow noopener" target="_blank"><strong>LifeStraw Personal</strong></a> at #2 filters well and costs very little. Just be clear about what you are buying: a straw, used by getting down to the water.</p>
+<p>If price is the only thing that matters, the <a href="${AMZ("B07C56LR6N", "lifestraw_editorial")}" rel="sponsored nofollow noopener" target="_blank"><strong>LifeStraw Personal</strong></a> at #2 filters well and costs very little. Just be clear about what you are buying: a straw, used by getting down to the water.</p>
 
-<p>If you want the longest possible service life and do not mind maintenance, the <a href="${AMZ("Sawyer Mini Water Filtration System", "sawyer_editorial")}" rel="sponsored nofollow noopener" target="_blank"><strong>Sawyer Mini</strong></a> at #3 outlasts everything here, provided you keep backflushing it.</p>
+<p>If you want the longest possible service life and do not mind maintenance, the <a href="${AMZ("B01CWFR92M", "sawyer_editorial")}" rel="sponsored nofollow noopener" target="_blank"><strong>Sawyer Mini</strong></a> at #3 outlasts everything here, provided you keep backflushing it.</p>
 
-<p>And if your real risk is drinking water abroad rather than at home, the <a href="${AMZ("Grayl GeoPress Water Purifier Bottle", "grayl_editorial")}" rel="sponsored nofollow noopener" target="_blank"><strong>Grayl GeoPress</strong></a> at #5 handles viruses, which nothing else on this list claims to do.</p>
+<p>And if your real risk is drinking water abroad rather than at home, the <a href="${AMZ("B0C1JHC2M6", "grayl_editorial")}" rel="sponsored nofollow noopener" target="_blank"><strong>Grayl GeoPress</strong></a> at #5 handles viruses, which nothing else on this list claims to do.</p>
 
 <h3>Our verdict</h3>
 
