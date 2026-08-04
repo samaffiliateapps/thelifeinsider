@@ -56,12 +56,13 @@ const SIP_LINK = CPV_CAMPAIGN ? `${CPV_ROOT}base2.php` : SIP_DIRECT;
 const AMZ = (asin: string, sub: string) =>
   `https://www.amazon.com/dp/${asin}?tag=thelifeinside-20&ascsubtag=sip_${sub}&language=en_US`;
 
-/* Manufacturer-published specs, cited as theirs. */
-const keyFindings = [
-  { value: "0.1 micron", label: "Hollow-fibre membrane on our top pick" },
-  { value: "1,800 gal", label: "Manufacturer's stated filter lifespan" },
-  { value: "2 oz", label: "Light enough to forget it is in the bag" },
-];
+/* Key Findings removed 4 Aug 2026. Every figure in it — 0.1 micron, 1,800
+   gallons, 2 oz — already appears verbatim in the hero card's pros list, so
+   the block was duplicating the hero's spec sheet while sitting between the
+   reader and the picks. With the answer strip now carrying the verdict and a
+   CTA above the fold, this was pure distance to the review. The layout still
+   supports keyFindings for pages where the numbers are genuinely comparative
+   rather than one product's specs. */
 
 const products: Product[] = [
   {
@@ -343,7 +344,6 @@ const faqs = [
   updated="July 2026"
   intro={intro}
   products={products}
-  keyFindings={keyFindings}
   highlights={highlights}
   deepDive={deepDive}
   editorial={editorial}
