@@ -314,3 +314,142 @@ a.cat-tile:hover { border-color: var(--brand); transform: translateY(-2px); text
 .cat-tile.is-soon { opacity: 0.62; }
 .cat-tile .cat-name { font-size: 0.95rem; font-weight: 700; margin-top: 12px; }
 .cat-tile .cat-sub { font-size: 0.72rem; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* ==========================================================================
+   ANSWER STRIP — the verdict + a way to act, inside the opening screen.
+   Added 4 Aug 2026 after live traffic showed ~100% engagement with ~7%
+   click-through to the offer: readers were consuming the page and never
+   reaching a CTA. Mobile-first because 72% of our traffic is phone.
+   ========================================================================== */
+.answer-strip {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 14px 14px;
+  align-items: start;
+  margin: 20px 0 4px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 14px;
+  background: var(--bg-soft);
+}
+.as-media { display: block; }
+.as-media img {
+  width: 72px; height: 72px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #fff;
+}
+.as-kicker { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+.as-flag {
+  font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+  color: #fff; background: var(--accent-dark);
+  padding: 3px 8px; border-radius: 5px;
+}
+.as-score { font-size: 0.78rem; font-weight: 700; color: var(--accent-dark); }
+.as-name { font-size: 1.12rem; line-height: 1.3; margin: 0 0 6px; }
+.as-verdict {
+  font-size: 0.92rem; line-height: 1.5; color: var(--muted); margin: 0 0 6px;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;
+}
+@media (min-width: 720px) { .as-verdict { -webkit-line-clamp: unset; overflow: visible; } }
+.as-trust { font-size: 0.8rem; color: var(--muted); margin: 0; }
+
+.as-action { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 8px; }
+.as-price { display: flex; align-items: baseline; gap: 8px; }
+.as-old { font-size: 0.9rem; color: var(--muted); text-decoration: line-through; }
+.as-now { font-size: 1.35rem; font-weight: 800; color: var(--ink); }
+.as-btn {
+  display: block; text-align: center;
+  padding: 14px 18px;
+  font-size: 1rem; font-weight: 700;
+  color: #fff; background: var(--accent);
+  border-radius: 10px; text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+.as-btn:hover { background: var(--accent-dark); color: #fff; }
+.as-why { font-size: 0.85rem; text-align: center; color: var(--muted); text-decoration: none; }
+.as-why:hover { color: var(--accent-dark); }
+
+@media (min-width: 720px) {
+  .answer-strip { grid-template-columns: 96px 1fr 220px; align-items: center; gap: 20px; padding: 20px 22px; }
+  .as-media img { width: 96px; height: 96px; }
+  .as-action { grid-column: auto; }
+  .as-name { font-size: 1.25rem; }
+}
+
+/* ==========================================================================
+   STICKY CTA — keeps the action reachable at any point on the page.
+   ========================================================================== */
+.sticky-cta {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 60;
+  background: var(--ink);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.18);
+  transform: translateY(0);
+  transition: transform 220ms ease, opacity 220ms ease;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.sticky-cta[data-hidden] { transform: translateY(110%); opacity: 0; pointer-events: none; }
+
+.sc-inner {
+  display: flex; align-items: center; gap: 10px;
+  max-width: 1120px; margin: 0 auto;
+  padding: 9px 12px;
+}
+.sc-thumb {
+  width: 42px; height: 42px; flex: 0 0 42px;
+  object-fit: contain; background: #fff; border-radius: 8px;
+}
+.sc-copy { min-width: 0; flex: 1 1 auto; }
+.sc-kicker {
+  font-size: 0.62rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase;
+  color: #8fd7a8; line-height: 1.2;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.sc-name {
+  font-size: 0.92rem; font-weight: 700; color: #fff; line-height: 1.25;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.sc-price { display: none; }
+.sc-old { font-size: 0.8rem; color: rgba(255,255,255,0.55); text-decoration: line-through; }
+.sc-now { font-size: 1.05rem; font-weight: 800; color: #fff; margin-left: 6px; }
+
+.sc-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  flex: 0 0 auto;
+  padding: 11px 15px;
+  font-size: 0.9rem; font-weight: 800; line-height: 1;
+  color: #fff; background: var(--accent);
+  border-radius: 9px; text-decoration: none;
+  white-space: nowrap;
+}
+.sc-btn:hover { background: var(--accent-dark); color: #fff; }
+.sc-btn svg { width: 15px; height: 15px; }
+
+.sc-close {
+  flex: 0 0 auto;
+  width: 30px; height: 30px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: transparent; border: 0; cursor: pointer;
+  color: rgba(255, 255, 255, 0.5);
+}
+.sc-close:hover { color: #fff; }
+.sc-close svg { width: 16px; height: 16px; }
+
+/* Never let the bar cover the last line of the page. */
+body.has-sticky-cta .site-footer { padding-bottom: 84px; }
+
+@media (min-width: 720px) {
+  .sc-inner { padding: 11px 20px; gap: 14px; }
+  .sc-thumb { width: 48px; height: 48px; flex-basis: 48px; }
+  .sc-name { font-size: 1rem; }
+  .sc-price { display: flex; align-items: baseline; flex: 0 0 auto; }
+  .sc-btn { padding: 13px 22px; font-size: 0.95rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticky-cta { transition: none; }
+}

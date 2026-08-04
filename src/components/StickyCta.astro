@@ -1,0 +1,112 @@
+---
+/* Persistent bottom CTA.
+
+   Why this exists: our first read of live traffic (4 Aug 2026, Survival Sip)
+   showed Engage% at ~100% with an LP click-through of ~7%. People were landing,
+   staying and reading — then leaving without ever reaching an offer link. On
+   mobile (72% of our traffic) the hero CTA scrolls out of view within a screen
+   or two and there is no way to act without scrolling back up.
+
+   Sugarman's slippery slide says every element's job is to get the next one
+   read. This bar's job is narrower: make the action available at ANY point on
+   the slide, so a reader who is convinced on paragraph 9 doesn't have to hunt
+   for the button.
+
+   Honest-claims line: the only assertion here is "#1 Pick", which is our own
+   published ranking (methodology at /how-we-rate). No invented test counts,
+   no fake countdown, no fabricated stock warning.
+*/
+export interface Props {
+  name: string;
+  brand?: string;
+  image: string;
+  url: string;
+  price?: string;
+  oldPrice?: string;
+  discount?: string;
+  ctaLabel?: string;
+}
+
+const { name, brand, image, url, price, oldPrice, discount, ctaLabel } = Astro.props;
+const label = brand ?? name;
+---
+
+<div class="sticky-cta" id="stickyCta" data-hidden aria-hidden="true">
+  <div class="sc-inner">
+    <img class="sc-thumb" src={image} alt="" width="48" height="48" loading="lazy" decoding="async" />
+
+    <div class="sc-copy">
+      <div class="sc-kicker">#1 Pick</div>
+      <div class="sc-name">{label}</div>
+    </div>
+
+    <div class="sc-price">
+      {oldPrice && <span class="sc-old">{oldPrice}</span>}
+      {price && <span class="sc-now">{price}</span>}
+    </div>
+
+    <a class="sc-btn" href={url} rel="sponsored nofollow noopener" target="_blank">
+      <span class="sc-btn-text">{discount ? `Claim ${discount}` : (ctaLabel ?? "Check Price")}</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 12h13M13 6l6 6-6 6" />
+      </svg>
+    </a>
+
+    <button class="sc-close" id="stickyCtaClose" type="button" aria-label="Dismiss">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+        <path d="M18 6 6 18M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var bar = document.getElementById("stickyCta");
+    var close = document.getElementById("stickyCtaClose");
+    if (!bar) return;
+
+    // Stay out of the way until the reader has moved past the opening screen,
+    // so it never competes with the above-the-fold CTA it exists to back up.
+    var TRIGGER = 600;
+    var dismissed = false;
+
+    function sync() {
+      if (dismissed) return;
+      var show = window.scrollY > TRIGGER;
+      if (show) {
+        bar.removeAttribute("data-hidden");
+        bar.setAttribute("aria-hidden", "false");
+      } else {
+        bar.setAttribute("data-hidden", "");
+        bar.setAttribute("aria-hidden", "true");
+      }
+    }
+
+    var ticking = false;
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function () {
+          sync();
+          ticking = false;
+        });
+      },
+      { passive: true }
+    );
+
+    if (close) {
+      close.addEventListener("click", function () {
+        dismissed = true;
+        bar.setAttribute("data-hidden", "");
+        bar.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("has-sticky-cta");
+      });
+    }
+
+    document.body.classList.add("has-sticky-cta");
+    sync();
+  })();
+</script>
