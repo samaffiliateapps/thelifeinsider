@@ -19,7 +19,10 @@ import type { Product } from "../../components/ProductCard.astro";
    but landing1 and landing-new-org both state 90 days — different funnels,
    different terms. We state what the page the buyer actually lands on states.
    Verified on landing1: 90-day money-back · free size exchanges ·
-   "up to 60% off" (bundle pricing; $69.99 from $139.98 is the single pair) ·
+   "up to 60% off" (bundle pricing; $69.99 from $139.98 is the single pair).
+   DESTINATION CHOICE: landing1 = 60% off + 90-day guarantee.
+   landing1b = 50% off + 30-day. D2C store = 30-day. Three funnels, three
+   sets of terms — always read the one you are actually sending to. ·
    zero heel drop · wide anatomical toe box · 60% lighter (their claim) ·
    machine washable · 250,000+ customers (their claim).
 
@@ -86,7 +89,7 @@ const products: Product[] = [
     badge: "Best Overall",
     price: "$69.99",
     oldPrice: "$139.98",
-    discount: "50% Off",
+    discount: "Up to 60% Off",
     image: "/images/gf-grounded.webp",
     url: GF_LINK,
     ctaLabel: "Check Price & Availability",
@@ -328,11 +331,6 @@ const editorial = {
 <p>Widest where feet are actually widest. Flat underfoot. Light enough to forget. And the only pick here where getting the size wrong costs you nothing — <strong>free size exchanges</strong>, on top of a <strong>90-day money-back guarantee</strong>.</p>
 
 <p>Which means the entire risk of finding out is postage. If your feet have been hurting for years, that is not much to stake on the one variable nobody has changed yet.</p>
-
-<div style="text-align:center;margin:30px 0 0;">
-  <a href="${GF_LINK}" class="btn" rel="sponsored nofollow noopener" target="_blank">Check Price &amp; Availability</a>
-  <div class="rank-offer" style="margin-top:8px;">Currently up to 60% off · 90-day money-back guarantee</div>
-</div>
 `,
 };
 
