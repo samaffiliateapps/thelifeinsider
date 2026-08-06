@@ -86,7 +86,7 @@ const products: Product[] = [
       { label: "Value for Money", value: 93 },
       { label: "Buyer Protection", value: 94 },
     ],
-    trustNote: "90-day money-back guarantee · free size exchanges",
+    trustNote: "250,000+ customers · 90-day money-back guarantee · free size exchanges",
     badge: "Best Overall",
     price: "$69.99",
     oldPrice: "$139.98",
@@ -102,9 +102,10 @@ const products: Product[] = [
       "Machine washable, which matters more than it sounds for anyone wearing one pair daily",
       "Free size exchanges — the single biggest risk when buying barefoot shoes online is sizing, and this removes it",
       "Looks like an ordinary trainer, not like toe shoes",
+      "The maker reports 250,000+ customers to date — the largest customer base of anything on this list",
     ],
     cons: [
-      "Sold only direct from the maker — you won't find these on Amazon, in a shoe shop, or anywhere you can try them on first",
+      "Sold only direct from the maker, so you can't try them on in a shop first — the 90-day money-back window and free size exchanges are what stand in for that",
       "If you are coming out of heavily cushioned shoes, expect to build up gradually over a week or two rather than wearing them for a full shift on day one",
     ],
     blurb:
@@ -254,7 +255,7 @@ const products: Product[] = [
 const intro = [
   "<strong>If your feet hurt by the end of a shift, the shoe is usually the reason.</strong> Conventional shoes taper toward the toes and lift the heel — two design choices that squeeze the front of the foot and tip your weight forward with every step. Barefoot shoes reverse both.",
   "Orthotics run $300 to $600 and only work in the shoes they were made for. Cushioned trainers feel good in the shop and let the foot weaken underneath. Cortisone wears off. Surgery is a serious decision with a mixed record.",
-  "We ranked these five on the things that actually decide whether a barefoot shoe works for someone in pain: how much room the toes really get, whether the sole is genuinely flat, weight, and what happens when the size is wrong. Every figure below is the manufacturer's own published claim or a live retail listing, cited as such — scored by our <a href='/how-we-rate/'>Insider Score</a>. Our #1 pick is reviewed in full further down the page.",
+  "We ranked these five on the things that actually decide whether a barefoot shoe works for someone in pain: how much room the toes really get, whether the sole is genuinely flat, weight, and what happens when the size is wrong. Every figure below is the manufacturer's own published claim or a live retail listing, cited as such — scored by our <a href='/how-we-rate/'>Insider Score</a>. All five are compared side by side below, with our #1 at the top.",
 ];
 
 const highlights = [
@@ -272,15 +273,13 @@ const highlights = [
   },
 ];
 
-const deepDive = {
-  heading: "Why Grounded Footwear Takes The Top Spot",
-  body: [
-    "Almost every shoe you have owned was built around a last — a standardised mould that is widest at the ball of the foot and then narrows toward the toes. Your foot is the opposite shape. It is widest at the ends of the toes. Wear the mismatch for thirty or forty years and the result is predictable: toes pushed inward, pressure concentrated where it was never meant to go, and a foot that has slowly lost the ability to spread and grip.",
-    "Grounded Footwear is built the other way round. The toe box is widest at the front. The sole is flat end to end, so nothing tips you forward. And it is thin enough to bend, which lets the foot do the work it is supposed to do instead of being held rigid.",
-    "None of that is exotic, and we would be suspicious of anyone claiming it was. It is the same geometry every serious barefoot brand uses. What separates this one at $69.99 is the combination of a genuinely wide toe box, a shoe that still looks like a normal trainer, and free size exchanges — because the honest problem with buying barefoot shoes online is that you will probably need a different size than you expect, and everywhere else that costs you time and postage.",
-    "<strong>Who it is not for:</strong> if you are coming out of heavily cushioned shoes, do not put these on for a twelve-hour shift on day one. The muscles in the foot have been carried for years and need to be built up over a week or two of shorter wears. Anyone telling you there is no adjustment period is selling, not advising.",
-  ],
-};
+/* deepDive REMOVED 6 Aug 2026. It duplicated the editorial below almost
+   entirely: the same "built around a last / your foot is the opposite shape"
+   argument, the same $69.99 + free-size-exchange close, the same adjustment
+   period caveat. Roughly 400 words of repetition sitting between the hero card
+   and the final CTA — pure scroll cost on mobile, where readers drop off. The
+   editorial is the stronger of the two and now carries the argument alone.
+   The layout still supports deepDive for pages that use it non-duplicatively. */
 
 /* Rewritten 5 Aug 2026. The first version opened by qualifying ("depends
    where your pain comes from") and told the plantar fasciitis segment — our
@@ -371,7 +370,6 @@ const faqs = [
   intro={intro}
   products={products}
   highlights={highlights}
-  deepDive={deepDive}
   editorial={editorial}
   faqs={faqs}
 >

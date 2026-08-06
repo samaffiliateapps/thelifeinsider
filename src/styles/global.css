@@ -408,7 +408,14 @@ a.cat-tile:hover { border-color: var(--brand); transform: translateY(-2px); text
   width: 42px; height: 42px; flex: 0 0 42px;
   object-fit: contain; background: #fff; border-radius: 8px;
 }
-.sc-copy { min-width: 0; flex: 1 1 auto; }
+/* Phones: the thumbnail, the label block, the button and the close control
+   cannot all fit. Previously the label block absorbed the shortfall and
+   rendered as "#1 PI... / Gro..." — truncated text reads as broken layout and
+   costs more trust than the label was ever worth. So on mobile the label is
+   dropped entirely and the button takes the freed width instead: the product
+   image still identifies the pick, and the offer becomes a large, unambiguous
+   tap target. The full label returns at 720px where there is room for it. */
+.sc-copy { display: none; }
 .sc-kicker {
   font-size: 0.62rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase;
   color: #8fd7a8; line-height: 1.2;
@@ -424,9 +431,9 @@ a.cat-tile:hover { border-color: var(--brand); transform: translateY(-2px); text
 
 .sc-btn {
   display: inline-flex; align-items: center; gap: 6px;
-  flex: 0 0 auto;
+  flex: 1 1 auto;          /* mobile: fill the width the label gave up */
   padding: 11px 15px;
-  min-height: 44px;
+  min-height: 46px;
   font-size: 0.9rem; font-weight: 800; line-height: 1;
   justify-content: center;
   color: #fff; background: var(--cta-dark);
@@ -452,9 +459,10 @@ body.has-sticky-cta .site-footer { padding-bottom: 84px; }
 @media (min-width: 720px) {
   .sc-inner { padding: 11px 20px; gap: 14px; }
   .sc-thumb { width: 48px; height: 48px; flex-basis: 48px; }
+  .sc-copy { display: block; min-width: 0; flex: 1 1 auto; }
   .sc-name { font-size: 1rem; }
   .sc-price { display: flex; align-items: baseline; flex: 0 0 auto; }
-  .sc-btn { padding: 13px 22px; font-size: 0.95rem; }
+  .sc-btn { flex: 0 0 auto; padding: 13px 22px; font-size: 0.95rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
