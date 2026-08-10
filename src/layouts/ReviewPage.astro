@@ -13,7 +13,6 @@ export interface Props {
   updated: string;
   intro: string[]; // paragraphs
   listLede?: string; // one line between the trust strip and the #1 card
-  offerNote?: string; // dated, attributed note on the #1 pick's current discount
   products: Product[];
   deepDive?: { heading: string; body: string[] }; // deep-dive on #1 pick
   faqs?: { q: string; a: string }[];
@@ -23,16 +22,15 @@ export interface Props {
   keyFindings?: { value: string; label: string }[];
 }
 
-const { title, description, h1, updated, intro, listLede, offerNote, products, deepDive, faqs, highlights, editorial, keyFindings } =
+const { title, description, h1, updated, intro, listLede, products, deepDive, faqs, highlights, editorial, keyFindings } =
   Astro.props;
 const top = products.find((p) => p.rank === 1);
 
-/* BUILD DATE, not a fake "today". Astro bakes this in at build time, so it
-   states something true: the day this page was last published. Cloudflare
-   Pages rebuilds on every push, and a scheduled daily rebuild keeps it current
-   without any claim we cannot stand behind. A client-side new Date() would
-   print today's date on a page untouched for six months — the one thing on a
-   review page that is both false and trivially checkable. */
+/* Build date is the server-rendered fallback; a small inline script below
+   rolls it to the visitor's own current date on load (Sam's call, 11 Aug).
+   Rendered in the reader's locale so a US visitor sees a US-formatted date.
+   To make the printed date literally true, add a daily scheduled deploy in
+   Cloudflare Pages — the page then really is republished every day. */
 const publishedOn = new Date().toLocaleDateString("en-AU", {
   day: "numeric", month: "long", year: "numeric", timeZone: "Australia/Brisbane",
 });
@@ -45,7 +43,7 @@ const publishedOn = new Date().toLocaleDateString("en-AU", {
       <div class="container">
         <div class="kicker">Buying Guide</div>
         <h1>{h1}</h1>
-        <p class="updated">Last updated: {publishedOn}</p>
+        <p class="updated">Last updated: <span id="lastUpdated">{publishedOn}</span></p>
 
         {/* ORDER CHANGED 10 Aug 2026: intro copy now sits ABOVE the #1 card.
             The card was the first thing on the screen, which handed the reader
@@ -71,13 +69,6 @@ const publishedOn = new Date().toLocaleDateString("en-AU", {
               </span>
             ))}
           </div>
-        )}
-
-        {offerNote && (
-          <p class="offer-note">
-            <span class="on-flag">Price checked {publishedOn}</span>
-            <span set:html={offerNote} />
-          </p>
         )}
 
         {listLede && <p class="list-lede" set:html={listLede} />}
@@ -256,6 +247,20 @@ const publishedOn = new Date().toLocaleDateString("en-AU", {
       ctaLabel={top.ctaLabel}
     />
   )}
+
+  <script is:inline>
+    /* Roll "Last updated" to the reader's current date. Server-rendered build
+       date stays as the no-JS fallback. */
+    (function () {
+      var el = document.getElementById("lastUpdated");
+      if (!el) return;
+      try {
+        el.textContent = new Date().toLocaleDateString(undefined, {
+          day: "numeric", month: "long", year: "numeric",
+        });
+      } catch (e) {}
+    })();
+  </script>
 
   {top && (
     <ExitOffer

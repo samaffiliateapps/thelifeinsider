@@ -15,9 +15,13 @@
 
    Trigger design:
      desktop — pointer leaves through the top of the viewport (real exit intent)
-     touch   — back-button intercept, plus a fast upward flick after the reader
-               is 25% down and 15s in as a fallback for readers who leave by
-               switching apps rather than by pressing Back.
+     touch   — back-button intercept ONLY.
+
+   The scroll-up fallback was removed 11 Aug 2026. It fired whenever a reader
+   scrolled back up to re-read something, which is the opposite of leaving,
+   and because the offer shows once per session it consumed the trigger before
+   the reader ever pressed Back. Sam saw exactly this: popup on scroll-up,
+   nothing on Back. Re-reading is engagement, not exit intent.
 
    The back intercept pushes exactly ONE history entry and never re-pushes.
    First Back shows the offer; the next Back leaves the site normally. That
@@ -81,9 +85,6 @@ const { name, image, url, price, oldPrice, discount, trustNote } = Astro.props;
     try { if (sessionStorage.getItem(KEY)) return; } catch (e) {}
 
     var shown = false;
-    var armedAt = Date.now();
-    var lastY = window.scrollY;
-    var lastT = Date.now();
 
     function show() {
       if (shown) return;
@@ -128,30 +129,13 @@ const { name, image, url, price, oldPrice, discount, trustNote } = Astro.props;
       show();
     }
 
-    // ---- touch: fast upward flick, but only once the reader is invested ----
-    function onScroll() {
-      var now = Date.now();
-      var y = window.scrollY;
-      var dt = now - lastT;
-      if (dt > 0) {
-        var v = (lastY - y) / dt; // px per ms, positive when scrolling up
-        var deepEnough = y > document.documentElement.scrollHeight * 0.25;
-        var longEnough = now - armedAt > 15000;
-        if (v > 1.6 && deepEnough && longEnough) show();
-      }
-      lastY = y;
-      lastT = now;
-    }
-
     function teardown() {
       document.removeEventListener("mouseout", onMouseOut);
-      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("popstate", onPopState);
     }
 
     var touch = window.matchMedia("(hover: none)").matches;
     if (touch) {
-      window.addEventListener("scroll", onScroll, { passive: true });
       window.addEventListener("popstate", onPopState);
       armBack();
     } else {

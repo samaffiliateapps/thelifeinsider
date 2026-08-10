@@ -38,7 +38,7 @@ const p = product;
    which pushed the advertorial two extra screens down on mobile. Both funnels
    running this offer profitably keep the rivals to a few lines each. */
 const compact = p.rank !== 1;
-const pros = compact ? p.pros.slice(0, 3) : p.pros;
+const pros = compact ? p.pros.slice(0, 2) : p.pros;
 const cons = compact ? (p.cons ?? []).slice(0, 2) : (p.cons ?? []);
 const stars = p.starRating
   ? "★".repeat(Math.round(p.starRating)) + "☆".repeat(5 - Math.round(p.starRating))
@@ -93,7 +93,7 @@ const stars = p.starRating
       )}
     </div>
     {!compact && p.blurb && <p style="font-size:0.92rem;color:var(--muted);margin:12px 0 0;">{p.blurb}</p>}
-    {p.verdict && (
+    {!compact && p.verdict && (
       <div class:list={["verdict", { "verdict-top": p.rank === 1 }]}>
         {p.bestFor && <span class="v-label">Best For: {p.bestFor}</span>}
         <p class="v-text">{p.verdict}</p>
@@ -102,13 +102,13 @@ const stars = p.starRating
   </div>
 
   <div class="rank-side">
-    {p.grade && (
+    {!compact && p.grade && (
       <div class="grade-wrap">
         <span class="grade-cap">Overall Grade</span>
         <span class:list={["grade", { "grade-a": p.rank === 1 }]}>{p.grade}</span>
       </div>
     )}
-    {p.scoreLabel && <div class="score-label">{p.scoreLabel}</div>}
+    {!compact && p.scoreLabel && <div class="score-label">{p.scoreLabel}</div>}
     <div class="score-pill">
       <span class="num">{p.score.toFixed(1)}</span>
       <span class="label">out of 10</span>
