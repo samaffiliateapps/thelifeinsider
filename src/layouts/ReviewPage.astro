@@ -3,6 +3,7 @@ import Base from "./Base.astro";
 import ProductCard from "../components/ProductCard.astro";
 import EmailCapture from "../components/EmailCapture.astro";
 import StickyCta from "../components/StickyCta.astro";
+import ExitOffer from "../components/ExitOffer.astro";
 import type { Product } from "../components/ProductCard.astro";
 
 export interface Props {
@@ -267,6 +268,18 @@ const top = products.find((p) => p.rank === 1);
       oldPrice={top.oldPrice}
       discount={top.discount}
       ctaLabel={top.ctaLabel}
+    />
+  )}
+
+  {top && (
+    <ExitOffer
+      name={top.name}
+      image={top.image}
+      url={top.url}
+      price={top.price}
+      oldPrice={top.oldPrice}
+      discount={top.discount}
+      trustNote={top.trustNote}
     />
   )}
 

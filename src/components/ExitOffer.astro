@@ -1,0 +1,142 @@
+---
+/* Exit-intent offer.
+
+   Why: our first 75 paid visitors engaged at 93% and clicked through at 12%.
+   Almost everyone reads the page and leaves without ever seeing the offer.
+   The sticky bar catches people who decide while reading; this catches the
+   ones who reach the end, decide "not now", and go.
+
+   Honest-claims line, same as the rest of the page: the only assertions here
+   are the discount, the guarantee and the customer count, all of which are
+   verified on the funnel we send to. No countdown timer, no invented stock
+   warning, no "1,350 people chose this today". A fake deadline on a discount
+   that runs permanently is the one thing on a page like this that is both
+   provably false and trivially checkable.
+
+   Trigger design:
+     desktop — pointer leaves through the top of the viewport (real exit intent)
+     touch   — fast upward flick after the reader is 25% down and 15s in, which
+               is the closest honest proxy for "about to leave" on a phone.
+   Deliberately NOT hijacking the back button. It works, but it breaks the
+   one navigation control a phone user actually trusts, and a second back
+   press to escape a popup is a genuinely hostile experience.
+
+   Shows at most once per session, never after the user has clicked through.
+*/
+export interface Props {
+  name: string;
+  image: string;
+  url: string;
+  price?: string;
+  oldPrice?: string;
+  discount?: string;
+  trustNote?: string;
+}
+const { name, image, url, price, oldPrice, discount, trustNote } = Astro.props;
+---
+
+<div class="exit-offer" id="exitOffer" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="exitOfferTitle">
+  <div class="eo-backdrop" data-eo-close></div>
+
+  <div class="eo-panel">
+    <button class="eo-close" type="button" data-eo-close aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+        <path d="M18 6 6 18M6 6l12 12" />
+      </svg>
+    </button>
+
+    <div class="eo-kicker">Before you go</div>
+    <h2 class="eo-title" id="exitOfferTitle">Our #1 pick is still discounted</h2>
+
+    <img class="eo-img" src={image} alt={name} width="150" height="150" loading="lazy" decoding="async" />
+
+    <div class="eo-name">{name}</div>
+
+    {(price || oldPrice) && (
+      <div class="eo-price">
+        {oldPrice && <span class="eo-old">{oldPrice}</span>}
+        {price && <span class="eo-now">{price}</span>}
+      </div>
+    )}
+
+    {trustNote && <p class="eo-trust">{trustNote}</p>}
+
+    <a class="eo-btn" href={url} rel="sponsored nofollow noopener" target="_blank" data-eo-go>
+      {discount ? `Claim ${discount}` : "Check Price & Availability"}
+    </a>
+
+    <button class="eo-dismiss" type="button" data-eo-close>No thanks, I'll keep reading</button>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var el = document.getElementById("exitOffer");
+    if (!el) return;
+
+    var KEY = "tli_exit_offer_seen";
+    try { if (sessionStorage.getItem(KEY)) return; } catch (e) {}
+
+    var shown = false;
+    var armedAt = Date.now();
+    var lastY = window.scrollY;
+    var lastT = Date.now();
+
+    function show() {
+      if (shown) return;
+      shown = true;
+      try { sessionStorage.setItem(KEY, "1"); } catch (e) {}
+      el.hidden = false;
+      el.setAttribute("aria-hidden", "false");
+      requestAnimationFrame(function () { el.classList.add("is-open"); });
+      document.body.style.overflow = "hidden";
+      var btn = el.querySelector(".eo-btn");
+      if (btn) btn.focus({ preventScroll: true });
+      teardown();
+    }
+
+    function hide() {
+      el.classList.remove("is-open");
+      el.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      setTimeout(function () { el.hidden = true; }, 200);
+    }
+
+    // ---- desktop: pointer exits through the top of the window ----
+    function onMouseOut(e) {
+      if (e.clientY <= 4 && !e.relatedTarget) show();
+    }
+
+    // ---- touch: fast upward flick, but only once the reader is invested ----
+    function onScroll() {
+      var now = Date.now();
+      var y = window.scrollY;
+      var dt = now - lastT;
+      if (dt > 0) {
+        var v = (lastY - y) / dt; // px per ms, positive when scrolling up
+        var deepEnough = y > document.documentElement.scrollHeight * 0.25;
+        var longEnough = now - armedAt > 15000;
+        if (v > 1.6 && deepEnough && longEnough) show();
+      }
+      lastY = y;
+      lastT = now;
+    }
+
+    function teardown() {
+      document.removeEventListener("mouseout", onMouseOut);
+      window.removeEventListener("scroll", onScroll);
+    }
+
+    var touch = window.matchMedia("(hover: none)").matches;
+    if (touch) window.addEventListener("scroll", onScroll, { passive: true });
+    else document.addEventListener("mouseout", onMouseOut);
+
+    el.addEventListener("click", function (e) {
+      if (e.target.closest("[data-eo-close]")) hide();
+      if (e.target.closest("[data-eo-go]")) hide();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !el.hidden) hide();
+    });
+  })();
+</script>

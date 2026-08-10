@@ -517,3 +517,71 @@ body.has-sticky-cta .site-footer { padding-bottom: 84px; }
 @media (max-width: 640px) {
   article > section.section:first-of-type { padding-top: 20px; }
 }
+
+/* Advertorial figures — manufacturer product images placed at the argument
+   beats. Captions are read far more than body copy, so each one carries a
+   fact rather than a restatement, and says whose image it is. */
+.ed-figure { margin: 26px 0; }
+.ed-figure img {
+  width: 100%; height: auto; display: block;
+  border-radius: var(--radius); border: 1px solid var(--border);
+}
+.ed-figure figcaption {
+  margin-top: 9px; font-size: 0.84rem; line-height: 1.5;
+  color: var(--muted); text-align: center;
+}
+@media (max-width: 640px) { .ed-figure { margin: 20px 0; } }
+
+/* ==========================================================================
+   EXIT OFFER — last chance for a reader who has finished and is leaving.
+   No countdown, no stock warning: the discount runs permanently, so a
+   deadline would be the one claim on this page that is provably false.
+   ========================================================================== */
+.exit-offer { position: fixed; inset: 0; z-index: 80; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.exit-offer[hidden] { display: none; }
+.eo-backdrop { position: absolute; inset: 0; background: rgba(20, 33, 61, 0.62); opacity: 0; transition: opacity 200ms ease; }
+.exit-offer.is-open .eo-backdrop { opacity: 1; }
+.eo-panel {
+  position: relative; z-index: 1;
+  width: 100%; max-width: 380px; max-height: 92vh; overflow-y: auto;
+  background: var(--bg); border-radius: 16px; padding: 26px 22px 20px;
+  text-align: center; box-shadow: 0 20px 60px rgba(20, 33, 61, 0.3);
+  transform: translateY(14px) scale(0.97); opacity: 0;
+  transition: transform 220ms cubic-bezier(.2,.8,.3,1), opacity 220ms ease;
+}
+.exit-offer.is-open .eo-panel { transform: none; opacity: 1; }
+.eo-close {
+  position: absolute; top: 6px; right: 6px;
+  width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center;
+  background: none; border: 0; cursor: pointer; color: var(--muted);
+}
+.eo-close:hover { color: var(--ink); }
+.eo-close svg { width: 18px; height: 18px; }
+.eo-kicker { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-dark); }
+.eo-title { font-size: 1.25rem; margin: 6px 0 14px; }
+.eo-img {
+  /* natural aspect ratio — a fixed square letterboxed the wide product
+     shot with grey bars top and bottom */
+  width: 190px; height: auto; margin: 0 auto 8px; display: block;
+}
+.eo-name { font-weight: 700; color: var(--ink); font-size: 1.02rem; }
+.eo-price { margin: 8px 0 6px; display: flex; align-items: baseline; justify-content: center; gap: 8px; }
+.eo-old { color: var(--muted); text-decoration: line-through; font-size: 0.95rem; }
+.eo-now { font-size: 1.5rem; font-weight: 800; color: var(--ink); }
+.eo-trust { font-size: 0.82rem; color: var(--muted); margin: 0 0 16px; line-height: 1.5; }
+.eo-btn {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 50px; padding: 0 18px;
+  background: var(--cta-dark); color: #fff !important;
+  border-radius: 10px; font-weight: 800; font-size: 1rem; text-decoration: none !important;
+}
+.eo-btn:hover { background: var(--cta-darker); }
+.eo-dismiss {
+  display: block; width: 100%; min-height: 44px; margin-top: 6px;
+  background: none; border: 0; cursor: pointer;
+  color: var(--muted); font-size: 0.86rem; text-decoration: underline;
+}
+.eo-dismiss:hover { color: var(--ink); }
+@media (prefers-reduced-motion: reduce) {
+  .eo-backdrop, .eo-panel { transition: none; }
+}
