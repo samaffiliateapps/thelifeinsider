@@ -31,12 +31,21 @@ export interface Product {
 // anchor target stays unique and the top-picks jump links keep working.
 const { product, repeat } = Astro.props as { product: Product; repeat?: boolean };
 const p = product;
+
+/* Ranks 2-5 render compact. They exist to make the #1 credible by being real
+   alternatives honestly assessed — not to be shopped in their own right. At
+   full detail each one ran five metric bars, up to five bullets and a blurb,
+   which pushed the advertorial two extra screens down on mobile. Both funnels
+   running this offer profitably keep the rivals to a few lines each. */
+const compact = p.rank !== 1;
+const pros = compact ? p.pros.slice(0, 3) : p.pros;
+const cons = compact ? (p.cons ?? []).slice(0, 2) : (p.cons ?? []);
 const stars = p.starRating
   ? "★".repeat(Math.round(p.starRating)) + "☆".repeat(5 - Math.round(p.starRating))
   : null;
 ---
 
-<div class:list={["card", "rank-card", { "is-top": p.rank === 1 }]} id={repeat ? undefined : `rank-${p.rank}`}>
+<div class:list={["card", "rank-card", { "is-top": p.rank === 1, "is-compact": compact }]} id={repeat ? undefined : `rank-${p.rank}`}>
   <div class="rank-media">
     {
       p.image ? (
@@ -64,7 +73,7 @@ const stars = p.starRating
         {p.oldPrice && <span class="was">{p.oldPrice}</span>}
       </p>
     )}
-    {p.metrics && p.metrics.length > 0 && (
+    {!compact && p.metrics && p.metrics.length > 0 && (
       <div class="metrics">
         {p.metrics.map((m) => (
           <div class="metric">
@@ -78,12 +87,12 @@ const stars = p.starRating
     <div class="proscons">
       {/* set:html so bullets can lead with a bolded payoff before the reason.
           Content is authored in this repo, never user input. */}
-      <ul class="pros">{p.pros.map((pro) => <li set:html={pro} />)}</ul>
-      {p.cons && p.cons.length > 0 && (
-        <ul class="cons">{p.cons.map((con) => <li set:html={con} />)}</ul>
+      <ul class="pros">{pros.map((pro) => <li set:html={pro} />)}</ul>
+      {cons.length > 0 && (
+        <ul class="cons">{cons.map((con) => <li set:html={con} />)}</ul>
       )}
     </div>
-    {p.blurb && <p style="font-size:0.92rem;color:var(--muted);margin:12px 0 0;">{p.blurb}</p>}
+    {!compact && p.blurb && <p style="font-size:0.92rem;color:var(--muted);margin:12px 0 0;">{p.blurb}</p>}
     {p.verdict && (
       <div class:list={["verdict", { "verdict-top": p.rank === 1 }]}>
         {p.bestFor && <span class="v-label">Best For: {p.bestFor}</span>}

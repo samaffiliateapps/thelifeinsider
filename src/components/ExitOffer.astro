@@ -15,11 +15,14 @@
 
    Trigger design:
      desktop — pointer leaves through the top of the viewport (real exit intent)
-     touch   — fast upward flick after the reader is 25% down and 15s in, which
-               is the closest honest proxy for "about to leave" on a phone.
-   Deliberately NOT hijacking the back button. It works, but it breaks the
-   one navigation control a phone user actually trusts, and a second back
-   press to escape a popup is a genuinely hostile experience.
+     touch   — back-button intercept, plus a fast upward flick after the reader
+               is 25% down and 15s in as a fallback for readers who leave by
+               switching apps rather than by pressing Back.
+
+   The back intercept pushes exactly ONE history entry and never re-pushes.
+   First Back shows the offer; the next Back leaves the site normally. That
+   costs an interested reader one tap and cannot trap anyone — the version
+   that re-arms on every pop is the one that earns the hostility.
 
    Shows at most once per session, never after the user has clicked through.
 */
@@ -107,6 +110,24 @@ const { name, image, url, price, oldPrice, discount, trustNote } = Astro.props;
       if (e.clientY <= 4 && !e.relatedTarget) show();
     }
 
+    // ---- touch: back-button intercept ----
+    // Push one history entry on arrival. The first Back press pops it, which
+    // fires popstate without leaving the page, and we show the offer instead.
+    // We do NOT re-push after that: the very next Back press leaves normally,
+    // so the reader is never trapped and never has to press it three times.
+    var pushed = false;
+    function armBack() {
+      try {
+        history.pushState({ tliExit: 1 }, "", location.href);
+        pushed = true;
+      } catch (e) {}
+    }
+    function onPopState() {
+      if (!pushed || shown) return;
+      pushed = false;
+      show();
+    }
+
     // ---- touch: fast upward flick, but only once the reader is invested ----
     function onScroll() {
       var now = Date.now();
@@ -125,11 +146,17 @@ const { name, image, url, price, oldPrice, discount, trustNote } = Astro.props;
     function teardown() {
       document.removeEventListener("mouseout", onMouseOut);
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("popstate", onPopState);
     }
 
     var touch = window.matchMedia("(hover: none)").matches;
-    if (touch) window.addEventListener("scroll", onScroll, { passive: true });
-    else document.addEventListener("mouseout", onMouseOut);
+    if (touch) {
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("popstate", onPopState);
+      armBack();
+    } else {
+      document.addEventListener("mouseout", onMouseOut);
+    }
 
     el.addEventListener("click", function (e) {
       if (e.target.closest("[data-eo-close]")) hide();

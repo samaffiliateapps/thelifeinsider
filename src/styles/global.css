@@ -585,3 +585,50 @@ body.has-sticky-cta .site-footer { padding-bottom: 84px; }
 @media (prefers-reduced-motion: reduce) {
   .eo-backdrop, .eo-panel { transition: none; }
 }
+
+/* Compact rival cards (ranks 2-5): tighter padding and a smaller image so the
+   list reads as "here are the alternatives" rather than five things to shop. */
+.rank-card.is-compact { padding: 18px; }
+.rank-card.is-compact .product-title { font-size: 1.05rem; }
+.rank-card.is-compact .rank-img { width: 110px; height: 110px; }
+.rank-card.is-compact .proscons { margin-top: 8px; }
+.rank-card.is-compact .verdict { margin-top: 10px; }
+@media (max-width: 640px) {
+  .rank-card.is-compact { padding: 15px; }
+  .rank-card.is-compact .rank-img { width: 92px; height: 92px; }
+}
+
+/* Offer note — dated, attributed urgency. Reports the maker's own limited-time
+   framing instead of running a countdown of ours that resets on refresh. */
+.offer-note {
+  margin: 16px 0 0; padding: 12px 14px;
+  background: #fff7ed; border: 1px solid #fed7aa; border-radius: 10px;
+  font-size: 0.88rem; line-height: 1.55; color: var(--body);
+}
+.on-flag {
+  display: block; font-size: 0.7rem; font-weight: 800;
+  letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--accent-dark); margin-bottom: 4px;
+}
+@media (prefers-color-scheme: dark) {
+  .offer-note { background: rgba(232, 89, 12, 0.08); border-color: rgba(232, 89, 12, 0.3); }
+}
+
+/* Tighten the seam between the header block and the ranked list on phones —
+   52px of stacked section padding was sitting directly above the #1 card. */
+@media (max-width: 640px) {
+  article > section.section:first-of-type { padding-bottom: 10px; }
+  .trust-strip { margin: 14px 0 0; }
+  .offer-note { margin-top: 12px; }
+  .list-lede { margin-top: 12px; }
+}
+
+/* Header + ranked-list sections. Kept as classes rather than inline styles so
+   the mobile overrides can actually win — 52px of stacked section padding was
+   sitting directly between the lede and the #1 card. */
+.section-head { padding-bottom: 24px; }
+.section-list { padding-top: 28px; }
+@media (max-width: 640px) {
+  .section-head { padding-bottom: 8px; }
+  .section-list { padding-top: 14px; }
+}

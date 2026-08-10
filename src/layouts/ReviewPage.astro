@@ -13,6 +13,7 @@ export interface Props {
   updated: string;
   intro: string[]; // paragraphs
   listLede?: string; // one line between the trust strip and the #1 card
+  offerNote?: string; // dated, attributed note on the #1 pick's current discount
   products: Product[];
   deepDive?: { heading: string; body: string[] }; // deep-dive on #1 pick
   faqs?: { q: string; a: string }[];
@@ -22,19 +23,29 @@ export interface Props {
   keyFindings?: { value: string; label: string }[];
 }
 
-const { title, description, h1, updated, intro, listLede, products, deepDive, faqs, highlights, editorial, keyFindings } =
+const { title, description, h1, updated, intro, listLede, offerNote, products, deepDive, faqs, highlights, editorial, keyFindings } =
   Astro.props;
 const top = products.find((p) => p.rank === 1);
+
+/* BUILD DATE, not a fake "today". Astro bakes this in at build time, so it
+   states something true: the day this page was last published. Cloudflare
+   Pages rebuilds on every push, and a scheduled daily rebuild keeps it current
+   without any claim we cannot stand behind. A client-side new Date() would
+   print today's date on a page untouched for six months — the one thing on a
+   review page that is both false and trivially checkable. */
+const publishedOn = new Date().toLocaleDateString("en-AU", {
+  day: "numeric", month: "long", year: "numeric", timeZone: "Australia/Brisbane",
+});
 ---
 
 <Base title={title} description={description}>
   <article>
     <!-- Header -->
-    <section class="section" style="padding-bottom:24px;">
+    <section class="section section-head">
       <div class="container">
         <div class="kicker">Buying Guide</div>
         <h1>{h1}</h1>
-        <p class="updated">Last updated: {updated}</p>
+        <p class="updated">Last updated: {publishedOn}</p>
 
         {/* ORDER CHANGED 10 Aug 2026: intro copy now sits ABOVE the #1 card.
             The card was the first thing on the screen, which handed the reader
@@ -62,36 +73,23 @@ const top = products.find((p) => p.rank === 1);
           </div>
         )}
 
+        {offerNote && (
+          <p class="offer-note">
+            <span class="on-flag">Price checked {publishedOn}</span>
+            <span set:html={offerNote} />
+          </p>
+        )}
+
         {listLede && <p class="list-lede" set:html={listLede} />}
 
-        {top && (
-          <div class="answer-strip">
-            <a class="as-media" href={top.url} rel="sponsored nofollow noopener" target="_blank">
-              <img src={top.image} alt={top.name} width="96" height="96" decoding="async" />
-            </a>
-            <div class="as-body">
-              <div class="as-kicker">
-                <span class="as-flag">#1 Pick</span>
-                {top.score && <span class="as-score">{top.score}/10 Insider Score</span>}
-              </div>
-              <h2 class="as-name">{top.name}</h2>
-              {top.verdict && <p class="as-verdict">{top.verdict}</p>}
-              {top.trustNote && <p class="as-trust">{top.trustNote}</p>}
-            </div>
-            <div class="as-action">
-              {(top.price || top.oldPrice) && (
-                <div class="as-price">
-                  {top.oldPrice && <span class="as-old">{top.oldPrice}</span>}
-                  {top.price && <span class="as-now">{top.price}</span>}
-                </div>
-              )}
-              <a class="as-btn" href={top.url} rel="sponsored nofollow noopener" target="_blank">
-                {top.discount ? `Claim ${top.discount}` : (top.ctaLabel ?? "Check Price")}
-              </a>
-              <a class="as-why" href="#rank-1">Why it won →</a>
-            </div>
-          </div>
-        )}
+        {/* ANSWER STRIP REMOVED 11 Aug 2026. The #1 pick was appearing as a
+            card three times before the advertorial — answer strip, first card
+            in the list, then the repeat band — plus the sticky bar and the exit
+            offer. Five surfaces for one product reads as pressure, not
+            confidence. Both funnels running this offer profitably show it
+            twice: once at the top of the list, once again before the sales
+            letter. The full card is also the stronger unit; the strip was a
+            summary of it sitting directly above it. */}
 
       </div>
     </section>
@@ -115,25 +113,13 @@ const top = products.find((p) => p.rank === 1);
       </section>
     )}
 
-    <!-- Quick picks summary -->
-    <section style="padding:0 0 8px;">
-      <div class="container">
-        <div class="card" style="padding:20px 24px;background:var(--bg-soft);">
-          <strong style="color:var(--ink);">Our Top Picks:</strong>
-          <div style="display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:10px;">
-            {products.map((p) => (
-              <a href={`#rank-${p.rank}`} style="font-size:0.95rem;">
-                <strong>#{p.rank}</strong> {p.badge ? `${p.badge}: ` : ""}{p.brand ?? p.name}
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
+    {/* Quick-picks jump list removed with the answer strip — it sat between
+        the reader and the #1 card doing a navigation job nobody asked for on a
+        five-item page. */}
 
     <!-- Ranked list. Top 3 shown; the rest sit behind a disclosure so the page
          reaches the #1 pick faster and doesn't front-load choice paralysis. -->
-    <section class="section" style="padding-top:28px;">
+    <section class="section section-list">
       <div class="container">
         {products.slice(0, 3).map((p) => <ProductCard product={p} />)}
         {products.length > 3 && (

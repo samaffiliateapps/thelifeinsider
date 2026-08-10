@@ -24,7 +24,16 @@ import type { Product } from "../../components/ProductCard.astro";
    landing1b = 50% off + 30-day. D2C store = 30-day. Three funnels, three
    sets of terms — always read the one you are actually sending to. ·
    zero heel drop · wide anatomical toe box · 60% lighter (their claim) ·
-   machine washable · 250,000+ customers (their claim).
+   machine washable · 13,427+ customers (their claim).
+
+   ⚠️ CORRECTION 11 Aug 2026: this file previously recorded "250,000+
+   customers" as verified on landing1. It is not on that page and never was —
+   re-fetched and grepped the live funnel, and the only customer figure it
+   carries is "Based on reviews from 13,427+ customers". The figure had been
+   published in the trust strip, the #1 card and the exit offer. Corrected in
+   all three. Verify claims against the funnel, not against a note saying the
+   funnel was verified.
+   Also on landing1 and quotable: "Limited Time: Claim Your 60% Off Today".
 
    We do NOT repeat the merchant's medical claims. Their presell asserts
    relief for neuropathy, diabetic foot symptoms, circulation and restless
@@ -86,7 +95,7 @@ const products: Product[] = [
       { label: "Value for Money", value: 93 },
       { label: "Buyer Protection", value: 94 },
     ],
-    trustNote: "250,000+ customers · 90-day money-back guarantee · free size exchanges",
+    trustNote: "13,427+ customers · 90-day money-back guarantee · free size exchanges",
     badge: "Best Overall",
     price: "$69.99",
     oldPrice: "$139.98",
@@ -108,7 +117,7 @@ const products: Product[] = [
       "<strong>Getting the size wrong costs you nothing</strong> — free size exchanges, on the one purchase where sizing is the single biggest reason people send them back",
       "<strong>Nobody can tell</strong> — these read as an ordinary trainer, not as toe shoes",
       "<strong>They go in the washing machine</strong> — which matters more than it sounds if this becomes the pair you wear every day",
-      "<strong>250,000+ customers, by the maker's count</strong> — the largest customer base of anything on this list, and a 90-day window to change your mind",
+      "<strong>13,427+ customers, by the maker's own count</strong> — with a 90-day window to change your mind and free exchanges if the size is wrong",
     ],
     cons: [
       "Sold only direct from the maker, so you can't try them on in a shop first — the 90-day money-back window and free size exchanges are what stand in for that",
@@ -262,8 +271,8 @@ const products: Product[] = [
    our actual basis for ranking. No invented testing. */
 const intro = [
   "<strong>If your feet hurt by the end of a shift, the shoe is usually the reason.</strong> Conventional shoes taper toward the toes and lift the heel — two design choices that squeeze the front of the foot and tip your weight forward with every step. Barefoot shoes reverse both.",
-  "Orthotics run $300 to $600 and only work in the shoes they were made for. Cushioned trainers feel good in the shop and let the foot weaken underneath. Cortisone wears off. Surgery is a serious decision with a mixed record.",
-  "We ranked five on what actually decides it: real toe room, a genuinely flat sole, weight, and what happens when the size is wrong. Every figure is the maker's published claim or a live retail listing, cited as such — scored by our <a href='/how-we-rate/'>Insider Score</a>.",
+  "Orthotics run $300 to $600 and only work in the one pair they were moulded for. Cushioned trainers feel good in the shop and let the foot weaken underneath. Cortisone wears off.",
+  "We ranked five on what actually decides it: real toe room, a flat sole, weight, and what happens when the size is wrong. Every figure below is the maker's own published claim or a live retail listing, cited as such — see <a href='/how-we-rate/'>how we rate</a>.",
 ];
 
 /* Sits between the trust strip and the #1 card, matching the pattern every
@@ -271,6 +280,14 @@ const intro = [
    where the long-form case lives, then hand them the card. */
 const listLede =
   "<strong>Here are our top 5 barefoot shoes</strong>, with the full review of our #1 pick further down the page.";
+
+/* Urgency, without inventing a deadline. The maker's own funnel currently
+   headlines "Limited Time: Claim Your 60% Off Today" — so we report that they
+   are running it as a limited-time sale, dated, rather than manufacturing a
+   countdown of our own. A timer that resets on refresh is the one claim on a
+   page like this that is both false and takes ten seconds to disprove. */
+const offerNote =
+  "At the time of checking, the maker was running this as a <strong>limited-time 60% off sale</strong> and lists the discount as ending without notice. We re-check the price on every update — but it is their sale, and they can pull it.";
 
 const highlights = [
   {
@@ -407,6 +424,7 @@ const faqs = [
   updated="August 2026"
   intro={intro}
   listLede={listLede}
+  offerNote={offerNote}
   products={products}
   highlights={highlights}
   editorial={editorial}
