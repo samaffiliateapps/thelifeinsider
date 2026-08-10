@@ -76,9 +76,11 @@ const stars = p.starRating
       </div>
     )}
     <div class="proscons">
-      <ul class="pros">{p.pros.map((pro) => <li>{pro}</li>)}</ul>
+      {/* set:html so bullets can lead with a bolded payoff before the reason.
+          Content is authored in this repo, never user input. */}
+      <ul class="pros">{p.pros.map((pro) => <li set:html={pro} />)}</ul>
       {p.cons && p.cons.length > 0 && (
-        <ul class="cons">{p.cons.map((con) => <li>{con}</li>)}</ul>
+        <ul class="cons">{p.cons.map((con) => <li set:html={con} />)}</ul>
       )}
     </div>
     {p.blurb && <p style="font-size:0.92rem;color:var(--muted);margin:12px 0 0;">{p.blurb}</p>}

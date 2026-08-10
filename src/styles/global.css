@@ -318,6 +318,39 @@ a.cat-tile:hover { border-color: var(--brand); transform: translateY(-2px); text
 .cat-tile .cat-sub { font-size: 0.72rem; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
 
 /* ==========================================================================
+   TRUST STRIP — three checkable facts between the intro copy and the #1 card.
+   Added 10 Aug 2026. Every competitor funnel running this offer places a
+   equivalent band here ("100+ Tested · 13k Reviews · 90 Day Guarantee"); ours
+   carries only claims we can attribute to the maker or verify on the funnel.
+   ========================================================================== */
+.trust-strip {
+  display: flex; flex-wrap: wrap; gap: 10px 26px;
+  align-items: center; justify-content: center;
+  margin: 20px 0 4px;
+  padding: 14px 18px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.ts-item {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.9rem; font-weight: 700; color: var(--ink);
+  line-height: 1.3;
+}
+.ts-item svg { width: 17px; height: 17px; color: var(--cta-dark); flex: none; }
+@media (max-width: 640px) {
+  .trust-strip {
+    gap: 9px 0; padding: 13px 15px;
+    flex-direction: column; align-items: flex-start;
+  }
+  .ts-item { font-size: 0.86rem; }
+}
+/* Lede paragraph sits above the #1 card now — give the opening line a touch
+   more weight so the problem lands before the product does. */
+.intro-lede > p:first-child { font-size: 1.06rem; }
+@media (max-width: 640px) { .intro-lede > p:first-child { font-size: 1.02rem; } }
+
+/* ==========================================================================
    ANSWER STRIP — the verdict + a way to act, inside the opening screen.
    Added 4 Aug 2026 after live traffic showed ~100% engagement with ~7%
    click-through to the offer: readers were consuming the page and never
@@ -467,4 +500,20 @@ body.has-sticky-cta .site-footer { padding-bottom: 84px; }
 
 @media (prefers-reduced-motion: reduce) {
   .sticky-cta { transition: none; }
+}
+
+/* One line between the trust strip and the #1 card — the competitor pattern:
+   say what the reader is about to get, then hand them the card. */
+.list-lede {
+  margin: 16px 0 0;
+  font-size: 1.02rem;
+  color: var(--body);
+}
+.list-lede strong { color: var(--ink); }
+
+/* Mobile: 56px of section padding above the H1 is desktop spacing being spent
+   on the most valuable pixels on the page. Every px here pushes the #1 card
+   further past the fold. */
+@media (max-width: 640px) {
+  article > section.section:first-of-type { padding-top: 20px; }
 }

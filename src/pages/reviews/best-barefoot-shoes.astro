@@ -94,15 +94,21 @@ const products: Product[] = [
     image: "/images/gf-grounded.webp",
     url: GF_LINK,
     ctaLabel: "Check Price & Availability",
+    /* Rewritten 10 Aug 2026 to mechanism → payoff. The previous bullets were
+       accurate and sold nothing: "Anatomically wide toe box — shaped widest at
+       the toes rather than tapering" states a fact and leaves the reader to
+       work out why they should care. Every winning funnel in this niche leads
+       the bullet with the outcome and follows with the reason. Same facts,
+       same attributions, ordered so the payoff lands first. */
     pros: [
-      "Anatomically wide toe box — shaped widest at the toes rather than tapering, so toes sit where they naturally fall instead of being squeezed together",
-      "Zero heel drop: heel and forefoot sit at the same height, which removes the forward tilt built into almost every conventional shoe",
-      "Thin flexible sole, so the foot bends and grips rather than being splinted flat",
-      "The maker states they are 60% lighter than conventional shoes — noticeable if you are covering distance on hard floors",
-      "Machine washable, which matters more than it sounds for anyone wearing one pair daily",
-      "Free size exchanges — the single biggest risk when buying barefoot shoes online is sizing, and this removes it",
-      "Looks like an ordinary trainer, not like toe shoes",
-      "The maker reports 250,000+ customers to date — the largest customer base of anything on this list",
+      "<strong>The squeeze stops on day one</strong> — the toe box is widest at the toes instead of tapering to a point, so toes sit where they actually fall rather than stacked on top of each other",
+      "<strong>Nothing is tipping you forward any more</strong> — heel and forefoot sit at the same height, removing the forward tilt built into almost every conventional shoe you have ever owned",
+      "<strong>Your foot works again instead of being splinted</strong> — the sole is thin enough to bend and grip, so the muscles that have been carried for years start taking the load back",
+      "<strong>Light enough to forget you are wearing them</strong> — the maker states 60% lighter than conventional shoes, which you notice most on hard floors late in a shift",
+      "<strong>Getting the size wrong costs you nothing</strong> — free size exchanges, on the one purchase where sizing is the single biggest reason people send them back",
+      "<strong>Nobody can tell</strong> — these read as an ordinary trainer, not as toe shoes",
+      "<strong>They go in the washing machine</strong> — which matters more than it sounds if this becomes the pair you wear every day",
+      "<strong>250,000+ customers, by the maker's count</strong> — the largest customer base of anything on this list, and a 90-day window to change your mind",
     ],
     cons: [
       "Sold only direct from the maker, so you can't try them on in a shop first — the 90-day money-back window and free size exchanges are what stand in for that",
@@ -139,7 +145,8 @@ const products: Product[] = [
       "WHITIN is the established name in budget barefoot shoes and has the review history to show for it",
     ],
     cons: [
-      "Sizing runs inconsistent across WHITIN models — read the size guidance for this specific model rather than assuming",
+      "Sizing runs inconsistent across WHITIN models — and unlike our #1 there are no free exchanges, so a wrong guess costs you the return postage",
+      "Amazon's 30-day return window rather than the 90 days our #1 gives you",
       "Thinner on cushioning than our #1, which is the point of the category but takes adjusting to",
     ],
     blurb:
@@ -173,8 +180,9 @@ const products: Product[] = [
       "The model most often recommended by people already deep in the barefoot category",
     ],
     cons: [
-      "Men's sizing only",
-      "The aggressive tread is unnecessary — and noisier — if you are mostly indoors on hard floors",
+      "Men's sizing only — our #1 is unisex",
+      "The aggressive tread is unnecessary, and noisier, if you are mostly indoors on hard floors",
+      "30-day Amazon returns and no size-exchange programme, against 90 days on our #1",
     ],
     blurb:
       "The outdoor answer rather than the all-day-standing answer. Different job to our #1.",
@@ -255,8 +263,14 @@ const products: Product[] = [
 const intro = [
   "<strong>If your feet hurt by the end of a shift, the shoe is usually the reason.</strong> Conventional shoes taper toward the toes and lift the heel — two design choices that squeeze the front of the foot and tip your weight forward with every step. Barefoot shoes reverse both.",
   "Orthotics run $300 to $600 and only work in the shoes they were made for. Cushioned trainers feel good in the shop and let the foot weaken underneath. Cortisone wears off. Surgery is a serious decision with a mixed record.",
-  "We ranked these five on the things that actually decide whether a barefoot shoe works for someone in pain: how much room the toes really get, whether the sole is genuinely flat, weight, and what happens when the size is wrong. Every figure below is the manufacturer's own published claim or a live retail listing, cited as such — scored by our <a href='/how-we-rate/'>Insider Score</a>. All five are compared side by side below, with our #1 at the top.",
+  "We ranked five on what actually decides it: real toe room, a genuinely flat sole, weight, and what happens when the size is wrong. Every figure is the maker's published claim or a live retail listing, cited as such — scored by our <a href='/how-we-rate/'>Insider Score</a>.",
 ];
+
+/* Sits between the trust strip and the #1 card, matching the pattern every
+   competitor funnel uses: tell the reader what they are about to get and
+   where the long-form case lives, then hand them the card. */
+const listLede =
+  "<strong>Here are our top 5 barefoot shoes</strong>, with the full review of our #1 pick further down the page.";
 
 const highlights = [
   {
@@ -368,6 +382,7 @@ const faqs = [
   h1="The 5 Best Barefoot Shoes of 2026"
   updated="August 2026"
   intro={intro}
+  listLede={listLede}
   products={products}
   highlights={highlights}
   editorial={editorial}
