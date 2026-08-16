@@ -4,7 +4,6 @@ import ProductCard from "../components/ProductCard.astro";
 import EmailCapture from "../components/EmailCapture.astro";
 import StickyCta from "../components/StickyCta.astro";
 import ExitOffer from "../components/ExitOffer.astro";
-import AuthorBox from "../components/AuthorBox.astro";
 import type { Product } from "../components/ProductCard.astro";
 
 export interface Props {
@@ -176,16 +175,12 @@ const publishedOn = new Date().toLocaleDateString("en-AU", {
           {deepDive.body.map((para) => <p set:html={para} />)}
           <div style="text-align:center;margin-top:24px;">
             <a href={top.url} class="btn" rel="sponsored nofollow noopener" target="_blank">
-              {top.ctaLabel ?? "Check Price"}
+              Visit Site
             </a>
           </div>
         </div>
       </section>
     )}
-
-    <section style="padding:0 0 8px;">
-      <div class="container"><AuthorBox /></div>
-    </section>
 
     <!-- Long-form editorial sell -->
     {editorial && top && (
@@ -195,7 +190,7 @@ const publishedOn = new Date().toLocaleDateString("en-AU", {
           <div set:html={editorial.html} />
           <div style="text-align:center;margin:30px 0 0;">
             <a href={top.url} class="btn" rel="sponsored nofollow noopener" target="_blank">
-              {top.ctaLabel ?? "View Site"}
+              Visit Site
             </a>
             {top.discount && <div class="rank-offer" style="margin-top:8px;">{top.discount}</div>}
           </div>
