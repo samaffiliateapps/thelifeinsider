@@ -40,6 +40,9 @@ const p = product;
 const compact = p.rank !== 1;
 const pros = compact ? p.pros.slice(0, 2) : p.pros;
 const cons = compact ? (p.cons ?? []).slice(0, 2) : (p.cons ?? []);
+const dealDate = new Date().toLocaleDateString("en-AU", {
+  day: "numeric", month: "long", year: "numeric", timeZone: "Australia/Brisbane",
+});
 const stars = p.starRating
   ? "★".repeat(Math.round(p.starRating)) + "☆".repeat(5 - Math.round(p.starRating))
   : null;
@@ -124,10 +127,32 @@ const stars = p.starRating
     <a href={p.url} class="btn btn-block" rel="sponsored nofollow noopener" target="_blank">
       {p.ctaLabel ?? "View Site"}
     </a>
-    {p.discount && <div class="rank-offer">{p.discount}</div>}
+    {/* Deal tag under the CTA, matching the placement competitors running this
+        same offer use. Three stacked lines with a pointer up to the button.
+        Theirs reads "Sale Ends: <today>" on a date that rolls daily; ours dates
+        our verification instead, which survives a reload. */}
+    {p.discount && (
+      <div class="deal-tag">
+        <span class="dt-off">{p.discount}</span>
+        <span class="dt-label">Deal verified:</span>
+        <span class="dt-date" data-deal-date>{dealDate}</span>
+      </div>
+    )}
     {p.awardBadge && (
       <img class="award-badge" src={p.awardBadge} alt="The Life Insider top pick" loading="lazy" width="78" height="78" />
     )}
     {p.awardNote && <div class="rank-trust">{p.awardNote}</div>}
   </div>
 </div>
+
+<script is:inline>
+  /* Roll every deal date to the reader's own current date. */
+  (function () {
+    var f;
+    try {
+      f = new Date().toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" });
+    } catch (e) { return; }
+    var n = document.querySelectorAll("[data-deal-date]");
+    for (var i = 0; i < n.length; i++) n[i].textContent = f;
+  })();
+</script>

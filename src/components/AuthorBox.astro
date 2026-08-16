@@ -2,13 +2,12 @@
 /* Credibility block, sitting where the competitors put theirs — directly under
    the #1 pick, before the advertorial.
 
-   They run an invented persona ("Harrison Caldwell, a recognized expert in
-   personal health and wellness technology..."). We don't, so this has to earn
-   the same trust with things that are actually true. It turns out we have more
-   substance to work with than they do — they claim expertise, we can show
-   method, sourcing and what we deliberately refuse to do.
+   A named person, as competitors do — but a real one. Sam runs the research
+   and writes the rankings, so his name goes on them. Everything in the bio is
+   true of what actually happens on this page: sourcing, method, disclosure.
 
-   Every line here is checkable against the page it appears on.
+   byline/role/bio/points are props, so a different real author can be set per
+   page. What must never go here is an invented person.
 */
 export interface Props {
   byline?: string;
@@ -17,19 +16,19 @@ export interface Props {
   points?: string[];
 }
 const {
-  byline = "The Life Insider editorial team",
-  role = "Independent product research · Brisbane, Australia",
-  bio = "We rank consumer products from manufacturer specifications, live retail listings and published customer data — then publish the method, the sources and the cons alongside the verdict. We buy no placements and we run no invented test results.",
+  byline = "Sam Dullroy",
+  role = "Founder & lead researcher, The Life Insider · Brisbane, Australia",
+  bio = "I build these rankings from manufacturer specifications, live retail listings and published customer data — then publish the method, the sources and the cons next to the verdict. No paid placements, and no test results I did not actually run.",
   points = [
     "Every figure is the maker's published claim or a live listing, cited as such",
-    "Cons published on all five picks, including our top one",
-    "We earn a commission if you buy through our links — it never changes a ranking",
+    "Cons published on all five picks, including the one I rank first",
+    "I earn a commission if you buy through my links — it never changes a ranking",
   ],
 } = Astro.props;
 ---
 
 <aside class="author-box">
-  <div class="ab-mark" aria-hidden="true">TL</div>
+  <div class="ab-mark" aria-hidden="true">SD</div>
 
   <div class="ab-body">
     <div class="ab-name">{byline}</div>
