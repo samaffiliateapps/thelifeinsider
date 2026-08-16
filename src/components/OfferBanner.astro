@@ -1,0 +1,64 @@
+---
+/* Deal banner for the #1 pick.
+
+   Competitor pattern (consumerhealthreports.co, on the same Grounded offer):
+     "50% OFF / Sale Ends: August 16, 2026"
+   — a rolling date that reads as a deadline and resets every day.
+
+   We carry the same visual weight and the same live date, but the claim is one
+   we can stand behind. The maker's own funnel headlines "Limited Time: Claim
+   Your 60% Off Today", so we report THEIR framing and date OUR verification of
+   it. A deadline we invent is the single easiest thing on this page for a
+   reader — or a regulator — to disprove: reload and the timer resets.
+
+   The date is server-rendered at build time and rolled to the reader's own
+   current date on load, so it is always today without ever asserting that
+   today is the last day.
+*/
+export interface Props {
+  discount?: string;
+  price?: string;
+  oldPrice?: string;
+  url: string;
+  ctaLabel?: string;
+}
+const { discount, price, oldPrice, url, ctaLabel } = Astro.props;
+const built = new Date().toLocaleDateString("en-AU", {
+  day: "numeric", month: "long", year: "numeric", timeZone: "Australia/Brisbane",
+});
+---
+
+<div class="offer-banner">
+  <div class="ob-flag">{discount ?? "Deal live"}</div>
+
+  <div class="ob-body">
+    <div class="ob-head">Limited-time sale, per the maker</div>
+    <p class="ob-sub">
+      Price verified <span class="ob-date" id="obDate">{built}</span>. The maker runs this as a
+      limited-time offer and can end it without notice.
+    </p>
+  </div>
+
+  {(price || oldPrice) && (
+    <div class="ob-price">
+      {oldPrice && <span class="ob-old">{oldPrice}</span>}
+      {price && <span class="ob-now">{price}</span>}
+    </div>
+  )}
+
+  <a class="ob-btn" href={url} rel="sponsored nofollow noopener" target="_blank">
+    {ctaLabel ?? "Check Price"}
+  </a>
+</div>
+
+<script is:inline>
+  (function () {
+    var el = document.getElementById("obDate");
+    if (!el) return;
+    try {
+      el.textContent = new Date().toLocaleDateString(undefined, {
+        day: "numeric", month: "long", year: "numeric",
+      });
+    } catch (e) {}
+  })();
+</script>

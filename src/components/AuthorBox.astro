@@ -1,0 +1,52 @@
+---
+/* Credibility block, sitting where the competitors put theirs — directly under
+   the #1 pick, before the advertorial.
+
+   They run an invented persona ("Harrison Caldwell, a recognized expert in
+   personal health and wellness technology..."). We don't, so this has to earn
+   the same trust with things that are actually true. It turns out we have more
+   substance to work with than they do — they claim expertise, we can show
+   method, sourcing and what we deliberately refuse to do.
+
+   Every line here is checkable against the page it appears on.
+*/
+export interface Props {
+  byline?: string;
+  role?: string;
+  bio?: string;
+  points?: string[];
+}
+const {
+  byline = "The Life Insider editorial team",
+  role = "Independent product research · Brisbane, Australia",
+  bio = "We rank consumer products from manufacturer specifications, live retail listings and published customer data — then publish the method, the sources and the cons alongside the verdict. We buy no placements and we run no invented test results.",
+  points = [
+    "Every figure is the maker's published claim or a live listing, cited as such",
+    "Cons published on all five picks, including our top one",
+    "We earn a commission if you buy through our links — it never changes a ranking",
+  ],
+} = Astro.props;
+---
+
+<aside class="author-box">
+  <div class="ab-mark" aria-hidden="true">TL</div>
+
+  <div class="ab-body">
+    <div class="ab-name">{byline}</div>
+    <div class="ab-role">{role}</div>
+    <p class="ab-bio">{bio}</p>
+
+    <ul class="ab-points">
+      {points.map((p) => (
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m20 6-11 11-5-5" />
+          </svg>
+          <span>{p}</span>
+        </li>
+      ))}
+    </ul>
+
+    <a class="ab-link" href="/how-we-rate/">Read our full scoring method →</a>
+  </div>
+</aside>

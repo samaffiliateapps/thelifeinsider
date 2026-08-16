@@ -4,6 +4,8 @@ import ProductCard from "../components/ProductCard.astro";
 import EmailCapture from "../components/EmailCapture.astro";
 import StickyCta from "../components/StickyCta.astro";
 import ExitOffer from "../components/ExitOffer.astro";
+import OfferBanner from "../components/OfferBanner.astro";
+import AuthorBox from "../components/AuthorBox.astro";
 import type { Product } from "../components/ProductCard.astro";
 
 export interface Props {
@@ -110,6 +112,20 @@ const publishedOn = new Date().toLocaleDateString("en-AU", {
 
     <!-- Ranked list. Top 3 shown; the rest sit behind a disclosure so the page
          reaches the #1 pick faster and doesn't front-load choice paralysis. -->
+    {top && (
+      <section style="padding:0 0 6px;">
+        <div class="container">
+          <OfferBanner
+            discount={top.discount}
+            price={top.price}
+            oldPrice={top.oldPrice}
+            url={top.url}
+            ctaLabel={top.ctaLabel}
+          />
+        </div>
+      </section>
+    )}
+
     <section class="section section-list">
       <div class="container">
         {products.slice(0, 3).map((p) => <ProductCard product={p} />)}
@@ -181,6 +197,10 @@ const publishedOn = new Date().toLocaleDateString("en-AU", {
         </div>
       </section>
     )}
+
+    <section style="padding:0 0 8px;">
+      <div class="container"><AuthorBox /></div>
+    </section>
 
     <!-- Long-form editorial sell -->
     {editorial && top && (
