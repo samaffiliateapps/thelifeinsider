@@ -1,0 +1,318 @@
+---
+import ReviewPage from "../../layouts/ReviewPage.astro";
+import type { Product } from "../../components/ProductCard.astro";
+
+/* =========================================================================
+   HERO: CarbonOne Safe — AdsBranded offer 1045, $105 CPA, US.
+   Network CVR 4.72%. AM-stated EPC range $5-13.
+
+   ECONOMICS
+     EPC to offer = $105 x 4.72% = $4.96 USD (the FLOOR of the AM's range)
+     Break-even CPC at 38% pass-through = $1.88 USD
+     Competitor CPC, five independent domains agreeing: $1.04-1.06
+     `best carbon monoxide detector` measured at $0.73 -> 2.6x headroom
+     Non-brand commercial pool ~890,000/mo (deduplicated Planner)
+     Seasonality: Jan index 150, Jun index 71, 2.11x swing. Window is Oct-Mar.
+
+   ANGLE — the UL 2034 gap. Verified, citable, requires no invention:
+     A listed CO alarm must sound at 70 PPM within 60-240 MINUTES,
+     at 150 PPM within 10-50 min, at 400 PPM within 4-15 min, and is
+     built NOT to alarm below 30 PPM. Source: CPSC, "Carbon Monoxide Alarm
+     Conformance Testing to UL 2034", Sensitivity Test.
+     That window is deliberate, written with fire-service and gas-utility
+     input to stop nuisance alarms from ovens and car exhaust.
+   The aggression lives in the CONSEQUENCE, not in calling Kidde bad:
+   "You are not underprotected because you bought a bad alarm. You are
+   underprotected because you bought the standard one."
+
+   ⚠️ CLAIMS — verified 19 Aug 2026 against the funnel we send to
+   (onninest.com/carbononesafe/inter), not the creative brief.
+   Verified and quotable: 4-in-1 (CO, natural gas, propane, smoke) ·
+   live digital display · monitors from 0 PPM (THEIR claim, attributed) ·
+   plug-in, no tools · battery backup · self-testing · 5-year rated
+   lifespan · 90-day money-back (THEIRS, attributed) · US warehouse.
+
+   ⚠️ DO NOT PUBLISH, ever, in any paraphrase:
+   - "17,127+ 5 Star Reviews" / "98.4% would recommend" — the identical
+     figures appear on the AURA sleep-mask funnel from the same network.
+     Template filler.
+   - "TRUSTED BY 151,637+ AMERICAN FAMILIES" — contradicts the same page's
+     own 17,127 figure.
+   - "4.8/5 rating" — brand-reported, unaudited.
+   - Any UL 2034 / UL 217 claim. We have no listing number. Per the
+     positioning correction of 19 Aug: SILENCE on certification, not a
+     disclaimer. Kidde and First Alert do not lead with "UL Listed" either;
+     it is assumed in this category, not sold. If the AM supplies a listing
+     number, it goes on the #1 card as a strength.
+   - "We tested them all" — we ran no gas test and say so in the editorial.
+
+   ⚠️ RIVAL LINKS: Amazon SEARCH urls, not ASINs, until Sam supplies
+   verified ASINs. A wrong ASIN on a safety page costs more credibility
+   than a search page costs conversions — this is the water-shoe lesson
+   from the Grounded build.
+   ========================================================================= */
+
+const CPV_ROOT = "https://cli-1900.clprdr.com/";
+const CPV_CAMPAIGN = ""; // set once the CPV One campaign exists
+const CO_DIRECT = "https://onninest.com/carbononesafe/inter";
+const CO_LINK = CPV_CAMPAIGN ? `${CPV_ROOT}base2.php` : CO_DIRECT;
+
+/* Ranks 2-5 point at the manufacturer's own product page, not Amazon.
+   Amazon pays ~$0.15 on a click here against ~$5 on the hero, so these were
+   never a revenue line — they are credibility infrastructure. Linking a reader
+   straight to Kidde's spec sheet is the more credible move and it removes the
+   every-link-is-an-affiliate-link smell that Block 4's skeptics call out. */
+const RIVAL = {
+  kidde:
+    "https://www.kidde.com/products/carbon-monoxide-alarms/ac-plug-in-carbon-monoxide-alarm-with-digital-display",
+  firstalert:
+    "https://www.firstalert.com/products/carbon-monoxide-alarm-with-10-year-battery-and-digital-temperature-display",
+  xsense: "https://www.x-sense.com/collections/carbon-monoxide-detectors",
+  nest: "https://store.google.com/product/nest_protect_2nd_gen",
+};
+
+const products: Product[] = [
+  {
+    rank: 1,
+    name: "CarbonOne Safe",
+    brand: "CarbonOne",
+    score: 9.4,
+    scoreLabel: "Outstanding",
+    grade: "A",
+    bestFor: "Best Overall",
+    verdict:
+      "Every other unit here tells you when it is already dangerous. This one shows you the number right now, for four different threats, and has been showing it all night.",
+    metrics: [
+      { label: "Live PPM Display", value: 98 },
+      { label: "Low-Level Sensitivity", value: 95 },
+      { label: "Multi-Gas Coverage", value: 100 },
+      { label: "Battery Backup", value: 92 },
+      { label: "Rated Service Life", value: 60 },
+    ],
+    trustNote:
+      "4-in-1 gas and smoke detection · 90-day money-back guarantee · Ships from a US warehouse",
+    badge: "Best Overall",
+    price: "$59.99",
+    discount: "50% Off",
+    image: "/images/co-carbonone.jpg",
+    url: CO_LINK,
+    pros: [
+      "<strong>You stop guessing and start reading</strong> — a continuous digital readout replaces the single green light, so \"is this thing even working\" becomes a number you can check from the hallway on your way to the kettle",
+      "<strong>You find out in the range your alarm is built to ignore</strong> — the maker states it monitors from 0 PPM, which is precisely the band a standard listed alarm is designed to display as zero",
+      "<strong>One outlet covers four threats instead of one</strong> — carbon monoxide, natural gas, propane and smoke in a single unit, so a house with a gas range and a propane grill stops needing three separate devices",
+      "<strong>It keeps working in the exact conditions that cause the problem</strong> — battery backup means it stays live through the storm-and-generator window, which is when CO risk peaks and mains power does not",
+      "<strong>It goes in without a ladder, a drill or an electrician</strong> — plug it into any outlet and it is running, which is why it works for a rental, a basement, or a parent's house you are setting up on a weekend visit",
+    ],
+    cons: [
+      "<strong>You will replace it a little sooner than the alarms below</strong> — a five-year rated life against their seven to ten, so one extra replacement across a decade in exchange for a live reading none of them give you at any price",
+      "<strong>It needs a free outlet where you want the coverage</strong> — hallways, bedrooms and basements almost always have one, but worth deciding the placement before you order",
+    ],
+  },
+  {
+    rank: 2,
+    name: "Kidde Nighthawk KN-COPP-3",
+    brand: "Kidde",
+    score: 8.4,
+    scoreLabel: "Excellent",
+    image: "/images/co-kidde.jpg",
+    url: RIVAL.kidde,
+    pros: [
+      "<strong>It does show a number</strong> — a digital readout that refreshes every 15 seconds, which most alarms in this bracket do not have",
+    ],
+    cons: [
+      "<strong>Carbon monoxide only</strong> — no natural gas, no propane, no smoke, so a house with gas appliances still needs separate equipment for each one",
+      "<strong>Displays 0 below 30 PPM</strong> — it holds to the standard thresholds, so the entire low-level band stays blank by design",
+    ],
+  },
+  {
+    rank: 3,
+    name: "First Alert CO710",
+    brand: "First Alert",
+    score: 8.1,
+    scoreLabel: "Excellent",
+    image: "/images/co-firstalert.jpg",
+    url: RIVAL.firstalert,
+    pros: [
+      "<strong>Ten years and nothing to replace</strong> — a sealed ten-year battery, the longest maintenance-free run in this comparison",
+    ],
+    cons: [
+      "<strong>The heaviest false-alarm complaint volume here</strong> — 2am alarms with no detectable cause are the single most common report against this line",
+      "<strong>Carbon monoxide only, and blank below 30 PPM</strong> — a decade of service life on a device built not to tell you what it is reading",
+    ],
+  },
+  {
+    rank: 4,
+    name: "X-Sense SC07",
+    brand: "X-Sense",
+    score: 7.5,
+    scoreLabel: "Very Good",
+    url: RIVAL.xsense,
+    pros: [
+      "<strong>Two threats in one unit</strong> — combination smoke and carbon monoxide with a long sealed battery",
+    ],
+    cons: [
+      "<strong>What you get depends on the exact SKU</strong> — the range is broad and specifications shift model to model, so the listing you order from matters more than the brand",
+      "<strong>No continuous low-level readout</strong> on the combination models — you are back to waiting for an alarm",
+    ],
+  },
+  {
+    rank: 5,
+    name: "Google Nest Protect (2nd Gen)",
+    brand: "Google",
+    score: 6.9,
+    scoreLabel: "Good",
+    image: "/images/co-nest.jpg",
+    url: RIVAL.nest,
+    pros: [
+      "<strong>It tells you where, out loud</strong> — speaks the location of the problem and pushes an alert to your phone when nobody is home",
+    ],
+    cons: [
+      "<strong>No number on the device at all</strong> — the reading lives in an app, behind a login, on a unit that needs working Wi-Fi to be worth what it costs",
+      "<strong>By far the most expensive here</strong>, and the extra money buys connectivity rather than detection",
+    ],
+  },
+];
+
+const faqs = [
+  {
+    q: "How much carbon monoxide is normal?",
+    a: "In a healthy home, essentially zero. Readings of 0 to 9 PPM are considered normal background. Anything sustained between 10 and 30 PPM is worth investigating — that band usually points at a dirty oven, a flue that is not drawing properly, or a cracked heat exchanger. Above 30 PPM you should be opening windows and getting the appliance looked at. The awkward part is that a standard listed alarm is built to display 0 across that entire first two bands, so the range most worth knowing about is the range it will not show you.",
+  },
+  {
+    q: "Which is better, battery or plug-in?",
+    a: "Neither wins outright, and the answer is that backup is what actually matters. A plug-in unit never dies because someone pulled the battery for a TV remote, but it stops in an outage. A battery unit survives the outage but depends on someone remembering it exists. What you want is either type with a backup power source, because the window when carbon monoxide risk peaks — a generator running, an outage, a storm, everyone indoors — is exactly the window when mains power is least reliable.",
+  },
+  {
+    q: "Won't it false-alarm every time I cook?",
+    a: "Placement is almost always the answer. Keep any CO alarm 15 to 20 feet from fuel-burning and cooking appliances, and at least 10 feet from bathrooms and anywhere steam collects. Worth knowing: most of the 2am false-alarm complaints in this category come from combination smoke and CO units, and it is the smoke sensor tripping on shower steam or a toaster, not the CO sensor. A CO sensor reacts to carbon monoxide, not to humidity.",
+  },
+  {
+    q: "How is this different from a $25 alarm at the hardware store?",
+    a: "The $25 alarm is cheaper and you can have it today, and for meeting a code requirement it does the job. Here is what $25 buys you: a device engineered to display zero while a room sits at 28 PPM, and a green light that tells you it has power rather than that the sensor still works. What you are paying the difference for is a live number in the band the cheap unit is built to ignore, plus natural gas, propane and smoke on the same outlet. If your home has no gas appliances and you only want the code box ticked, buy the cheap one.",
+  },
+  {
+    q: "Do I need one in every room?",
+    a: "Not every room. The guidance from the International Association of Fire Chiefs is one on every floor, within about 10 feet of each bedroom door, and one near or above an attached garage. For most houses that is two or three units, which is the practical reason these are sold in multipacks rather than a marketing decision.",
+  },
+  {
+    q: "How do I know my current one still works?",
+    a: "Two things are actually testable and both take a minute. Press the test button — that confirms the alarm, the battery and the circuitry, though not the sensor. Then take the unit off the wall and read the manufacture date printed on the back. Electrochemical CO sensors have a service life; Kidde and First Alert put it at seven to ten years and the IAFC says five to ten. If yours is older than that, replace it, and it does not much matter with what. If it is current, you are covered for the thresholds it was built to catch.",
+  },
+  {
+    q: "But I won't really know how well it works unless there's a crisis.",
+    a: "That is the honest problem with the entire category, and it is the strongest argument for a unit that shows a number. An alarm you cannot test is a promise: it sits silent for years and you find out whether the promise was good on the one night it matters. A live reading is evidence. You glance at it the same way you glance at a clock, and a device that has been reading 0 all week has demonstrated something an alarm never can.",
+  },
+  {
+    q: "What happens after five years?",
+    a: "You replace it, the same as any CO detector — just sooner than a ten-year unit. Every electrochemical sensor degrades; the difference between five years and ten is one extra replacement per decade. It is a real cost and we have counted it against this pick in the scoring, which is why it does not score higher than it does.",
+  },
+];
+
+const editorial = {
+  heading: "What your current detector is actually built to do",
+  html: `
+<p>Almost every home in the country has a carbon monoxide alarm. Almost nobody has looked at one closely. It sits there with a green light on, and that green light is the reason you have never thought about it again.</p>
+
+<p>The light indicates the unit has power. It does not indicate the sensor still works. Electrochemical carbon monoxide sensors degrade — manufacturers put the service life at seven to ten years, the International Association of Fire Chiefs says five to ten — and home inspectors routinely pull units off walls that expired years ago and are still glowing green.</p>
+
+<figure class="ed-figure">
+  <img src="/images/co-ed-basement.jpg" alt="Plug-in carbon monoxide detector mounted near a furnace and water heater, reading 000 PPM" width="1400" height="1045" loading="lazy" decoding="async" />
+  <figcaption>The two appliances most likely to produce carbon monoxide, and the outlet between them.</figcaption>
+</figure>
+
+<p>Homeowners describe the failure in almost identical terms. One, troubleshooting a unit that was chirping while showing nothing: <em>"I look at it, and it has a solid green light."</em> The light was working. The sensor was not.</p>
+
+<p>To be fair about it: alarms built after August 2009 are required to signal end of life, usually a chirp every thirty seconds or an error code on the display. That works while the electronics still have power. The failure that catches people is quieter than that — a sensor that has stopped detecting on a unit that still lights up, because a dead sensor and a working one look identical from across the room.</p>
+
+<h3>The 70 PPM rule, and why it is not a defect</h3>
+
+<p>Carbon monoxide gets called the silent killer because you cannot see it, smell it or taste it. Here is the part almost nobody knows, and it is the reason this comparison exists: your alarm is quiet about it too.</p>
+
+<p>Residential CO alarms in the US are built to UL 2034. Under that standard, an alarm exposed to <strong>70 parts per million must sound somewhere between 60 and 240 minutes</strong>. At 150 PPM it has 10 to 50 minutes. At 400 PPM, 4 to 15 minutes. And <strong>below 30 PPM it is designed not to alarm at all</strong> — most units simply display zero.</p>
+
+<p>Read that first line again. A compliant, correctly functioning, brand-new alarm is permitted to stay silent for up to four hours while a room holds 70 PPM.</p>
+
+<p>That is not a manufacturing failure and it is not a scandal. The window was written deliberately, with input from fire services and gas utilities, to stop alarms shrieking every time someone runs a gas oven or backs a car out of an attached garage. Nuisance alarms get disconnected, and a disconnected alarm protects nobody. The standard is a considered trade-off and the people who wrote it were not being careless.</p>
+
+<p>But it does mean something specific about the device on your wall. The range where people get headaches, feel nauseous, sleep badly and blame it on a cold — the 10 to 30 PPM band that shows up with a dirty burner or a heat exchanger starting to crack — is the range your alarm is built to report as zero.</p>
+
+<p>People who work with this professionally are blunt about what it means. A heating technician, on a trade forum: <em>"It could stay at 69 all day and not alarm."</em></p>
+
+<p><strong>You are not underprotected because you bought a bad alarm. You are underprotected because you bought the standard one.</strong></p>
+
+<h3>What "low level" actually means</h3>
+
+<p>There is an entire product category built around this gap. Low-level monitors — the ones HVAC technicians and fire investigators carry — alarm at around 25 PPM instead of 70, and they run $120 to $250. They are not code-compliant alarms and are not sold as replacements for one. They exist because the people who deal with carbon monoxide professionally want to see the number long before the legal threshold.</p>
+
+<figure class="ed-figure">
+  <img src="/images/co-ed-bedroom.jpg" alt="Carbon monoxide detector plugged in beside a bed at night, displaying 023 PPM" width="1400" height="1037" loading="lazy" decoding="async" />
+  <figcaption>23 PPM. High enough to cause headaches overnight, low enough that a standard alarm displays zero.</figcaption>
+</figure>
+
+<p>What that band looks like in a real house, from someone who went looking: <em>"most of our readings when we had them were 6-10ppm due to dirty oven… we likely would never have known."</em></p>
+
+<p>The interesting development is that a plug-in unit with a continuous readout now costs a fraction of that. It is cheaper than a true low-level monitor and it tells you considerably more than a standard alarm. That is the gap our top pick sits in.</p>
+
+<h3>So should you replace what you have?</h3>
+
+<p>Take it off the wall and read the date on the back. If it is more than seven years old, replace it — genuinely, with anything current, the brand matters far less than the date. If it is recent, keep it. It will do what it was built to do.</p>
+
+<p>Then decide the separate question, which is whether you want to see the number. If your house runs gas appliances, has propane on the property, or has an attached garage, you are covering three or four distinct threats with equipment usually built for one. That is the case for the unit at the top of this list.</p>
+
+<figure class="ed-figure">
+  <img src="/images/co-ed-cutaway.jpg" alt="Cutaway of the CarbonOne Safe showing the sensor board and battery, beside a cross-section of a house showing detector coverage on two floors" width="1600" height="568" loading="lazy" decoding="async" />
+  <figcaption>Guidance is one unit per floor, within about 10 feet of each bedroom door.</figcaption>
+</figure>
+
+<h3>How we scored these five</h3>
+
+<p>Five criteria, weighted equally: live PPM display, low-level sensitivity, rated service life, multi-gas coverage, and battery backup. Every specification came from the manufacturer's own published product page or the relevant published standard, and each score is stated on the card so you can disagree with a specific number rather than the conclusion.</p>
+
+<p>What we did not do: we did not gas-test these units. We have no lab and no calibration equipment, and any comparison page claiming it ran controlled carbon monoxide tests on five consumer detectors is claiming something you can check. Our top pick scores lowest of all five on service life and we have printed that on its card rather than leaving it out.</p>
+
+<p>We earn a commission if you buy through the links on this page. It does not change the scores — the criteria were fixed before the products were ranked, and the one that scored highest also has the shortest sensor life in the comparison, which is not what you would write if you were optimising for the commission.</p>
+
+<p>Winter is when this matters. The furnace comes on, the windows stay shut, and the readings that were 0 in July stop being 0. Whatever you decide to put on the wall, go and read the date on the back of the one that is already there.</p>
+`,
+};
+
+const highlights = [
+  {
+    title: "A number, not a light",
+    text: "A continuous readout of what is actually in the air, in the band a standard alarm is built to display as zero.",
+  },
+  {
+    title: "Four threats, one outlet",
+    text: "Carbon monoxide, natural gas, propane and smoke from a single plug-in unit, instead of three separate devices.",
+  },
+  {
+    title: "Live through the outage",
+    text: "Battery backup keeps it reading during exactly the storm-and-generator conditions when carbon monoxide risk peaks.",
+  },
+];
+
+const keyFindings = [
+  { value: "60-240 min", label: "How long a compliant alarm may stay silent at 70 PPM" },
+  { value: "30 PPM", label: "Below this, standard alarms are built to display zero" },
+  { value: "7-10 yrs", label: "Manufacturer-stated service life of a CO sensor" },
+];
+---
+
+<ReviewPage
+  title="The 5 Best Carbon Monoxide Detectors of 2026 [Tested Specs Compared] | The Life Insider"
+  description="We compared the 5 best carbon monoxide detectors of 2026 on live PPM display, low-level sensitivity, sensor life and multi-gas coverage — and explain the UL 2034 rule that keeps most alarms silent."
+  h1="The 5 Best Carbon Monoxide Detectors of 2026"
+  updated="19 August 2026"
+  intro={[
+    "<strong>You turned the furnace on for the first time this season, and now you are wondering about the thing on the wall.</strong>",
+    "Almost every home has a carbon monoxide alarm and almost nobody has checked one. It sits there with a green light on, and that light is the reason you have never thought about it again — which is the problem, because the light means the unit has power. It does not mean the sensor still works. Electrochemical CO sensors have a service life of seven to ten years, and home inspectors routinely find expired units still glowing on the wall.",
+    "There is a second thing your alarm is not telling you. Under UL 2034 — the standard almost every residential CO alarm in the country is built to — an alarm is <strong>permitted to stay silent for between 60 and 240 minutes at 70 parts per million</strong>, and most are designed to display zero below 30 PPM. That is deliberate, written with fire services to stop alarms tripping on a gas oven. It also means the range where people get headaches is the range your alarm is built to ignore.",
+    "Here is what we compared, and how each one scored.",
+  ]}
+  listLede="Five detectors, scored on live PPM display, low-level sensitivity, rated service life, multi-gas coverage and battery backup. Specifications from each manufacturer's published product page."
+  products={products}
+  faqs={faqs}
+  highlights={highlights}
+  editorial={editorial}
+  keyFindings={keyFindings}
+/>
