@@ -53,7 +53,8 @@ import type { Product } from "../../components/ProductCard.astro";
    ========================================================================= */
 
 const CPV_ROOT = "https://cli-1900.clprdr.com/";
-const CPV_CAMPAIGN = ""; // set once the CPV One campaign exists
+const CPV_ENGSEC = "5"; // install-level, identical across every campaign
+const CPV_CAMPAIGN = "11"; // CarbonOne — CPV One campaign 11, created 21 Aug 2026
 const CO_DIRECT = "https://onninest.com/carbononesafe/inter";
 const CO_LINK = CPV_CAMPAIGN ? `${CPV_ROOT}base2.php` : CO_DIRECT;
 
@@ -323,4 +324,14 @@ const keyFindings = [
   editorial={editorial}
   keyFindings={keyFindings}
   keyFindingsPosition="after-list"
-/>
+>
+  {
+    CPV_CAMPAIGN && (
+      <Fragment slot="body-end">
+        <script is:inline set:html={`var clpconfig = { "clroot": "${CPV_ROOT}", "engsec": "${CPV_ENGSEC}" };`} />
+        <script is:inline src={`${CPV_ROOT}landing.js`}></script>
+        <script is:inline set:html={`checkdirect(${CPV_CAMPAIGN}, 1)`} />
+      </Fragment>
+    )
+  }
+</ReviewPage>
