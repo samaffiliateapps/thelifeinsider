@@ -67,8 +67,9 @@ const RIVAL = {
     "https://www.kidde.com/products/carbon-monoxide-alarms/ac-plug-in-carbon-monoxide-alarm-with-digital-display",
   firstalert:
     "https://www.firstalert.com/products/carbon-monoxide-alarm-with-10-year-battery-and-digital-temperature-display",
-  xsense: "https://www.x-sense.com/collections/carbon-monoxide-detectors",
-  nest: "https://store.google.com/product/nest_protect_2nd_gen",
+  xsense:
+    "https://www.x-sense.com/products/10-year-battery-combination-smoke-carbon-monoxide-alarm-with-lcd-sc07?variant=32835927441543",
+  sc5: "https://www.firstalert.com/products/sc5-battery-smart-smoke-carbon-monoxide-alarm",
 };
 
 const products: Product[] = [
@@ -87,7 +88,7 @@ const products: Product[] = [
       { label: "Low-Level Sensitivity", value: 95 },
       { label: "Multi-Gas Coverage", value: 100 },
       { label: "Battery Backup", value: 92 },
-      { label: "Rated Service Life", value: 60 },
+      { label: "Rated Service Life", value: 75 },
     ],
     trustNote:
       "4-in-1 gas and smoke detection · 90-day money-back guarantee · Ships from a US warehouse",
@@ -95,6 +96,7 @@ const products: Product[] = [
     price: "$59.99",
     discount: "50% Off",
     image: "/images/co-carbonone.jpg",
+    stickyImage: "/images/co-carbonone-thumb.jpg",
     url: CO_LINK,
     pros: [
       "<strong>You stop guessing and start reading</strong> — a continuous digital readout replaces the single green light, so \"is this thing even working\" becomes a number you can check from the hallway on your way to the kettle",
@@ -157,18 +159,18 @@ const products: Product[] = [
   },
   {
     rank: 5,
-    name: "Google Nest Protect (2nd Gen)",
-    brand: "Google",
+    name: "First Alert SC5 Smart Alarm",
+    brand: "First Alert",
     score: 6.9,
     scoreLabel: "Good",
-    image: "/images/co-nest.jpg",
-    url: RIVAL.nest,
+    image: "/images/co-sc5.jpg",
+    url: RIVAL.sc5,
     pros: [
-      "<strong>It tells you where, out loud</strong> — speaks the location of the problem and pushes an alert to your phone when nobody is home",
+      "<strong>The alarm that replaced the Nest</strong> — Google discontinued Nest Protect in March 2025 and now points its owners here, with app alerts when the house is empty",
     ],
     cons: [
       "<strong>No number on the device at all</strong> — the reading lives in an app, behind a login, on a unit that needs working Wi-Fi to be worth what it costs",
-      "<strong>By far the most expensive here</strong>, and the extra money buys connectivity rather than detection",
+      "<strong>By far the most expensive here</strong>, and the extra money buys connectivity rather than earlier detection",
     ],
   },
 ];
@@ -296,9 +298,9 @@ const highlights = [
 ];
 
 const keyFindings = [
-  { value: "60-240 min", label: "How long a compliant alarm may stay silent at 70 PPM" },
-  { value: "30 PPM", label: "Below this, standard alarms are built to display zero" },
-  { value: "7-10 yrs", label: "Manufacturer-stated service life of a CO sensor" },
+  { value: "4 hours", label: "How long your alarm can stay silent while a room sits at 70 PPM" },
+  { value: "0 PPM", label: "What it displays while the air around it holds 28" },
+  { value: "7 years", label: "When the sensor dies. The green light stays on." },
 ];
 ---
 

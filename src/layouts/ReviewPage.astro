@@ -239,7 +239,7 @@ const publishedOn = new Date().toLocaleDateString("en-AU", {
     <StickyCta
       name={top.name}
       brand={top.brand}
-      image={top.image}
+      image={top.stickyImage ?? top.image}
       url={top.url}
       price={top.price}
       oldPrice={top.oldPrice}

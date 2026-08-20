@@ -5,6 +5,7 @@ export interface Product {
   name: string;
   brand?: string;
   image?: string; // /images/... in public. Omit → tasteful placeholder box.
+  stickyImage?: string; // optional 48px thumbnail for the sticky bar; falls back to `image`
   score: number; // out of 10 (real: derived from verified ratings / disclosed assessment — see how-we-rate)
   scoreLabel?: string; // Outstanding / Excellent / Very Good / Good / Decent
   starRating?: number; // out of 5, real average (retailer-listed products)
