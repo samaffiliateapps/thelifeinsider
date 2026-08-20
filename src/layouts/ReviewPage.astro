@@ -20,9 +20,16 @@ export interface Props {
   editorial?: { heading: string; html: string }; // long-form editorial sell (our voice, never a persona)
   // 3 headline numbers shown above the list. REAL published specs only — never invented test results.
   keyFindings?: { value: string; label: string }[];
+  /* Where the key-findings strip renders.
+     "top" (default) — above the card stack, as an authority beat before the list.
+     "after-list" — below the cards, as evidence for the ranking just read.
+     Use "after-list" when the intro copy already states the same facts: a stats
+     box that repeats the paragraph above it reads as padding and delays the
+     card, which is the last thing Product-Aware traffic wants. */
+  keyFindingsPosition?: "top" | "after-list";
 }
 
-const { title, description, h1, updated, intro, listLede, products, deepDive, faqs, highlights, editorial, keyFindings } =
+const { title, description, h1, updated, intro, listLede, products, deepDive, faqs, highlights, editorial, keyFindings, keyFindingsPosition = "top" } =
   Astro.props;
 const top = products.find((p) => p.rank === 1);
 
@@ -86,7 +93,7 @@ const publishedOn = new Date().toLocaleDateString("en-AU", {
     </section>
 
     <!-- Key findings: three real, verifiable numbers up front -->
-    {keyFindings && keyFindings.length > 0 && (
+    {keyFindingsPosition === "top" && keyFindings && keyFindings.length > 0 && (
       <section style="padding:0 0 8px;">
         <div class="container">
           <div class="key-findings">
@@ -126,6 +133,25 @@ const publishedOn = new Date().toLocaleDateString("en-AU", {
         )}
       </div>
     </section>
+
+    <!-- Key findings, placed after the list as evidence for the ranking -->
+    {keyFindingsPosition === "after-list" && keyFindings && keyFindings.length > 0 && (
+      <section style="padding:0 0 8px;">
+        <div class="container">
+          <div class="key-findings">
+            <div class="kf-head">Key Findings</div>
+            <div class="kf-grid">
+              {keyFindings.map((k) => (
+                <div class="kf-item">
+                  <div class="kf-value">{k.value}</div>
+                  <div class="kf-label">{k.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
 
     <!-- Best option on the market: repeat the #1 pick + its key strengths -->
     {top && (
