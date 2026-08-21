@@ -1,0 +1,47 @@
+---
+/* CPV One tracker + the multi-offer cookie-lock fix.
+
+   THE BUG (proven 21 Aug 2026 against live CPV):
+   `base2.php` carries no campaign ID. It resolves the destination purely from
+   the `cpvlab*` cookies, and `adck.php` will NOT overwrite them once set — the
+   first campaign a browser sees wins for the life of the cookie. So a visitor
+   who clicked a Grounded ad on Monday and a CarbonOne ad on Friday landed on
+   Grounded both times: we pay for the click, send them to the wrong product,
+   and attribute it to the wrong campaign.
+
+   WHY WE CAN FIX IT NOW: on the custom tracking domain the cookies are set on
+   `.thelifeinsider.com` and are NOT HttpOnly, so our own JS can read and clear
+   them. On the old third-party domain that was impossible.
+
+   WHY NOT JUST CLEAR ON EVERY LOAD: the first click record is the one carrying
+   the gclid. Wiping it on every pageview would mean a visitor who arrives from
+   an ad, browses elsewhere and returns gets a gclid-less record — which breaks
+   conversion upload entirely. So we clear ONLY when the stored is a
+   different campaign to this page's.
+*/
+export interface Props {
+  campaign: string; // CPV One campaign id, e.g. "11"
+  root?: string;
+  engsec?: string;
+}
+const { campaign, root = "https://track.thelifeinsider.com/", engsec = "5" } = Astro.props;
+---
+<script is:inline set:html={`var clpconfig = { "clroot": "${root}", "engsec": "${engsec}" };`} />
+<script is:inline src={`${root}landing.js`}></script>
+<script is:inline set:html={`
+(function () {
+  var WANT = "${campaign}";
+  var m = document.cookie.match(/(?:^|;\\s*)cpvlabsubid=([^;]*)/);
+  if (m) {
+    var parts = decodeURIComponent(m[1]).split("_");
+    /* subid format: <token>_<campaign>_<clickid> */
+    if (parts.length > 1 && parts[1] !== WANT) {
+      ["cpvlabclick", "cpvlabsubid", "cpvlablevel", "cpvlabclicks"].forEach(function (n) {
+        document.cookie = n + "=; Max-Age=0; path=/; domain=.thelifeinsider.com";
+        document.cookie = n + "=; Max-Age=0; path=/";
+      });
+    }
+  }
+  checkdirect(${campaign}, 1);
+})();
+`} />

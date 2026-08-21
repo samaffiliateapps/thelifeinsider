@@ -18,7 +18,7 @@ import type { Product } from "../../components/ProductCard.astro";
 // attaches its click ID, and forwards to the MaxWeb HauSafe offer configured
 // inside the tracker — that click ID is what MaxWeb's postback returns.
 // Direct MaxWeb link (kept for reference): https://mwebtrackerhq.com/7624/2654/2/
-const HAUSAFE_CPA = "https://cli-1900.clprdr.com/base2.php";
+const HAUSAFE_CPA = "https://track.thelifeinsider.com/base2.php";
 const AMZ = (asin: string, sub: string) =>
   `https://www.amazon.com.au/dp/${asin}?tag=thelifeinside-22&ascsubtag=cam_${sub}`;
 
@@ -237,9 +237,9 @@ const faqs = [
   {/* CPV One landing-page tracking (campaign 5, landing page 1) */}
   <Fragment slot="body-end">
     <script is:inline>
-      var clpconfig = { "clroot": "https://cli-1900.clprdr.com/", "engsec": "5" };
+      var clpconfig = { "clroot": "https://track.thelifeinsider.com/", "engsec": "5" };
     </script>
-    <script is:inline src="https://cli-1900.clprdr.com/landing.js"></script>
+    <script is:inline src="https://track.thelifeinsider.com/landing.js"></script>
     <script is:inline>checkdirect(5, 1)</script>
   </Fragment>
 </ReviewPage>

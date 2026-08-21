@@ -1,6 +1,7 @@
 ---
 import ReviewPage from "../../layouts/ReviewPage.astro";
 import type { Product } from "../../components/ProductCard.astro";
+import CpvTracker from "../../components/CpvTracker.astro";
 
 /* =========================================================================
    HERO: Grounded Footwear® Freedom — AdsBranded offer 568, $64 CPA, US.
@@ -62,9 +63,9 @@ import type { Product } from "../../components/ProductCard.astro";
      keyword={keyword}&ad={creative}&match={matchtype}&network={network}&campid={campaignid}&adgroupid={adgroupid}&clpcid=<ID>
 
    ⚠️ EVERFLOW — global postback must be set in the AdsBranded panel:
-     https://cli-1900.clprdr.com/adclick.php?subid={sub1}&revenue={payout_amount}&txid={transaction_id}
+     https://track.thelifeinsider.com/adclick.php?subid={sub1}&revenue={payout_amount}&txid={transaction_id}
    --------------------------------------------------------------------------- */
-const CPV_ROOT = "https://cli-1900.clprdr.com/";
+const CPV_ROOT = "https://track.thelifeinsider.com/"; // custom first-party tracking domain, 21 Aug 2026
 const CPV_ENGSEC = "5"; // install-level, same for every campaign
 const CPV_CAMPAIGN = "10"; // Grounded Footwear — CPV One campaign 10
 
@@ -427,11 +428,7 @@ const faqs = [
 >
   {
     CPV_CAMPAIGN && (
-      <Fragment slot="body-end">
-        <script is:inline set:html={`var clpconfig = { "clroot": "${CPV_ROOT}", "engsec": "${CPV_ENGSEC}" };`} />
-        <script is:inline src={`${CPV_ROOT}landing.js`}></script>
-        <script is:inline set:html={`checkdirect(${CPV_CAMPAIGN}, 1)`} />
-      </Fragment>
+      <Fragment slot="body-end"><CpvTracker campaign="10" /></Fragment>
     )
   }
 </ReviewPage>

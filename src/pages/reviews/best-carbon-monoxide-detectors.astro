@@ -1,6 +1,7 @@
 ---
 import ReviewPage from "../../layouts/ReviewPage.astro";
 import type { Product } from "../../components/ProductCard.astro";
+import CpvTracker from "../../components/CpvTracker.astro";
 
 /* =========================================================================
    HERO: CarbonOne Safe — AdsBranded offer 1045, $105 CPA, US.
@@ -52,7 +53,7 @@ import type { Product } from "../../components/ProductCard.astro";
    from the Grounded build.
    ========================================================================= */
 
-const CPV_ROOT = "https://cli-1900.clprdr.com/";
+const CPV_ROOT = "https://track.thelifeinsider.com/"; // custom first-party tracking domain, 21 Aug 2026
 const CPV_ENGSEC = "5"; // install-level, identical across every campaign
 const CPV_CAMPAIGN = "11"; // CarbonOne — CPV One campaign 11, created 21 Aug 2026
 const CO_DIRECT = "https://onninest.com/carbononesafe/inter";
@@ -327,11 +328,7 @@ const keyFindings = [
 >
   {
     CPV_CAMPAIGN && (
-      <Fragment slot="body-end">
-        <script is:inline set:html={`var clpconfig = { "clroot": "${CPV_ROOT}", "engsec": "${CPV_ENGSEC}" };`} />
-        <script is:inline src={`${CPV_ROOT}landing.js`}></script>
-        <script is:inline set:html={`checkdirect(${CPV_CAMPAIGN}, 1)`} />
-      </Fragment>
+      <Fragment slot="body-end"><CpvTracker campaign="11" /></Fragment>
     )
   }
 </ReviewPage>
