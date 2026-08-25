@@ -50,9 +50,9 @@ const WALLA_LINK = CPV_CAMPAIGN ? `${CPV_ROOT}base2.php` : WALLA_DIRECT;
 
 const RIVAL = {
   charge6: "https://www.jbl.com/CHARGE-6.html",
-  motionboomplus: "https://www.soundcore.com/products/motion-boom-plus-a3129011",
+  motionboomplus: "https://www.soundcore.com/products/motion-boom-plus?variant=43775460442332",
   flip7: "https://www.jbl.com/FLIP-7.html",
-  stormbox2: "https://tribit.com/products/stormbox-2",
+  stormbox2: "https://tribit.com/products/tribit-stormbox-2-portable-speaker",
 };
 
 const products: Product[] = [
@@ -100,6 +100,7 @@ const products: Product[] = [
     brand: "JBL",
     score: 8.7,
     scoreLabel: "Excellent",
+    image: "/images/walla-charge6.jpg",
     url: RIVAL.charge6,
     pros: [
       "<strong>The longest-running battery in this set</strong> — rated 24 hours, and it charges your phone from the speaker while it plays",
@@ -115,6 +116,7 @@ const products: Product[] = [
     brand: "Soundcore",
     score: 8.5,
     scoreLabel: "Excellent",
+    image: "/images/walla-mbp.jpg",
     url: RIVAL.motionboomplus,
     pros: [
       "<strong>The raw-output champion here</strong> — 80W, floats, IPX7-rated; if one box must cover a parking lot, this is that box",
@@ -130,6 +132,7 @@ const products: Product[] = [
     brand: "JBL",
     score: 8.4,
     scoreLabel: "Excellent",
+    image: "/images/walla-flip7.jpg",
     url: RIVAL.flip7,
     pros: [
       "<strong>The best small speaker JBL has made</strong> — proper woofer-plus-tweeter design, IP68, 14–16 hours claimed, from the brand you already trust",
@@ -145,6 +148,7 @@ const products: Product[] = [
     brand: "Tribit",
     score: 8.0,
     scoreLabel: "Very Good",
+    image: "/images/walla-sb2.jpg",
     url: RIVAL.stormbox2,
     pros: [
       "<strong>The cheapest credible speaker here</strong> — around $68, from the challenger brand reviewers keep comparing to speakers twice its price",
@@ -203,7 +207,7 @@ const editorial = {
 <p>Open up a $30 party speaker and you find one small driver doing everything. Bass and treble, at the same time, at volume, outdoors. Bass is the killer: producing it takes big physical movement, and a small driver runs out of travel fast. Push past that point and the sound clips. That clipping is the crackle. Not wear. Not bad luck. One component doing two jobs.</p>
 
 <figure class="ed-figure">
-  <img src="/images/walla-ed-sound.jpg" alt="Walla Sound Boom+ with 360-degree sound coverage — clear, well-balanced output that holds up at higher volume" width="739" height="988" loading="lazy" decoding="async" />
+  <img src="/images/walla-ed-sound.jpg" alt="Walla Sound Boom+ with 360-degree sound coverage — clear, well-balanced output that holds up at higher volume" width="739" height="988" loading="lazy" decoding="async" style="max-width:340px;display:block;margin:0 auto;" />
   <figcaption>Two drivers, two jobs: the woofer takes the bass, the tweeter takes the highs — and neither is ever pushed past what it can do.</figcaption>
 </figure>
 
@@ -256,9 +260,13 @@ const editorial = {
 
 <h3>The next party is already on the calendar</h3>
 
-<p>You know the moment this page exists to delete: the food out, the yard full, the volume up, and that first electrical crackle in front of everyone. The speaker that does that is doing it because of what's inside it — and it will do it again next time.</p>
+<p>You know the moment this page exists to delete: the food out, the yard full, the volume up — and that first electrical crackle in front of everyone. The speaker that did that to you will do it again. It is built to. Nothing about it changes between now and your next party except how much warning you had.</p>
 
-<p><strong>Four of these five speakers ask you to pay for a single box and hope it reaches the back fence. One is priced so you can stop hoping — and put a speaker at both ends.</strong> <a href="${WALLA_LINK}" onclick="checkdirect(${CPV_CAMPAIGN},1)"><strong>Check availability and today's price →</strong></a></p>
+<p>Here is the whole decision, priced out. Fixing it costs $99.99 — half off, shipped free, and completely reversible for 90 days. If it doesn't fill your yard, send it back and pay nothing. Keeping the old speaker costs nothing today and one more silence in front of your guests later. You already know which one of those you'll actually regret.</p>
+
+<p><strong>Four of these five ask you to pay for a single box and hope it reaches the back fence. One is priced so you can stop hoping — and put a speaker at both ends of the yard.</strong></p>
+
+<p><a href="${WALLA_LINK}" onclick="checkdirect(${CPV_CAMPAIGN},1)"><strong>Get the Boom+ — 50% off with free shipping →</strong></a></p>
 `,
 };
 
