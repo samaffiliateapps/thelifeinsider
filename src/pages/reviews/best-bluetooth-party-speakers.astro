@@ -1,0 +1,343 @@
+---
+import ReviewPage from "../../layouts/ReviewPage.astro";
+import type { Product } from "../../components/ProductCard.astro";
+import CpvTracker from "../../components/CpvTracker.astro";
+
+/* =========================================================================
+   HERO: Walla Sound Boom+ — AdsBranded offer 1063, $100 CPA, US.
+   AM-stated CVR 5.0% (modelled at 3.0%). Destination: int1 interstitial,
+   NOT the pre1 advertorial (per the AM's "best link is the interstitial").
+
+   ECONOMICS (Blocks 1-2, 25 Aug 2026)
+     Break-even CPC at 35% pass-through = A$1.47
+     Opening keyword set 630,300/mo at A$0.55-1.07 — EVERY cluster in this
+     market clears break-even, the only offer in the portfolio where that
+     is true. Peak month January (index 146).
+
+   THE BIG IDEA — REVISED 25 AUG AFTER VERIFICATION KILLED THE FIRST ONE.
+     The copy brief's spine was "two-way architecture at a one-way price,
+     vs the single-driver JBL Flip 7." VERIFICATION RESULT: the Flip 7 is
+     NOT single-driver. JBL's own page + TechRadar confirm a 45x80mm
+     racetrack woofer PLUS a 16mm tweeter, 35W total, IP68, 14-16h rated.
+     The old idea was publicly falsifiable. DO NOT RESURRECT IT.
+
+     The replacement spine, and it is stronger because the cart feeds it:
+     OUTDOORS, COVERAGE BEATS WATTAGE — AND THIS IS THE ONLY SPEAKER HERE
+     PRICED SO OWNING TWO IS REALISTIC. Open air has no walls; SPL falls
+     ~6 dB per doubling of distance, so one loud box gives you a loud
+     patch and a quiet yard. Two paired speakers 20 ft apart cover the
+     space. A true Boom+ stereo pair is US$174 (2-pack, $87.12/unit) —
+     less than the LIST price of one JBL Charge 6 ($199.95). Two Flip 7s
+     list at $259.90. The 3-pack ($76.99/unit) covers three zones for
+     about the price of one premium box. The merchant's own price ladder
+     IS the argument, and the argument lands the reader on the cart's
+     "Most Popular" 2-pack.
+
+   The single-driver clipping mechanism STAYS — aimed where it is true:
+   the $20-40 junk-tier speaker the reader already owns. That is the
+   incumbent, and its failure is why he is searching.
+
+   ⚠️ CLAIMS — verified against int1, 25 Aug 2026. Publishable:
+     20W two-way (15W woofer + 5W tweeter) · rated 8-hour playtime (AS
+     RATED, never as measured) · rated 98 ft / 30 m range · water-resistant
+     NOT submersible (no IP code exists — never print IPX6/IPX7/IP67) ·
+     TWS pairing of two units · 90-day money-back, no questions asked ·
+     free US shipping, 2-3 day delivery.
+   Rival figures: JBL Charge 6 rated 24h, measured 13h15m at 80 dB —
+     SoundGuys, 11 Jun 2025. Cite it; it is load-bearing and honest.
+
+   ⚠️ DO NOT PUBLISH, ever, in any paraphrase:
+   - "60% OFF" against a single unit — the 1x cart shows ~53%. "Over 50%"
+     for 1x, "up to 62%" only tied to the 3-pack.
+   - "4.9 from 23,000+ reviews" as our finding — attributed to the maker
+     only, and we simply omit it here.
+   - Any IP code. Any measured dB. Any "we tested" claim. Any Bluetooth
+     version. Any charging-connector name (int1 says "Fast Charging
+     Cable" and never names USB-C — confirm with the AM before claiming).
+   - "35+ Speakers Tested" / "174,424 Readers Helped" — competitor
+     template filler, appears across unrelated products.
+   - A 9.9 score. The market's own words: "best speakers ever or major
+     shilling. I vote major shilling." 8.9 with two visible cons IS the
+     conversion strategy.
+
+   ⚠️ BEFORE LAUNCH (Sam):
+   1. Load int1 on a US IP and confirm 1x/2x/3x USD prices — every price
+      below is AU-cart-converted (FX 1.396697) and marked so.
+   2. Confirm the int1 affiliate link (params below carried over from the
+      pre1 link in the AM sheet — confirm int1 takes the same ones).
+   3. Create CPV One campaign 12 → destination int1 with &sub1={!subid!}.
+   4. Product images: /images/walla-*.jpg — pull from int1 or shoot.
+   5. Rival links: manufacturer pages, re-check each resolves on publish
+      day. Flip 7 verified live 25 Aug; the other three written from
+      the makers' standard URL patterns.
+   ========================================================================= */
+
+const CPV_ROOT = "https://track.thelifeinsider.com/";
+const CPV_CAMPAIGN = "12"; // Walla Sound — create in CPV One before launch
+const WALLA_DIRECT =
+  "https://offer.wallasound.com/boom/int1?uidsm=1035&oidsm=184&affidsm=39&oid=1063&affid=1241";
+const WALLA_LINK = CPV_CAMPAIGN ? `${CPV_ROOT}base2.php` : WALLA_DIRECT;
+
+const RIVAL = {
+  charge6: "https://www.jbl.com/CHARGE-6.html",
+  motionboomplus: "https://www.soundcore.com/products/motion-boom-plus-a3129011",
+  flip7: "https://www.jbl.com/FLIP-7.html",
+  stormbox2: "https://tribit.com/products/stormbox-2",
+};
+
+const products: Product[] = [
+  {
+    rank: 1,
+    name: "Walla Sound Boom+",
+    brand: "Walla Sound",
+    score: 8.9,
+    scoreLabel: "Excellent",
+    grade: "A-",
+    bestFor: "Best Overall Value",
+    verdict:
+      "The most usable outdoor sound per dollar in this set — and the only speaker here priced so that the real answer to a big yard, a true stereo pair, costs less than one premium rival at list.",
+    metrics: [
+      { label: "Sound At Volume", value: 92 },
+      { label: "Stereo Pair Value", value: 98 },
+      { label: "Wireless Range", value: 90 },
+      { label: "Outdoor Loudness", value: 76 },
+      { label: "Battery Life", value: 70 },
+    ],
+    trustNote:
+      "20W two-way — 15W woofer + 5W tweeter (maker's published spec) · Rated 98 ft wireless range · 90-day money-back guarantee",
+    badge: "Best Overall Value",
+    price: "$96.65",
+    discount: "Over 50% Off",
+    image: "/images/walla-boom.jpg",
+    stickyImage: "/images/walla-boom-thumb.jpg",
+    url: WALLA_LINK,
+    pros: [
+      "<strong>It stays clean when you turn it up</strong> — a 15W woofer carries the bass so the 5W tweeter never has to, which is exactly the division of labour the crackling speaker in your garage doesn't have",
+      "<strong>The stereo pair is actually affordable</strong> — two units run about $87 each on the 2-pack, so true left-and-right stereo across the yard costs less than the list price of a single JBL Charge 6",
+      "<strong>The far end of the yard still gets music</strong> — rated to 98 ft of wireless range, so the phone stays on the table while you're at the grill",
+      "<strong>One charge covers the event</strong> — rated 8 hours of playtime, the length of a BBQ that starts at four and ends when the kids flake out",
+      "<strong>Two of them pair with one button</strong> — press once and the second unit becomes the right channel, no app, no account",
+      "<strong>Ninety days to change your mind</strong> — a no-questions money-back window three times longer than the 30 days most retailers give you",
+    ],
+    cons: [
+      "<strong>It is not the loudest single box here</strong> — 20W is built for a backyard and a patio, not a parking lot. If one speaker has to carry a tailgate on its own, rank 3 is the honest answer",
+      "<strong>No published IP code</strong> — the maker rates it splash-resistant, not submersible. Poolside, rain and spilled drinks are fine; the bottom of the pool is not",
+    ],
+  },
+  {
+    rank: 2,
+    name: "JBL Charge 6",
+    brand: "JBL",
+    score: 8.7,
+    scoreLabel: "Excellent",
+    image: "/images/walla-charge6.jpg",
+    url: RIVAL.charge6,
+    pros: [
+      "<strong>The longest-running battery in this set</strong> — rated 24 hours, and it charges your phone from the speaker while it plays",
+    ],
+    cons: [
+      "<strong>The rated number is not the real number</strong> — independently measured at 13h 15m at realistic volume (SoundGuys, Jun 2025), and it costs $199.95 at list — more than a Boom+ stereo pair",
+      "<strong>One box, however good, is still one box</strong> — a mono point source at the loud end of the yard, with the quiet end still quiet",
+    ],
+  },
+  {
+    rank: 3,
+    name: "Anker Soundcore Motion Boom Plus",
+    brand: "Soundcore",
+    score: 8.5,
+    scoreLabel: "Excellent",
+    image: "/images/walla-motionboom.jpg",
+    url: RIVAL.motionboomplus,
+    pros: [
+      "<strong>The raw-output champion here</strong> — 80W, floats, and carries an IPX7 rating; if one box must cover a parking lot, this is that box",
+    ],
+    cons: [
+      "<strong>A two-hands, one-trip speaker</strong> — big and heavy enough that it lives where you put it down",
+      "<strong>Undiscounted it brushes premium money</strong> — regularly listed near $180, at which point you are paying wattage prices for a single mono source",
+    ],
+  },
+  {
+    rank: 4,
+    name: "JBL Flip 7",
+    brand: "JBL",
+    score: 8.4,
+    scoreLabel: "Excellent",
+    image: "/images/walla-flip7.jpg",
+    url: RIVAL.flip7,
+    pros: [
+      "<strong>The best small speaker JBL has made</strong> — a proper woofer-plus-tweeter design, IP68 rated, 14-16 hours claimed, from the brand you already trust",
+    ],
+    cons: [
+      "<strong>The smallest sound in this comparison</strong> — built for a picnic blanket and a kitchen bench, and it runs out of yard before the yard runs out",
+      "<strong>Stereo doubles the bill</strong> — a second Flip 7 for true left-and-right is another $129.95 at list, putting the pair at $259.90 — half as much again as a Boom+ pair",
+    ],
+  },
+  {
+    rank: 5,
+    name: "Tribit StormBox 2",
+    brand: "Tribit",
+    score: 8.0,
+    scoreLabel: "Very Good",
+    url: RIVAL.stormbox2,
+    pros: [
+      "<strong>The cheapest credible speaker here</strong> — around $68, from the challenger brand reviewers keep comparing to speakers twice its price",
+    ],
+    cons: [
+      "<strong>The least output in the set</strong> — indoors it punches above its price; in open air it is the first to disappear",
+      "<strong>Value is its whole argument</strong> — nothing else on its spec sheet leads this comparison",
+    ],
+  },
+];
+
+const faqs = [
+  {
+    q: "Will it actually be loud enough outside?",
+    a: "For a backyard or a patio, yes — that is what a 20W two-way unit is built for, and the woofer-tweeter split is why it stays clean at the volume you'll actually use instead of dissolving into crackle. For a parking lot or a block party, honestly, no single speaker at this price is, and the ones that come close cost $180 and weigh ten pounds. The better answer for a big space is two speakers spread apart, which is exactly what the 2-pack exists for — and a Boom+ pair still costs less than one Charge 6 at list.",
+  },
+  {
+    q: "I've never heard of Walla Sound. Who makes this really?",
+    a: "A fair question — 'wary of weird names… who makes this really?' is word-for-word how buyers on the deal forums put it. Here is the honest answer: it is a direct-to-consumer brand, the same route Anker's Soundcore took before everyone trusted it. What separates a real challenger from rebadged junk is whether the maker publishes specifics and stands behind them. Walla Sound publishes its driver architecture — 15W woofer, 5W tweeter — its rated range, and a 90-day no-questions money-back guarantee. Generics publish a wattage number and vanish. You have three months to disagree at no cost.",
+  },
+  {
+    q: "Is the bass real, or is it another tinny one?",
+    a: "The tinny sound you're remembering is what happens when one small driver is asked to make bass and treble at the same time — the bass eats all the driver's travel and the whole signal distorts. The Boom+ gives the bass its own 15W woofer and the highs their own tweeter, which is the same architectural choice JBL makes in speakers at twice the price. It will not shake a house. It will stay clean and full at backyard volume, which is the actual job.",
+  },
+  {
+    q: "Does the battery really last 8 hours?",
+    a: "It is rated 8 hours by the maker, and we print it as a rating, not a measurement — because this category's ratings are optimistic across the board, including the famous names. The JBL Charge 6 is rated 24 hours and was independently measured at 13 hours 15 minutes at realistic volume (SoundGuys, June 2025). Budget on a rated number covering an afternoon-into-evening event at sensible volume, whatever speaker you buy, and you will not be disappointed by any of the five on this page.",
+  },
+  {
+    q: "Is it actually waterproof?",
+    a: "Splash-resistant, not submersible — the maker's own words, and we're not going to improve on them. Rivals here publish certified IP codes (the Flip 7 is IP68, the Motion Boom Plus IPX7) and Walla Sound does not, so if your speaker is going to spend time actually in the water, buy one of the certified ones. For rain, poolside spray and a knocked-over drink — which is what actually happens at a BBQ — it is rated for exactly that.",
+  },
+  {
+    q: "A discounted JBL costs about the same. Why not just buy the JBL?",
+    a: "If you only ever need one small speaker within arm's reach, a discounted Flip 7 is a genuinely good buy and we scored it accordingly. The case for the Boom+ is the yard, not the badge: outdoors, coverage beats wattage, and coverage means two speakers. Two Boom+ in true stereo cost about $174. Two Flip 7s list at $259.90. Same architecture philosophy, ninety extra days of guarantee, and eighty-five dollars still in your pocket.",
+  },
+  {
+    q: "Do I really need another Bluetooth speaker?",
+    a: "One buyer on Slickdeals asked exactly that — 'And do you really need another bluetooth speaker? Haha. I didn't but you know how it goes…' If the one you own stays clean at outdoor volume and lasts the evening, no, you don't. If it crackles past half volume or dies at hour two, then what you're replacing isn't a speaker, it's the moment at your own party when the music quits. And the second unit isn't 'another speaker' — paired, it's the right channel of a stereo system.",
+  },
+  {
+    q: "How do I know this page isn't just shilling?",
+    a: "You shouldn't take our word for it — the market has been burned by review pages that score an unknown brand 9.9 and beat Bose, JBL and Sonos simultaneously. So check what we actually printed: our ranking criterion is stated above the first card, our #1 scores 8.9 — not 9.9 — and its card carries two real cons, including that it is not the loudest speaker on this page and that rivals hold certifications it doesn't. Every number here is a manufacturer's published spec or a cited independent measurement. We earn a commission if you buy the top pick; the rankings are ours.",
+  },
+];
+
+const editorial = {
+  heading: "Why the music died at your last party — and the cheap fix nobody explains",
+  html: `
+<p>Every host has a version of the same story. The food is out, the yard is full, somebody asks you to turn it up — and the speaker you brought starts to fall apart. The reviews for cheap party speakers tell it in the owners' own words: <em>"can't go above 50% volume, speaker starts to distort, and it now has a constant crackle regardless of volume."</em> <em>"They have zero depth, zero bass, and really aren't that loud."</em> <em>"Dies after like 1 1/2- 2hrs."</em></p>
+
+<p>Here is the part almost nobody gets told: that speaker didn't fail because it was cheap. It failed for a specific, physical, fixable reason — and once you know it, the whole category sorts itself into keepers and junk in about thirty seconds.</p>
+
+<h3>One driver, two jobs</h3>
+
+<p>Open up a $30 party speaker and you find one small full-range driver doing everything. Bass and treble, simultaneously, at volume, outdoors. Bass is the problem: producing it takes large physical movement — excursion — and a small driver runs out of travel fast. Push it past that point and the waveform clips. That clipping is the crackle. It is not wear, and it is not bad luck. It is one component being asked to do two jobs.</p>
+
+<figure class="ed-figure">
+  <img src="/images/walla-ed-drivers.jpg" alt="Two-way speaker driver layout showing a separate woofer and tweeter" width="1400" height="1045" loading="lazy" decoding="async" />
+  <figcaption>Two drivers, two jobs: the woofer takes the excursion-hungry bass, the tweeter takes the highs.</figcaption>
+</figure>
+
+<p>The fix has been standard in serious audio for seventy years: split the work. A dedicated woofer takes the bass, a dedicated tweeter takes the highs, and neither is ever pushed past what it can do. A JBL owner reviewing his own speaker put it better than we could: <em>"I fully attribute this to the added tweeter, which eases the burden of the main driver from producing all frequencies."</em> That is a customer, unprompted, explaining the exact mechanism.</p>
+
+<p>The Boom+ runs that architecture — a 15W woofer and a 5W tweeter, stated plainly on the maker's own spec page — at a price where most of what you'll find is still one lonely driver doing two jobs. That, and not any adjective, is why it holds together at the volume where the speaker you currently own gives up. <a href="${WALLA_LINK}" onclick="checkdirect(${CPV_CAMPAIGN},1)">See the full spec on the #1 card</a>.</p>
+
+<h3>The battery number on the box is not the battery number in your yard</h3>
+
+<p>The second way a party dies is quieter: the speaker just stops. And here the whole category — famous names included — has a rating problem. The JBL Charge 6 is rated at 24 hours; SoundGuys measured it at <strong>13 hours and 15 minutes</strong> at realistic volume in their standardised June 2025 test. Owners are blunter: <em>"I do not know how they claim 15 hours. I get 3-4 hours outdoors with full volume."</em> <em>"This one? 2 hours and the red light is blinking."</em></p>
+
+<p>We can't fix the industry's ratings. What we can do is refuse to play the game: every battery figure on this page is printed as a <em>rating</em>, attributed to its maker, and where an independent measurement exists we cite it — including when it counts against the brands we rank. The Boom+ is rated 8 hours. Treat that the way you should treat every number in this category, and it covers a BBQ that starts at four and ends in the dark.</p>
+
+<h3>So why not just buy the JBL?</h3>
+
+<p>Let's take the strongest version of the objection, because you will have it: a JBL Flip 7 discounts to about a hundred dollars, it has a real woofer-and-tweeter design too, it carries an IP68 certification, and it is a genuinely excellent small speaker. We ranked it on this page and said so.</p>
+
+<p>Here is what the badge doesn't change: physics. Outdoors there are no walls to reflect sound. Every doubling of distance from a single speaker costs you about six decibels — so one box, <em>any</em> one box, gives you a loud circle of chairs and a quiet everywhere-else. The people at the far table aren't hearing your speaker, whatever logo is on the grille.</p>
+
+<p>The fix isn't a louder box. It's two boxes, spread apart, playing true left and right. And this is where the price sheet stops being boring: <strong>a pair of Boom+ speakers runs about $174. A pair of Flip 7s lists at $259.90. One Charge 6 lists at $199.95 — and it's still mono.</strong></p>
+
+<p>That is the entire argument of this page in three numbers. The market's own words for how a challenger brand earns the money: <em>"Best $70 speaker you can get imo. Competes with the jbl extreme3."</em> Nobody talks a friend into a spec sheet. They talk them into a comparison — and this one you can check from your phone in ninety seconds. <a href="${WALLA_LINK}" onclick="checkdirect(${CPV_CAMPAIGN},1)"><strong>Check today's 2-pack price →</strong></a></p>
+
+<h3>What we'd skip, and who should buy something else</h3>
+
+<p>If one speaker has to carry a genuinely big, loud space on its own — a tailgate, a block party — buy wattage: that is rank 3's job, and it does it at rank 3's size and price. If your speaker will actually go <em>in</em> the water rather than beside it, buy a certified IP rating; the Boom+ doesn't publish one and we're not going to pretend otherwise. And if you just want something for the kitchen bench, the cheap option at rank 5 is honestly enough.</p>
+
+<p>Everyone else — the birthday in the backyard, the pool afternoon, the deck at dusk — is who this ranking is for.</p>
+
+<h3>Buy one, or buy two</h3>
+
+<figure class="ed-figure">
+  <img src="/images/walla-ed-backyard.jpg" alt="Two portable speakers placed at opposite ends of a backyard gathering" width="1400" height="1037" loading="lazy" decoding="async" />
+  <figcaption>Coverage beats wattage: two paired units, twenty feet apart, and there is no quiet end of the yard.</figcaption>
+</figure>
+
+<p>One Boom+ covers the patio. The reason to look hard at the 2-pack is what happens at the second press of a button: the units pair into true stereo — a left and a right, not the same mono signal twice — and the per-unit price drops to about $87. An owner, after doing exactly this: <em>"I love it so much I purchased a second one to pair with the first one I bought and it was even better."</em></p>
+
+<p>Ninety days of no-questions money-back applies either way. That window exists because the maker knows exactly what an unknown brand has to prove, and it is three times what the store gives you. <a href="${WALLA_LINK}" onclick="checkdirect(${CPV_CAMPAIGN},1)"><strong>See single and 2-pack pricing →</strong></a></p>
+
+<h3>The next party is already on the calendar</h3>
+
+<p>You know the moment this page exists to delete: the food out, the yard full, the volume up, and that first electrical crackle in front of everyone. The speaker that does that is doing it because of what's inside it, and it will do it again next time.</p>
+
+<p><strong>Four of these five speakers ask you to pay for a single box and hope it reaches the back fence. One is priced so you can stop hoping — and put a speaker at both ends.</strong> <a href="${WALLA_LINK}" onclick="checkdirect(${CPV_CAMPAIGN},1)"><strong>Check availability and today's price →</strong></a></p>
+`,
+};
+
+const highlights = [
+  {
+    title: "Two drivers, not one",
+    text: "A 15W woofer and a 5W tweeter split the work, so it stays clean at the volume where single-driver speakers dissolve into crackle.",
+  },
+  {
+    title: "The $87 stereo pair",
+    text: "The only speaker here priced so true left-and-right stereo across the yard costs less than one premium rival at list.",
+  },
+  {
+    title: "98 feet of range",
+    text: "Rated to 98 ft, so the phone stays on the table while you're at the grill — with the far tables still inside the music.",
+  },
+];
+
+const keyFindings = [
+  {
+    value: "50%",
+    label: "The volume where owners report single-driver party speakers 'start to distort' — their words, not ours",
+  },
+  {
+    value: "13h 15m",
+    label: "What a famous 24-hour battery rating measured at real volume (SoundGuys, Jun 2025)",
+  },
+  {
+    value: "~$87",
+    label: "Per-speaker price of a true stereo pair on the 2-pack — less than one premium box",
+  },
+];
+---
+
+<ReviewPage
+  title="The 5 Best Bluetooth Party Speakers of 2026 [Coverage per Dollar, Ranked] | The Life Insider"
+  description="We ranked the 5 best Bluetooth party speakers of 2026 on sound at volume, outdoor loudness, battery, range and what a true stereo pair actually costs — with every spec sourced and the ratings gap called out by name."
+  h1="The 5 Best Bluetooth Party Speakers of 2026"
+  updated="25 August 2026"
+  intro={[
+    "<strong>The food is out, the yard is full, and the speaker you brought is doing nothing past the first row of chairs.</strong>",
+    "Somebody asks you to turn it up. You do, and it starts to crackle. The reviews for cheap party speakers are full of that exact moment — <em>\"can't go above 50% volume, speaker starts to distort\"</em>, <em>\"zero depth, zero bass, and really aren't that loud\"</em>, <em>\"Dies after like 1 1/2- 2hrs.\"</em> It isn't bad luck, and it isn't because you didn't spend $200. It's a specific piece of engineering missing from the box — and one of the five speakers below has it at a price where its rivals don't.",
+    "Our ranking criterion, stated up front so you can argue with it: <strong>the most usable outdoor sound per dollar for a backyard-scale gathering</strong> — including what it costs to actually cover the space, not just to own the loudest single box. Every specification below comes from the manufacturer's own published page, and where an independent measurement exists, we cite it — including when it counts against the big brands.",
+    "Here is what holds up outdoors, and what we'd skip.",
+  ]}
+  listLede="Five speakers, scored on sound at volume, outdoor loudness, battery life, wireless range, and the real cost of a true stereo pair. Specs from each maker's published page; independent measurements cited where they exist."
+  products={products}
+  faqs={faqs}
+  highlights={highlights}
+  editorial={editorial}
+  keyFindings={keyFindings}
+  keyFindingsPosition="after-list"
+>
+  {
+    CPV_CAMPAIGN && (
+      <Fragment slot="body-end"><CpvTracker campaign="12" /></Fragment>
+    )
+  }
+</ReviewPage>
