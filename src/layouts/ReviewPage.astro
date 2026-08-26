@@ -27,9 +27,12 @@ export interface Props {
      box that repeats the paragraph above it reads as padding and delays the
      card, which is the last thing Product-Aware traffic wants. */
   keyFindingsPosition?: "top" | "after-list";
+  /* Hide the layout's own editorial-end CTA when the page's editorial html
+     already ends in a button — two stacked CTAs read as a glitch. */
+  editorialCta?: boolean;
 }
 
-const { title, description, h1, updated, intro, listLede, products, deepDive, faqs, highlights, editorial, keyFindings, keyFindingsPosition = "top" } =
+const { title, description, h1, updated, intro, listLede, products, deepDive, faqs, highlights, editorial, keyFindings, keyFindingsPosition = "top", editorialCta = true } =
   Astro.props;
 const top = products.find((p) => p.rank === 1);
 
@@ -214,12 +217,14 @@ const publishedOn = new Date().toLocaleDateString("en-AU", {
         <div class="container-narrow prose">
           <h2>{editorial.heading}</h2>
           <div set:html={editorial.html} />
-          <div style="text-align:center;margin:30px 0 0;">
-            <a href={top.url} class="btn" rel="sponsored nofollow noopener" target="_blank">
-              Visit Site
-            </a>
-            {top.discount && <div class="rank-offer" style="margin-top:8px;">{top.discount}</div>}
-          </div>
+          {editorialCta && (
+            <div style="text-align:center;margin:30px 0 0;">
+              <a href={top.url} class="btn" rel="sponsored nofollow noopener" target="_blank">
+                Visit Site
+              </a>
+              {top.discount && <div class="rank-offer" style="margin-top:8px;">{top.discount}</div>}
+            </div>
+          )}
         </div>
       </section>
     )}

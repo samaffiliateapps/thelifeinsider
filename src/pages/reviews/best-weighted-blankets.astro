@@ -116,6 +116,7 @@ const products: Product[] = [
     brand: "Bearaby",
     score: 8.6,
     scoreLabel: "Excellent",
+    price: "$249+",
     image: "/images/be-bearaby.jpg",
     url: RIVAL.bearaby,
     pros: [
@@ -132,6 +133,7 @@ const products: Product[] = [
     brand: "Baloo",
     score: 8.4,
     scoreLabel: "Excellent",
+    price: "$198",
     image: "/images/be-baloo.jpg",
     url: RIVAL.baloo,
     pros: [
@@ -148,6 +150,7 @@ const products: Product[] = [
     brand: "Gravity",
     score: 8.2,
     scoreLabel: "Excellent",
+    price: "$149+",
     image: "/images/be-gravity.jpg",
     url: RIVAL.gravity,
     pros: [
@@ -164,6 +167,7 @@ const products: Product[] = [
     brand: "YnM",
     score: 7.8,
     scoreLabel: "Very Good",
+    price: "$87",
     image: "/images/be-ynm.jpg",
     url: RIVAL.ynm,
     pros: [
@@ -269,8 +273,6 @@ const editorial = {
 
 <p>Now the number that decides it for most households: <strong>a BareEarth 2-pack is $174.98 — two blankets for less than one Bearaby.</strong> One for the bed and one for the couch. One for you and one for the partner who keeps stealing yours — because they will, and every owner thread confirms it: <em>"So nice I ordered a second the moment I used this one."</em> The 4-pack drops it to $62.48 a blanket, which is Christmas for a family of anxious sleepers sorted in one order.</p>
 
-<p style="text-align:center;"><a href="${BE_LINK}" class="btn" rel="sponsored nofollow noopener" target="_blank" onclick="checkdirect(${CPV_CAMPAIGN},1)">Check Single & 2-Pack Pricing →</a></p>
-
 <h3>Tonight, at 2am</h3>
 
 <p>You already know how tonight goes. The body clocks off, the brain doesn't — the replayed conversation, the un-sent email, the arithmetic on how much sleep is left if you fall asleep <em>right now.</em> You've done the melatonin, the white noise, the no-screens-after-nine. Some of it helps a bit. None of it turns the thing off.</p>
@@ -339,6 +341,7 @@ const keyFindings = [
   editorial={editorial}
   keyFindings={keyFindings}
   keyFindingsPosition="after-list"
+  editorialCta={false}
 >
   {
     CPV_CAMPAIGN && (
