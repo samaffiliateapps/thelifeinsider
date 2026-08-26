@@ -1,0 +1,339 @@
+---
+import ReviewPage from "../../layouts/ReviewPage.astro";
+import type { Product } from "../../components/ProductCard.astro";
+import CpvTracker from "../../components/CpvTracker.astro";
+
+/* =========================================================================
+   HERO: BareEarth Weighted Blanket — AdsBranded offer 1002, $90 CPA, US.
+   Built 27 Aug 2026 from the v2 research run (copy brief + language bank +
+   Gemini/Reddit pass). First page built under research-system-v2.
+
+   CONFIRMED FROM THE AM / CHECKOUT (27 Aug):
+     15 lb: $99 x1 · $87.49/ea x2 ($174.98) · $74.98/ea x3 · $62.48/ea x4
+     18 lb: $129 x1 · $113.49/ea x2 · $97.33/ea x3 · $81.23/ea x4
+     Guarantee, checkout verbatim: "90 Day Money-Back Guarantee: Feel safe
+     knowing you are protected with a 90 day guarantee. Simply send the
+     unused item(s) back in the original packaging to receive a full refund
+     or replacement, less S&H."
+     → We say "90-day money-back guarantee" and, where terms are stated,
+     quote the checkout's own wording. NEVER "risk-free trial" or
+     "no questions asked" — the checkout doesn't say it, congruency rules.
+
+   BIG IDEA (Prompt 4 winner): BEAD MIGRATION — every weighted blanket that
+   ever disappointed someone failed the same checkable way: the fill slid to
+   the ends and the middle stopped weighing anything. The reader can check
+   her own blanket in ten seconds. Pocket grid size is the spec that stops
+   it — a spec the market's best-seller (YnM) spent 7 years and a US patent
+   training buyers to shop on (8"→5"→2"), and BareEarth owns on-page as the
+   Tru-Balance Grid (4"x4", double-stitched). Heat = second axis. Price =
+   the close: A BAREEARTH 2-PACK ($174.98) COSTS LESS THAN ONE BEARABY.
+
+   RIVAL FACTS — VERIFIED ON THE MAKERS' OWN PAGES 27 AUG 2026:
+     Bearaby 15lb Cotton Napper: $249-299 (page shows $249/$269/$299)
+     Baloo Weighted Blanket: $198 (Shopify product JSON)
+     Gravity Original: $149-199 (JSON: 149 base, 179/199 variants)
+       ⚠️ brief said $195-255 — OUTDATED, corrected down. Never cite the old
+       range.
+     YnM 15lb: $87 direct (ynmhome.com JSON); routinely less on Amazon.
+     YnM 2"x2" pockets + small-compartment patent: PR Newswire 29 Sep 2023.
+     All four rival links below returned HTTP 200 on 27 Aug.
+
+   TABOO SCRUB (language bank §11) — never publish, in any paraphrase:
+     cortisol / serotonin / melatonin name-drops · "grounding your nervous
+     system" · "swaddle you like a baby" · "cocooning" as brand-speak ·
+     "therapeutic" · "clinically proven/tested" · "revolutionary" · counts
+     of sold/reviews (217,013 / 27,517 = template filler across five
+     affiliate funnels) · any "we tested / 47 nights / $1,800" claim ·
+     9.5+ scores. The customer words to use instead: hug, beads, shift,
+     squares, pockets, too hot, worth it, tired but wired, brain won't
+     shut off.
+     AGE NOTE: never image or market this for infants/toddlers.
+
+   IMAGE CALLS: bare2 (AI "doctor") REJECTED — fabricated-authority is the
+   market's #1 documented credibility killer. bare4 (SOLD OUT 3X / DOCTOR
+   RECOMMENDED badges) REJECTED — merchant scarcity furniture stays on the
+   merchant's page. Video: 15s product demo, 1.1MB, in the spec section.
+
+   ⚠️ BEFORE TRAFFIC: create CPV One campaign 13 → offer lander with
+   &sub1={!subid!}, then click-test one CTA end-to-end.
+   ========================================================================= */
+
+const CPV_ROOT = "https://track.thelifeinsider.com/";
+const CPV_CAMPAIGN = "13"; // BareEarth — create in CPV One before launch
+const BE_DIRECT =
+  "https://offer.bareearthlife.com/wblanket/landing?uid=3644&oid=1002&affid=1241";
+const BE_LINK = CPV_CAMPAIGN ? `${CPV_ROOT}base2.php` : BE_DIRECT;
+
+const RIVAL = {
+  bearaby: "https://bearaby.com/products/15-lb-weighted-blanket",
+  baloo: "https://balooliving.com/products/weighted-blanket",
+  gravity: "https://gravityblankets.com/products/gravity-blanket",
+  ynm: "https://www.ynmhome.com/products/ynm-weighted-blanket-15lb",
+};
+
+const products: Product[] = [
+  {
+    rank: 1,
+    name: "BareEarth Weighted Blanket",
+    brand: "BareEarth",
+    score: 9.1,
+    scoreLabel: "Outstanding",
+    grade: "A",
+    bestFor: "Best Overall",
+    verdict:
+      "The only blanket in this set that gets the tight pocket grid, the glass fill and home washability into one product under $100 — and the only one where the middle will still be doing its job next winter.",
+    metrics: [
+      { label: "Fill Quality", value: 95 },
+      { label: "Weight Distribution", value: 93 },
+      { label: "Care & Washability", value: 90 },
+      { label: "Build & Durability", value: 88 },
+      { label: "Temperature Control", value: 84 },
+    ],
+    trustNote:
+      "4-inch double-stitched pockets · Glass microbeads, no plastic pellets · 90-day money-back guarantee",
+    badge: "Best Overall",
+    price: "$99",
+    discount: "50% Off",
+    image: "/images/be-hero.jpg",
+    stickyImage: "/images/be-hero-thumb.jpg",
+    url: BE_LINK,
+    pros: [
+      "<strong>The middle still weighs something in year two</strong> — 4\"×4\" double-stitched pockets lock the fill in place, so the beads can't slide to the ends the way they do in every big-baffle blanket that ever got given away",
+      "<strong>Glass beads, not plastic pellets</strong> — the dense, silent fill that doesn't click when you roll over and doesn't pile up in bulges under your back",
+      "<strong>It goes in the machine you already own</strong> — gentle cycle, cold water, done. Not a hand-wash job, not a trip to the laundromat",
+      "<strong>You stop guessing at the weight</strong> — 15 lb for a 120–170 lb adult, 18 lb above that. The 10% rule, answered instead of dodged",
+      "<strong>Two blankets cost less than one Bearaby</strong> — at $87.49 each on the 2-pack, his-and-hers weighted blankets run $174.98 against $249+ for a single knit",
+      "<strong>It ships from Ohio in 2–3 days</strong> — not a month from overseas, and it's covered by a 90-day money-back guarantee",
+    ],
+    cons: [
+      "<strong>The cover is microfiber, and hot sleepers are right to ask</strong> — the cooling case rests on the glass beads and the tight grid, not on a bamboo shell. If temperature is your single deciding factor, rank 2 and rank 3 breathe better",
+      "<strong>Two weights, two sizes, and the washable cover costs extra</strong> — if you're under 120 lb, well over 200 lb, or dressing a king bed, the range doesn't reach you",
+    ],
+  },
+  {
+    rank: 2,
+    name: "Bearaby Cotton Napper",
+    brand: "Bearaby",
+    score: 8.6,
+    scoreLabel: "Excellent",
+    image: "/images/be-bearaby.jpg",
+    url: RIVAL.bearaby,
+    pros: [
+      "<strong>It has no beads at all</strong> — the chunky hand-knit means there is literally nothing to migrate, clump or leak, and nothing in this set breathes better",
+    ],
+    cons: [
+      "<strong>$249 to $299 for a 15-pounder</strong> — you're paying for a design object, and a BareEarth 2-pack costs less than one of them",
+      "<strong>The open knit lets drafts through and washing is a genuine project</strong> — owners describe it staying damp for days, and larger sizes need a commercial machine",
+    ],
+  },
+  {
+    rank: 3,
+    name: "Baloo Living Weighted Blanket",
+    brand: "Baloo",
+    score: 8.4,
+    scoreLabel: "Excellent",
+    image: "/images/be-baloo.jpg",
+    url: RIVAL.baloo,
+    pros: [
+      "<strong>The best-documented materials in the set</strong> — OEKO-TEX and organic cotton certifications published on their own site, with a breathable cotton shell that machine washes at home",
+    ],
+    cons: [
+      "<strong>$198 before you've bought the cover</strong> — premium money without the design distinctiveness that justifies Bearaby's",
+      "<strong>Pocket dimensions aren't prominently published</strong> — the one spec this category actually turns on has to be taken on faith",
+    ],
+  },
+  {
+    rank: 4,
+    name: "Gravity Blanket",
+    brand: "Gravity",
+    score: 8.2,
+    scoreLabel: "Excellent",
+    image: "/images/be-gravity.jpg",
+    url: RIVAL.gravity,
+    pros: [
+      "<strong>The longest track record in the category</strong> — the blanket people name when they want one that lasts, from an established company with a real returns operation",
+    ],
+    cons: [
+      "<strong>The warmest cover system in the set</strong> — a plush-backed duvet arrangement that runs exactly opposite to the category's single biggest complaint",
+      "<strong>$149–199 plus a tie-on cover owners find fiddly</strong> — the ties loosen, the cover shifts, and making the bed becomes a wrestling match",
+    ],
+  },
+  {
+    rank: 5,
+    name: "YnM Weighted Blanket",
+    brand: "YnM",
+    score: 7.8,
+    scoreLabel: "Very Good",
+    image: "/images/be-ynm.jpg",
+    url: RIVAL.ynm,
+    pros: [
+      "<strong>The tightest published pocket grid in the set</strong> — 2\"×2\" compartments, patented, at $87 direct and often less on Amazon. On the headline spec, it genuinely wins",
+    ],
+    cons: [
+      "<strong>The seven layers that hold those tiny pockets are what make it sleep hot</strong> — the containment and the heat are the same design decision",
+      "<strong>Long-term owners document bead leaks at stressed seams</strong> — the washing that keeps it clean is what eventually opens it up",
+    ],
+  },
+];
+
+const faqs = [
+  {
+    q: "Do weighted blankets actually work?",
+    a: "Here's the honest version: the deep-pressure effect is real enough that occupational therapists have used weighted tools for decades, a large randomized trial found weighted-blanket users far more likely to halve their insomnia scores, and the wider research is still mixed. What isn't mixed is the owner experience this page is built on — people describe falling asleep faster and feeling settled under the weight, in their own words: 'as soon as I covered myself with the blanket I understood what the fuzz is all about. You feel like you're being hugged.' What we can promise isn't a medical outcome. It's a blanket engineered so the weight actually stays on you, which is the part the cheap ones get wrong.",
+  },
+  {
+    q: "What weight should I get?",
+    a: "About 10% of your body weight — the rule of thumb the whole category runs on, originally from occupational-therapy practice. In BareEarth's range that means the 15 lb for anyone 120–170 lb and the 18 lb above 170 lb. Two honest notes: some OTs recommend going heavier for high-anxiety or sensory-seeking users, and buying too heavy is the single most common reason people give up on the category — when in doubt between two weights, take the lighter one.",
+  },
+  {
+    q: "Will it make me too hot?",
+    a: "This is the question that kills most weighted blankets, so here's the straight answer. The cheap ones overheat because plastic-pellet fill and thick layered construction trap heat. BareEarth's glass microbeads are dense and thermally conductive — they release heat instead of hoarding it — and the single-piece build avoids the seven-layer sandwich that makes the tight-pocket budget blankets sleep hot. The honest caveat: the cover is microfiber, not bamboo. If you sleep genuinely hot and temperature is your one deciding factor, Baloo's cotton or Bearaby's open knit breathe better — at roughly twice and two-and-a-half times the price.",
+  },
+  {
+    q: "It's the first time I've used a weighted blanket. Does it leak beads easily?",
+    a: "Leaks happen at stressed seams — usually a big-pocket budget blanket that's been through the wash a few times, and owners describe the result vividly: 'as I was taking off the duvet cover to wash it, I see beads everywhere.' BareEarth's pockets are double-stitched specifically against that failure, and the small 4-inch chambers mean each seam carries a fraction of the load a big baffle does. Less strain per seam, nothing to leak through.",
+  },
+  {
+    q: "Can I even wash something this heavy?",
+    a: "Yes — machine wash on gentle, cold water, then air dry or tumble low. That's genuinely unusual: many weighted blankets are hand-wash-only, and anything over about 22 lb is a laundromat item no matter what the label says. Both BareEarth weights are under that line. One real tip from owners: the separate washable cover is worth adding, because washing a cover weekly beats washing a 15 lb blanket monthly.",
+  },
+  {
+    q: "Will I feel trapped or claustrophobic?",
+    a: "A minority of people genuinely dislike the sensation, and we're not going to pretend otherwise — one owner described 'that desperate if-I-don't-move-this-instant-I-am-going-to-scream feeling.' Most describe the opposite: 'It just feels like I'm tucked in and safe.' The practical answer: start with the blanket over your regular covers rather than directly on you, give it three or four nights, and stay inside the 10% weight rule. If it still isn't for you, that's exactly what the 90-day guarantee is for.",
+  },
+  {
+    q: "Is BareEarth a legitimate company?",
+    a: "A fair question about any brand you meet through an ad, so here's what you can verify rather than take on faith. The construction claims are published specifics you can check on their own page — 4\"×4\" double-stitched pockets, glass microbead fill, machine washability. It ships from a US warehouse in Ohio in 2–3 days. And the guarantee, exactly as their checkout states it: '90 Day Money-Back Guarantee… simply send the unused item(s) back in the original packaging to receive a full refund or replacement, less S&H.' We earn a commission if you buy through this page — and the rankings, including the two cons printed on our #1 pick, are ours.",
+  },
+  {
+    q: "Could I just get one cheaper on Amazon?",
+    a: "Yes — YnM runs $87 direct and often less on Amazon, and we ranked it on this page because it's a real product with a genuinely tight pocket grid. Here's the trade you'd be making: the multi-layer build that holds those tiny pockets together is also why it sleeps hot, and long-term owners document bead leakage at the seams after repeated washing. You'd save about $12 today against the single BareEarth — and the moment you want a second blanket for the couch or the other side of the bed, the 2-pack at $87.49 each has already erased the difference.",
+  },
+];
+
+const editorial = {
+  heading: "The failure nobody names — and the ten-second test that exposes it",
+  html: `
+<p>Almost every weighted blanket that has ever disappointed someone failed the same way. Not the seams, not the fabric — the beads moved. Slowly, over months, usually a little faster after each wash, the fill slid down into the ends and edges. An owner on a buying forum, describing the moment she noticed: <em>"the beads have all fallen to the sides, making it effectively no longer a weighted blanket."</em> Another, from an Amazon Q&A: <em>"they slowly fall all the way to the ends and stay there, so the middle isn't really weighted."</em></p>
+
+<p>Read that again, because it's the whole category in one sentence. The middle of the blanket — the part over your body, the part doing the actual work — quietly stops weighing anything. The heavy edges hang off the mattress and drag the blanket floorward all night. And because it happens gradually, almost nobody diagnoses it. They just conclude weighted blankets "stopped working" for them.</p>
+
+<h3>Check yours right now — it takes ten seconds</h3>
+
+<p>If there's a weighted blanket in your house, go lay it flat. Run your hand down the centre line, then along the ends. If the ends feel dense and the middle feels like two sheets of fabric, you're not imagining it — you're sleeping under the memory of a weighted blanket. That test is the entire argument of this page, and you just ran it yourself.</p>
+
+<figure class="ed-figure">
+  <img src="/images/be-ed-cutaway.jpg" alt="Cutaway of the BareEarth blanket showing the Tru-Balance Grid 4-inch pockets, cooling glass beads and microfiber layers" width="1141" height="1000" loading="lazy" decoding="async" style="max-width:420px;display:block;margin:0 auto;" />
+  <figcaption>Small pockets, double-stitched: the fill physically cannot travel to the ends.</figcaption>
+</figure>
+
+<h3>The number the market already agreed on</h3>
+
+<p>Why do the beads move? Baffle size. Big quilted compartments — six, seven, eight inches across — give the fill room to travel every time the blanket is lifted, washed or slept under. Small pockets don't. This isn't our invention: it's the spec the market itself settled on. The category's best-selling budget brand has spent seven years shrinking its pockets — 8-inch squares in 2016, 5-inch in 2019, a patented 2-inch grid by 2023 — precisely because buyers learned to shop on it. In their own words: <em>"The small squares were the deciding point. Think about it a minute - keeps the fill nicely in place."</em> And: <em>"I have another weighted blanket that has large squares and the pressure becomes too much throughout the night."</em></p>
+
+<p>The BareEarth runs a 4"×4" double-stitched grid — inside the band buyers treat as quality, with each small seam carrying a fraction of the load a big baffle puts on its stitching. And yes, we'll say it plainly: <strong>YnM's 2-inch grid is tighter than BareEarth's on paper.</strong> Rank 5 wins the headline number. The catch is what it costs to hold those tiny pockets together — a seven-layer construction that owners consistently describe as sleeping hot, with documented bead leaks at the stressed seams over time. The containment and the heat are the same design decision. BareEarth's grid holds the fill with two fewer problems attached.</p>
+
+<figure class="ed-figure">
+  <video controls muted playsinline preload="metadata" width="720" style="max-width:100%;display:block;margin:0 auto;border-radius:8px;">
+    <source src="/videos/bareearth-demo.mp4" type="video/mp4" />
+  </video>
+  <figcaption>Fifteen seconds of the blanket itself: the grid, the fill, the drape.</figcaption>
+</figure>
+
+<p><a href="${BE_LINK}" onclick="checkdirect(${CPV_CAMPAIGN},1)">See the full spec on the #1 card</a> — or keep reading for the second thing that ruins weighted blankets.</p>
+
+<h3>The second thing — waking up sweating at 3am</h3>
+
+<p>The other way this category loses people: <em>"Weighted blankets are amazing until you're sweating at 3am."</em> The culprit is almost always the fill. Plastic pellets are bulky, and bulky fill needs thick layers around it — the whole package works like insulation. Glass microbeads are dense and small; they carry the same weight in a fraction of the volume and conduct heat away instead of hoarding it. It's why <em>"glass beads vs. plastic pellets — go glass every time"</em> is standing advice wherever owners compare notes.</p>
+
+<p>BareEarth is glass-bead fill in a single-piece build — no pellet bulk, no seven-layer sandwich. The honest limit, printed on the card as con number one: the cover is microfiber, not bamboo or open-knit cotton. It's soft and it washes at home, but if you run genuinely hot and temperature is your single deciding factor, Baloo and Bearaby breathe better — for $198 and $249+ respectively. For everyone else, the glass-and-grid combination is the better trade by about $100.</p>
+
+<h3>"But what weight do I even get?"</h3>
+
+<p>The question that stalls more carts than any other, answered in one line: <strong>about 10% of your body weight.</strong> BareEarth maps it to two options — 15 lb if you weigh 120–170 lb, 18 lb above that. The rule came out of occupational-therapy practice and some OTs go heavier for sensory-seeking users, but here's the practical wisdom from thousands of reviews: too heavy is the mistake people actually make. <em>"I bought one a couple of years ago, but it was too heavy, and unpleasant to use, so I got rid of it right away."</em> Between two weights, take the lighter one. The weight should hold you, not pin you.</p>
+
+<h3>What $250 buys, and what it doesn't</h3>
+
+<figure class="ed-figure">
+  <img src="/images/be-ed-cocoon.jpg" alt="Woman wrapped in the BareEarth weighted blanket on a couch" width="900" height="820" loading="lazy" decoding="async" style="max-width:420px;display:block;margin:0 auto;" />
+  <figcaption>The job description, in one image. The construction is what makes it still true next year.</figcaption>
+</figure>
+
+<p>Let's put the price sheet on the table, verified on each maker's own site this week. Bearaby: $249–299, and to be fair, its knit genuinely solves bead migration — by having no beads. Baloo: $198 before the cover. Gravity: $149–199 with the warmest cover system in the set. YnM: $87, with the trade-offs above. <strong>BareEarth: $99.</strong></p>
+
+<p>Now the number that decides it for most households: <strong>a BareEarth 2-pack is $174.98 — two blankets for less than one Bearaby.</strong> One for the bed and one for the couch. One for you and one for the partner who keeps stealing yours — because they will, and every owner thread confirms it: <em>"So nice I ordered a second the moment I used this one."</em> The 4-pack drops it to $62.48 a blanket, which is Christmas for a family of anxious sleepers sorted in one order.</p>
+
+<p><a href="${BE_LINK}" onclick="checkdirect(${CPV_CAMPAIGN},1)"><strong>Check single and 2-pack pricing →</strong></a></p>
+
+<h3>How we evaluated these</h3>
+
+<p>We compared published construction specs — pocket dimensions, fill material, stitching, care labels — and documented owner-reported failure patterns across thousands of reviews. We did not run a lab test, and we won't pretend to have. Every price above was checked on the maker's own page this week. We earn a commission if you buy the top pick through this page; the scores, including the visible 8.4 on temperature and the two cons on the winner's card, are ours. Argue with a specific bar, not with the conclusion — that's what they're printed for.</p>
+
+<h3>Tonight, at 2am</h3>
+
+<p>You already know how tonight goes. The body clocks off, the brain doesn't — the replayed conversation, the un-sent email, the arithmetic on how much sleep is left if you fall asleep <em>right now.</em> You've done the melatonin, the white noise, the no-screens-after-nine. Some of it helps a bit. None of it turns the thing off.</p>
+
+<p>The people who found the off-switch describe it the same way, over and over: <em>"I put my head on my pillow at 10pm and within 10 MINUTES i was asleep. This thing is magic."</em> <em>"I can finally sleep, feel comfortable and safe."</em> It isn't magic — it's twelve pounds of glass beads held exactly where they're supposed to be, which is the one thing the cheap blankets can't do.</p>
+
+<p><strong>Four of these five blankets ask you to gamble $87 to $299 on where their beads will be by spring. One locks them in place for $99 — and gives you 90 days to disagree.</strong></p>
+
+<p><a href="${BE_LINK}" onclick="checkdirect(${CPV_CAMPAIGN},1)"><strong>Get the BareEarth — 50% off →</strong></a></p>
+`,
+};
+
+const highlights = [
+  {
+    title: "The beads stay put",
+    text: "4-inch double-stitched pockets lock the fill in place, so the middle of the blanket still weighs something in year two.",
+  },
+  {
+    title: "Glass, not plastic",
+    text: "Dense, silent glass microbeads that release heat instead of trapping it — the fill owners tell each other to insist on.",
+  },
+  {
+    title: "Two for less than one Bearaby",
+    text: "The 2-pack runs $87.49 a blanket — $174.98 for two, against $249+ for a single premium knit.",
+  },
+];
+
+const keyFindings = [
+  {
+    value: "4\"×4\"",
+    label: "The pocket size that stops beads migrating — the spec the category's best-seller spent seven years and a patent chasing",
+  },
+  {
+    value: "10%",
+    label: "Of your body weight — the weight rule that prevents the category's most common regret",
+  },
+  {
+    value: "$174.98",
+    label: "A BareEarth 2-pack — two weighted blankets for less than one $249 Bearaby",
+  },
+];
+---
+
+<ReviewPage
+  title="The 5 Best Weighted Blankets of 2026 [Construction Compared, Not Brands] | The Life Insider"
+  description="We ranked the 5 best weighted blankets of 2026 on the specs that decide whether they still work next year — pocket grid size, fill type, washability and durability — with every price verified on the maker's own page."
+  h1="The 5 Best Weighted Blankets of 2026"
+  updated="27 August 2026"
+  intro={[
+    "<strong>You're not tired. You're tired <em>and</em> wired.</strong>",
+    "The body is done. The brain is still going — replaying a conversation from Tuesday, drafting an email you won't send until Thursday, doing arithmetic on how many hours are left if you fall asleep <em>right now</em>. It's 2am. You've done the melatonin, the white noise, the no-screens-after-nine. Some of it helps a bit. None of it turns the thing off.",
+    "So you're looking at weighted blankets, and you've probably noticed the problem: there are two of them at $200–300 that everyone advertises, a wall of them at $50 that all look identical, and no obvious reason to believe any particular one is better than the rest. There is a reason, and it isn't the brand name. <strong>It's where the beads end up.</strong> Almost every weighted blanket that has ever disappointed someone failed the same specific, physical way — and it's a failure you can check with your own hands in ten seconds.",
+    "That's what this comparison is built around: <strong>construction, not brand</strong> — scored on the five specs that decide whether a weighted blanket is still a weighted blanket next winter.",
+  ]}
+  listLede="Five blankets, scored on weight distribution, fill quality, washability, durability and temperature control. Construction specs from each maker's published page; every price verified on the maker's own site this week."
+  products={products}
+  faqs={faqs}
+  highlights={highlights}
+  editorial={editorial}
+  keyFindings={keyFindings}
+  keyFindingsPosition="after-list"
+>
+  {
+    CPV_CAMPAIGN && (
+      <Fragment slot="body-end"><CpvTracker campaign="13" /></Fragment>
+    )
+  }
+</ReviewPage>
