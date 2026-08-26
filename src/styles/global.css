@@ -125,11 +125,17 @@ img { max-width: 100%; height: auto; }
 .lede { font-size: 1.15rem; color: var(--muted); }
 
 /* ---- Prose (legal/blog/articles) ---- */
-.prose { max-width: 720px; }
+.prose { max-width: 720px; font-size: 18px; line-height: 1.85; }
+.prose p { margin: 0 0 1.4em; }
 .prose h2 { margin-top: 2em; }
-.prose h3 { margin-top: 1.5em; }
-.prose ul, .prose ol { padding-left: 1.3em; margin-bottom: 1.2em; }
-.prose li { margin-bottom: 0.4em; }
+.prose h3 { margin-top: 1.7em; margin-bottom: 0.7em; font-size: 1.32rem; }
+.prose ul, .prose ol { padding-left: 1.3em; margin-bottom: 1.3em; }
+.prose li { margin-bottom: 0.5em; }
+.prose .btn { margin: 4px 0 8px; }
+@media (max-width: 640px) {
+  .prose { font-size: 17.5px; line-height: 1.9; }
+  .prose p { margin: 0 0 1.5em; }
+}
 .updated { font-size: 0.85rem; color: var(--muted); margin-bottom: 24px; }
 
 /* ---- Disclosure box (legacy, kept for any inline use) ---- */
