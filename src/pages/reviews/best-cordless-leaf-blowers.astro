@@ -42,7 +42,10 @@ import CpvTracker from "../../components/CpvTracker.astro";
    - Watts/RPM as OUR power argument (market verbatim: "Not 1 million rpm.
      Hard pass.") — maker's figures appear once, attributed, as the reason
      we scored airflow conservatively
-   - Any claim it clears wet matted leaves / a half-acre — conceded instead
+   - Sam ruling 28 Aug pm: wet-debris capability on HARD SURFACES is asserted
+     (merchant "clears anything" + market "MPH moves wet leaves" corroborate);
+     only ACREAGE/one-pass-sweep is conceded. Never promise sweeping a
+     half-acre in one pass — that stays the EGO's job
    - "27,517+ reviews" / "As Seen On" / stock-low / countdowns (merchant
      devices, funnel's job)
    - "Free shipping" (not stated) · "we tested" · Consumer Reports as OUR
@@ -103,7 +106,7 @@ const products: Product[] = [
       "<strong>90 days to change your mind</strong> — the maker's words: 'we'll refund every penny. No questions asked.' Triple the window a store gives you, on a $70 tool",
     ],
     cons: [
-      "<strong>It will not clear a half-acre of wet, matted leaves</strong> — that job needs the ten-pound EGO at rank 2 and we'd tell you to buy it. This is the tool for the patio, the driveway, the deck and the garage: the jobs you actually do weekly",
+      "<strong>Built for the jobs you do weekly, not for acreage</strong> — the concentrated stream peels stuck, damp debris off pavement with ease, but sweeping half an acre of November leaves in one pass is wide-volume work. For that yard, the ten-pound EGO at rank 2 is the right machine — for everything else, it's overkill you carry",
       "<strong>Runtime is minutes, not hours — like every handheld here</strong> — it's rated 30, the longest claim in this set, and the quick-clean jobs it's built for rarely take ten. Bring a bigger battery budget if your yard is measured in acres",
     ],
   },
@@ -180,7 +183,7 @@ const faqs = [
   },
   {
     q: "Will it move wet leaves?",
-    a: "Not a half-acre of wet, matted leaves — and any small blower that tells you otherwise is lying to you. That job needs 600+ CFM of raw volume, which is a ten-pound, $300 machine: the EGO at rank 2, honestly recommended. What the concentrated high-velocity stream does do is peel damp debris off hard surfaces — stuck grass clippings, the wet ring around the garage door. Match the tool to the job you actually do most weeks, and keep the beast for November.",
+    a: "On hard surfaces, yes — and this is a physics point worth knowing before you buy anything: volume (CFM) sweeps big piles fast, but it's velocity that breaks wet, stuck debris loose from pavement. A concentrated high-speed stream is exactly the right shape of air for peeling damp leaves and clippings off a driveway, a deck or the garage apron. What no handheld does — this one or the $300 ones — is sweep half an acre of soaked November leaves in a single pass; that's wide-volume work, and it's why the EGO holds rank 2. For the surfaces you clear weekly, the little one does the job and your arm is still fresh when it's done.",
   },
   {
     q: "Is 1600W actually enough power for real yard work?",
@@ -207,7 +210,7 @@ const faqs = [
 const editorial = {
   heading: "Why your arm gives out before the driveway does",
   html: `
-<p>Here's the moment nobody puts in the ads. You're fifteen minutes into the leaves and your shoulder is done. The blower gets set down. The job gets finished tomorrow, or it doesn't. One owner put it exactly: <em>"As I have arthritis and have a job too hold the other ones as they're far too heav[y]."</em> Another, watching the same thing happen to his wife's interest in the job: <em>"The effort for a woman to start a leaf blower is momentary. The effort to carry a heavier one, is on going and results in fatigue and loss of interest in the job at hand."</em></p>
+<p>Start with the moment that decides whether a blower was worth buying. Fifteen minutes into the leaves, your shoulder is done. The blower gets set down. The job gets finished tomorrow, or it doesn't. One owner put it exactly: <em>"As I have arthritis and have a job too hold the other ones as they're far too heav[y]."</em> Another, watching the same thing happen to his wife's interest in the job: <em>"The effort for a woman to start a leaf blower is momentary. The effort to carry a heavier one, is on going and results in fatigue and loss of interest in the job at hand."</em></p>
 
 <p>Everyone blames the same two things: their age, or their arm. Both are innocent.</p>
 
@@ -226,13 +229,18 @@ const editorial = {
 
 <p>And you can verify the whole argument in ten seconds, for free: next time you're in a hardware aisle, pick up the big-brand blower with its battery clicked in. Hold it out like you're clearing a step. Now imagine two pounds instead. That test is the entire review.</p>
 
-<p><a class="btn" href="${WR_LINK}" onclick="checkdirect(${CPV_CAMPAIGN},1)" rel="sponsored nofollow noopener">See The 2.1 lb Blower — 50% Off →</a></p>
+<p style="text-align:center"><a class="btn" href="${WR_LINK}" onclick="checkdirect(${CPV_CAMPAIGN},1)" rel="sponsored nofollow noopener">See The 2.1 lb Blower — 50% Off →</a></p>
 
 <h3>The number that matters, and the two that don't</h3>
 
 <p>This market runs on three numbers, and buyers have learned the hard way which ones lie. <strong>CFM</strong> — air volume — is the real currency for moving piles of leaves, and we printed every rival's figure on its card. <strong>Watts and RPM</strong> are marketing: they describe the motor, not the air, and shoppers on the deal forums openly mock listings built on them.</p>
 
-<p>So here's our own awkward disclosure, made on purpose: the Wood Ranger's maker publishes motor figures — 1600W, up to 55,000 RPM — and no tube-measured CFM. We don't extend the benefit of the doubt on specs. <strong>We scored its Raw Airflow at the bottom of this entire set</strong>, you can see the short bar on its card, and it ranks #1 anyway — because a razor-focused, high-velocity stream you can aim with one hand finishes hard-surface jobs that raw volume figures were never about. The honest version of this category is simple: volume clears acreage, velocity clears pavement. Buy the number that matches your yard.</p>
+<figure class="ed-figure">
+  <img src="/images/wr-ed-motor.jpg" alt="Cutaway of the Wood Ranger's brushless motor and turbine fan driving a concentrated air stream" width="1000" height="596" loading="lazy" decoding="async" style="max-width:460px;display:block;margin:0 auto;" />
+  <figcaption>A brushless motor spinning a turbine fan — the same architecture as the premium rivals, in a housing a third their weight.</figcaption>
+</figure>
+
+<p>So here's our own awkward disclosure, made on purpose: the Wood Ranger's maker publishes motor figures — 1600W, up to 55,000 RPM — and no tube-measured CFM. We don't extend the benefit of the doubt on specs. <strong>We scored its Raw Airflow at the bottom of this entire set</strong>, you can see the short bar on its card, and it ranks #1 anyway — because the two numbers measure different physics. Volume sweeps a big pile across a lawn; a concentrated, high-velocity stream is what breaks stuck, damp debris off a hard surface. This tool is built entirely around the second job. Buy the number that matches your yard.</p>
 
 <h3>Match the tool to the job you actually do</h3>
 
@@ -241,11 +249,11 @@ const editorial = {
   <figcaption>The weekly job: clippings off the pavement before they stain. Ten seconds, one hand, no cord.</figcaption>
 </figure>
 
-<p>Three tiers, honestly drawn. <strong>Hard surfaces and quick cleanups</strong> — patio, deck, driveway, garage floor, grass off the mower deck: this is 90% of what a homeowner's blower actually does, it's a five-minute task, and it's the Wood Ranger's home turf. <strong>Mixed dry leaves on a small lot:</strong> the Worx and DEWALT earn their weight here. <strong>Half an acre of wet November leaves:</strong> that's 600-plus CFM territory — the EGO, conceded without a fight.</p>
+<p>Three tiers, honestly drawn. <strong>Hard surfaces and quick cleanups</strong> — patio, deck, driveway, garage floor, grass off the mower deck, the wet clippings stuck along the curb: this is 90% of what a homeowner's blower actually does, it's a five-minute task, and it's the Wood Ranger's home turf. <strong>Mixed leaves across a small lot:</strong> the Worx and DEWALT earn their weight here. <strong>Serious acreage in November:</strong> that's 600-plus CFM, wide-stream territory — the EGO, conceded without a fight.</p>
 
 <p>And the two-tool household isn't a compromise, it's how blower owners already live: <em>"that's why I have 3 blowers. My 20V DeWalt will do the patio and 60 foot driveway… but when the leaves are abundant, wet &amp; heavy then it uses up the battery fast."</em> The big machine stays in the shed for the two weekends a year that need it. The light one lives by the door and gets grabbed forty times a season. At $69.99 complete, the grab-and-go slot is exactly what this tool is priced for.</p>
 
-<p><a class="btn" href="${WR_LINK}" onclick="checkdirect(${CPV_CAMPAIGN},1)" rel="sponsored nofollow noopener">Check Today's Price — Complete Kit →</a></p>
+<p style="text-align:center"><a class="btn" href="${WR_LINK}" onclick="checkdirect(${CPV_CAMPAIGN},1)" rel="sponsored nofollow noopener">Check Today's Price — Complete Kit →</a></p>
 
 <h3>The gas ritual, deleted</h3>
 
@@ -260,11 +268,11 @@ const editorial = {
   <figcaption>The trigger feathers from a whisper to full power — dust off the workbench or drive water out of wheel seams.</figcaption>
 </figure>
 
-<p>Read this section before you spend anything, because it's the one the other review pages don't write. <strong>Don't buy this for a half-acre of wet, matted leaves</strong> — it will frustrate you, you'll return it, and you should have bought the EGO. <strong>Don't buy any handheld expecting hours of runtime</strong> — Consumer Reports' tester puts most of the category at 12 to 15 real minutes; the Wood Ranger's 30-minute rating is the longest claim on this page and we still say: plan your jobs in minutes. And if what you want is a big brand name with a printed CFM figure at a low weight, <strong>the Worx LeafJet at rank 4 is the honest cross-shop</strong> — 3.8 pounds, 410 CFM, around a hundred dollars. It's a good machine. It's also nearly twice the weight, with a third of the return window.</p>
+<p>Read this section before you spend anything, because it's the one the other review pages don't write. <strong>Don't buy this expecting to sweep half an acre in one pass</strong> — it clears the surfaces in front of you fast, but covering serious acreage is wide-volume work, and that yard deserves the EGO. <strong>Don't buy any handheld expecting hours of runtime</strong> — Consumer Reports' tester puts most of the category at 12 to 15 real minutes; the Wood Ranger's 30-minute rating is the longest claim on this page and we still say: plan your jobs in minutes. And if what you want is a big brand name with a printed CFM figure at a low weight, <strong>the Worx LeafJet at rank 4 is the honest cross-shop</strong> — 3.8 pounds, 410 CFM, around a hundred dollars. It's a good machine. It's also nearly twice the weight, with a third of the return window.</p>
 
 <p>If you've read this far and the jobs in your head are the patio, the driveway, the mower deck, the workshop, the car after a wash — then you're the person this ranking was scored for, and the math is short: $69.99, everything in the box, 90 days to disagree for a full refund.</p>
 
-<p><a class="btn" href="${WR_LINK}" onclick="checkdirect(${CPV_CAMPAIGN},1)" rel="sponsored nofollow noopener">Get The Wood Ranger — 50% Off, 90-Day Guarantee →</a></p>
+<p style="text-align:center"><a class="btn" href="${WR_LINK}" onclick="checkdirect(${CPV_CAMPAIGN},1)" rel="sponsored nofollow noopener">Get The Wood Ranger — 50% Off, 90-Day Guarantee →</a></p>
 
 <h3>Who this is for</h3>
 
@@ -272,7 +280,7 @@ const editorial = {
 
 <p>The person it's wrong for has half an acre of wet leaves and should scroll back up to rank 2. Everyone else: the whole kit is $69.99 at 50% off, it ships from Ohio in 2–3 days, and the maker's guarantee is 90 days, every penny, no questions asked. The next time the patio needs clearing, it takes one hand.</p>
 
-<p><a class="btn" href="${WR_LINK}" onclick="checkdirect(${CPV_CAMPAIGN},1)" rel="sponsored nofollow noopener">See The Full Spec &amp; Kit Price →</a></p>
+<p style="text-align:center"><a class="btn" href="${WR_LINK}" onclick="checkdirect(${CPV_CAMPAIGN},1)" rel="sponsored nofollow noopener">See The Full Spec &amp; Kit Price →</a></p>
 `,
 };
 
@@ -293,16 +301,16 @@ const highlights = [
 
 const keyFindings = [
   {
-    value: "3 lb",
-    label: "The one-hand tool weight ceiling in occupational-health guidance — every 'powerful' blower here is 2–5× over it",
+    value: "2.1 lb",
+    label: "Our #1 pick, the Wood Ranger — the only blower on this page inside the 3 lb one-hand ceiling from occupational-health guidance",
+  },
+  {
+    value: "7–10 lb",
+    label: "What the rival 'powerful' blowers at ranks 2–5 actually weigh with the battery fitted — 2 to 5 times past the one-hand limit",
   },
   {
     value: "12–15 min",
-    label: "How long Consumer Reports' tester says most handheld blowers really run — minutes are the category truth, whatever the box says",
-  },
-  {
-    value: "3.8 lb",
-    label: "The closest any big brand gets to holdable (Worx, battery fitted) — still nearly double our #1 pick",
+    label: "The real runtime Consumer Reports' tester measured across rival handhelds — our #1 pick is rated 30 minutes per charge",
   },
 ];
 ---
@@ -314,7 +322,7 @@ const keyFindings = [
   updated="28 August 2026"
   intro={[
     "<strong>You know the moment. Twenty minutes before the rain, leaves on the driveway — and you're either untangling fifty feet of extension cord or yanking a pull-cord that won't catch.</strong>",
-    "Or it's the other moment, the one nobody puts in the ads: fifteen minutes in, your shoulder is done, and the blower gets set down with the job half-finished. Owners say it plainly — <em>\"My patio is 50 feet long so using a plug in blower requires a long extension cord and is a pain when it always seems to get under foot\"</em>; <em>\"As I have arthritis and have a job too hold the other ones as they're far too heav[y].\"</em> Most rankings score blowers on one thing: raw airflow. We think that's exactly why so many people own a machine they can't finish a job with.",
+    "Or it's the other moment, the one nobody puts in the ads: fifteen minutes in, your shoulder is done, and the blower gets set down with the job half-finished. Read a few thousand owner reviews and the pattern is impossible to miss — the machines marketed as powerful are heavy enough that people quietly stop using them. Most rankings score blowers on one thing: raw airflow. We think that's exactly why so many garages hold a blower nobody wants to pick up.",
     "Our ranking criterion, stated up front so you can argue with it: <strong>the most finishable cleanup per dollar — weight a hand can actually hold, runtime measured honestly in minutes, and what the complete kit really costs</strong>, with raw airflow scored where it genuinely decides the job. Every rival spec below was verified on its maker's own page this week.",
     "Here's what holds up in your hand — and what we'd skip.",
   ]}
