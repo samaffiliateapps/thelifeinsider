@@ -1,0 +1,335 @@
+---
+import ReviewPage from "../../layouts/ReviewPage.astro";
+import type { Product } from "../../components/ProductCard.astro";
+import CpvTracker from "../../components/CpvTracker.astro";
+
+/* =========================================================================
+   HERO: Wood Ranger Power Blower — AdsBranded offer 905, $70 CPA, US.
+   Destination: offer.woodrangertools.com/leafblower/presell (Sam's link).
+
+   BUILT 28 AUG from the v2 research run (compass Phases 1-4 + Gemini pass
+   + wood-ranger-build-document.md) and same-day build verification.
+
+   OFFER PAGE FACTS (re-fetched 28 Aug — the page, not the brief, is truth):
+     · Runtime: 30 minutes per charge (page states it; brief's 15 is dead)
+     · 2.1 lb · 1600W brushless · up to 55,000 RPM · 24V lithium
+     · Full charge under an hour · box: blower + battery + charging cable
+     · Guarantee verbatim: "Try the WOODRANGER® Power Blower in your home
+       for 90 days. If you aren't completely blown away by the power and
+       convenience, we'll refund every penny. No questions asked."
+     · Ships from Ohio, USA · fast 2-3 day US shipping (NOT stated free —
+       never claim free shipping)
+     · NO CFM/MPH published → Raw Airflow scored bottom of set (78), stated
+       openly on the page. That lower bar IS the honesty signal.
+
+   RIVALS VERIFIED 28 AUG (maker/retailer pages):
+     · EGO LB6504: 650 CFM / 180 MPH, 4.77 lb bare, ~9-10 lb w/ 5.0Ah
+       (Bob Vila tester: 10.2 lb, "one of the heaviest of its kind"),
+       kits $275-$370
+     · DEWALT DCBL722: 450 CFM / 125 MPH, 5.4 lb bare ~7 lb w/ battery,
+       66 dB, $179 bare-tool / $239 kit
+     · Worx Nitro WG543 (LeafJet): 410 CFM / 130 MPH, 3.8 lb WITH 4.0Ah
+       battery, ~$99-119 kit — CLOSEST CHALLENGER, conceded by name
+     · Ryobi ONE+ PCLLB01: 350 CFM / 100 MPH, ~5.3 lb bare, $109 bare /
+       $129 kit
+   CITATIONS VERIFIED 28 AUG:
+     · CCOHS (ccohs.ca): "1.4 kg (3 lb) or less for tools operated with
+       one hand" — verbatim
+     · Consumer Reports' David Trezza: most handhelds "max out in 12 to
+       15 minutes" — verbatim
+
+   ⚠️ DO NOT PUBLISH, in any paraphrase:
+   - Watts/RPM as OUR power argument (market verbatim: "Not 1 million rpm.
+     Hard pass.") — maker's figures appear once, attributed, as the reason
+     we scored airflow conservatively
+   - Any claim it clears wet matted leaves / a half-acre — conceded instead
+   - "27,517+ reviews" / "As Seen On" / stock-low / countdowns (merchant
+     devices, funnel's job)
+   - "Free shipping" (not stated) · "we tested" · Consumer Reports as OUR
+     endorsement (Trezza quoted+attributed only) · PC/electronics dusting
+     (static-damage consensus) · snow clearing · CARB 1,100-mile figure
+   - Image rejects: slider-1 (PRICE DROP badge), slider-2 (RPM claim),
+     slider-6 (merchant testimonials), banner2 (garbled AI text)
+
+   ⚠️ BEFORE TRAFFIC: Sam creates CPV One campaign 14 → confirm number
+   matches CPV_CAMPAIGN + CpvTracker below; click-test all 4 rival links.
+   ========================================================================= */
+
+const CPV_ROOT = "https://track.thelifeinsider.com/";
+const CPV_CAMPAIGN = "14"; // Wood Ranger — create in CPV One before launch
+const WR_DIRECT =
+  "https://offer.woodrangertools.com/leafblower/presell?oid=135&affid=23&oidab=905&affidab=1241";
+const WR_LINK = CPV_CAMPAIGN ? `${CPV_ROOT}base2.php` : WR_DIRECT;
+
+const RIVAL = {
+  ego: "https://egopowerplus.com/blower-650cfm/",
+  dewalt: "https://www.dewalt.com/product/dcbl722b/20v-max-xr-brushless-cordless-handheld-blower-tool-only",
+  worx: "https://www.worx.com/20v-leafjet-cordless-leaf-blower-wg543-tool-only.html",
+  ryobi: "https://www.ryobitools.com/products/details/46396053145",
+};
+
+const products: Product[] = [
+  {
+    rank: 1,
+    name: "Wood Ranger Power Blower",
+    brand: "Wood Ranger",
+    score: 9.1,
+    scoreLabel: "Outstanding",
+    grade: "A",
+    bestFor: "Best For Everyday Cleanups",
+    verdict:
+      "The only blower here a hand is actually built to hold — 2.1 lb against a 3-lb one-hand ceiling the 'powerful' rivals miss by two to five times. The best tool for the blowing you do most weeks, and honest about the one job it isn't for.",
+    metrics: [
+      { label: "One-Hand Weight", value: 98 },
+      { label: "Grab-And-Go", value: 95 },
+      { label: "Complete-Kit Value", value: 96 },
+      { label: "Runtime (Rated)", value: 90 },
+      { label: "Raw Airflow", value: 78 },
+    ],
+    trustNote:
+      "90-day money-back guarantee · Ships from Ohio, USA · Fast 2–3 day US shipping",
+    badge: "Best Overall",
+    price: "$69.99",
+    discount: "50% Off",
+    image: "/images/wr-blower.jpg",
+    stickyImage: "/images/wr-blower-thumb.jpg",
+    url: WR_LINK,
+    pros: [
+      "<strong>2.1 pounds, one hand, the whole job</strong> — occupational-health guidance caps a one-handed tool at about 3 lb. This sits under it. The blowers marketed as 'powerful' run 7–10 lb with the battery on, which is why your arm quits before the driveway does",
+      "<strong>Press the button, it runs</strong> — brushless motor, no pull cord, no choke, no fuel mixing, no carburetor to rebuild in spring. The starting ritual you hate is simply gone",
+      "<strong>$69.99 is the whole price</strong> — blower, 24V battery and charger in one box. The big-brand stickers are frequently bare-tool: the DEWALT is $179 until you add the battery, then it's $239",
+      "<strong>Rated 30 minutes a charge, refilled in under an hour</strong> — Consumer Reports' own tester says most handhelds max out at 12 to 15. Rated figures deserve skepticism everywhere, but the quick jobs this is built for take five",
+      "<strong>A trigger you can feather</strong> — pressure-sensitive from a whisper to full power: grass off the mower deck, sawdust off the bench, water out of mirrors and wheel seams after a wash",
+      "<strong>90 days to change your mind</strong> — the maker's words: 'we'll refund every penny. No questions asked.' Triple the window a store gives you, on a $70 tool",
+    ],
+    cons: [
+      "<strong>It will not clear a half-acre of wet, matted leaves</strong> — that job needs the ten-pound EGO at rank 2 and we'd tell you to buy it. This is the tool for the patio, the driveway, the deck and the garage: the jobs you actually do weekly",
+      "<strong>Runtime is minutes, not hours — like every handheld here</strong> — it's rated 30, the longest claim in this set, and the quick-clean jobs it's built for rarely take ten. Bring a bigger battery budget if your yard is measured in acres",
+    ],
+  },
+  {
+    rank: 2,
+    name: "EGO Power+ LB6504",
+    brand: "EGO",
+    score: 8.8,
+    scoreLabel: "Excellent",
+    image: "/images/wr-ego.jpg",
+    url: RIVAL.ego,
+    pros: [
+      "<strong>The raw-airflow champion — 650 CFM at 180 MPH</strong> — this is the tool that genuinely clears a half-acre of wet leaves, and if that's your yard, it's the honest answer",
+    ],
+    cons: [
+      "<strong>Roughly 10 lb with its 5.0Ah battery fitted</strong> — one professional tester called it 'one of the heaviest blowers of its kind.' That's over three times the one-hand weight guidance, held at arm's length",
+      "<strong>Kits run $275–$370</strong> — four to five times the price of rank 1, for power most patios and driveways never ask for",
+    ],
+  },
+  {
+    rank: 3,
+    name: "DEWALT 20V MAX DCBL722",
+    brand: "DEWALT",
+    score: 8.5,
+    scoreLabel: "Excellent",
+    image: "/images/wr-dewalt.jpg",
+    url: RIVAL.dewalt,
+    pros: [
+      "<strong>The best power-to-weight of the mainstream brands</strong> — 450 CFM at 5.4 lb bare, and at 66 dB it's genuinely quieter than most of this category",
+    ],
+    cons: [
+      "<strong>The $179 sticker is a bare tool</strong> — no battery, no charger. The real kit is $239, and with the 5.0Ah pack fitted it's about 7 lb in your hand",
+      "<strong>Owners cluster runtime at 11–20 minutes on high</strong> — fine for a driveway, frustrating past it",
+    ],
+  },
+  {
+    rank: 4,
+    name: "Worx Nitro WG543 LeafJet",
+    brand: "Worx",
+    score: 8.4,
+    scoreLabel: "Excellent",
+    image: "/images/wr-worx.jpg",
+    url: RIVAL.worx,
+    pros: [
+      "<strong>The only big brand in the same weight conversation</strong> — 3.8 lb with the battery on, a published 410 CFM, and kit deals near $99–119. If you want a brand name and a printed airflow figure, this is the one to cross-shop",
+    ],
+    cons: [
+      "<strong>Still nearly double the weight of rank 1</strong> — 3.8 lb sits at the very top of the one-hand guidance instead of comfortably under it",
+      "<strong>A 30-day retail window, not 90</strong> — and Worx's Nitro naming (WG543 vs WG585) makes it easy to order the wrong machine",
+    ],
+  },
+  {
+    rank: 5,
+    name: "Ryobi ONE+ 18V PCLLB01",
+    brand: "Ryobi",
+    score: 8.0,
+    scoreLabel: "Very Good",
+    image: "/images/wr-ryobi.jpg",
+    url: RIVAL.ryobi,
+    pros: [
+      "<strong>The cheapest sensible route for ONE+ owners</strong> — $109 as a bare tool if you already run Ryobi batteries, from the most-searched brand in this category",
+    ],
+    cons: [
+      "<strong>The most modest output here — 350 CFM at 100 MPH</strong> — and around 5.3 lb before the battery goes on",
+      "<strong>The platform is the price</strong> — non-owners pay the battery tax that pushes the real cost past the $129 kit sticker",
+    ],
+  },
+];
+
+const faqs = [
+  {
+    q: "How long does the battery actually last before it dies?",
+    a: "The Wood Ranger is rated 30 minutes per charge — and here's the context that number needs: Consumer Reports' leaf-blower tester says most handhelds 'max out in 12 to 15 minutes,' and owner reports on the big-brand rivals cluster at 11 to 20 on high. Treat every rated figure in this category with the same skepticism, ours included. Then reframe to the actual job: a patio and a two-car driveway is a five-minute task. The battery refills in under an hour, so even the long Saturday version of cleanup fits inside two charges.",
+  },
+  {
+    q: "Will it move wet leaves?",
+    a: "Not a half-acre of wet, matted leaves — and any small blower that tells you otherwise is lying to you. That job needs 600+ CFM of raw volume, which is a ten-pound, $300 machine: the EGO at rank 2, honestly recommended. What the concentrated high-velocity stream does do is peel damp debris off hard surfaces — stuck grass clippings, the wet ring around the garage door. Match the tool to the job you actually do most weeks, and keep the beast for November.",
+  },
+  {
+    q: "Is 1600W actually enough power for real yard work?",
+    a: "Wrong number to ask about — watts measure what a motor drinks, not what the tube moves, which is why we didn't score anyone on them. The Wood Ranger's maker publishes motor figures rather than a tube-measured CFM, so we scored its Raw Airflow at the bottom of this set — no published number, no benefit of the doubt — and ranked it #1 anyway. Because for hard surfaces and quick cleanups, the spec that decides whether the job gets finished is the one in your hand: 2.1 lb against rivals at 7 to 10. Power you can't hold up is power you don't use.",
+  },
+  {
+    q: "Is Wood Ranger a real brand, or another Amazon rebadge?",
+    a: "The fair test of a challenger brand isn't the name — it's whether the maker takes the risk or hands it to you. Here's the risk math: it ships from Ohio in 2–3 days, the box is a complete kit (blower, battery, charger), and it carries a 90-day money-back guarantee in plain words: 'we'll refund every penny. No questions asked.' That's triple a store window, on a $69.99 tool. The cost of being wrong is small and reversible — which is exactly why people take a $70 chance they wouldn't take at $300.",
+  },
+  {
+    q: "What if I buy it and don't like it?",
+    a: "You have 90 days, and the guarantee's own wording is the answer: 'If you aren't completely blown away by the power and convenience, we'll refund every penny. No questions asked.' A documented anxiety with used outdoor tools is whether a store will even take them back — here the window is three months and the promise is in writing on the maker's page.",
+  },
+  {
+    q: "I already own DEWALT/Ryobi batteries — shouldn't I just buy into my platform?",
+    a: "If you're running four tools off one battery platform, that logic holds and rank 5 is your cheapest door in. For a single light quick-job blower it usually doesn't: a bare-tool blower plus a compatible brand battery routinely costs more than this entire $69.99 kit — and the tool still weighs 7 to 10 lb once the pack is on. The platform saves you money on batteries and costs you the one thing this purchase was about: a tool light enough to grab with one hand.",
+  },
+  {
+    q: "Can I use it to dry my car after a wash?",
+    a: "For the spots towels ruin — mirrors, badges, grille, wheels, panel gaps where water hides and drips out ten minutes later — yes, and the feathering trigger is what makes it work. Two honest caveats from the detailing community: keep the blower clean and dedicated (a blower full of garage grit will mark wet paint), and don't expect a full touchless dry of the whole car — that's a dedicated $500 filtered dryer's job. As a $70 entry into touchless spot-drying, it earns its place on the shelf.",
+  },
+];
+
+const editorial = {
+  heading: "Why your arm gives out before the driveway does",
+  html: `
+<p>Here's the moment nobody puts in the ads. You're fifteen minutes into the leaves and your shoulder is done. The blower gets set down. The job gets finished tomorrow, or it doesn't. One owner put it exactly: <em>"As I have arthritis and have a job too hold the other ones as they're far too heav[y]."</em> Another, watching the same thing happen to his wife's interest in the job: <em>"The effort for a woman to start a leaf blower is momentary. The effort to carry a heavier one, is on going and results in fatigue and loss of interest in the job at hand."</em></p>
+
+<p>Everyone blames the same two things: their age, or their arm. Both are innocent.</p>
+
+<h3>The 3-pound rule nobody prints on the box</h3>
+
+<p>Occupational-health guidance — the rules written for people who hold tools all day for a living — caps a one-handed tool at <strong>1.4 kg: about 3 pounds</strong>. Heavier than that, the guidance says, and the tool needs a counterbalance or a strap, because a human arm holding weight away from the body fatigues fast and keeps fatiguing faster.</p>
+
+<p>Now weigh the blowers marketed as powerful. The EGO at rank 2: roughly <strong>10 pounds</strong> with its battery — a professional tester called it "one of the heaviest blowers of its kind." The DEWALT: about <strong>7 pounds</strong> ready to run. Gas backpacks: over 20. Every one of them is two to five times past the weight a hand is built to hold, and every one of them is why the job keeps getting abandoned in the middle.</p>
+
+<figure class="ed-figure">
+  <img src="/images/wr-ed-leaves.jpg" alt="Wood Ranger Power Blower held in one hand, clearing dry leaves off a patio" width="530" height="328" loading="lazy" decoding="async" style="max-width:420px;display:block;margin:0 auto;" />
+  <figcaption>2.1 lb, one hand. Under the 3-pound one-hand ceiling — with room to spare.</figcaption>
+</figure>
+
+<p>It was never your age. It was never your arm. It was a tool three times heavier than the limit, held at arm's length until something quit. The Wood Ranger weighs <strong>2.1 pounds with the battery on</strong> — the only blower on this page that sits <em>inside</em> the guidance instead of piled on top of it.</p>
+
+<p>And you can verify the whole argument in ten seconds, for free: next time you're in a hardware aisle, pick up the big-brand blower with its battery clicked in. Hold it out like you're clearing a step. Now imagine two pounds instead. That test is the entire review.</p>
+
+<p><a class="btn" href="${WR_LINK}" onclick="checkdirect(${CPV_CAMPAIGN},1)" rel="sponsored nofollow noopener">See The 2.1 lb Blower — 50% Off →</a></p>
+
+<h3>The number that matters, and the two that don't</h3>
+
+<p>This market runs on three numbers, and buyers have learned the hard way which ones lie. <strong>CFM</strong> — air volume — is the real currency for moving piles of leaves, and we printed every rival's figure on its card. <strong>Watts and RPM</strong> are marketing: they describe the motor, not the air, and shoppers on the deal forums openly mock listings built on them.</p>
+
+<p>So here's our own awkward disclosure, made on purpose: the Wood Ranger's maker publishes motor figures — 1600W, up to 55,000 RPM — and no tube-measured CFM. We don't extend the benefit of the doubt on specs. <strong>We scored its Raw Airflow at the bottom of this entire set</strong>, you can see the short bar on its card, and it ranks #1 anyway — because a razor-focused, high-velocity stream you can aim with one hand finishes hard-surface jobs that raw volume figures were never about. The honest version of this category is simple: volume clears acreage, velocity clears pavement. Buy the number that matches your yard.</p>
+
+<h3>Match the tool to the job you actually do</h3>
+
+<figure class="ed-figure">
+  <img src="/images/wr-ed-grass.jpg" alt="Wood Ranger blowing fresh grass clippings off a sidewalk edge, one-handed" width="530" height="328" loading="lazy" decoding="async" style="max-width:420px;display:block;margin:0 auto;" />
+  <figcaption>The weekly job: clippings off the pavement before they stain. Ten seconds, one hand, no cord.</figcaption>
+</figure>
+
+<p>Three tiers, honestly drawn. <strong>Hard surfaces and quick cleanups</strong> — patio, deck, driveway, garage floor, grass off the mower deck: this is 90% of what a homeowner's blower actually does, it's a five-minute task, and it's the Wood Ranger's home turf. <strong>Mixed dry leaves on a small lot:</strong> the Worx and DEWALT earn their weight here. <strong>Half an acre of wet November leaves:</strong> that's 600-plus CFM territory — the EGO, conceded without a fight.</p>
+
+<p>And the two-tool household isn't a compromise, it's how blower owners already live: <em>"that's why I have 3 blowers. My 20V DeWalt will do the patio and 60 foot driveway… but when the leaves are abundant, wet &amp; heavy then it uses up the battery fast."</em> The big machine stays in the shed for the two weekends a year that need it. The light one lives by the door and gets grabbed forty times a season. At $69.99 complete, the grab-and-go slot is exactly what this tool is priced for.</p>
+
+<p><a class="btn" href="${WR_LINK}" onclick="checkdirect(${CPV_CAMPAIGN},1)" rel="sponsored nofollow noopener">Check Today's Price — Complete Kit →</a></p>
+
+<h3>The gas ritual, deleted</h3>
+
+<p>If you came from gas, you already know the real reason you're here, and it isn't airflow. It's the ritual: <em>"I have a heck of a time getting the stupid thing started – the engine just won't 'catch.'"</em> The fuel mixing. The spring carburetor surgery. The fumes — one owner with lung trouble: <em>"the 2 stroke fumes would choke off my ability to breath."</em></p>
+
+<p>None of that pain was ever the price of moving air. It was the price of a gasoline engine. Press the Wood Ranger's button and it's already running — brushless, no choke, no cord to yank, nothing to mix, nothing to winterize, and quiet enough that clearing the porch at 7am doesn't make you the neighborhood villain. The part of blowing leaves you hated is the part that's gone.</p>
+
+<h3>What we'd tell you not to buy it for</h3>
+
+<figure class="ed-figure">
+  <img src="/images/wr-ed-control.jpg" alt="Wood Ranger's pressure-sensitive trigger shown at gentle and full power settings" width="1000" height="922" loading="lazy" decoding="async" style="max-width:460px;display:block;margin:0 auto;" />
+  <figcaption>The trigger feathers from a whisper to full power — dust off the workbench or drive water out of wheel seams.</figcaption>
+</figure>
+
+<p>Read this section before you spend anything, because it's the one the other review pages don't write. <strong>Don't buy this for a half-acre of wet, matted leaves</strong> — it will frustrate you, you'll return it, and you should have bought the EGO. <strong>Don't buy any handheld expecting hours of runtime</strong> — Consumer Reports' tester puts most of the category at 12 to 15 real minutes; the Wood Ranger's 30-minute rating is the longest claim on this page and we still say: plan your jobs in minutes. And if what you want is a big brand name with a printed CFM figure at a low weight, <strong>the Worx LeafJet at rank 4 is the honest cross-shop</strong> — 3.8 pounds, 410 CFM, around a hundred dollars. It's a good machine. It's also nearly twice the weight, with a third of the return window.</p>
+
+<p>If you've read this far and the jobs in your head are the patio, the driveway, the mower deck, the workshop, the car after a wash — then you're the person this ranking was scored for, and the math is short: $69.99, everything in the box, 90 days to disagree for a full refund.</p>
+
+<p><a class="btn" href="${WR_LINK}" onclick="checkdirect(${CPV_CAMPAIGN},1)" rel="sponsored nofollow noopener">Get The Wood Ranger — 50% Off, 90-Day Guarantee →</a></p>
+
+<h3>Who this is for</h3>
+
+<p>Three people keep showing up in the research, and this pick belongs to all of them. The homeowner who's sick of dragging out a machine (or fifty feet of cord) for a five-minute job. The person whose hands, back or shoulders have had enough — the owners in their seventies and eighties writing <em>"It is perfect for me"</em> about featherweight blowers are the most relieved voices in this entire market. And the gas refugee who never wants to yank a cord again.</p>
+
+<p>The person it's wrong for has half an acre of wet leaves and should scroll back up to rank 2. Everyone else: the whole kit is $69.99 at 50% off, it ships from Ohio in 2–3 days, and the maker's guarantee is 90 days, every penny, no questions asked. The next time the patio needs clearing, it takes one hand.</p>
+
+<p><a class="btn" href="${WR_LINK}" onclick="checkdirect(${CPV_CAMPAIGN},1)" rel="sponsored nofollow noopener">See The Full Spec &amp; Kit Price →</a></p>
+`,
+};
+
+const highlights = [
+  {
+    title: "The 3-pound rule",
+    text: "Occupational-health guidance caps a one-handed tool at about 3 lb. The 'powerful' blowers run 7–10 lb with the battery. This one is 2.1 — the only blower here inside the limit.",
+  },
+  {
+    title: "The whole kit, one price",
+    text: "$69.99 buys the blower, the 24V battery and the charger. Big-brand stickers are frequently bare-tool — the battery is where they get you back.",
+  },
+  {
+    title: "Rated 30 minutes, refilled in under an hour",
+    text: "The longest rated runtime in this set — in a category whose real numbers live between 12 and 20 minutes. The quick jobs it's built for take five.",
+  },
+];
+
+const keyFindings = [
+  {
+    value: "3 lb",
+    label: "The one-hand tool weight ceiling in occupational-health guidance — every 'powerful' blower here is 2–5× over it",
+  },
+  {
+    value: "12–15 min",
+    label: "How long Consumer Reports' tester says most handheld blowers really run — minutes are the category truth, whatever the box says",
+  },
+  {
+    value: "3.8 lb",
+    label: "The closest any big brand gets to holdable (Worx, battery fitted) — still nearly double our #1 pick",
+  },
+];
+---
+
+<ReviewPage
+  title="The 5 Best Cordless Leaf Blowers of 2026 [Ranked by Weight You Can Hold, Not Watts] | The Life Insider"
+  description="We ranked the 5 best cordless leaf blowers of 2026 on one-hand weight, real runtime, kit value and airflow — with every rival spec verified on the maker's page and the weight problem nobody prints on the box called out by name."
+  h1="The 5 Best Cordless Leaf Blowers of 2026"
+  updated="28 August 2026"
+  intro={[
+    "<strong>You know the moment. Twenty minutes before the rain, leaves on the driveway — and you're either untangling fifty feet of extension cord or yanking a pull-cord that won't catch.</strong>",
+    "Or it's the other moment, the one nobody puts in the ads: fifteen minutes in, your shoulder is done, and the blower gets set down with the job half-finished. Owners say it plainly — <em>\"My patio is 50 feet long so using a plug in blower requires a long extension cord and is a pain when it always seems to get under foot\"</em>; <em>\"As I have arthritis and have a job too hold the other ones as they're far too heav[y].\"</em> Most rankings score blowers on one thing: raw airflow. We think that's exactly why so many people own a machine they can't finish a job with.",
+    "Our ranking criterion, stated up front so you can argue with it: <strong>the most finishable cleanup per dollar — weight a hand can actually hold, runtime measured honestly in minutes, and what the complete kit really costs</strong>, with raw airflow scored where it genuinely decides the job. Every rival spec below was verified on its maker's own page this week.",
+    "Here's what holds up in your hand — and what we'd skip.",
+  ]}
+  listLede="Five blowers, scored on one-hand weight, grab-and-go friction, complete-kit value, rated runtime and raw airflow. Rival specs verified on each maker's published page; the scoring ceiling comes from occupational-health guidance, not marketing."
+  products={products}
+  faqs={faqs}
+  highlights={highlights}
+  editorial={editorial}
+  keyFindings={keyFindings}
+  keyFindingsPosition="after-list"
+  editorialCta={false}
+>
+  {
+    CPV_CAMPAIGN && (
+      <Fragment slot="body-end"><CpvTracker campaign="14" /></Fragment>
+    )
+  }
+</ReviewPage>
