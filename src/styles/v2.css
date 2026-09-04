@@ -163,10 +163,10 @@
 .v2 .v2-steps li::before { content: counter(s); width: 40px; height: 40px; border-radius: 50%; background: var(--v2-cta); color: #fff; font-weight: 800; font-size: 1.05rem; display: flex; align-items: center; justify-content: center; }
 .v2 .v2-steps .st { font-weight: 800; color: var(--ink); font-size: 1rem; margin: 6px 0 4px; }
 .v2 .v2-steps .sb { font-size: 0.93rem; line-height: 1.55; color: var(--body); margin: 0; }
-.v2 .v2-final { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 34px; align-items: start; }
+.v2 .v2-final { margin-top: 34px; }
 .v2 .v2-author { background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; display: flex; gap: 14px; align-items: flex-start; }
 .v2 .v2-author img.av { object-fit: cover; }
-.v2 .v2-author .av { width: 54px; height: 54px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+.v2 .v2-author .av { width: 64px; height: 64px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
 .v2 .v2-author .an { font-weight: 800; color: var(--ink); }
 .v2 .v2-author .ar { font-size: 0.82rem; color: var(--muted); margin-bottom: 6px; }
 .v2 .v2-author p { font-size: 0.9rem; margin: 0; }
@@ -181,7 +181,8 @@
 /* ---- Mobile ---- */
 @media (max-width: 900px) {
   .v2 .v2-ed { grid-template-columns: 1fr; }
-  .v2 .v2-ed-side { position: static; }
+  /* Mobile: the sticky sub-score sidebar is desktop-only. The #1 card, sticky bar and wide CTA already carry the score and button on phones (Sam, 4 Sep). */
+  .v2 .v2-ed-side { display: none; }
   .v2 .v2-quotes, .v2 .v2-final { grid-template-columns: 1fr; }
 }
 @media (max-width: 760px) {

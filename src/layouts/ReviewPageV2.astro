@@ -152,22 +152,10 @@ const photoOk = author.photo ? fs.existsSync(new URL(`../../public${author.photo
         <a href={top.url} class="v2-btn" style="display:inline-block;width:auto;max-width:none;padding:14px 34px;" rel="sponsored nofollow noopener" target="_blank">{urgency.cta}</a>
       </div>
 
-      <!-- 10. Final score + author -->
+      <!-- 10. Author -->
       <div class="v2-final">
-        <div class="side-card">
-          <div class="sc-head">{top.name}</div>
-          <div class="sc-score">{top.score.toFixed(1)}</div>
-          <div class="sc-label">{top.scoreLabel}</div>
-          {sidebar.subscores.map((s) => (
-            <div class="bar">
-              <div class="bl"><span>{s.label}</span><span>{s.value.toFixed(1)}</span></div>
-              <div class="bt"><div class="bf" style={`width:${s.value * 10}%`}></div></div>
-            </div>
-          ))}
-          <a href={top.url} class="v2-btn" rel="sponsored nofollow noopener" target="_blank">Visit Site →</a>
-        </div>
         <div class="v2-author">
-          {photoOk ? <img class="av" src={author.photo} alt={author.name} width="54" height="54" loading="lazy" /> : <div class="av">{initials}</div>}
+          {photoOk ? <img class="av" src={author.photo} alt={author.name} width="64" height="64" loading="lazy" /> : <div class="av">{initials}</div>}
           <div>
             <div class="an">Written by {author.name}</div>
             <div class="ar">{author.role}</div>
