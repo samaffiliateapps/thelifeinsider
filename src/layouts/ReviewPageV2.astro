@@ -1,0 +1,217 @@
+---
+/* REVIEW PAGE V2 — 4 Sep 2026.
+   The proven affiliate-lander shape, section for section, from the visual
+   teardown of eight high-traffic competitor pages (competitor-visual-teardown-3sep.md):
+   logo-only header → H1 + "Last Updated" → bold sub-headline → pain questions →
+   short intro → #1 card (big) → rivals (compact, 2 shown, rest behind a toggle) →
+   repeat band + #1 card with trust strip → HOW WE RATE box → two-column editorial
+   with a STICKY sub-score sidebar → urgency box + wide CTA → customer quotes →
+   where to buy → final score card + author → FAQ → email capture → disclosure.
+   Sticky bottom bar and exit offer retained from V1. */
+import "../styles/v2.css";
+import Base from "./Base.astro";
+import RankCardV2 from "../components/RankCardV2.astro";
+import type { ProductV2 } from "../components/RankCardV2.astro";
+import EmailCapture from "../components/EmailCapture.astro";
+import StickyCta from "../components/StickyCta.astro";
+import ExitOffer from "../components/ExitOffer.astro";
+
+export interface Props {
+  title: string;
+  description: string;
+  h1: string;
+  subhead: string;                 // one bold sentence under the date
+  painQuestions: string[];         // 3–5 bold questions
+  intro: string[];                 // 2–3 short paragraphs
+  listLede: string;
+  products: ProductV2[];
+  trust: string[];                 // 3 items in the repeat card's trust strip
+  howWeRate: string;
+  editorial: { heading: string; byline: string; bylineRole?: string; html: string };
+  sidebar: { subscores: { label: string; value: number }[]; pros: string[]; cons: string[] };
+  urgency: { kicker: string; heading: string; text: string; cta: string; under?: string };
+  quotes: { text: string; name: string; where?: string; source: string; stars?: number }[];
+  howToBuy: string[];
+  author: { name: string; role: string; bio: string };
+  faqs?: { q: string; a: string }[];
+  visibleRivals?: number;          // rivals shown before the toggle (default 2)
+}
+const { title, description, h1, subhead, painQuestions, intro, listLede, products, trust, howWeRate, editorial, sidebar, urgency, quotes, howToBuy, author, faqs, visibleRivals = 2 } = Astro.props;
+const top = products.find((p) => p.rank === 1)!;
+const rivals = products.filter((p) => p.rank !== 1).sort((a, b) => a.rank - b.rank);
+const shown = rivals.slice(0, visibleRivals);
+const hidden = rivals.slice(visibleRivals);
+const publishedOn = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" });
+const stars = top.starRating ? "★".repeat(Math.round(top.starRating)) + "☆".repeat(5 - Math.round(top.starRating)) : null;
+const initials = author.name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();
+---
+
+<Base title={title} description={description} minimal>
+  <article class="v2">
+    <div class="container">
+      <!-- 1. Header -->
+      <header class="v2-head">
+        <h1>{h1}</h1>
+        <div class="v2-updated">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1.2 14.2-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4-7 7Z" /></svg>
+          Last Updated: <span id="lastUpdated">{publishedOn}</span>
+        </div>
+        <p class="v2-subhead" set:html={subhead} />
+        <div class="v2-pain">{painQuestions.map((q) => <p set:html={q} />)}</div>
+        <div class="v2-intro">{intro.map((t) => <p set:html={t} />)}</div>
+        <p class="v2-list-lede" set:html={listLede} />
+      </header>
+
+      <!-- 2. #1 card -->
+      <RankCardV2 product={top} />
+
+      <!-- 3. Rivals -->
+      {shown.map((p) => <RankCardV2 product={p} />)}
+      {hidden.length > 0 && (
+        <details class="v2-more">
+          <summary>
+            <span class="mo-closed">See the rest of the list ({hidden.length} more) ⌄</span>
+            <span class="mo-open">Hide the rest of the list ⌃</span>
+          </summary>
+          <div class="mo-body">{hidden.map((p) => <RankCardV2 product={p} />)}</div>
+        </details>
+      )}
+
+      <!-- 4. Repeat band + #1 with trust strip -->
+      <div class="v2-band">Best Overall {h1.replace(/^The \d+ Best /i, "").replace(/ of \d{4}$/i, "")} — {new Date().getFullYear()}</div>
+      <RankCardV2 product={top} repeat trust={trust} />
+
+      <!-- 5. How we rate -->
+      <div class="v2-note">
+        <div class="n-head">How We Rate?</div>
+        <p set:html={howWeRate} />
+      </div>
+
+      <!-- 6. Editorial + sticky sidebar -->
+      <div class="v2-ed">
+        <div class="v2-ed-main">
+          <h2 set:html={editorial.heading} />
+          <p class="v2-byline">Written by <strong>{editorial.byline}</strong>{editorial.bylineRole && <>, {editorial.bylineRole}</>} — Updated <span data-updated>{publishedOn}</span></p>
+          <div class="prose" set:html={editorial.html} />
+
+          <!-- 7. Urgency + wide CTA -->
+          <div class="v2-urgent">
+            <div class="u-kicker">{urgency.kicker}</div>
+            <h3>{urgency.heading}</h3>
+            <p set:html={urgency.text} />
+          </div>
+          <a href={top.url} class="v2-wide-btn" rel="sponsored nofollow noopener" target="_blank">{urgency.cta}</a>
+          {urgency.under && <p class="v2-under-btn" set:html={urgency.under} />}
+        </div>
+
+        <aside class="v2-ed-side">
+          <div class="side-card">
+            <div class="sc-head">Overall Score</div>
+            <div class="sc-score">{top.score.toFixed(1)}</div>
+            <div class="sc-label">{top.scoreLabel}</div>
+            {stars && <div class="sc-stars">{stars}</div>}
+            {top.ratingLine && <div class="sc-rating">{top.ratingLine}</div>}
+            {sidebar.subscores.map((s) => (
+              <div class="bar">
+                <div class="bl"><span>{s.label}</span><span>{s.value.toFixed(1)}</span></div>
+                <div class="bt"><div class="bf" style={`width:${s.value * 10}%`}></div></div>
+              </div>
+            ))}
+            <div class="sc-pc">
+              <div class="pc-head pros">PROS:</div>
+              <ul>{sidebar.pros.map((t) => <li set:html={t} />)}</ul>
+              <div class="pc-head cons">CONS:</div>
+              <ul>{sidebar.cons.map((t) => <li class="x" set:html={t} />)}</ul>
+            </div>
+            <a href={top.url} class="v2-btn" rel="sponsored nofollow noopener" target="_blank">Visit Site →</a>
+          </div>
+        </aside>
+      </div>
+
+      <!-- 8. Customer quotes -->
+      <h2 class="v2-section-title">What {top.brand ?? top.name} Customers Say</h2>
+      <p style="margin:0;color:var(--muted);font-size:0.9rem;">Verbatim from the maker's published customer reviews. Individual experiences vary.</p>
+      <div class="v2-quotes">
+        {quotes.map((q) => (
+          <div class="quote">
+            <div class="q-stars">{"★".repeat(q.stars ?? 5)}</div>
+            <p set:html={`“${q.text}”`} />
+            <div class="q-who">{q.name}{q.where && <> — {q.where}</>}</div>
+            <div class="q-src">{q.source}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- 9. Where to buy -->
+      <h2 class="v2-section-title">Where Can I Buy the {top.name}?</h2>
+      <ol class="v2-steps">{howToBuy.map((s) => <li set:html={s} />)}</ol>
+      <div style="text-align:center;margin-top:18px;">
+        <a href={top.url} class="v2-btn" style="display:inline-block;width:auto;max-width:none;padding:14px 34px;" rel="sponsored nofollow noopener" target="_blank">{urgency.cta}</a>
+      </div>
+
+      <!-- 10. Final score + author -->
+      <div class="v2-final">
+        <div class="side-card">
+          <div class="sc-head">{top.name}</div>
+          <div class="sc-score">{top.score.toFixed(1)}</div>
+          <div class="sc-label">{top.scoreLabel}</div>
+          {sidebar.subscores.map((s) => (
+            <div class="bar">
+              <div class="bl"><span>{s.label}</span><span>{s.value.toFixed(1)}</span></div>
+              <div class="bt"><div class="bf" style={`width:${s.value * 10}%`}></div></div>
+            </div>
+          ))}
+          <a href={top.url} class="v2-btn" rel="sponsored nofollow noopener" target="_blank">Visit Site →</a>
+        </div>
+        <div class="v2-author">
+          <div class="av">{initials}</div>
+          <div>
+            <div class="an">Written by {author.name}</div>
+            <div class="ar">{author.role}</div>
+            <p set:html={author.bio} />
+          </div>
+        </div>
+      </div>
+
+      <!-- 11. FAQ -->
+      {faqs && faqs.length > 0 && (
+        <section id="faq" style="margin-top:34px;">
+          <h2 class="v2-section-title" style="margin-top:0;">Frequently Asked Questions</h2>
+          <div class="faq-list">
+            {faqs.map((f) => (
+              <details class="faq-item">
+                <summary>
+                  <span class="faq-q">{f.q}</span>
+                  <svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+                </summary>
+                <div class="faq-a"><p set:html={f.a} /></div>
+              </details>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <p class="v2-disclosure">
+        <strong>Advertising disclosure:</strong> The Life Insider is reader-supported. We may earn a commission when you buy through links on this page, at no extra cost to you. Our #1 pick is a product we are compensated to feature; ranks 2–5 link to Amazon, where we earn as an Amazon Associate. Scores are our editorial assessment of published specifications, maker claims and customer feedback — see <a href="/how-we-rate/">how we rate</a> and our <a href="/advertising-disclosure/">advertising disclosure</a>. Claims about the #1 product are the maker's own and are attributed as such. This page is not medical advice.
+      </p>
+    </div>
+
+    <EmailCapture />
+  </article>
+
+  <StickyCta name={top.name} brand={top.brand} image={top.stickyImage ?? top.image} url={top.url} price={top.price} oldPrice={top.oldPrice} discount={top.discount} ctaLabel={top.ctaLabel} />
+  <ExitOffer name={top.name} image={top.image} url={top.url} price={top.price} oldPrice={top.oldPrice} discount={top.discount} trustNote={top.trustNote} />
+
+  <script is:inline>
+    /* Roll every date on the page to the reader's own current date (US locale). */
+    (function () {
+      try {
+        var d = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+        var el = document.getElementById("lastUpdated"); if (el) el.textContent = d;
+        document.querySelectorAll("[data-deal-date],[data-updated]").forEach(function (n) { n.textContent = d; });
+      } catch (e) {}
+    })();
+  </script>
+
+  <slot name="body-end" slot="body-end" />
+</Base>

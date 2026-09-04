@@ -4,9 +4,13 @@ import "../styles/global.css";
 interface Props {
   title: string;
   description: string;
+  /* minimal = logo-only header (no nav). Used by V2 review pages: every
+     high-traffic competitor lander runs a logo-only header so the only
+     clickable things on the page are the offer buttons. 4 Sep 2026. */
+  minimal?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, minimal = false } = Astro.props;
 const year = new Date().getFullYear();
 
 // Set to your GA4 Measurement ID (e.g. "G-XXXXXXXXXX") to activate analytics.
@@ -52,12 +56,14 @@ const GA4_ID = "G-M9LT53YQDS";
           <span class="mark">TL</span>
           <span><span class="ti-the">The</span> Life Insider</span>
         </a>
-        <nav class="main-nav">
-          <a href="/reviews/">Reviews</a>
-          <a href="/blog/">Blog</a>
-          <a href="/how-we-rate/">How We Rate</a>
-          <a href="/about/">About</a>
-        </nav>
+        {!minimal && (
+          <nav class="main-nav">
+            <a href="/reviews/">Reviews</a>
+            <a href="/blog/">Blog</a>
+            <a href="/how-we-rate/">How We Rate</a>
+            <a href="/about/">About</a>
+          </nav>
+        )}
       </div>
     </header>
 

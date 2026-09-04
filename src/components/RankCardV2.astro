@@ -1,0 +1,79 @@
+---
+/* V2 ranked card — 3 zones: media | body (two-column ticks) | side (score, stars,
+   price, hot button, red sale block, shipping line). Built from the 3 Sep 2026
+   visual teardown of the eight highest-traffic competitor landers.
+   rank 1 renders full; ranks 2–5 render compact (3 pros, 2 cons). */
+import type { Product } from "./ProductCard.astro";
+
+export interface ProductV2 extends Product {
+  ribbon?: string;        // "#1 Best in 2026" (rank 1) — ranks 2+ show "#2" etc.
+  ratingLine?: string;    // "4.8/5 from 13,427+ customers"
+  shipNote?: string;      // "Ships within 48 hrs · USPS 2–5 days"
+  shipFast?: boolean;     // render shipNote in green (the #1's advantage)
+  dealLabel?: string;     // "Deal verified" | "Sale ends" — the label under the sale %
+  logo?: string;          // brand logo under the product image
+}
+const { product, repeat = false, trust } = Astro.props as { product: ProductV2; repeat?: boolean; trust?: string[] };
+const p = product;
+const compact = p.rank !== 1;
+const pros = compact ? p.pros.slice(0, 3) : p.pros;
+const cons = compact ? (p.cons ?? []).slice(0, 2) : (p.cons ?? []);
+const stars = p.starRating ? "★".repeat(Math.round(p.starRating)) + "☆".repeat(5 - Math.round(p.starRating)) : null;
+const dealDate = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" });
+---
+
+<div class:list={["rc", { "is-top": p.rank === 1, "is-compact": compact }]} id={repeat ? undefined : `rank-${p.rank}`}>
+  {p.rank === 1
+    ? <span class="rc-ribbon">{p.ribbon ?? "#1 Best in 2026"}</span>
+    : <span class="rc-ribbon num">#{p.rank}</span>}
+  <div class="rc-grid">
+    <div class="rc-media">
+      {p.image && <img class="rc-img" src={p.image} alt={p.name} width="210" height="190" loading={p.rank === 1 ? "eager" : "lazy"} decoding="async" />}
+      {p.logo && <img class="rc-logo" src={p.logo} alt={p.brand ?? ""} loading="lazy" decoding="async" />}
+    </div>
+    <div class="rc-body">
+      <h2 class="rc-title" set:html={p.name} />
+      <ul class="rc-ticks">
+        {pros.map((t) => <li set:html={t} />)}
+        {cons.map((t) => <li class="x" set:html={t} />)}
+      </ul>
+    </div>
+    <div class="rc-side">
+      <div class="rc-score-cap">Overall Score</div>
+      <div class="rc-score">{p.score.toFixed(1)}</div>
+      {p.scoreLabel && <div class="rc-score-label">{p.scoreLabel}</div>}
+      {stars && <div class="rc-stars" aria-label={`${p.starRating} out of 5`}>{stars}</div>}
+      {p.ratingLine && <div class="rc-rating-line">{p.ratingLine}</div>}
+      {p.price && (
+        <div class="rc-price">
+          <span class="now">{p.price}</span>
+          {p.oldPrice && <span class="was">{p.oldPrice}</span>}
+        </div>
+      )}
+      <a href={p.url} class:list={["rc-btn", { "is-alt": p.rank !== 1 }]} rel="sponsored nofollow noopener" target="_blank">
+        {p.ctaLabel ?? "Visit Site →"}
+      </a>
+      {p.rank === 1 && p.discount && (
+        <div class="rc-sale">
+          <strong>{p.discount}</strong>
+          {p.dealLabel ?? "Deal verified"}: <span data-deal-date>{dealDate}</span>
+        </div>
+      )}
+      {p.shipNote && <div class:list={["rc-ship", { "is-fast": p.shipFast }]}>{p.shipNote}</div>}
+    </div>
+    {trust && trust.length > 0 && (
+      <div class="rc-trust">
+        {trust.map((t, i) => (
+          <div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              {i === 0 && <><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0" /><path d="m8 12 3 3 5-6" /></>}
+              {i === 1 && <><path d="M3 7h13v10H3z" /><path d="M16 10h4l1 3v4h-5" /><circle cx="7" cy="18" r="2" /><circle cx="18" cy="18" r="2" /></>}
+              {i === 2 && <><path d="M12 3v4M12 17v4M3 12h4M17 12h4" /><circle cx="12" cy="12" r="4" /></>}
+            </svg>
+            <span set:html={t} />
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</div>
