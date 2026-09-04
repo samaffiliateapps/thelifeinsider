@@ -15,6 +15,7 @@ import type { ProductV2 } from "../components/RankCardV2.astro";
 import EmailCapture from "../components/EmailCapture.astro";
 import StickyCta from "../components/StickyCta.astro";
 import ExitOffer from "../components/ExitOffer.astro";
+import fs from "node:fs";
 
 export interface Props {
   title: string;
@@ -26,13 +27,13 @@ export interface Props {
   listLede: string;
   products: ProductV2[];
   trust: string[];                 // 3 items in the repeat card's trust strip
-  howWeRate: string;
+  howWeRate?: string;              // optional — omitted on Grounded (Sam, 4 Sep)
   editorial: { heading: string; byline: string; bylineRole?: string; html: string };
   sidebar: { subscores: { label: string; value: number }[]; pros: string[]; cons: string[] };
   urgency: { kicker: string; heading: string; text: string; cta: string; under?: string };
   quotes: { text: string; name: string; where?: string; source: string; stars?: number }[];
-  howToBuy: string[];
-  author: { name: string; role: string; bio: string };
+  howToBuy: { title: string; text: string }[];
+  author: { name: string; role: string; bio: string; photo?: string };
   faqs?: { q: string; a: string }[];
   visibleRivals?: number;          // rivals shown before the toggle (default 2)
 }
@@ -44,6 +45,7 @@ const hidden = rivals.slice(visibleRivals);
 const publishedOn = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" });
 const stars = top.starRating ? "★".repeat(Math.round(top.starRating)) + "☆".repeat(5 - Math.round(top.starRating)) : null;
 const initials = author.name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();
+const photoOk = author.photo ? fs.existsSync(new URL(`../../public${author.photo}`, import.meta.url)) : false;
 ---
 
 <Base title={title} description={description} minimal>
@@ -81,11 +83,12 @@ const initials = author.name.split(" ").map((w) => w[0]).join("").slice(0, 2).to
       <div class="v2-band">Best Overall {h1.replace(/^The \d+ Best /i, "").replace(/ of \d{4}$/i, "")} — {new Date().getFullYear()}</div>
       <RankCardV2 product={top} repeat trust={trust} />
 
-      <!-- 5. How we rate -->
-      <div class="v2-note">
-        <div class="n-head">How We Rate?</div>
-        <p set:html={howWeRate} />
-      </div>
+      {howWeRate && (
+        <div class="v2-note">
+          <div class="n-head">How We Rate?</div>
+          <p set:html={howWeRate} />
+        </div>
+      )}
 
       <!-- 6. Editorial + sticky sidebar -->
       <div class="v2-ed">
@@ -130,7 +133,7 @@ const initials = author.name.split(" ").map((w) => w[0]).join("").slice(0, 2).to
 
       <!-- 8. Customer quotes -->
       <h2 class="v2-section-title">What {top.brand ?? top.name} Customers Say</h2>
-      <p style="margin:0;color:var(--muted);font-size:0.9rem;">Verbatim from the maker's published customer reviews. Individual experiences vary.</p>
+      <p style="margin:0;color:var(--muted);font-size:0.9rem;">Verbatim from {top.brand ?? top.name}'s published customer reviews. Individual experiences vary.</p>
       <div class="v2-quotes">
         {quotes.map((q) => (
           <div class="quote">
@@ -144,7 +147,7 @@ const initials = author.name.split(" ").map((w) => w[0]).join("").slice(0, 2).to
 
       <!-- 9. Where to buy -->
       <h2 class="v2-section-title">Where Can I Buy the {top.name}?</h2>
-      <ol class="v2-steps">{howToBuy.map((s) => <li set:html={s} />)}</ol>
+      <ol class="v2-steps">{howToBuy.map((s) => <li><div><div class="st">{s.title}</div><p class="sb" set:html={s.text} /></div></li>)}</ol>
       <div style="text-align:center;margin-top:18px;">
         <a href={top.url} class="v2-btn" style="display:inline-block;width:auto;max-width:none;padding:14px 34px;" rel="sponsored nofollow noopener" target="_blank">{urgency.cta}</a>
       </div>
@@ -164,7 +167,7 @@ const initials = author.name.split(" ").map((w) => w[0]).join("").slice(0, 2).to
           <a href={top.url} class="v2-btn" rel="sponsored nofollow noopener" target="_blank">Visit Site →</a>
         </div>
         <div class="v2-author">
-          <div class="av">{initials}</div>
+          {photoOk ? <img class="av" src={author.photo} alt={author.name} width="54" height="54" loading="lazy" /> : <div class="av">{initials}</div>}
           <div>
             <div class="an">Written by {author.name}</div>
             <div class="ar">{author.role}</div>
@@ -191,9 +194,10 @@ const initials = author.name.split(" ").map((w) => w[0]).join("").slice(0, 2).to
         </section>
       )}
 
-      <p class="v2-disclosure">
-        <strong>Advertising disclosure:</strong> The Life Insider is reader-supported. We may earn a commission when you buy through links on this page, at no extra cost to you. Our #1 pick is a product we are compensated to feature; ranks 2–5 link to Amazon, where we earn as an Amazon Associate. Scores are our editorial assessment of published specifications, maker claims and customer feedback — see <a href="/how-we-rate/">how we rate</a> and our <a href="/advertising-disclosure/">advertising disclosure</a>. Claims about the #1 product are the maker's own and are attributed as such. This page is not medical advice.
-      </p>
+      <details class="v2-disclosure">
+        <summary>Advertising disclosure</summary>
+        <p>The Life Insider is reader-supported. We may earn a commission if you buy through links on this page, at no extra cost to you. This never influences our rankings, scores or what we write — see <a href="/how-we-rate/">how we rate</a> and our <a href="/advertising-disclosure/">advertising disclosure</a>. Product claims are the brand's own and are attributed as such. This page is not medical advice.</p>
+      </details>
     </div>
 
     <EmailCapture />
