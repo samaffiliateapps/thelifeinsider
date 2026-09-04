@@ -16,6 +16,7 @@ import EmailCapture from "../components/EmailCapture.astro";
 import StickyCta from "../components/StickyCta.astro";
 import ExitOffer from "../components/ExitOffer.astro";
 import fs from "node:fs";
+import path from "node:path";
 
 export interface Props {
   title: string;
@@ -45,7 +46,7 @@ const hidden = rivals.slice(visibleRivals);
 const publishedOn = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" });
 const stars = top.starRating ? "★".repeat(Math.round(top.starRating)) + "☆".repeat(5 - Math.round(top.starRating)) : null;
 const initials = author.name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();
-const photoOk = author.photo ? fs.existsSync(new URL(`../../public${author.photo}`, import.meta.url)) : false;
+const photoOk = author.photo ? fs.existsSync(path.join(process.cwd(), "public", author.photo)) : false; // build-time check from the project root
 ---
 
 <Base title={title} description={description} minimal>
