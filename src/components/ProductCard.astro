@@ -151,7 +151,7 @@ const stars = p.starRating
   (function () {
     var f;
     try {
-      f = new Date().toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" });
+      f = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" });
     } catch (e) { return; }
     var n = document.querySelectorAll("[data-deal-date]");
     for (var i = 0; i < n.length; i++) n[i].textContent = f;
