@@ -199,7 +199,7 @@ const photoOk = author.photo ? fs.existsSync(path.join(process.cwd(), "public", 
     /* Roll every date on the page to the reader's own current date (US locale). */
     (function () {
       try {
-        var d = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+        var d = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" });
         var el = document.getElementById("lastUpdated"); if (el) el.textContent = d;
         document.querySelectorAll("[data-deal-date],[data-updated]").forEach(function (n) { n.textContent = d; });
       } catch (e) {}

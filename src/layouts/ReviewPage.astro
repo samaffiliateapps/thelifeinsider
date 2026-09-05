@@ -41,8 +41,8 @@ const top = products.find((p) => p.rank === 1);
    Rendered in the reader's locale so a US visitor sees a US-formatted date.
    To make the printed date literally true, add a daily scheduled deploy in
    Cloudflare Pages — the page then really is republished every day. */
-const publishedOn = new Date().toLocaleDateString("en-AU", {
-  day: "numeric", month: "long", year: "numeric", timeZone: "Australia/Brisbane",
+const publishedOn = new Date().toLocaleDateString("en-US", {
+  day: "numeric", month: "long", year: "numeric", timeZone: "America/New_York",
 });
 ---
 
@@ -286,8 +286,8 @@ const publishedOn = new Date().toLocaleDateString("en-AU", {
       var el = document.getElementById("lastUpdated");
       if (!el) return;
       try {
-        el.textContent = new Date().toLocaleDateString(undefined, {
-          day: "numeric", month: "long", year: "numeric",
+        el.textContent = new Date().toLocaleDateString("en-US", {
+          month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York",
         });
       } catch (e) {}
     })();

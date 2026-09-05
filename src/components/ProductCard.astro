@@ -41,8 +41,8 @@ const p = product;
 const compact = p.rank !== 1;
 const pros = compact ? p.pros.slice(0, 2) : p.pros;
 const cons = compact ? (p.cons ?? []).slice(0, 2) : (p.cons ?? []);
-const dealDate = new Date().toLocaleDateString("en-AU", {
-  day: "numeric", month: "long", year: "numeric", timeZone: "Australia/Brisbane",
+const dealDate = new Date().toLocaleDateString("en-US", {
+  day: "numeric", month: "long", year: "numeric", timeZone: "America/New_York",
 });
 const stars = p.starRating
   ? "★".repeat(Math.round(p.starRating)) + "☆".repeat(5 - Math.round(p.starRating))
