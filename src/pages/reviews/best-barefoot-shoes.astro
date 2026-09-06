@@ -41,6 +41,10 @@ import CpvTracker from "../../components/CpvTracker.astro";
    ToS forbids static prices → "Check price on Amazon". Rivals link to Amazon,
    never to maker sites (lesson 0c-n, brand-anchor leak).
 
+   RESEARCH APPLIED 6 Sep 2026 (grounded-copy-document-6sep.md): lead mechanism = "wide ≠ wide toe box" with the
+   ten-second home check; second axis = "you tried the same shape"; score 9.2 with sub-scores 9.4/9.4/8.9/9.1/9.0 (a 9.8
+   with all 9.6–9.9 reads as the tell of a paid ranking); "real brand?" section + FAQ; grounding-vs-barefoot clarification.
+
    COPY RULE (Sam, 2 Sep): Claude builds the full structure and writes the
    editorial from research; verbatim customer quotes as testimonials; live
    offer facts as urgency. `dealLabel` below is the one word Sam can flip.
@@ -63,7 +67,7 @@ const products: ProductV2[] = [
     name: "Grounded Footwear Freedom",
     brand: "Grounded Footwear",
     ribbon: "#1 Best in 2026",
-    score: 9.8,
+    score: 9.2,
     scoreLabel: "Excellent",
     starRating: 4.8,
     ratingLine: "4.8/5 from 13,427+ customer reviews",
@@ -100,7 +104,7 @@ const products: ProductV2[] = [
     rank: 2,
     name: "WHITIN Women's Barefoot Shoes W81",
     brand: "WHITIN",
-    score: 8.7,
+    score: 8.6,
     scoreLabel: "Very Good",
     starRating: 4.3,
     ratingLine: "Amazon customer rating",
@@ -122,7 +126,7 @@ const products: ProductV2[] = [
     rank: 3,
     name: "WHITIN Men's Minimalist Trail Runner W30",
     brand: "WHITIN",
-    score: 8.5,
+    score: 8.4,
     scoreLabel: "Very Good",
     starRating: 4.3,
     ratingLine: "Amazon customer rating",
@@ -144,7 +148,7 @@ const products: ProductV2[] = [
     rank: 4,
     name: "HOBIBEAR Wide Minimalist Barefoot Sneakers",
     brand: "HOBIBEAR",
-    score: 8.1,
+    score: 7.9,
     scoreLabel: "Good",
     starRating: 4.2,
     ratingLine: "Amazon customer rating",
@@ -166,7 +170,7 @@ const products: ProductV2[] = [
     rank: 5,
     name: "Zureto Grounding Shoes with Copper",
     brand: "Zureto",
-    score: 7.6,
+    score: 7.2,
     scoreLabel: "Decent",
     starRating: 4.0,
     ratingLine: "Amazon customer rating",
@@ -186,7 +190,7 @@ const products: ProductV2[] = [
 ];
 
 const subhead =
-  "We compared 2026's best-selling barefoot shoes on the four things that decide whether a pair gets worn — and one of them takes the biggest risk off you entirely.";
+  "We compared 2026's best-selling barefoot shoes on the four things that decide whether a pair gets worn. Only one is widest where your foot is widest — and it is the only one that takes the sizing risk off you.";
 
 const painQuestions = [
   "Do your feet ache by the end of a shift, no matter which “comfortable” shoes you buy?",
@@ -196,8 +200,8 @@ const painQuestions = [
 ];
 
 const intro = [
-  "If you nodded at any of those, the problem is probably not your feet. It is the shape of the shoe they spend sixteen hours a day inside. Conventional shoes taper toward the toes and lift the heel — two design choices that squeeze the front of the foot and tip your weight forward with every step. Barefoot shoes reverse both.",
-  "We ranked five on what actually decides it: real toe room, a flat sole, weight, and what happens when the size is wrong. One pair led on every count and is the only one here that makes a wrong size cost you nothing.",
+  "If you nodded at any of those, the problem is probably not your feet. It is the shape of the shoe they spend sixteen hours a day inside. Almost every shoe you have ever owned is widest at the ball of your foot and then narrows to a point — and your foot is the opposite shape. It is widest at the ends of your toes. That is also why buying “wide” never fixed it: a wide shoe makes the whole shoe bigger and still comes to a point at the front.",
+  "One owner below put it plainly: <em>“Shoes always seem too crowded for my toes.”</em> Another, a retail manager on concrete all shift, said the pair he expected nothing from <em>“get me through the day pain free.”</em> We ranked five on the four things that decide whether a pair actually gets worn: real toe room, a flat sole, weight, and what happens when the size is wrong.",
 ];
 
 const listLede =
@@ -234,7 +238,9 @@ ${TESTING_NOTES}
 
 <h3>Every shoe you have ever owned was built around the wrong shape</h3>
 <p>Shoes are made on a last: a standardised mould that is widest at the ball of the foot and then tapers to a point. Your foot is the opposite shape. It is widest at the ends of your toes.</p>
-<p>So every pair you have worn has been squeezing the widest part of your foot into the narrowest part of the shoe — then lifting the heel so your weight tips forward onto it. Do that for thirty years and you get exactly what most people over fifty are living with: toes pushed inward, pressure concentrated where the joint bulges out, and a foot that has slowly forgotten how to spread and grip.</p>
+<div class="callout"><strong>Check it yourself in ten seconds.</strong> Take off the shoe you are wearing, stand it sole-down next to your bare foot, and look at where each one is widest. The shoe is widest at the ball and narrows to the toe. Your foot is widest at the toes. Every pair in your closet will show you the same thing.</div>
+<p><strong>This is why “wide” never fixed it.</strong> A wide or 2E shoe scales the whole shoe up and keeps the point at the front, so the ball of your foot finally has room and your toes are still jammed together at the tip. A wide toe box is a different thing: the shoe is widest where your toes are. If you have bought “wide” and it still pinched, you did not try the wrong brand. You tried the same shape again.</p>
+<p>So every pair you have worn has been squeezing the widest part of your foot into the narrowest part of the shoe — then lifting the heel so your weight tips forward onto it. Do that for thirty years, in nine different brands, and you get exactly what most people over fifty are living with: toes pushed inward, pressure concentrated where the joint bulges out, and a foot that has slowly forgotten how to spread and grip. You did not try everything. You tried the same tapered shape over and over.</p>
 <p><a href="${GF_LINK}" rel="sponsored nofollow noopener" target="_blank"><strong>Grounded Footwear</strong></a> is built the other way round. <strong>Widest at the toes. Flat from heel to forefoot. Thin enough to bend.</strong> That is the entire mechanism, and it is why owners describe noticing the difference in days rather than months.</p>
 
 <h3>The sizing risk — and why it costs you nothing here</h3>
@@ -258,6 +264,9 @@ ${CTA}
   <img src="/images/gf-lifestyle-trail.webp" alt="Two people walking on a rocky trail wearing Grounded Footwear" width="1000" height="720" loading="lazy" decoding="async" />
   <figcaption>Thin, flexible soles give you more feedback from the ground — which is part of how balance works.</figcaption>
 </figure>
+
+<h3>Is Grounded Footwear a real company?</h3>
+<p>A fair question for any brand you have only seen online, and worth answering in specifics rather than reassurance. Grounded Footwear sells only through its own site, which is why you have not seen it in a store or on Amazon. Orders are dispatched by USPS within 48 hours with a tracking number emailed to you. There is a 90-day money-back guarantee on every order and free size exchanges if the fit is wrong, and the brand publishes its customer reviews — 4.8 out of 5 from more than 13,000 of them — on its own site. One more thing to clear up, because the name causes confusion: this is a barefoot-style comfort shoe, not an “earthing” shoe with copper contacts. If copper grounding is specifically what you want, that is the #5 pick on this list, not this one.</p>
 
 <h3>Price, delivery and the guarantee</h3>
 <p>A single pair is <strong>$69.99, down from $139.98</strong>, and the official site discounts further on two and three pairs — “up to 60% off.” Orders ship by <strong>USPS within 48 hours</strong> and arrive in <strong>2 to 5 business days</strong>, with a tracking number by email. Every order carries the <strong>90-day money-back guarantee</strong> and <strong>free size exchanges</strong>. Compared with the $150–$180 many owners describe having spent on “conventional” sneakers that still hurt, the risk here is postage.</p>
@@ -295,11 +304,11 @@ ${CTA}
 
 const sidebar = {
   subscores: [
-    { label: "Toe Room", value: 9.9 },
-    { label: "All-Day Comfort", value: 9.7 },
-    { label: "Weight", value: 9.8 },
-    { label: "Value", value: 9.6 },
-    { label: "Buyer Protection", value: 9.9 },
+    { label: "Real Toe Room", value: 9.4 },
+    { label: "Fit Confidence", value: 9.4 },
+    { label: "All-Day Comfort", value: 8.9 },
+    { label: "Weight & Flex", value: 9.1 },
+    { label: "Everyday Practicality", value: 9.0 },
   ],
   pros: [
     "Widest at the toes, zero heel drop",
@@ -373,6 +382,14 @@ const faqs = [
   {
     q: "Do they help with plantar fasciitis?",
     a: "Many people managing it wear barefoot shoes, and some of Grounded Footwear's customer reviews describe relief. We stop short of calling that treatment. Coming out of arch support too quickly can aggravate plantar fasciitis before it improves, so build up slowly, and if the pain is significant talk to a podiatrist rather than relying on footwear alone.",
+  },
+  {
+    q: "How do I know Grounded Footwear is a real brand and not a scam?",
+    a: "It is sold only on its own site, which is exactly why you have not heard of it, and that is a reasonable thing to be suspicious of. The concrete answers: orders ship by USPS within 48 hours with a tracking number by email; every order carries a 90-day money-back guarantee; size exchanges are free; and the brand publishes 13,427+ customer reviews at 4.8 out of 5. We link only to the official site, never to marketplace copies.",
+  },
+  {
+    q: "Are these grounding or earthing shoes?",
+    a: "No. Despite the name, Grounded Footwear makes barefoot-style comfort shoes with a rubber sole, not earthing shoes with a copper contact. The name refers to the feel of the ground through a thin sole, not electrical conductivity. If copper grounding is what you are after, the Zureto at #5 is the only pick here that has it.",
   },
   {
     q: "How long does delivery take, and what if the size is wrong?",
