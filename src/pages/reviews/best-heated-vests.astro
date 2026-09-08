@@ -54,6 +54,11 @@ import CpvTracker from "../../components/CpvTracker.astro";
    Fieldsheer Mobile Warming Backcountry Xtera: "3 Zone Heating System -
    2x Chest & 1x Back" (Amazon listing), 7.4V pack included, Bluetooth app,
    Amazon B0DF3VL2R8 ($249, 4.5★).
+
+   MEDIA (Sam, 8 Sep 11pm): customer UGC video (29 s, captions burned in) under
+   the editorial opener; the maker's heat-glow loop (5 s) in the cold-spot
+   section; a still of the glow (front + back) as the #1 card image — the
+   "heating zones glowing" product shot every winning lander uses.
    Amazon ToS forbids static prices → "Check price on Amazon". Rivals link
    to Amazon, never maker sites (brand-anchor leak).
 
@@ -65,11 +70,11 @@ import CpvTracker from "../../components/CpvTracker.astro";
    ========================================================================= */
 
 /* CPV ONE TRACKING — set CPV_CAMPAIGN to the CPV One campaign id created for
-   this page (campaign 14 is the leaf-blower page; the vest needs its own).
+   this page — CPV One "Heat Vest - 08.09.2026" = campaign 16 (created by Sam 8 Sep).
    The Google Ads final-URL suffix for the HeatedVest campaign carries the
    same id as clpcid. Both must match before launch. */
 const CPV_ROOT = "https://track.thelifeinsider.com/";
-const CPV_CAMPAIGN = "15";
+const CPV_CAMPAIGN = "16";
 const HV_LINK = `${CPV_ROOT}base2.php`;
 const AMZ = (asin: string, sub: string) =>
   `https://www.amazon.com/dp/${asin}?tag=thelifeinside-20&ascsubtag=hv_${sub}&language=en_US`;
@@ -92,7 +97,7 @@ const products: ProductV2[] = [
     dealLabel: "Sale Ends",
     shipNote: "Ships from Ohio, USA · 2–3 days",
     shipFast: true,
-    image: "/images/hv-hero.webp",
+    image: "/images/hv-hero-glow.webp",
     logo: "/images/hv-logo.svg",
     stickyImage: "/images/hv-hero-thumb.webp",
     trustNote: "37,392+ customers · 90-day money-back guarantee · free size exchanges",
@@ -241,6 +246,10 @@ const editorial = {
   bylineRole: "Gear & Everyday Comfort Editor",
   html: `
 <p><strong>Nothing else on this list came close.</strong> If you are cold where you sit, stand or work, the <a href="${HV_LINK}" rel="sponsored nofollow noopener" target="_blank"><strong>Solana Gear Heated Vest</strong></a> is the one I would buy — and it was not a close call. Here is exactly why.</p>
+<figure class="hv-video">
+  <video src="/media/hv-ugc.mp4" poster="/images/hv-ugc-poster.webp" controls muted autoplay loop playsinline preload="metadata" width="720" height="449" aria-label="Customer video: unboxing the Solana Gear heated vest, plugging in the power bank and cycling the heat levels"></video>
+  <figcaption>A Solana Gear customer unboxing the vest, plugging in a power bank and cycling the three heat levels. Captions in the video; tap the speaker to unmute. Solana Gear customer video.</figcaption>
+</figure>
 
 <h3 id="how-we-ranked">How we ranked the five</h3>
 <p>We put the five side by side and scored them on five things that decide whether a heated vest actually keeps you warm: <strong>where the heat lands</strong> (how many pads, and whether any of them sit on the lower back and neck), <strong>honest runtime</strong> (hours per setting, not the “up to” number), <strong>what it costs to keep running</strong> (a universal USB bank, or a proprietary pack you must buy again), <strong>bulk and arm freedom</strong> (does it wear under a shell, and does the battery dig in when you sit), and <strong>all-in price</strong> (the vest plus the battery you need to use it). We went through each brand's published zone map, battery spec and return policy word for word, and read the owner reviews for every vest, looking for the complaints that repeat: cold spots, dead batteries, runs small, bulky.</p>
@@ -255,6 +264,10 @@ ${TESTING_NOTES}
 <h3 id="zones">The cold spot nobody heats</h3>
 <p>Fabric barely moves heat sideways. A pad on your chest warms your chest and almost nothing else. So a heated vest only warms the places it has pads, and the gaps between pads stay cold no matter how high you turn it up. Coverage is about placement, not the number printed on the box.</p>
 <p>Now look at where you actually go cold. The lower back you press into a seat, a tree or a bleacher. The kidneys. The back of the neck where the wind gets in. Then pull up any rival's spec page and count where its pads sit. Ororo's Classic vest publishes four zones: the two hand pockets, the mid-back and the collar. iHood's put heat in the collar, mid-back and chest. Neither has an element on the lower back.</p>
+<figure class="hv-video">
+  <video src="/media/hv-heat-loop.mp4" poster="/images/hv-heat-poster.webp" muted autoplay loop playsinline preload="auto" width="900" height="630" aria-label="The Solana Gear vest's heated areas glowing red, front and back"></video>
+  <figcaption>Where the heat lands, front and back. Solana Gear video.</figcaption>
+</figure>
 <figure>
   <img src="/images/hv-zones.svg" alt="Zone map of the Solana Gear heated vest: two pads at the front hand pockets, six pads across the upper, mid and lower back, and one at the collar" width="520" height="276" loading="lazy" decoding="async" />
   <figcaption>The Solana Gear vest's nine pads: two at the front pockets, six across the upper, mid and lower back, one at the collar. Drawn from Solana Gear's published zone diagram.</figcaption>
@@ -299,6 +312,10 @@ ${CTA}
 <p><strong>If you sit still in the cold</strong> — a tree stand, an ice shanty, a rink or a bleacher — the lower-back pads are the reason to choose this one, and eight hours on low covers any game or sit with hours to spare.</p>
 <p><strong>If you are always cold indoors</strong>, the core zones are the point: warm the torso and the hands follow, and heating one person for under a cent a charge beats heating a whole house.</p>
 <p><strong>If your last vest's battery died</strong>, this is the way out of the replacement-pack cycle. Any 5V/2A bank, forever.</p>
+<figure>
+  <img src="/images/hv-hero.webp" alt="A woman and a man wearing the black Solana Gear heated vest over long-sleeve tops" width="720" height="690" loading="lazy" decoding="async" />
+  <figcaption>One unisex cut, XS to XXXL. Solana Gear image.</figcaption>
+</figure>
 <p><strong>Sizing.</strong> “Runs small” is the most common complaint in this whole category, so it is a fair thing to check. This vest is unisex XS–XXXL and true to size, with a height-and-weight chart at checkout. If you are between sizes: prefer a trim fit, go down; plan to wear it over a hoodie, or have broad shoulders, go up. Free exchanges either way, which is also what makes it a safe gift.</p>
 
 <h3 id="verdict">The clear winner</h3>

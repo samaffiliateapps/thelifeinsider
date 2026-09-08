@@ -207,3 +207,6 @@
   .v2 .v2-steps { grid-template-columns: 1fr; }
   .v2 .v2-head h1 { font-size: 1.75rem; }
 }
+
+/* ---- Inline video (heated vest, 8 Sep 2026) ---- */
+.v2 .prose figure.hv-video video { display: block; width: 100%; height: auto; border-radius: 10px; background: #000; }
