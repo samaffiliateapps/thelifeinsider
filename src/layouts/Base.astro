@@ -15,6 +15,10 @@ const year = new Date().getFullYear();
 
 // Set to your GA4 Measurement ID (e.g. "G-XXXXXXXXXX") to activate analytics.
 const GA4_ID = "G-M9LT53YQDS";
+// Google Ads tag (added 8 Sep 2026). The GA4 link alone only feeds the "All visitors (AdWords)" list; URL-rule
+// remarketing lists ("Barefoot page visitors", "Heated vest page visitors") need the Ads tag itself so each page
+// visit is recorded against its URL. Conversion tracking id from the account (customer.conversion_tracking_setting).
+const ADS_ID = "AW-18319719009";
 ---
 
 <!doctype html>
@@ -32,11 +36,12 @@ const GA4_ID = "G-M9LT53YQDS";
       GA4_ID && (
         <>
           <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`} />
-          <script is:inline define:vars={{ GA4_ID }}>
+          <script is:inline define:vars={{ GA4_ID, ADS_ID }}>
             window.dataLayer = window.dataLayer || [];
             function gtag() { dataLayer.push(arguments); }
             gtag("js", new Date());
             gtag("config", GA4_ID);
+            if (ADS_ID) gtag("config", ADS_ID);
           </script>
         </>
       )

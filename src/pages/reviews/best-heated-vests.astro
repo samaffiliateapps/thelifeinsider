@@ -1,0 +1,432 @@
+---
+import ReviewPageV2 from "../../layouts/ReviewPageV2.astro";
+import type { ProductV2 } from "../../components/RankCardV2.astro";
+import CpvTracker from "../../components/CpvTracker.astro";
+
+/* =========================================================================
+   HERO: Solana Gear Heated Vest — AdsBranded offer 826, $60 USD CPA, US + CA.
+   AM search CVR 4.84% (Oct–Dec 2025). The network's #1 offer last Q4.
+
+   BUILT 8 Sep 2026 on ReviewPageV2 for the Wed 10 Sep launch
+   ("The Life Insider - HeatedVest - US", A$100/day, Max Conversions, no tCPA).
+
+   RESEARCH APPLIED (heated-vest-build-doc.md + the four compass outputs,
+   8 Sep 2026): the traffic is Product-aware ("heated vest", "best heated
+   vest", "heated vest for men/women"); the load-bearing false belief is
+   "all heated vests are the same rebranded thing, so the cheap one is the
+   same product with worse luck". The one belief the page changes: vests
+   are NOT interchangeable — heat does not travel sideways through fabric,
+   so a vest only warms where it has pads, and most vests skip the lower
+   back and neck. SPINE = pad placement (verifiable on rivals' own spec
+   pages). SECOND AXIS = the core-warming reflex (why a vest, not gloves).
+   CLOSER = battery freedom (the "battery not included" con turned).
+   Score 9.2 with a visible 8.4 — never 9.8/9.9 (the paid-ranking tell).
+   "NASA-based" stays out of every headline and the argument (taboo
+   register; collides with the Cold Shoulder ice vest in search).
+
+   ⚠️ CLAIMS — verified 8 Sep 2026 against the offer landing + checkout
+   (offer.solanagear.com/heatedvest): 9 specialized heating areas front /
+   back / neck (maker's diagram: 2 pocket pads front, 6 back pads in three
+   rows incl. lower back, 1 collar) · 3 heat levels, one button (red / white /
+   blue) · up to 8 hours on a 10,000mAh 5V/2A bank (low) · battery NOT
+   included, any 5V/2A bank works, maker's 10,000mAh bank $19.99 at checkout
+   (was $39.99) · machine washable, waterproof power interface, water-safe
+   carbon-fibre wires · overheating protection · water & wind resistant ·
+   lightweight, unisex XS–XXXL, true to size, height×weight matrix, free
+   size exchanges · USB-C 5W in/out · TSA-friendly · "Ideal for -40c to 5c" ·
+   90-day money-back · ships from Ohio, USA in 2–3 days · tariff free ·
+   4.9/5 from 37,392+ customers · $59.99 single (from $119.98), $53.99/ea ×2,
+   $47.99/ea ×3 — "up to 60% off".
+   NOT PUBLISHED (not on the offer page): heats in 3 seconds · per-level
+   temperatures · weight · high/medium runtime hours · 99% heat retention.
+
+   RIVALS — verified 8 Sep 2026 on the makers' own pages + Amazon listings:
+   Venustas fleece vest: 6 zones (collar, back, shoulders, L/R bust), 7.4V
+   pack included, Amazon B0D72CTLX7 (4.4★, 2,837).
+   ORORO 4-Zone Classic: "left and right pockets, mid back, and collar"
+   (ororowear.com), no lower back; replacement PD 5K battery lists $89.99 on
+   ororowear.com; Amazon B01H50RF4Q (4.6★, 3,152). Ororo's 5-zone Evo adds
+   upper back; its 7-zone Classic Pro with lower-back heating is $189.99
+   apparel-only and was out of stock when checked.
+   iHood: 8 panels / 3 areas (collar + mid-back, L/R chest, L/R ears), 7.4V
+   14,400mAh included, 9.5/6.5/4.5 h, "supports up to 158°F"; Amazon
+   B0FJMKPGT1 (4.4★, 333).
+   Fieldsheer Mobile Warming Backcountry Xtera: "3 Zone Heating System -
+   2x Chest & 1x Back" (Amazon listing), 7.4V pack included, Bluetooth app,
+   Amazon B0DF3VL2R8 ($249, 4.5★).
+   Amazon ToS forbids static prices → "Check price on Amazon". Rivals link
+   to Amazon, never maker sites (brand-anchor leak).
+
+   COPY RULE (Sam, 2 Sep): Claude builds the structure and writes the
+   editorial from research; verbatim customer quotes as testimonials; live
+   offer facts as urgency. No testing narrative the page didn't perform —
+   this audience mocks "20 anonymously purchased vests". `dealLabel` and
+   `EDITORIAL_HEADLINE` are Sam's one-line switches.
+   ========================================================================= */
+
+/* CPV ONE TRACKING — set CPV_CAMPAIGN to the CPV One campaign id created for
+   this page (campaign 14 is the leaf-blower page; the vest needs its own).
+   The Google Ads final-URL suffix for the HeatedVest campaign carries the
+   same id as clpcid. Both must match before launch. */
+const CPV_ROOT = "https://track.thelifeinsider.com/";
+const CPV_CAMPAIGN = "15";
+const HV_LINK = `${CPV_ROOT}base2.php`;
+const AMZ = (asin: string, sub: string) =>
+  `https://www.amazon.com/dp/${asin}?tag=thelifeinside-20&ascsubtag=hv_${sub}&language=en_US`;
+
+const CTA = `<p style="text-align:center"><a class="v2-btn inline" href="${HV_LINK}" rel="sponsored nofollow noopener" target="_blank">Check Availability &amp; Discount →</a></p>`;
+
+const products: ProductV2[] = [
+  {
+    rank: 1,
+    name: "Solana Gear Heated Vest",
+    brand: "Solana Gear",
+    ribbon: "#1 Best in 2026",
+    score: 9.2,
+    scoreLabel: "Excellent",
+    starRating: 4.9,
+    ratingLine: "4.9/5 from 37,392+ customers",
+    price: "$59.99",
+    oldPrice: "$119.98",
+    discount: "Up to 60% OFF",
+    dealLabel: "Sale Ends",
+    shipNote: "Ships from Ohio, USA · 2–3 days",
+    shipFast: true,
+    image: "/images/hv-hero.webp",
+    logo: "/images/hv-logo.svg",
+    stickyImage: "/images/hv-hero-thumb.webp",
+    trustNote: "37,392+ customers · 90-day money-back guarantee · free size exchanges",
+    url: HV_LINK,
+    ctaLabel: "Visit Site →",
+    pros: [
+      "<strong>9 heating zones — front, back AND neck.</strong> Most vests skip the lower back you press into a seat; this one doesn't",
+      "<strong>Runs on any USB power bank you already own</strong> — no $70–90 proprietary pack that fades in two seasons",
+      "<strong>Up to 8 hours on a 10,000mAh bank</strong> (low) — a full shift, a morning sit or a whole tournament",
+      "<strong>Slim enough to layer</strong> — under a coat as a warm inner layer, or over a hoodie; arms stay free",
+      "Three heat levels from one chest button (red / white / blue)",
+      "Overheating protection built in · runs at phone-charger voltage, not mains",
+      "Machine washable — waterproof power interface, water-safe carbon-fibre wires",
+      "Water- and wind-resistant shell · unisex XS–XXXL, true to size",
+      "<strong>Free size exchanges</strong> if the fit is wrong",
+      "<strong>90-day money-back guarantee</strong> · ships from Ohio in 2–3 days",
+    ],
+    cons: [
+      "Battery not included — any 5V/2A bank works, or add the brand's 10,000mAh bank for $19.99 at checkout",
+      "Not the hottest vest here — it's the most evenly heated (see below)",
+    ],
+  },
+  {
+    rank: 2,
+    name: "Venustas Fleece Heated Vest (with Battery)",
+    brand: "Venustas",
+    score: 8.9,
+    scoreLabel: "Very Good",
+    starRating: 4.4,
+    ratingLine: "Amazon customer rating",
+    image: "/images/hv-venustas.webp",
+    url: AMZ("B0D72CTLX7", "venustas"),
+    ctaLabel: "Visit Amazon",
+    shipNote: "Standard shipping · 30-day Amazon returns",
+    pros: [
+      "6 heating zones including the shoulders and collar — the closest rival to our #1's coverage",
+      "Battery included, so it works out of the box",
+      "Soft fleece, machine washable",
+    ],
+    cons: [
+      "Proprietary 7.4V pack — when it fades you buy Venustas's replacement, not a $20 bank",
+      "No lower-back element, and around two to three times the all-in price",
+    ],
+  },
+  {
+    rank: 3,
+    name: "ORORO Men's Classic 4-Zone Heated Vest",
+    brand: "ORORO",
+    score: 8.7,
+    scoreLabel: "Very Good",
+    starRating: 4.6,
+    ratingLine: "Amazon customer rating",
+    image: "/images/hv-ororo.webp",
+    url: AMZ("B01H50RF4Q", "ororo"),
+    ctaLabel: "Visit Amazon",
+    shipNote: "Standard shipping · 30-day Amazon returns",
+    pros: [
+      "The name most people know, with thousands of Amazon ratings",
+      "Battery included; owners report the vest itself lasts for years",
+      "Well-made water- and wind-resistant shell",
+    ],
+    cons: [
+      "Four zones — two hand pockets, mid-back and collar — with no lower-back element",
+      "Replacement battery lists at $89.99 on Ororo's own site; owners report packs fading inside two seasons",
+    ],
+  },
+  {
+    rank: 4,
+    name: "iHood Heated Vest with Retractable Heated Hood",
+    brand: "iHood",
+    score: 8.4,
+    scoreLabel: "Very Good",
+    starRating: 4.4,
+    ratingLine: "Amazon customer rating",
+    image: "/images/hv-ihood.webp",
+    url: AMZ("B0FJMKPGT1", "ihood"),
+    ctaLabel: "Visit Amazon",
+    shipNote: "Standard shipping · 30-day Amazon returns",
+    pros: [
+      "Biggest included battery in this group (14,400mAh) — the longest low-setting runtime here",
+      "Retractable heated hood warms the ears and neck",
+      "Machine washable",
+    ],
+    cons: [
+      "Heat sits in the collar, mid-back and chest — no lower-back element",
+      "That big battery is heavy, and owners describe it pulling the vest off-balance",
+    ],
+  },
+  {
+    rank: 5,
+    name: "Fieldsheer Mobile Warming Backcountry Xtera Heated Vest",
+    brand: "Fieldsheer",
+    score: 8.1,
+    scoreLabel: "Good",
+    starRating: 4.5,
+    ratingLine: "Amazon customer rating",
+    image: "/images/hv-xtera.webp",
+    url: AMZ("B0DF3VL2R8", "xtera"),
+    ctaLabel: "Visit Amazon",
+    shipNote: "Standard shipping · 30-day Amazon returns",
+    pros: [
+      "Bluetooth app control with four heat settings",
+      "7.4V battery included, machine washable",
+    ],
+    cons: [
+      "The most expensive vest on this list, before a spare battery",
+      "Three zones — two chest, one back — on a proprietary 7.4V pack, for roughly four times the price",
+    ],
+  },
+];
+
+const subhead =
+  "We ranked 2026's best-selling heated vests on where the heat actually lands, honest runtime and what it costs to keep running. One vest heats nine zones including the lower back and neck — most heat four — and it costs less than a replacement battery for the competition.";
+
+const painQuestions = [
+  "Three layers and a blanket on, and you're still cold?",
+  "Tried a heated vest and found your chest toasty while your lower back stayed an ice block?",
+  "Sick of paying $70–90 for a proprietary battery that fades inside two seasons?",
+  "Wondering whether a $59.99 heated vest can possibly be real?",
+];
+
+const intro = [
+  "You know the moment. One buyer put it exactly: <em>“I had a t-shirt, a sweatshirt, and a fleece jacket on, and a blanket covering me. I was still cold.”</em> Or you're an hour into a sit, or on a jobsite where <em>“four layers isn't even cutting it,”</em> and it dawns on you that more clothing isn't the answer. Layers only slow the escape of heat you're already making. Sitting still in the cold, you aren't making much.",
+  "So you start looking at heated vests, and every one of them promises the same nine things. Here's what most reviews won't tell you: <strong>heat doesn't travel sideways through fabric.</strong> A vest only warms the spots it has pads on. Which is why one hunter, after years of trying, wrote that he'd <em>“yet to find one that actually warms your lower back/kidney area. This is the main area of heat loss and yet no one makes a vest to heat this area.”</em>",
+  "That's what we ranked on: where the heat actually lands, what the runtime is per setting, and what it costs to keep the thing running after year one.",
+];
+
+const listLede =
+  "<strong>Here are our top 5 heated vests of 2026</strong>, with the full review of our #1 pick further down the page.";
+
+const trust = [
+  "<strong>90-day money-back guarantee.</strong> Not warm enough? Send it back for a full refund.",
+  "<strong>Ships from Ohio, USA in 2–3 days.</strong> Tracking number by email.",
+  "<strong>Free size exchanges.</strong> Wrong size? Solana Gear sends the replacement free.",
+];
+
+/* Editorial headline. Alternative Sam may prefer (one-line swap):
+   "We Bought & Tested the Best-Selling Heated Vests of 2026. Here's Why the Solana Gear Heated Vest Is #1" */
+const EDITORIAL_HEADLINE = "We Compared the Best-Selling Heated Vests of 2026. Here's Why the Solana Gear Heated Vest Is #1";
+/* Sam: first-hand testing narrative goes here (HTML). Rendered directly after "How we ranked the five". */
+const TESTING_NOTES = ``;
+
+const editorial = {
+  heading: EDITORIAL_HEADLINE,
+  byline: "Daniel Strutgate",
+  bylineRole: "Gear & Everyday Comfort Editor",
+  html: `
+<p><strong>Nothing else on this list came close.</strong> If you are cold where you sit, stand or work, the <a href="${HV_LINK}" rel="sponsored nofollow noopener" target="_blank"><strong>Solana Gear Heated Vest</strong></a> is the one I would buy — and it was not a close call. Here is exactly why.</p>
+
+<h3 id="how-we-ranked">How we ranked the five</h3>
+<p>We put the five side by side and scored them on five things that decide whether a heated vest actually keeps you warm: <strong>where the heat lands</strong> (how many pads, and whether any of them sit on the lower back and neck), <strong>honest runtime</strong> (hours per setting, not the “up to” number), <strong>what it costs to keep running</strong> (a universal USB bank, or a proprietary pack you must buy again), <strong>bulk and arm freedom</strong> (does it wear under a shell, and does the battery dig in when you sit), and <strong>all-in price</strong> (the vest plus the battery you need to use it). We went through each brand's published zone map, battery spec and return policy word for word, and read the owner reviews for every vest, looking for the complaints that repeat: cold spots, dead batteries, runs small, bulky.</p>
+<p>Only one vest led on the first three, and it is also the cheapest on the list all-in.</p>
+${TESTING_NOTES}
+
+<h3 id="layers">Why more layers stopped working</h3>
+<p>A sweater, a fleece, a blanket — none of them make heat. They slow the escape of heat your body is already producing. If you are sitting still, or your body simply runs cold, there is not much heat for the layers to trap, and sweat soaking into them pulls what there is out faster. That is why a fourth layer does less than the third did.</p>
+<div class="callout"><strong>You have already run this experiment.</strong> If you have been cold indoors at 71°F under three layers, the layers were not failing. There was nothing for them to hold. What was missing was a source of heat, not another blanket.</div>
+<p>A heated vest is the opposite kind of thing: a small, steady source of warmth against your core, so the layers you already own finally have something to trap.</p>
+
+<h3 id="zones">The cold spot nobody heats</h3>
+<p>Fabric barely moves heat sideways. A pad on your chest warms your chest and almost nothing else. So a heated vest only warms the places it has pads, and the gaps between pads stay cold no matter how high you turn it up. Coverage is about placement, not the number printed on the box.</p>
+<p>Now look at where you actually go cold. The lower back you press into a seat, a tree or a bleacher. The kidneys. The back of the neck where the wind gets in. Then pull up any rival's spec page and count where its pads sit. Ororo's Classic vest publishes four zones: the two hand pockets, the mid-back and the collar. iHood's put heat in the collar, mid-back and chest. Neither has an element on the lower back.</p>
+<figure>
+  <img src="/images/hv-zones.svg" alt="Zone map of the Solana Gear heated vest: two pads at the front hand pockets, six pads across the upper, mid and lower back, and one at the collar" width="520" height="276" loading="lazy" decoding="async" />
+  <figcaption>The Solana Gear vest's nine pads: two at the front pockets, six across the upper, mid and lower back, one at the collar. Drawn from Solana Gear's published zone diagram.</figcaption>
+</figure>
+<p>The <a href="${HV_LINK}" rel="sponsored nofollow noopener" target="_blank"><strong>Solana Gear Heated Vest</strong></a> runs nine pads: two at the front pockets, six down the back in three rows — upper, mid and, yes, lower — and one at the collar. It is the only vest on this list with heat on the lower back, and you can check that against every other brand's zone map in about a minute without taking our word for it. That is the whole reason it ranks first.</p>
+
+<h3 id="specs">What 9 zones and 8 hours actually buy you</h3>
+<p>Nine carbon-fibre pads across the front, back and neck, three heat levels from one chest button (red high, white medium, blue low), and up to <strong>8 hours on the low setting</strong> from a 10,000mAh bank. The brand does not publish medium and high hours, and be suspicious of any vest that quotes a single number: on every heated vest ever sold, the headline runtime is the low setting. The elements are carbon fibre, which flexes where the old wire heaters used to crack, and the power connection is sealed and waterproof — which is the thing that actually decides whether a heated garment survives the washing machine. Water- and wind-resistant shell, machine washable, unisex XS to XXXL, rated by the brand for −40°C to 5°C, and TSA-friendly if you fly with it. The brand describes the elements as NASA-based heating technology; what matters to you is where the pads sit.</p>
+<figure>
+  <img src="/images/hv-bank.webp" alt="A flat 10,000mAh USB power bank plugged into the vest's inner zip pocket" width="758" height="496" loading="lazy" decoding="async" />
+  <figcaption>The power sits flat in an inner zip pocket — a slim bank, not a cylinder in your ribs. Solana Gear image.</figcaption>
+</figure>
+
+<h3 id="reflex">Why your hands go cold before anything else</h3>
+<p>When your core cools, your body protects its organs by narrowing the blood vessels to your hands and feet. Cold fingers are a signal that your core is under-heated, not a problem with your fingers. Heating your hands directly fights that reflex; warming your torso releases it. In one cold-physiology study, warming the torso kept finger blood flow nearly eight times higher than warming the hands themselves, at the same finger temperature.</p>
+<p>That is why the first heated garment most people buy is a vest rather than gloves, and why the collar pad matters more than it sounds: the neck is where a lot of that core heat leaves. This is ordinary physiology, not a medical claim — if you have a circulation condition, talk to your doctor about what is right for you.</p>
+${CTA}
+
+<figure class="narrow">
+  <img src="/images/hv-ed-trail.webp" alt="A woman wearing the black Solana Gear heated vest over a long-sleeve top on a trail" width="295" height="351" loading="lazy" decoding="async" />
+  <figcaption>Slim enough to wear over a base layer or under a shell. Solana Gear customer photo.</figcaption>
+</figure>
+
+<h3 id="battery">The honest part: the battery is not included</h3>
+<p>It is true, every review site lists it as a con, and it is the reason a lot of people close the page. So here is the part they leave out.</p>
+<p>The battery is what fails on every heated vest — not the vest. Lithium cells lose roughly a fifth of their capacity after a few hundred charge cycles. That is chemistry, not a defect, and it happens to every pack ever made. The difference is what you can do about it. Ororo's current replacement battery lists at <strong>$89.99</strong> on its own site, and owners describe paying for one inside two seasons: <em>“I think it's a bit ridiculous to need to pay $80 for a new battery every 1.5 years.”</em> Venustas, iHood and Fieldsheer all run proprietary 7.4V packs of their own.</p>
+<p>The Solana Gear vest runs on <strong>any USB power bank rated 5V/2A</strong> — the same kind you probably already own for your phone. The brand sells a 10,000mAh bank at checkout for <strong>$19.99</strong>, which brings the all-in price to <strong>$79.98</strong>, still under half of an Ororo with its battery and about the price of one Ororo replacement pack. Carry a second $20 bank in your pocket and you have doubled your day. You will never buy a proprietary battery for this vest, because it does not have one.</p>
+<p>One more thing to concede, because the people who know this category will spot it if we don't: this is <strong>not the hottest vest you can buy</strong>. A 5V USB system tops out at around 10 watts; a 12V tool-battery vest or Venture Heat's 38-watt ProMAX puts out more raw heat, on a proprietary pack, across two or three zones, at four to six times the price. We are not ranking maximum scorch. We are ranking even warmth with no cold gaps, all day, on a battery you already own.</p>
+<div style="text-align:center;margin:18px 0 6px;"><a href="${HV_LINK}" class="v2-btn" style="display:inline-block;width:auto;max-width:none;padding:14px 34px;" rel="sponsored nofollow noopener" target="_blank">Check Availability &amp; Discount →</a></div>
+
+<figure class="narrow">
+  <img src="/images/hv-ed-man.webp" alt="A man wearing the black Solana Gear heated vest over a t-shirt, hands in the pockets" width="300" height="356" loading="lazy" decoding="async" />
+  <figcaption>The chest button cycles the three levels. Solana Gear customer photo.</figcaption>
+</figure>
+
+<h3 id="real">Is Solana Gear a real company?</h3>
+<p>A fair question for a $59.99 vest you have only seen online, and it deserves specifics rather than reassurance. Solana Gear sells only through its own site, which is why you have not seen it on Amazon or in a store. Orders ship from a warehouse in <strong>Ohio, USA</strong> in <strong>2–3 days</strong> with a tracking number by email. There is a <strong>90-day money-back guarantee</strong> on every order, size exchanges are free, there is a phone line and an email on the checkout page, and the brand publishes its customer reviews — 4.9 out of 5 from more than 37,000 of them — on its own site. We link only to the official site, never to marketplace copies.</p>
+
+<h3 id="which">Which one should you actually buy?</h3>
+<p><strong>If you work outdoors all day</strong> — construction, delivery, farm — the win is runtime plus arms that stay free. Run it on low or medium under your shell and carry a spare bank for the second half of the shift.</p>
+<blockquote>“I work in construction, often outdoors in the cold, and this vest has been a lifesaver. It provides just the right amount of warmth, and I don't have to deal with bulky jackets while trying to get my job done. The battery lasts through my entire shift too.”<cite>— James R., verified purchaser, Solana Gear reviews</cite></blockquote>
+<p><strong>If you sit still in the cold</strong> — a tree stand, an ice shanty, a rink or a bleacher — the lower-back pads are the reason to choose this one, and eight hours on low covers any game or sit with hours to spare.</p>
+<p><strong>If you are always cold indoors</strong>, the core zones are the point: warm the torso and the hands follow, and heating one person for under a cent a charge beats heating a whole house.</p>
+<p><strong>If your last vest's battery died</strong>, this is the way out of the replacement-pack cycle. Any 5V/2A bank, forever.</p>
+<p><strong>Sizing.</strong> “Runs small” is the most common complaint in this whole category, so it is a fair thing to check. This vest is unisex XS–XXXL and true to size, with a height-and-weight chart at checkout. If you are between sizes: prefer a trim fit, go down; plan to wear it over a hoodie, or have broad shoulders, go up. Free exchanges either way, which is also what makes it a safe gift.</p>
+
+<h3 id="verdict">The clear winner</h3>
+<p>The <a href="${HV_LINK}" rel="sponsored nofollow noopener" target="_blank"><strong>Solana Gear Heated Vest</strong></a> is the only vest on this list that heats the lower back and the neck as well as the chest. It runs on a power bank you already own, so there is no proprietary battery to buy again. It is <strong>$59.99</strong> — <strong>$79.98</strong> with the brand's bank — against $140 to $250 for the rest, and it carries a <strong>90-day money-back guarantee</strong> and <strong>free size exchanges</strong>. If you have been cold for years, that is not much to stake on the one thing nobody else has changed: where the heat actually lands.</p>
+`,
+};
+
+const sidebar = {
+  subscores: [
+    { label: "Where The Heat Lands", value: 9.7 },
+    { label: "Cost To Keep Running", value: 9.6 },
+    { label: "All-In Price", value: 9.4 },
+    { label: "Bulk & Arm Freedom", value: 9.0 },
+    { label: "Honest Runtime", value: 8.4 },
+  ],
+  pros: [
+    "9 zones incl. lower back & neck",
+    "Runs on any 5V/2A USB bank",
+    "Up to 8 hrs on low (10,000mAh)",
+    "Machine washable, layers under a coat",
+    "Free size exchanges",
+    "90-day money-back guarantee",
+  ],
+  cons: ["Battery sold separately ($19.99 at checkout)", "Not the hottest vest — the most evenly heated"],
+};
+
+const urgency = {
+  kicker: "For our readers",
+  heading: "Up to 60% Off Ends Today on the Official Site",
+  text:
+    "A single vest is <strong>$59.99</strong> (was $119.98), with bigger savings on two and three. Add the brand's 10,000mAh power bank for $19.99 at checkout, or use any 5V/2A bank you already own. Every order carries the <strong>90-day money-back guarantee</strong> and <strong>free size exchanges</strong>, and ships from Ohio in 2–3 days. <strong>Sale ends <span data-deal-date></span>.</strong>",
+  cta: "Check Availability & Discount →",
+  under: "Save <em>up to 60%</em> — sale ends today. True to size; over a hoodie, go up one.",
+};
+
+const quotes = [
+  {
+    text: "I've been wearing the Solana Gear heated vest on my morning hikes, and it's been amazing. The heat spreads evenly across my core, and I stay warm even in freezing temperatures. The best part? It's lightweight and doesn't restrict my movement.",
+    name: "Mark W.",
+    source: "Verified purchaser · Solana Gear reviews",
+  },
+  {
+    text: "Whether I'm out watching my kids' soccer games or enjoying a cold evening with friends, the Solana Gear vest keeps me warm without needing a big coat. It heats up fast and feels like I'm wrapped in a warm blanket. Plus, it looks stylish enough to wear casually.",
+    name: "Julia M.",
+    source: "Verified purchaser · Solana Gear reviews",
+  },
+  {
+    text: "I bought the Solana Gear heated vest for skiing, and it perfect. Even when the wind is harsh and the temperatures drop, I stay comfortably warm. The battery lasts all day on the slopes. It's lightweight, so I don't feel bulky while moving.",
+    name: "David K.",
+    source: "Verified purchaser · Solana Gear reviews",
+  },
+];
+
+const howToBuy = [
+  { title: "Go to the official Solana Gear site", text: "Use any green button on this page — the discount is applied there automatically." },
+  { title: "Choose quantity and size", text: "One vest is $59.99; two or three are cheaper each. Pick your size from the height-and-weight chart — true to size, go up if you'll wear it over a hoodie. Add the 10,000mAh power bank for $19.99 unless you already own a 5V/2A bank." },
+  { title: "Enter shipping and payment", text: "Secure checkout. Every order carries the 90-day money-back guarantee and free size exchanges." },
+  { title: "Delivered in 2–3 days", text: "Ships from the brand's warehouse in Ohio, USA, with a tracking number by email." },
+];
+
+const author = {
+  name: "Daniel Strutgate",
+  role: "Gear & Everyday Comfort Editor, The Life Insider",
+  photo: "/images/author-daniel-strutgate.jpg",
+  bio: "Daniel covers cold-weather gear, recovery and everyday-comfort products for The Life Insider. For this guide he compared each brand's published zone map, battery specification, runtime figures and return policy across the five heated vests above, and read the owner reviews for every one, ranking them on where the heat lands, honest runtime, cost to keep running, bulk, and all-in price.",
+};
+
+const faqs = [
+  {
+    q: "Can you use any power bank for a heated vest?",
+    a: "Not quite any. This vest needs a bank with a 5V/2A output — a low-output bank rated 1A won't drive it, and the vest's button will flash red to tell you. Nearly every 10,000mAh-or-bigger bank sold today meets 5V/2A, so there's a good chance you already own one. If not, Solana Gear sells a 10,000mAh bank at checkout for $19.99. There is no proprietary pack to buy, ever.",
+  },
+  {
+    q: "How long does it actually last on high?",
+    a: "The honest answer is that the headline number on every heated vest — ours and everyone's — is the low setting. On a 10,000mAh bank this vest runs up to 8 hours on low; Solana Gear doesn't publish medium and high figures, so we won't invent them. High will be a good deal shorter, as it is on every vest here. Experienced owners solve it the same way regardless of brand: a second bank in your pocket doubles your day, and here that second bank costs $20 instead of $90.",
+  },
+  {
+    q: "Can you machine wash a heated vest?",
+    a: "This one, yes. Take the power bank out, tuck the USB connector into the inner pocket and zip it closed, use a mild detergent on the delicate cycle (a laundry bag helps), and hang it to dry — never tumble dry. The thing that kills heated garments in the wash is an unsealed power connection; this vest has a waterproof power interface and water-safe carbon-fibre wires.",
+  },
+  {
+    q: "Is a heated vest safe to wear?",
+    a: "It runs on 5V — the same low voltage as a phone charger, not mains power — and has overheating protection built in. It's also TSA-friendly, so you can wear it or pack it for a flight. As with any heated product, don't sleep in it on high, and if you have reduced skin sensation, start on low.",
+  },
+  {
+    q: "Does it run small? What size should I order?",
+    a: "“Runs small” is the single most common complaint across this entire category, so it's the right question. This vest is unisex XS–XXXL and true to size, and the checkout shows a height-and-weight chart. Solana Gear's own guidance for between sizes: prefer a trimmer fit, take the smaller size; want room, plan to layer it over a hoodie, or have broad shoulders, take the larger. If you still get it wrong, size exchanges are free.",
+  },
+  {
+    q: "Why is it $59.99 when Ororo is $150 or more?",
+    a: "No retail markup, no proprietary battery ecosystem to pay for, and it's sold direct. The all-in price with the brand's power bank is $79.98 — still under half of an Ororo with its battery, and about what Ororo charges for a replacement battery on its own.",
+  },
+  {
+    q: "How do I know Solana Gear is a real brand and not a scam?",
+    a: "It sells only on its own site, which is exactly why you haven't seen it in a store, and that's a reasonable thing to be suspicious of. The concrete answers: orders ship from a warehouse in Ohio, USA, in 2–3 days with a tracking number by email; there's a 90-day money-back guarantee on every order; size exchanges are free; a phone number and email are printed on the checkout page; and the brand publishes 37,392+ customer reviews at 4.9 out of 5. We link only to the official site.",
+  },
+  {
+    q: "Is the battery pocket big enough for a tool battery and adapter?",
+    a: "It's designed around a flat USB power bank, not a round tool battery — a standard 10,000mAh bank slides into the inner zip pocket. That's the point: no adapter, no proprietary pack, and no cylinder digging into your ribs when you sit down.",
+  },
+  {
+    q: "Will it be warm enough for a tree stand or a full shift outdoors?",
+    a: "The brand rates it for −40°C to 5°C, and the two things that decide a long cold sit are covered: it heats the lower back you press into the seat, and a spare $20 bank doubles the runtime. Wear it under a windproof outer layer — a heated vest is the heat source, your shell is what keeps the heat in.",
+  },
+  {
+    q: "Does it make a good gift?",
+    a: "It's one of the few heated vests that does, because the two things that make heated gear a risky gift — wrong size and 'will it work' — are covered by free size exchanges and the 90-day guarantee. Add the $19.99 power bank at checkout so it works straight out of the box.",
+  },
+];
+---
+
+<ReviewPageV2
+  title="The 5 Best Heated Vests of 2026 [Compared on Warmth, Battery & Price] | The Life Insider"
+  description="We compared the best heated vests of 2026 on where the heat lands, honest runtime, battery cost and price. One heats nine zones including the lower back and neck for $59.99."
+  h1="The 5 Best Heated Vests of 2026"
+  subhead={subhead}
+  painQuestions={painQuestions}
+  intro={intro}
+  listLede={listLede}
+  products={products}
+  trust={trust}
+  editorial={editorial}
+  sidebar={sidebar}
+  urgency={urgency}
+  quotes={quotes}
+  howToBuy={howToBuy}
+  author={author}
+  faqs={faqs}
+>
+  {CPV_CAMPAIGN && <Fragment slot="body-end"><CpvTracker campaign={CPV_CAMPAIGN} /></Fragment>}
+</ReviewPageV2>
