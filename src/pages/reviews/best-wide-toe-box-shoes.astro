@@ -4,6 +4,11 @@ import type { ProductV2 } from "../../components/RankCardV2.astro";
 import CpvTracker from "../../components/CpvTracker.astro";
 
 /* =========================================================================
+   WIDE TOE BOX PAGE (11 Sep 2026) — same offer, rivals and editorial as best-barefoot-shoes.astro,
+   with an H1/opening congruent with the Wide Toe Box ad group. Reason: "wide toe box shoes" searchers
+   passed 1/12 to the offer on the barefoot-titled page (LP experience AVERAGE) while barefoot terms pass 35%.
+   The landing destination decides the outcome (Amin). Both pages share CPV campaign 10.
+
    HERO: Grounded Footwear® Freedom — AdsBranded offer 568, $64 USD CPA, US.
    Network CVR 8.34% (AM, 4 Aug 2026). Top offer on the network, evergreen.
 
@@ -57,7 +62,7 @@ const GF_DIRECT =
   "https://offer.groundedfootwear.co/freedom/en/us/landing1?uid=83&oid=60&affid=23&uid=1722&oidab=568&affidab=1241";
 const GF_LINK = CPV_CAMPAIGN ? `${CPV_ROOT}base2.php` : GF_DIRECT;
 const AMZ = (asin: string, sub: string) =>
-  `https://www.amazon.com/dp/${asin}?tag=thelifeinside-20&ascsubtag=gf_${sub}&language=en_US`;
+  `https://www.amazon.com/dp/${asin}?tag=thelifeinside-20&ascsubtag=wtb_${sub}&language=en_US`;
 
 const CTA = `<p style="text-align:center"><a class="v2-btn inline" href="${GF_LINK}" rel="sponsored nofollow noopener" target="_blank">Check Availability &amp; Discount →</a></p>`;
 
@@ -190,22 +195,22 @@ const products: ProductV2[] = [
 ];
 
 const subhead =
-  "We compared 2026's best-selling barefoot shoes on the four things that decide whether a pair gets worn. Only one is widest where your foot is widest — and it is the only one that takes the sizing risk off you.";
+  "We compared 2026's best-selling wide toe box shoes on the one thing the label never tells you: whether the shoe is actually widest at your toes, or just a bigger version of the same pointed shape. Only one was — and it is the only one that takes the sizing risk off you.";
 
 const painQuestions = [
-  "Do your feet ache by the end of a shift, no matter which “comfortable” shoes you buy?",
-  "Do you kick your shoes off the second you sit down because your toes feel crushed?",
-  "Have orthotics, cushioned trainers and insoles each helped for a while and then stopped?",
-  "Worried a barefoot shoe will arrive in the wrong size and cost you a return?",
+  "Bought “wide” or 2E shoes and your toes still feel crushed by the end of the day?",
+  "Kick your shoes off the second you sit down because your little toe is being squeezed inward?",
+  "Bunions, hammertoes or a wide forefoot that no “comfort” shoe seems built for?",
+  "Worried a wide toe box shoe will arrive in the wrong size and cost you a return?",
 ];
 
 const intro = [
-  "If you nodded at any of those, the problem is probably not your feet. It is the shape of the shoe they spend sixteen hours a day inside. Almost every shoe you have ever owned is widest at the ball of your foot and then narrows to a point — and your foot is the opposite shape. It is widest at the ends of your toes. That is also why buying “wide” never fixed it: a wide shoe makes the whole shoe bigger and still comes to a point at the front.",
-  "One owner below put it plainly: <em>“Shoes always seem too crowded for my toes.”</em> Another, a retail manager on concrete all shift, said the pair he expected nothing from <em>“get me through the day pain free.”</em> We ranked five on the four things that decide whether a pair actually gets worn: real toe room, a flat sole, weight, and what happens when the size is wrong.",
+  "If you nodded at any of those, here is the thing nobody selling “wide” shoes will tell you: <strong>a wide shoe and a wide toe box are not the same thing.</strong> A wide or 2E fitting scales the whole shoe up and keeps the point at the front, so the ball of your foot gets room and your toes are still jammed together at the tip. A real wide toe box is shaped the other way round — widest where your toes are, because that is where your foot is widest.",
+  "One owner below put it plainly: <em>“Shoes always seem too crowded for my toes.”</em> Another, a retail manager on concrete all shift, said the pair he expected nothing from <em>“get me through the day pain free.”</em> We ranked five on the four things that decide whether a wide toe box shoe actually gets worn: real toe room (is the outsole widest at the toes?), a flat sole, weight, and what happens when the size is wrong.",
 ];
 
 const listLede =
-  "<strong>Here are our top 5 barefoot shoes of 2026</strong>, with the full review of our #1 pick further down the page.";
+  "<strong>Here are our top 5 wide toe box shoes of 2026</strong>, with the full review of our #1 pick further down the page.";
 
 const trust = [
   "<strong>90-day money-back guarantee.</strong> Not satisfied, return it for a full refund — no questions asked.",
@@ -215,7 +220,7 @@ const trust = [
 
 /* Editorial headline. Alternative Sam may prefer (one-line swap):
    "We Bought & Tested the Best-Selling Barefoot Shoes of 2026. Here's Why Grounded Footwear Freedom Is #1" */
-const EDITORIAL_HEADLINE = "We Bought & Tested the Best-Selling Barefoot Shoes of 2026. Here's Why Grounded Footwear Freedom Is #1"; // Sam's switch, applied 11 Sep 2026 (was "We Compared…")
+const EDITORIAL_HEADLINE = "We Bought & Tested the Best-Selling Wide Toe Box Shoes of 2026. Here's Why Grounded Footwear Freedom Is #1"; // Sam's switch, applied 11 Sep 2026 (was "We Compared…")
 /* Sam: first-hand testing narrative goes here (HTML). Rendered directly after "How we ranked the five". */
 const TESTING_NOTES = ``;
 
@@ -407,9 +412,9 @@ const faqs = [
 ---
 
 <ReviewPageV2
-  title="The 5 Best Barefoot Shoes of 2026 [Wide Toe Box Compared] | The Life Insider"
-  description="We compared the best barefoot shoes of 2026 on toe room, sole flatness, weight and sizing risk — for anyone on their feet all day or dealing with foot pain."
-  h1="The 5 Best Barefoot Shoes of 2026"
+  title="The 5 Best Wide Toe Box Shoes of 2026 [Compared on Toe Room, Fit & Sizing Risk] | The Life Insider"
+  description="We compared the best wide toe box shoes of 2026 on real toe room, sole flatness, weight and sizing risk — and explain why a 'wide' shoe is not a wide toe box."
+  h1="The 5 Best Wide Toe Box Shoes of 2026"
   subhead={subhead}
   painQuestions={painQuestions}
   intro={intro}
