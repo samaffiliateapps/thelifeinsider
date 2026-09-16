@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="90-day money-back guarantee">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22a84f"/><stop offset="1" stop-color="#15803d"/></linearGradient>
+<path id="ring" d="M60,60 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
+<polygon points="116.00,60.00 109.69,65.60 114.60,72.46 107.19,76.51 110.45,84.30 102.34,86.60 103.78,94.92 95.36,95.36 94.92,103.78 86.60,102.34 84.30,110.45 76.51,107.19 72.46,114.60 65.60,109.69 60.00,116.00 54.40,109.69 47.54,114.60 43.49,107.19 35.70,110.45 33.40,102.34 25.08,103.78 24.64,95.36 16.22,94.92 17.66,86.60 9.55,84.30 12.81,76.51 5.40,72.46 10.31,65.60 4.00,60.00 10.31,54.40 5.40,47.54 12.81,43.49 9.55,35.70 17.66,33.40 16.22,25.08 24.64,24.64 25.08,16.22 33.40,17.66 35.70,9.55 43.49,12.81 47.54,5.40 54.40,10.31 60.00,4.00 65.60,10.31 72.46,5.40 76.51,12.81 84.30,9.55 86.60,17.66 94.92,16.22 95.36,24.64 103.78,25.08 102.34,33.40 110.45,35.70 107.19,43.49 114.60,47.54 109.69,54.40" fill="url(#g)"/>
+<circle cx="60" cy="60" r="44" fill="none" stroke="#fff" stroke-opacity="0.9" stroke-width="1.5"/>
+<text font-family="Inter, Helvetica, Arial, sans-serif" font-size="7.2" font-weight="700" fill="#fff" letter-spacing="1.6"><textPath href="#ring" startOffset="50%" text-anchor="middle">GUARANTEE · GUARANTEE · GUARANTEE ·</textPath></text>
+<text x="60" y="58" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="27" font-weight="900" fill="#fff">90</text>
+<text x="60" y="70" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="9.5" font-weight="800" fill="#fff" letter-spacing="1.5">DAY</text>
+<text x="60" y="81" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="8" font-weight="800" fill="#fff" letter-spacing="0.8">MONEY-BACK</text>
+</svg>

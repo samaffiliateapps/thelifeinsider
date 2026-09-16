@@ -58,7 +58,7 @@ const A = p.atf.a;
         </section>
       )}
       {p.ps && <div class="ps prose" set:html={p.ps} />}
-      <div class="disc" set:html={p.disclosure} />
+      {p.disclosure && <div class="disc" set:html={p.disclosure} />}
     </div>
   </article>
 
