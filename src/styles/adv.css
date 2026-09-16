@@ -62,3 +62,4 @@
 .adv .ps { border-top:2px solid var(--ink); padding-top:14px; margin-top:2em; font-size:1.02rem; }
 .adv .disc { font-size:0.78rem; color:var(--muted); line-height:1.5; margin:2.2em 0 3em; padding-top:14px; border-top:1px solid var(--rule); }
 @media (max-width:640px) { .adv .reviews, .adv .cross2 { grid-template-columns:1fr; } .adv .prose p { font-size:1.04rem; } .adv .seen img { height:16px; } }
+@media (max-width:520px) { .adv .mast .m-brand { display:none; } .adv .mast { font-size:0.7rem; } .adv .update { font-size:0.85rem; } }
