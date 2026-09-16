@@ -1,0 +1,107 @@
+---
+/* ADVERTORIAL PAGE — 17 Sep 2026. Single-product editorial pre-sell (Nooro / RejuvaCare skeleton, product-focused
+   info-lead). Three above-the-fold variants selected by ?v=a|b|c (default a) so Google ad groups can test whole ATFs.
+   Fires GA4 events: adv_variant, adv_scroll (25/50/75/100), adv_section (each h2[id] seen), adv_cta (clicks, by position). */
+import "../styles/v2.css";
+import "../styles/adv.css";
+import Base from "./Base.astro";
+import CpvTracker from "../components/CpvTracker.astro";
+import StickyCta from "../components/StickyCta.astro";
+
+export interface Atf { h1: string; sub: string; hero: { type: "img" | "video"; src: string; poster?: string; alt: string; caption?: string } }
+export interface Props {
+  title: string; description: string;
+  cpvCampaign: string;
+  kicker: string; updateBar?: string;
+  atf: Record<"a" | "b" | "c", Atf>;
+  byline: { name: string; role: string; photo?: string; readTime: string };
+  seenOn?: { src: string; alt: string }[];
+  ratingLine?: string;
+  lead: string;            // html
+  body: string;            // html (contains CTA blocks)
+  faqs?: { q: string; a: string }[];
+  ps?: string;             // html
+  sticky: { name: string; brand?: string; image: string; url: string; price?: string; oldPrice?: string; discount?: string };
+  disclosure: string;      // html
+}
+const p = Astro.props;
+const publishedOn = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" });
+const A = p.atf.a;
+---
+<Base title={p.title} description={p.description} minimal>
+  <article class="adv" id="adv" data-variant="a">
+    <div class="wrap">
+      <div class="mast"><span class="m-brand">The Life Insider</span><span>{p.kicker}</span><span class="m-tag">Advertorial</span></div>
+      {p.updateBar && <div class="update" set:html={p.updateBar} />}
+      <h1 id="advH1" set:html={A.h1} />
+      <p class="sub" id="advSub" set:html={A.sub} />
+      <div class="byline">
+        {p.byline.photo && <img src={p.byline.photo} alt={p.byline.name} width="40" height="40" loading="eager" />}
+        <div>By <b>{p.byline.name}</b>, {p.byline.role} · Updated <span data-updated>{publishedOn}</span> · {p.byline.readTime}</div>
+      </div>
+      {p.seenOn && p.seenOn.length > 0 && (
+        <div class="seen"><span>As Advertised On</span>{p.seenOn.map((l) => <img src={l.src} alt={l.alt} loading="lazy" decoding="async" />)}</div>
+      )}
+      {p.ratingLine && <div class="rating"><span class="stars">★★★★★</span><span set:html={p.ratingLine} /></div>}
+      <figure id="advHero">
+        {A.hero.type === "video"
+          ? <video src={A.hero.src} poster={A.hero.poster} muted autoplay loop playsinline preload="auto" aria-label={A.hero.alt}></video>
+          : <img src={A.hero.src} alt={A.hero.alt} width="900" height="600" loading="eager" decoding="async" />}
+        {A.hero.caption && <figcaption id="advHeroCap" set:html={A.hero.caption} />}
+      </figure>
+      <div class="prose lead" set:html={p.lead} />
+      <div class="prose" set:html={p.body} />
+      {p.faqs && p.faqs.length > 0 && (
+        <section class="faq" id="faq">
+          <h2 style="font-size:1.55rem;margin:2em 0 0.6em;">Questions People Ask Before They Order</h2>
+          {p.faqs.map((f) => <details><summary>{f.q}</summary><p set:html={f.a} /></details>)}
+        </section>
+      )}
+      {p.ps && <div class="ps prose" set:html={p.ps} />}
+      <div class="disc" set:html={p.disclosure} />
+    </div>
+  </article>
+
+  <StickyCta name={p.sticky.name} brand={p.sticky.brand} image={p.sticky.image} url={p.sticky.url} price={p.sticky.price} oldPrice={p.sticky.oldPrice} discount={p.sticky.discount} />
+  <CpvTracker campaign={p.cpvCampaign} />
+
+  <script is:inline define:vars={{ atf: p.atf }}>
+    (function () {
+      /* --- ATF variant swap (?v=a|b|c) --- */
+      var v = "a";
+      try { var q = new URLSearchParams(location.search).get("v"); if (q && atf[q]) v = q; } catch (e) {}
+      var root = document.getElementById("adv"); if (root) root.setAttribute("data-variant", v);
+      if (v !== "a") {
+        var d = atf[v];
+        var h = document.getElementById("advH1"); if (h) h.innerHTML = d.h1;
+        var s = document.getElementById("advSub"); if (s) s.innerHTML = d.sub;
+        var fig = document.getElementById("advHero");
+        if (fig) {
+          var media = d.hero.type === "video"
+            ? '<video src="' + d.hero.src + '"' + (d.hero.poster ? ' poster="' + d.hero.poster + '"' : '') + ' muted autoplay loop playsinline preload="auto" aria-label="' + d.hero.alt + '"></video>'
+            : '<img src="' + d.hero.src + '" alt="' + d.hero.alt + '" width="900" height="600" loading="eager">';
+          fig.innerHTML = media + (d.hero.caption ? '<figcaption id="advHeroCap">' + d.hero.caption + '</figcaption>' : '');
+        }
+      }
+      function ev(name, params) { try { params = params || {}; params.variant = v; if (typeof gtag === "function") gtag("event", name, params); if (window.clarity) window.clarity("set", "variant", v); } catch (e) {} }
+      ev("adv_variant");
+      /* --- dates roll to the reader's day --- */
+      try { var dd = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" });
+        document.querySelectorAll("[data-updated],[data-deal-date]").forEach(function (n) { n.textContent = dd; }); } catch (e) {}
+      /* --- scroll depth --- */
+      var marks = [25, 50, 75, 100], sent = {};
+      function depth() { var h = document.documentElement, t = (h.scrollTop || document.body.scrollTop), full = h.scrollHeight - h.clientHeight; if (full <= 0) return;
+        var pct = Math.round((t / full) * 100); marks.forEach(function (m) { if (pct >= m && !sent[m]) { sent[m] = 1; ev("adv_scroll", { depth: m }); } }); }
+      window.addEventListener("scroll", depth, { passive: true }); depth();
+      /* --- section views --- */
+      if ("IntersectionObserver" in window) {
+        var seen = {}; var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting && !seen[e.target.id]) { seen[e.target.id] = 1; ev("adv_section", { section: e.target.id }); } }); }, { threshold: 0.5 });
+        document.querySelectorAll(".adv h2[id]").forEach(function (h) { io.observe(h); });
+      }
+      /* --- CTA clicks --- */
+      document.querySelectorAll(".adv a.btn, .adv a[data-cta], .sticky-cta a.sc-btn").forEach(function (a, i) {
+        a.addEventListener("click", function () { ev("adv_cta", { position: a.getAttribute("data-cta") || ("btn" + i) }); });
+      });
+    })();
+  </script>
+</Base>

@@ -1,0 +1,193 @@
+---
+/* VEST ADVERTORIAL — built 17 Sep 2026 from: research pack (verbatim bank, avatars, mechanisms), Solana's own
+   pages (landing / presell / eightreasons / select, read 16–17 Sep), Zakaria + Fernando + Advertorial Guide structure.
+   Narrator: our editor (product-focused info-lead). Root cause: heat only lands where the pads sit and you lose heat
+   where you press (lower back / neck). Second axis: core-warming reflex. Closer: battery freedom.
+   CPV campaign id: set CPV_CAMPAIGN when Sam creates the new CPV One campaign (currently the vest id 16). */
+import AdvertorialPage from "../../layouts/AdvertorialPage.astro";
+
+const CPV_CAMPAIGN = "16";
+const LINK = "https://track.thelifeinsider.com/base2.php";
+const CTA_LABEL = "Check Availability &amp; Claim Up To 60% Off →";
+const cta = (pos: string, under = "Ships from Ohio in 2–3 days · 90-day money-back · Free size exchanges") =>
+  `<div class="cta"><a class="btn" data-cta="${pos}" href="${LINK}" rel="sponsored nofollow noopener" target="_blank">${CTA_LABEL}</a><span class="sale">Sale ends <span data-deal-date></span></span><div class="under">${under}</div></div>`;
+
+const atf = {
+  a: {
+    h1: "The Cold Spot Every Heated Vest Skips (It’s Not Your Chest) — And The $59 Vest That Finally Heats It",
+    sub: "If you’ve worn three layers and still felt a cold stripe across your lower back, this is the four-minute read that explains why, and what actually fixes it.",
+    hero: { type: "img", src: "/images/adv/zones-9.webp", alt: "Front and back view of the Solana Gear heated vest showing all nine heating zones, including the lower back and neck", caption: "Nine heating pads, front and back. Zones 7, 8 and 9 sit on the spine and lower waist, the spot most vests leave cold. Solana Gear’s published zone map." },
+  },
+  b: {
+    h1: "This $59 Heated Vest Heats 9 Zones Including Your Lower Back. The $180 One Heats 4. Here’s Why 37,000 People Switched",
+    sub: "A four-minute read before you spend $150 on a heated vest that leaves the coldest part of you cold.",
+    hero: { type: "img", src: "/images/adv/couple-snow.webp", alt: "A man and a woman outside a snowy house wearing black Solana Gear heated vests with the chest buttons glowing red", caption: "One unisex cut, XS to XXXL. The red light is the one-button control: high, medium, low. Solana Gear image." },
+  },
+  c: {
+    h1: "“Three Layers, A Blanket, And Still Cold At 71°F.” The Vest That Fixed It Heats The One Spot No Other Vest Does",
+    sub: "If you’re the one who is always cold, sits still in the cold, or works out in it, read this before you buy any heated vest.",
+    hero: { type: "video", src: "/media/adv-glow.mp4", poster: "/images/adv/glow-poster.jpg", alt: "The heated areas of the Solana Gear vest glowing red, front and back", caption: "Where the heat actually lands, front and back. Solana Gear video." },
+  },
+};
+
+const lead = `
+<p><strong>In the next four minutes you’re going to find out why every heated vest you’ve looked at, including the $180 one, leaves the same cold stripe across your lower back. Why gloves never fixed your cold hands. And why the honest answer to “how long does the battery last” is a number nobody prints on the box.</strong></p>
+<p>Then I’ll show you the one vest we found that puts heat where you actually lose it, runs on a battery you probably already own, and costs less than the replacement battery for the competition. It has 37,392 ratings at 4.9 out of 5, and you get 90 days to decide if I’m right.</p>
+<p>Read it now, not later. The temperature isn’t going up, and this one sells out every year in November.</p>
+`;
+
+const body = `
+<h2 id="cold">You already know the moment</h2>
+<p>One buyer put it in a sentence I can’t improve:</p>
+<blockquote><p>“Last night it was 71 degrees in our house. I had a t-shirt, a sweatshirt, and a fleece jacket on, and a blanket covering me. I was still cold.”</p><cite>Substack, weight-loss forum</cite></blockquote>
+<p>Or you’re the one on the jobsite. Two pairs of long johns, a mid-weight, the browns on top. A UPS driver wrote it exactly: <em>“Four layers isn’t even cutting it. The cold seems to stay with me. Ugh.”</em></p>
+<p>Or you’re an hour into a sit on a cold seat. Or the third period of your kid’s game, wrapped, in one mom’s words, <em>“like a cocoon,”</em> counting the minutes instead of watching.</p>
+<p>And there’s the other part. The part you don’t say out loud.</p>
+<p>You’re the one people ask <em>“are you cold AGAIN?”</em> The one who gets the thermostat argument. The one who wears a sweatshirt in the produce aisle in October when nobody else is cold. It starts to feel like something about you.</p>
+<p>It isn’t. And here’s what nobody bothered to tell you.</p>
+
+<h2 id="layers">Why more layers stopped working</h2>
+<p>A sweater doesn’t make heat. A fleece doesn’t make heat. A blanket doesn’t make heat.</p>
+<p>They slow down the escape of heat your body is <em>already</em> producing. That’s all insulation is.</p>
+<p>Which is fine if you’re walking. It is useless if you’re sitting still, standing on concrete, or you simply run cold. There is not much heat for the layers to trap. So the fourth layer does less than the third did, and the sweat soaking into all of them pulls out what little there is.</p>
+<div class="callout"><strong>You’ve already run this experiment.</strong> If you were cold indoors at 71°F under three layers, the layers didn’t fail. There was nothing for them to hold. What was missing was a source of heat, not another blanket.</div>
+<p>So you look at heated vests. And every single one of them promises the same nine things: zones, hours, “advanced technology.” One brand lists 13 zones, another 23. And you buy one, and this happens:</p>
+<blockquote><p>“Your neck and back are toasty but your chest area is just normal.”</p><cite>Ororo owner review</cite></blockquote>
+<blockquote><p>“I have yet to find one that actually warms your lower back/kidney area. This is the main area of heat loss and yet no one makes a vest to heat this area.”</p><cite>Rokslide hunting forum</cite></blockquote>
+<p>That second one is from a man who had tried several. He was right about the problem. He just hadn’t found the vest yet.</p>
+
+<h2 id="root">The real reason: heat doesn’t travel sideways</h2>
+<p>Here’s the thing nobody on a product page will tell you, because it makes their zone count look silly.</p>
+<p><strong>Fabric is a terrible conductor of heat sideways.</strong> A heating pad on your chest warms your chest and almost nothing else. Two inches away from the pad, the fabric is the same temperature as the air.</p>
+<p>So a heated vest does not “warm you.” It warms the exact spots where it has pads. The gaps between pads stay cold no matter how high you turn it up.</p>
+<p>Now think about where <em>you</em> actually go cold.</p>
+<ul class="tick">
+<li>The lower back you press into a car seat, a bleacher, a tree, an office chair. Your weight crushes the insulation flat right there, and the cold surface pulls heat straight out of you.</li>
+<li>The kidneys. Ask any hunter or anyone who works outside where the cold gets in first.</li>
+<li>The back of the neck, where the wind finds the gap in every collar.</li>
+</ul>
+<p>Then pull up the spec page of the vest you were about to buy and count where its pads actually sit.</p>
+<p>Ororo’s Classic, the one at $150 to $180, publishes four zones: left chest, right chest, upper back, collar. <strong>Nothing on the lower back.</strong> Milwaukee’s M12 publishes two: chest and back. iHood heats the collar, mid-back and chest. Not one of them puts an element on the lumbar area you lose the most heat from.</p>
+<p>You can check that in sixty seconds without trusting me. And when you do, something clicks: <strong>you were never cold because the vest was too weak. You were cold because it was heating the wrong place.</strong></p>
+<p>That is the whole game. Placement beats zone count. And most of the industry got it backwards.</p>
+
+<h2 id="hands">Why your hands go cold before anything else</h2>
+<p>One more thing, because it explains the gloves you wasted money on.</p>
+<p>When your core cools even slightly, your body does something automatic. It clamps down the blood vessels to your hands and feet to protect your organs. Cold hands are not the problem. <strong>They’re a signal that your core is under-heated.</strong></p>
+<p>Warm the hands and you’re fighting the clamp. Warm the chest and back and the body releases it. In a cold-physiology study, warming the torso held finger blood flow roughly eight times higher than warming the hands directly, at the same finger temperature. The Cleveland Clinic and the NIH give the same advice to people with poor circulation: <em>keep the whole body warm, not just the extremities.</em></p>
+<p>That’s why the first heated garment people buy should be a vest, not gloves. And why the neck pad matters more than it sounds.</p>
+<p>So the question was never “which vest is hottest.” It was: <strong>which vest puts heat on the spots that actually make you warm?</strong></p>
+
+<h2 id="found">The vest that put the pads where you lose heat</h2>
+<p>We went through the published zone maps, batteries and return policies of every heated vest you’d realistically consider, and read the owner reviews looking for the complaints that repeat: cold spots, dead batteries, runs small, bulky.</p>
+<p>Only one put an element on the lower back, the neck, and the chest, at a price that didn’t need a payment plan. It’s the <strong>Solana Gear Heated Vest</strong>, and here is its zone map, front and back:</p>
+<figure><img src="/images/adv/zones-9.webp" alt="Solana Gear heated vest zone map: neck front, left and right abdomen, neck back, left and right shoulder blades, spine, left and right lower waist" width="740" height="740" loading="lazy" decoding="async" /><figcaption>Nine carbon-fibre pads: two at the front, one at each side of the neck, two across the shoulder blades, one down the spine, two at the lower waist. Solana Gear’s published diagram.</figcaption></figure>
+<p>Nine pads. Two at the front pockets where your hands go. One at the collar. Two across the shoulder blades. One down the spine. And <strong>two at the lower waist, exactly where the seat steals your heat.</strong> Solana describes the elements as NASA-based heating technology; what matters to you is where they sit.</p>
+<p>The rest is what a vest should be and mostly isn’t:</p>
+<ul class="tick">
+<li><strong>One button, three levels.</strong> Red high, white medium, blue low. Works with gloves on. No app, no phone.</li>
+<li><strong>Carbon-fibre elements, not wire.</strong> Old heated gear used metal wire that cracks where it bends and frays at the plug. Carbon fibre flexes like thread. That, plus a sealed waterproof power port, is why this one goes in the washing machine and comes out working.</li>
+<li><strong>Slim enough to go under a shell.</strong> Arms free. Wears under your work coat as a hidden warm layer, or over a hoodie on its own. Water and wind resistant shell, rated by the brand for −40°C to 5°C.</li>
+<li><strong>Unisex XS to XXXL, true to size.</strong> And the sizing risk is on them, not you: free size exchanges.</li>
+</ul>
+<figure><img src="/images/adv/heat-levels.webp" alt="A woman pressing the chest button on the Solana Gear vest, with the red, white and blue level lights shown" width="740" height="740" loading="lazy" decoding="async" /><figcaption>One button on the chest: red is high, white is medium, blue is low. Solana Gear image.</figcaption></figure>
+${cta("after-reveal")}
+
+<h2 id="honest">The honest part, because you’d find out anyway</h2>
+<p>Three things the glossy pages skip. I’d rather you hear them from me.</p>
+<p><strong>1. It is not the hottest vest on the market.</strong> It runs on 5-volt USB power, the same voltage as your phone charger. A $349 twelve-volt vest with three big pads will out-scorch it on the chest. If you want one blazing hot patch, buy that one. This vest is built for even warmth with no cold gaps, all day, and that is the thing that actually keeps you warm.</p>
+<p><strong>2. “Up to 8 hours” means on low.</strong> On every heated vest ever sold, ours and everyone’s, the headline number is the lowest setting. On a 10,000mAh bank this one runs up to 8 hours on low. High is a good deal shorter, as it is on every vest here. Experienced owners solve it the same way regardless of brand: a second bank in your pocket doubles your day.</p>
+<p><strong>3. The battery is not in the box.</strong> Every competitor page lists this as a con and leaves it there. It is actually the best thing about it, and here is why.</p>
+
+<h2 id="battery">Why your last heated vest died (and why this one can’t die the same way)</h2>
+<p>Read what owners of the expensive brands say after a season or two:</p>
+<blockquote><p>“I think it’s a bit ridiculous to need to pay $80 for a new battery every 1.5 years.”</p><cite>Ororo owner</cite></blockquote>
+<blockquote><p>“I also have Pnuma with 2 batteries on 3rd year… they don’t last as long as before. At $30 per battery that’s the negative side of this vest.”</p><cite>Archery Talk</cite></blockquote>
+<blockquote><p>“Proprietary batteries suck.”</p><cite>Rokslide</cite></blockquote>
+<p>Here’s what’s happening. A lithium battery loses about a fifth of its capacity after 300 to 500 charges. That is chemistry. It happens to every pack, in every brand. <strong>The vest doesn’t die. The battery does.</strong></p>
+<p>The trap is what happens next. With a proprietary vest, the only replacement that fits is the brand’s own pack: Ororo’s runs $70 to $90. So you pay a ransom every second winter, or the vest becomes a normal vest.</p>
+<p>The Solana runs on <strong>any USB power bank that puts out 5V/2A</strong>, which is nearly every 10,000mAh bank sold today. You probably own one. If you don’t, Solana sells a slim 10,000mAh bank at checkout for $19.99, and it sits flat in an inner zip pocket instead of a cylinder digging into your ribs when you sit.</p>
+<figure><img src="/images/adv/bank-pocket.webp" alt="A flat 10,000mAh USB power bank plugged into the inner zip pocket of the vest" width="758" height="496" loading="lazy" decoding="async" /><figcaption>The power sits flat in the inner pocket. Any 5V/2A bank works; a spare in your coat pocket doubles your day. Solana Gear image.</figcaption></figure>
+<p>When that bank fades in three years, you replace it for twenty dollars from anywhere. Not eighty from one company. The lock-in ends here.</p>
+
+<h2 id="owners">What happened when real people put it on</h2>
+<p>These are Solana Gear’s own published customer reviews, quoted as written. I picked the ones that answer the question you’re probably asking right now.</p>
+<div class="reviews">
+<div class="rv"><div class="st">★★★★★</div><div class="t">“Is it actually warm?”</div><p>“I’ve been wearing the Solana Gear heated vest on my morning hikes, and it’s been amazing. The heat spreads evenly across my core, and I stay warm even in freezing temperatures. The best part? It’s lightweight and doesn’t restrict my movement.”</p><div class="who">— Mark W., verified purchaser</div></div>
+<div class="rv"><div class="st">★★★★★</div><div class="t">“Will it last a whole shift outside?”</div><p>“I work in construction, often outdoors in the cold, and this vest has been a lifesaver. It provides just the right amount of warmth, and I don’t have to deal with bulky jackets while trying to get my job done. The battery lasts through my entire shift too.”</p><div class="who">— James R., verified purchaser</div></div>
+<div class="rv"><div class="st">★★★★★</div><div class="t">“What about sitting still on a cold sideline?”</div><p>“My son’s games start early and there is nowhere to hide from the wind at that field. I put this over a long sleeve shirt and under my regular coat. I start it on high while everyone is warming up, then turn it down once I get comfortable. I can actually watch the game instead of counting the minutes until we can leave.”</p><div class="who">— Denise L., verified</div></div>
+<div class="rv"><div class="st">★★★★★</div><div class="t">“I’m cold indoors, at my desk.”</div><p>“I work from home and our house gets drafty in the afternoons. I used to pile on blankets at my desk. Now I just put this on, turn it to medium, and I’m perfectly comfortable. My back feels so much better too. I’ve already ordered one for my sister.”</p><div class="who">— Donna M., verified buyer</div></div>
+<div class="rv"><div class="st">★★★★★</div><div class="t">“Does it survive the wash?”</div><p>“Highly recommend. The Solana Gear vest keeps me warm, and after 30 washes, it still works great!”</p><div class="who">— Jake, verified customer</div></div>
+<div class="rv"><div class="st">★★★★★</div><div class="t">“Does it heat the back, or just the chest?”</div><p>“I feel the heat when I’m out in the cold, especially across my back. It fits well and isn’t stiff or limiting my movements like other vests, and is great wearing by itself or under a coat.”</p><div class="who">— Carol M., verified</div></div>
+</div>
+<p>Notice what isn’t in there. Nobody says “game changer.” Nobody says “revolutionary.” They say <em>my back</em>, <em>my shift</em>, <em>the game</em>, <em>30 washes</em>. That’s what real relief sounds like.</p>
+${cta("after-reviews")}
+
+<h2 id="who">Who this is for, and who should skip it</h2>
+<div class="cross2">
+<div class="no"><h4>Don’t order this if…</h4><ul class="tick cross"><li>You want a single scorching-hot patch on your chest. A 12-volt tool-battery vest does that better, at three to six times the price.</li><li>You will never carry a power bank. This vest needs one, and that is the point.</li><li>You expect “8 hours” to mean 8 hours on high. No vest on earth does that.</li></ul></div>
+<div class="yes"><h4>Order it if…</h4><ul class="tick"><li>You’re cold at your core, indoors or out, and layers have stopped working.</li><li>You sit still in the cold: a stand, a bleacher, a car, a desk by a window.</li><li>You work outside and need your arms free under a shell.</li><li>Your last vest died with its proprietary battery and you refuse to pay for another one.</li><li>You’re buying for someone who is always cold and you want the size risk on the seller, not you.</li></ul></div>
+</div>
+
+<h2 id="price">What it costs, next to what you’ve been paying</h2>
+<p>Put the numbers side by side.</p>
+<div class="price">
+<div class="row"><span>Ororo Classic, 4 zones, battery included</span><span>$150–$180</span></div>
+<div class="row"><span>Ororo replacement battery, every 1.5–2 years</span><span>$70–$90</span></div>
+<div class="row"><span>Milwaukee M12 vest with the comfortable flat pack</span><span>about $265</span></div>
+<div class="row"><span>Running a 1,500W space heater 8 hours a day</span><span>about $50 a month</span></div>
+<div class="row"><span>Solana Gear Heated Vest, 9 zones, list price</span><span class="old">$119.98</span></div>
+<div class="row"><span><strong>Solana Gear Heated Vest, today, on this page</strong></span><span class="now">$59.99</span></div>
+<div class="row"><span>Optional 10,000mAh power bank at checkout</span><span>$19.99 (was $39.99)</span></div>
+</div>
+<p>$79.98 all-in with the bank. That is less than half of an Ororo and roughly the price of one Ororo replacement battery. It recharges for under a cent.</p>
+<p>Buying for a household? Two vests are $53.99 each and three are $47.99 each on the same page. Owners keep saying the same thing: <em>“I’ve already ordered one for my sister.”</em> One for the person who is always cold, one for the one who won’t admit it.</p>
+
+<h2 id="guarantee">90 days to decide, and what that actually means</h2>
+<div class="guar"><div class="badge">90-DAY<br/>MONEY<br/>BACK</div><div><p style="margin:0 0 6px"><strong>Wear it for a month of real cold.</strong> If it isn’t the warmest thing you own, email Solana’s support team, send it back in its packaging, and you get a full refund. No forms, no restocking games.</p><p style="margin:0"><strong>Wrong size?</strong> They send the replacement free. True to size; if you’ll wear it over a hoodie, go up one.</p></div></div>
+<p>Ships from their warehouse in Ohio in 2 to 3 days with a tracking number, so the next cold morning is covered, not the one after Thanksgiving.</p>
+${cta("after-guarantee", "Up to 60% off · Ships from Ohio in 2–3 days · 90-day money-back · Free size exchanges")}
+
+<h2 id="crossroads">You have two options</h2>
+<p><strong>Option one.</strong> Close this page. Keep the blanket on the couch at 71°F. Keep the “are you cold again?” Keep climbing down from the stand early, leaving the game in the third period, buying the $80 battery for a vest that heats your collar and nothing else.</p>
+<p><strong>Option two.</strong> Click the button, try it for 90 days on their dime, and find out what your mornings feel like when the cold stripe across your lower back is gone.</p>
+<p>Picture it. It’s 6:40 on a Saturday. You’re on the sideline, or the stand, or the dog walk before sunrise. You press the button while you’re still getting your keys. By the time you step outside you can already feel it across your back. Somebody asks if you’re cold, and for the first time in years you have to think about it. No.</p>
+<p>That’s not a miracle morning. That is just Tuesday now.</p>
+${cta("crossroads", "Sale ends today · 4.9 out of 5 from 37,392+ customers · 90 days to decide")}
+`;
+
+const faqs = [
+  { q: "Can you use any power bank for a heated vest?", a: "Not any. It needs a 5V/2A output, which a small phone bank may not give you. Nearly every 10,000mAh or larger bank sold today does, so you probably already own one. If not, Solana sells a slim 10,000mAh bank at checkout for $19.99. There is no proprietary pack, ever." },
+  { q: "How long does it actually last on high?", a: "The honest answer on every heated vest is that the headline number is the low setting. This one runs up to 8 hours on low from a 10,000mAh bank. High is a good deal shorter, as it is on every vest. A second bank in your pocket doubles your day and costs $20, not $80." },
+  { q: "Does it heat the lower back?", a: "Yes. Two of the nine pads sit at the lower waist, one runs down the spine, and two cover the shoulder blades. That is the coverage the $150–$180 four-zone vests do not have." },
+  { q: "Can you machine wash a heated vest?", a: "This one, yes. Take the bank out, tuck the connector into its pocket, gentle cycle, hang dry. The sealed waterproof power port and water-safe carbon-fibre wires are what let it survive the wash; one owner reports 30 washes and counting." },
+  { q: "Is a heated vest safe?", a: "It runs on 5 volts, the same as a phone charger, not household current, and it has overheat protection built in. It is TSA-friendly, so you can fly with it." },
+  { q: "Does it run small? What size should I order?", a: "“Runs small” is the most common complaint in this whole category, so it is a fair question. Solana’s vest is unisex XS to XXXL and true to size; go up one size if you will wear it over a hoodie. Either way, size exchanges are free." },
+  { q: "Why is it $59.99 when Ororo is $150 or more?", a: "No retail markup, no proprietary battery ecosystem to pay for, and it is sold direct. All-in with the bank it is $79.98, still under half an Ororo and about the price of one Ororo replacement battery." },
+  { q: "Where does it ship from, and how fast?", a: "From Solana Gear’s warehouse in Ohio, in 2 to 3 days, with a tracking number by email. Tariff free." },
+];
+
+const ps = `
+<p><strong>P.S.</strong> The man on the hunting forum who wrote that he had <em>“yet to find one that actually warms your lower back”</em> wasn’t wrong about the vests he’d tried. He was describing the exact gap this one was built to fill. Check the zone map against any other brand’s page. Then check availability while the sale is still on.</p>
+${cta("ps", "90-day money-back · Free size exchanges · Ships from Ohio in 2–3 days")}
+`;
+
+const disclosure = `<strong>THIS IS AN ADVERTISEMENT AND NOT AN ACTUAL NEWS ARTICLE, BLOG, OR CONSUMER PROTECTION UPDATE.</strong> The Life Insider is reader-supported and may receive compensation for clicks on or purchases of products featured on this page. Product specifications, ratings and customer reviews are Solana Gear’s own published material and are attributed as such; competitor zone counts and prices are taken from those brands’ published pages and change over time. Customer results are illustrative and individual experiences vary. This page is not medical advice; if you have a circulation condition, talk to your doctor about heated garments. See our <a href="/advertising-disclosure/">advertising disclosure</a>.`;
+---
+<AdvertorialPage
+  title="The Cold Spot Every Heated Vest Skips, And The $59 Vest That Heats It | The Life Insider"
+  description="Why every heated vest leaves a cold stripe across your lower back, the physics behind it, and the 9-zone $59 vest that runs on any USB power bank. 4.9 from 37,392+ customers, 90-day money-back."
+  cpvCampaign={CPV_CAMPAIGN}
+  kicker="Gear & Everyday Comfort"
+  updateBar="<strong>Update:</strong> Solana Gear’s heated vest sold out twice last winter. Stock is listed as LOW for the current sale. Express shipping from Ohio."
+  atf={atf}
+  byline={{ name: "Daniel Strutgate", role: "Gear & Everyday Comfort Editor", photo: "/images/author-daniel-strutgate.jpg", readTime: "4 min read" }}
+  seenOn={[{ src: "/images/adv/logo-outside.webp", alt: "Outside" }, { src: "/images/adv/logo-outdoor-gearlab.webp", alt: "Outdoor GearLab" }, { src: "/images/adv/logo-mountain-gazette.webp", alt: "Mountain Gazette" }]}
+  ratingLine="<strong>4.9 / 5</strong> from 37,392+ Solana Gear customers"
+  lead={lead}
+  body={body}
+  faqs={faqs}
+  ps={ps}
+  sticky={{ name: "Solana Gear Heated Vest", brand: "Solana Gear", image: "/images/hv-hero-man-thumb.webp", url: LINK, price: "$59.99", oldPrice: "$119.98", discount: "Up to 60% OFF" }}
+  disclosure={disclosure}
+/>
