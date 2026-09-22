@@ -11,7 +11,7 @@ import StickyCta from "../components/StickyCta.astro";
 export interface Atf { h1: string; sub: string; hero: { type: "img" | "video"; src: string; poster?: string; alt: string; caption?: string } }
 export interface Props {
   title: string; description: string;
-  cpvCampaign: string;
+  cpvCampaign: string; cpvLp?: string;
   kicker: string; updateBar?: string;
   atf: Record<"a" | "b" | "c", Atf>;
   byline: { name: string; role: string; photo?: string; readTime: string };
@@ -63,7 +63,7 @@ const A = p.atf.a;
   </article>
 
   <StickyCta name={p.sticky.name} brand={p.sticky.brand} image={p.sticky.image} url={p.sticky.url} price={p.sticky.price} oldPrice={p.sticky.oldPrice} discount={p.sticky.discount} />
-  <CpvTracker campaign={p.cpvCampaign} />
+  <CpvTracker campaign={p.cpvCampaign} lp={p.cpvLp} />
 
   <script is:inline define:vars={{ atf: p.atf }}>
     (function () {

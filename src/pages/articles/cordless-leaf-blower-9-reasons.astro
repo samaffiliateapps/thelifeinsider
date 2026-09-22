@@ -6,7 +6,8 @@
    CPV campaign id: PLACEHOLDER until Sam creates the CPV One campaign for this page. */
 import ListiclePage from "../../layouts/ListiclePage.astro";
 
-const CPV_CAMPAIGN = "0"; // PLACEHOLDER: set to the CPV One campaign id Sam creates for this page
+const CPV_CAMPAIGN = "18"; // CPV One campaign "Wood Ranger - Listicle" (Sam, 22 Sep 2026); CPV shows checkdirect(18,3)
+const CPV_LP = "3";
 const LINK = "https://track.thelifeinsider.com/base2.php";
 const CTA_LABEL = "Check Availability &amp; Claim 50% Off →";
 const cta = (pos: string, under = "Ships from Ohio, USA · 90-day money-back guarantee · Battery &amp; charger included") =>
@@ -163,6 +164,7 @@ ${cta("ps", "90-day money-back · Ships from Ohio in 2–3 days · Battery &amp;
   title="9 Reasons Homeowners Are Ditching Gas Blowers For This 2.1 lb Cordless One | The Life Insider"
   description="Nine reasons 27,000+ homeowners switched to the 2.1 lb Wood Ranger cordless leaf blower: one-handed, no gas, no cord, quiet, 1,600W, $69.99 at 50% off with a 90-day money-back guarantee."
   cpvCampaign={CPV_CAMPAIGN}
+  cpvLp={CPV_LP}
   kicker="Home & Yard"
   updateBar="<strong>Update:</strong> Following increased demand, Wood Ranger is running low on inventory at the current 50% promotional price. Orders placed today still ship from Ohio in 2–3 days."
   atf={atf}

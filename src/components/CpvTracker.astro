@@ -21,10 +21,11 @@
 */
 export interface Props {
   campaign: string; // CPV One campaign id, e.g. "11"
+  lp?: string;      // landing-page slot inside that CPV campaign (the 2nd checkdirect arg CPV shows you); default "1"
   root?: string;
   engsec?: string;
 }
-const { campaign, root = "https://track.thelifeinsider.com/", engsec = "5" } = Astro.props;
+const { campaign, lp = "1", root = "https://track.thelifeinsider.com/", engsec = "5" } = Astro.props;
 ---
 <script is:inline set:html={`var clpconfig = { "clroot": "${root}", "engsec": "${engsec}" };`} />
 <script is:inline src={`${root}landing.js`}></script>
@@ -42,6 +43,6 @@ const { campaign, root = "https://track.thelifeinsider.com/", engsec = "5" } = A
       });
     }
   }
-  checkdirect(${campaign}, 1);
+  checkdirect(${campaign}, ${lp});
 })();
 `} />
