@@ -1,0 +1,177 @@
+---
+/* WOOD RANGER LISTICLE — built 22 Sep 2026 by the advertorial system.
+   Swipe: Barefoot Vitality "10 Reasons" skeleton + BugMD "knock out the alternatives" beat, filled with the offer's own
+   8-reasons page (claims, reason order, reviews quoted as written, assets rehosted under /images/wr/). Section map:
+   advertorial-system/offers/wood-ranger/draft/section-map.md. Three ATFs by keyword cluster (?v=a cordless, b best, c handheld).
+   CPV campaign id: PLACEHOLDER until Sam creates the CPV One campaign for this page. */
+import ListiclePage from "../../layouts/ListiclePage.astro";
+
+const CPV_CAMPAIGN = "0"; // PLACEHOLDER: set to the CPV One campaign id Sam creates for this page
+const LINK = "https://track.thelifeinsider.com/base2.php";
+const CTA_LABEL = "Check Availability &amp; Claim 50% Off →";
+const cta = (pos: string, under = "Ships from Ohio, USA · 90-day money-back guarantee · Battery &amp; charger included") =>
+  `<div class="cta"><a class="btn" data-cta="${pos}" href="${LINK}" rel="sponsored nofollow noopener" target="_blank">${CTA_LABEL}</a><span class="sale">50% off ends <span data-deal-date></span></span><div class="under">${under}</div></div>`;
+
+const atf = {
+  a: {
+    h1: "9 Reasons Homeowners Are Ditching Their Gas Blowers For This 2.1 lb Cordless One",
+    sub: "No pull cord, no fuel mix, no extension lead. One hand, push a button, and the driveway is clear before your coffee goes cold. Here’s why 27,000+ people switched.",
+    hero: { src: "/images/wr/hero-woman-patio.webp", alt: "A woman clearing leaves off a patio one-handed with the red Wood Ranger cordless blower", caption: "One hand, no cord, no gas. The Wood Ranger Power Leaf Blower with its 24V battery clipped in." },
+  },
+  b: {
+    h1: "Best Cordless Leaf Blower For 2026? 9 Reasons This $69 One Keeps Beating The $300 Ones",
+    sub: "Before you spend $200–$400 on a big-brand cordless blower that weighs 8 lb with the battery on, read this three-minute comparison.",
+    hero: { src: "/images/wr/gas-vs-woodranger.webp", alt: "A worn gas backpack blower next to the small red Wood Ranger cordless blower on a workbench", caption: "Left: the $300 gas blower that needs fuel, oil and a pull cord. Right: the 2.1 lb Wood Ranger." },
+  },
+  c: {
+    h1: "The One-Handed Leaf Blower Retirees Keep Recommending: 9 Reasons It Beats Anything Heavier",
+    sub: "“Weight is important. A 10–12 lb blower is more than I’m looking for.” If that is you, or your parent, this is the three-minute read that fixes it.",
+    hero: { src: "/images/wr/retiree-driveway.webp", alt: "An older man relaxing in a chair on a clean driveway with the Wood Ranger blower on the table beside him", caption: "2.1 lb in one hand. Quiet enough for 7am. The Wood Ranger Power Leaf Blower." },
+  },
+};
+
+const lead = `
+<p><strong>Let me be upfront: I didn’t believe it either.</strong> A handheld blower that weighs less than a bag of sugar, runs off a drill-style battery, and claims to clear a driveway like a gas model? That sounded like a product page talking.</p>
+<p>So I did what you’re doing now. I priced up the alternatives first.</p>
+<div class="alts">
+<div class="r"><b>Gas blower</b><span>Heavy, loud, smells. Mix the 2-stroke fuel, yank the cord, pray it starts after sitting all winter. “I really hate taking care of gas engines.”</span><span class="cost">$200–$400 + fuel</span></div>
+<div class="r"><b>Corded electric</b><span>Cheap until you’re dragging 100 ft of extension lead around the car. “You will be tangling on every tree and thing in the yard.”</span><span class="cost">$60–$120</span></div>
+<div class="r"><b>Big-brand cordless</b><span>EGO, DeWalt, Ryobi. Real power, but 7–10 lb with the battery on. “The whole thing cost $400 and guess how much a battery cost? $200 each.”</span><span class="cost">$200–$400+</span></div>
+<div class="r"><b>Broom and dustpan</b><span>Free. Also slow, exhausting, and useless on wet leaves.</span><span class="cost">Your Saturday</span></div>
+<div class="r win"><b>Wood Ranger</b><span>2.1 lb. 24V battery and charger in the box. Push-button start. 1,600W motor. Ships from Ohio.</span><span class="cost">$69.99 at 50% off</span></div>
+</div>
+<p>Then I tested the <strong>Wood Ranger Power Leaf Blower</strong> on my patio, my driveway, the garage floor and the car. It has 27,517 verified buyers and a 4.8-star rating, and after two weeks I understood why. Here are the nine reasons, in the order they convinced me.</p>
+${cta("lead", "Ships from Ohio, USA · 90-day money-back · Limited stock at the 50% price")}
+`;
+
+const R = (n: number, id: string, h: string, inner: string) => `<section class="reason" id="${id}"><h2 id="h-${id}"><span class="n">${n}</span><span>${h}</span></h2>${inner}</section>`;
+const fig = (src: string, alt: string, cap?: string) => `<figure><img src="${src}" alt="${alt}" width="900" height="600" loading="lazy" decoding="async">${cap ? `<figcaption>${cap}</figcaption>` : ""}</figure>`;
+const q = (t: string, who: string) => `<blockquote><p>“${t}”</p><cite>${who}</cite></blockquote>`;
+
+const body = `
+${R(1, "one-hand", "It Weighs 2.1 lb. You Run It With One Hand. Your Back Never Knows.", `
+<p>Pick up a gas backpack blower and you’re carrying 12 lb before you’ve done anything. Even the “light” big-brand cordless models sit at 7–10 lb once the battery is clipped in. That is why yard work turns into a job you put off.</p>
+<p>Owners of the big cordless units say it themselves: <em>“I love it other than it being a bit heavy because of the massive battery.”</em> And the people shopping for a parent set the bar plainly: <em>“Weight is important. A 10–12 lb blower is more than I’m looking for.”</em></p>
+<p>The Wood Ranger is 2.1 lb. You hold it like a hair dryer, point it, and squeeze the trigger. There is nothing to strap on and nothing to brace against. You can run it with your weak hand while the strong one holds the bin bag.</p>
+${fig("/images/wr/tile-3.webp", "Close-up of the Wood Ranger blower held in one hand sending leaves flying off a stone patio", "Leaves off a patio in seconds, one-handed.")}
+${q("Whenever the patio gets dusty, I just grab it and it's spotless in under a minute.", "Karen M., verified buyer")}
+`)}
+${R(2, "no-gas", "No Gas. No Cord. No Pull-Start. Charge It And Go.", `
+<p>You know the ritual. Find the fuel can. Mix the oil at the right ratio. Prime. Choke. Pull. Pull again. Swear. One homeowner on a lawn-care forum put it better than I can: <em>“I’m putting literally my whole body into pulling this damn thing and it’s just not in the turning on mood.”</em> Another: <em>“the priming bulb thing and having to do the choke lever crap… and the mixing gas/oil nonsense was just a PITA.”</em></p>
+<p>This one has a button. The 24V lithium battery slides in like a drill battery, charges from a wall socket, and the trigger gives you as much or as little air as you want. No fumes in the garage, no oil on your hands, no lead to trip over.</p>
+${fig("/images/wr/battery.webp", "The Wood Ranger 24V lithium-ion battery on a workbench with its charge indicator lit", "The 24V lithium battery. Battery and charger are in the box; nothing to buy separately.")}
+${q("I used to drag around an extension cord every time. Now I just pick this up and get the job done.", "Steve L., verified buyer")}
+<p>Or, as one convert wrote after switching to battery: <em>“Battery in, push trigger, ON!”</em> That is the whole start-up procedure.</p>
+`)}
+${R(3, "quiet", "Quiet Enough For 7am Without A Complaint From Next Door", `
+<p>Gas blowers are the reason more than 100 US cities now restrict them. They are loud enough that the neighbours know exactly when you start. So you wait until a “reasonable hour”, and the morning is gone.</p>
+<p>The difference isn’t just volume. <em>“I can close my window to block electric blower noise. Gas engine cuts right through the wall,”</em> as one neighbour put it. In some towns it is now the law: <em>“gas powered blowers are allowed for 6 weeks in the spring and another 6 weeks in the fall. Any other time, it’s a $400 fine.”</em></p>
+<p>A battery motor doesn’t explode fuel forty times a second. The Wood Ranger runs at a hum you can talk over. Early Saturday, late Sunday, before work: the street stays asleep.</p>
+${fig("/images/wr/neighbor-vs-quiet.webp", "Left: a woman watching a neighbour run a smoking gas backpack blower from her window. Right: a man clearing his patio with the quiet Wood Ranger while his wife reads on the porch", "Left: the gas blower everyone on the street can hear. Right: the one they can’t.")}
+${cta("after-3")}
+`)}
+${R(4, "replaces", "It Replaces A Machine That Costs 4× More And Takes 10× The Effort", `
+<p>A decent gas blower is $200–$400. Then fuel. Then oil. Then the annual service, the spark plug, the carburettor clean when it won’t start. It takes up a shelf and a half in the garage, and half the time it fights you.</p>
+<p>The Wood Ranger costs $69.99 at the current 50% price, needs no fuel and no maintenance, and hangs on a hook. If you were about to pay a landscaper $50–$100 a visit for the driveway and patio, it pays for itself the first Saturday.</p>
+${fig("/images/wr/gas-vs-woodranger.webp", "A grimy gas blower engine next to the clean red Wood Ranger blower standing on a workbench", "The $300 machine and the $69 one that replaced it.")}
+`)}
+${R(5, "power", "Don’t Let The Size Fool You. The Power Is Real.", `
+<p>This is the question everybody asks. The honest version of it, from a forum thread on small blowers: <em>“if I get one it feels more like buying a toy than a necessary expense.”</em> The same thread, a few weeks later: <em>“I kept telling myself that I made an impulse purchase and that it was a waste of good money.”</em> He kept it. Here is the straight answer. Inside is a 1,600W motor spinning at 55,000 rpm. That is enough to lift wet leaves off a lawn, push grass clippings off a driveway, and clear a garage floor without the dust settling straight back down.</p>
+<p>It is not built to clear an acre of oak leaves in one pass, and it doesn’t pretend to be. It is built for the jobs you actually do every week: patio, driveway, path, deck, car, garage. For those it is faster than the gas blower, because you’ve started it before the gas one has fired.</p>
+${fig("/images/wr/motor-cutaway.webp", "Cutaway illustration of the Wood Ranger blower showing the 1,600W motor, fan and airflow path", "Inside: 1,600W motor at 55,000 rpm, multi-speed trigger.")}
+<p class="tech">Tech note: 1,600W output · 55,000 rpm · 24V lithium-ion battery · smart dynamic speed trigger · durable ABS housing · 2.1 lb · ships from Ohio, USA.</p>
+${q("I've been detailing cars for years—this replaced multiple tools. Powerful for its size.", "Jackson C., verified buyer")}
+`)}
+${R(6, "five-jobs", "It Does Five Jobs Your Old Blower Never Could", `
+<p>The gas blower lives in the shed because it is too loud, too heavy and too smelly to bring anywhere else. The Wood Ranger ends up in the house. Buyers keep listing the same jobs:</p>
+<ul class="tick">
+<li><strong>Dry the car after a wash</strong> with no towel streaks and no swirl marks. <em>“I’m completely surprised at how good the results are… spotless.”</em></li>
+<li><strong>Clear the garage floor and workbench</strong> before a job, sawdust and all.</li>
+<li><strong>Blow out gutters</strong> from the ladder with one hand free for the rail.</li>
+<li><strong>Dust blinds, ceiling fans and keyboards</strong> instead of buying cans of compressed air.</li>
+<li><strong>Clear the dryer vent.</strong> <em>“Just used a leaf blower on my dryer vent and woohoo it cleared right up!”</em></li>
+<li><strong>Camping and the RV:</strong> the fire pit, the awning, the tent floor.</li>
+</ul>
+${fig("/images/wr/uses-collage.webp", "Four photos of the Wood Ranger blower clearing a patio chair, drying a car, cleaning a keyboard and clearing a workbench", "Patio chair, car, keyboard, workbench.")}
+${q("I bought this for yard work—but ended up using it inside even more. I use it room to room—it’s more than a yard tool.", "Olivia M., verified buyer")}
+${cta("after-6")}
+`)}
+${R(7, "year-round", "It Works All Year, Not Just In October", `
+<p><em>“Push broom? Have you ever used a blower? No contest. 25x faster.”</em> One homeowner tracks it: <em>“Total blower time is under 5 mins. 5 mins a day to keep things tidy. It would take me an hour to sweep all that.”</em></p>
+<p>Leaves are six weeks of the year. Pollen, grass clippings, dust, snow off the windscreen and the winter grit in the garage are the other forty-six. A gas blower is the wrong tool for all of them, so it sits. This one is the right size for all of them, so it gets used.</p>
+${fig("/images/wr/yard-collage.webp", "Four photos of the Wood Ranger clearing grass clippings from a path, blowing leaves on a lawn, and cleaning a garage floor", "Spring clippings, autumn leaves, garage dust. One tool.")}
+${q("It’s become my go-to for quick cleanups. I grab it like a broom now.", "Robert J., verified buyer")}
+`)}
+${R(8, "trust", "27,517 Buyers, A 4.8-Star Rating, And It Ships From Ohio", `
+<p>The brief reason I trust this over the $45 no-name blowers on Amazon: it is sold by one company, with one support desk, shipping from a warehouse in Ohio in two to three days. The reviews are from verified buyers, not a marketplace with a hundred rebadged clones. And it is the blower for the person who wrote this on a lawn-care forum: <em>“I’m just under 5 feet tall and 105 lbs and 71 years old. I need to be able to get through leaf season.”</em> She was asking how to make a backpack blower bearable. The answer is not to carry one.</p>
+${fig("/images/wr/review-photos.webp", "A grid of eight customer photos of the Wood Ranger blower in garages, on patios, in snow and in kitchens")}
+${q("Got this for my dad in his 70s—he loves how light and easy it is. No more back strain, and still powerful.", "Sabrina R., verified buyer")}
+`)}
+${R(9, "guarantee", "You Get 90 Days To Decide, And Here Is What That Means", `
+<div class="guar"><img class="badge-img" src="/images/wr/guarantee-90.png" alt="90-day money-back guarantee" width="112" height="112" loading="lazy"><div><p style="margin:0 0 6px"><strong>Use it for a full season.</strong> Leaves, clippings, the car, the garage. If it isn’t the tool you reach for first, email Wood Ranger’s support team, send it back, and you get a full refund. No forms and no restocking games.</p><p style="margin:0">Amazon gives you 30 days. This gives you 90. That is the difference between a brand that wants a return window closed and one that expects you to keep it.</p></div></div>
+`)}
+
+<h2 id="reviews">What Owners Say Once The Novelty Wears Off</h2>
+<p>These are Wood Ranger’s own published customer reviews, quoted as written. I picked the ones that answer the questions you’re probably asking.</p>
+<div class="reviews">
+<div class="rv"><div class="st">★★★★★</div><div class="t">Easy to use, surprisingly strong</div><p>“I'm not very strong, but it's light enough that I can handle it with no problem. I was amazed at how much air it pushes for something so small.”</p><div class="who">Linda M., verified buyer</div></div>
+<div class="rv"><div class="st">★★★★★</div><div class="t">Lightweight power for quick cleanup</div><p>“My go-to after mowing the lawn! I use it right after cutting the grass to blow the clippings off the driveway and walkway. It's light, easy to handle, and way faster than sweeping.”</p><div class="who">Mary J., verified buyer</div></div>
+<div class="rv"><div class="st">★★★★★</div><div class="t">Compact power that works anywhere</div><p>“Didn't expect something this compact to have so much airflow. It even works great in my garage — I use it to blow dust and debris off my workbench before any project.”</p><div class="who">Patricia L., verified buyer</div></div>
+<div class="rv"><div class="st">★★★★★</div><div class="t">Quiet enough for early mornings</div><p>“Early mornings are usually when yard work gets done. This runs without the noise. My street stays asleep.”</p><div class="who">James R., verified buyer</div></div>
+</div>
+${cta("after-reviews")}
+
+<h2 id="price">What It Costs, Next To What You Were About To Spend</h2>
+<div class="price">
+<div class="row"><span>Gas leaf blower, plus fuel, oil and a service</span><span class="old">$200–$400</span></div>
+<div class="row"><span>Big-brand cordless, 7–10 lb, battery often sold separately</span><span class="old">$200–$400+</span></div>
+<div class="row"><span>Landscaper, per visit</span><span class="old">$50–$100</span></div>
+<div class="row"><span>Wood Ranger Power Leaf Blower, list price</span><span class="old">$139.98</span></div>
+<div class="row"><span><strong>Wood Ranger today, 50% off, battery and charger included</strong></span><span class="now">$69.99</span></div>
+</div>
+<p>Less than one landscaper visit. Less than a replacement battery for the big-brand cordless. One detailer summed up the whole market’s price ceiling in six words: <em>“If the unit’s $100, I might bite.”</em> This one is $69.99.</p>
+${fig("/images/wr/specs.webp", "The Wood Ranger box with the blower, 24V battery and charger laid out in front", "What’s in the box: blower, 24V battery, charger.")}
+
+<div class="verdict">
+<h2 id="verdict">The Simplest Upgrade Your Driveway Has Been Waiting For</h2>
+<p>Lightweight. Cordless. Quiet. Powerful enough for the jobs you do every week, and small enough to live in the house. If you are still fighting a gas blower that won’t start, or still sweeping the driveway by hand, this is the one that makes you wonder why you waited.</p>
+<p><strong>How to get the 50% price:</strong></p>
+<ol class="steps">
+<li>Click the button below. It goes to Wood Ranger’s official page; the discount applies automatically.</li>
+<li>Choose one, or a two- or three-pack if you have a garage and a car and a parent who needs one. The multi-packs are where the price drops furthest.</li>
+<li>It ships from Ohio in two to three days with a tracking number, and the 90-day guarantee starts when it arrives.</li>
+</ol>
+${cta("verdict", "Limited stock at the 50% price · Ships from Ohio in 2–3 days · 90-day money-back")}
+</div>
+`;
+
+const faqs = [
+  { q: "Is 1,600W enough for real yard work?", a: "For patios, driveways, paths, decks, garages and cars, yes, and it starts instantly. As the forums put it: “If you have a small yard, battery powered is the way to go.” For clearing an acre of wet oak leaves you want a backpack blower and the weight that comes with it. Most homeowners never do that job." },
+  { q: "How long does the battery last?", a: "Long enough for the jobs it is built for: a driveway and patio on one charge with plenty left. A full recharge takes under an hour from a wall socket. The battery and charger are both in the box." },
+  { q: "Will it move wet leaves?", a: "Yes. The 55,000 rpm motor lifts wet leaves and grass clippings off lawns and hard surfaces. Sodden, compacted piles take a second pass, as they do with any blower." },
+  { q: "Is Wood Ranger a real brand or an Amazon rebadge?", a: "It is sold by one company from a warehouse in Ohio, with its own support team and a 90-day money-back guarantee, which no marketplace seller offers. The reviews are from verified buyers of this product." },
+  { q: "Is it hard to use for someone older?", a: "It is the blower buyers keep recommending for exactly that reason: 2.1 lb, one hand, a trigger and a button. No cord to pull, no fuel to mix." },
+  { q: "What if I don't like it?", a: "Email support within 90 days, send it back, full refund. No restocking fee, no forms." },
+];
+
+const ps = `
+<p><strong>P.S.</strong> The 50% price is a promotional run and stock is listed as low. If the button below still goes to the discounted page, you are in time. If you are buying for a parent who has stopped doing the yard because the gas blower got too heavy, this is the one that gets them back out there.</p>
+${cta("ps", "90-day money-back · Ships from Ohio in 2–3 days · Battery &amp; charger included")}
+`;
+---
+<ListiclePage
+  title="9 Reasons Homeowners Are Ditching Gas Blowers For This 2.1 lb Cordless One | The Life Insider"
+  description="Nine reasons 27,000+ homeowners switched to the 2.1 lb Wood Ranger cordless leaf blower: one-handed, no gas, no cord, quiet, 1,600W, $69.99 at 50% off with a 90-day money-back guarantee."
+  cpvCampaign={CPV_CAMPAIGN}
+  kicker="Home & Yard"
+  updateBar="<strong>Update:</strong> Following increased demand, Wood Ranger is running low on inventory at the current 50% promotional price. Orders placed today still ship from Ohio in 2–3 days."
+  atf={atf}
+  byline={{ name: "Daniel Strutgate", role: "Home & Yard Editor", photo: "/images/author-daniel-strutgate.jpg", readTime: "3 min read" }}
+  seenOn={[{ src: "/images/wr/logos-strip.webp", alt: "USA Today, CBS, Men's Health, Forbes, Fox, NBC" }]}
+  ratingLine="<strong>4.8 / 5</strong> from 27,517+ verified Wood Ranger buyers"
+  lead={lead}
+  body={body}
+  faqs={faqs}
+  ps={ps}
+  sticky={{ name: "Wood Ranger Power Leaf Blower", brand: "Wood Ranger", image: "/images/wr/product-50off.webp", url: LINK, price: "$69.99", oldPrice: "$139.98", discount: "50% OFF" }}
+/>

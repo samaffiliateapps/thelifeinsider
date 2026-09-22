@@ -1,0 +1,21 @@
+/* LISTICLE PAGE — 22 Sep 2026. Extends adv.css: numbered reason blocks, review wall, order steps, sticky-safe spacing. */
+.adv .reason { margin: 2.2em 0 1.4em; }
+.adv .reason h2 { display:flex; gap:12px; align-items:flex-start; font-size:1.5rem; line-height:1.25; margin:0 0 0.6em; }
+.adv .reason h2 .n { flex:none; width:38px; height:38px; border-radius:50%; background:var(--frame); color:#fff; font-size:1.1rem; font-weight:900; display:grid; place-items:center; margin-top:2px; }
+.adv .reason figure { margin:12px 0 14px; }
+.adv .reason .tech { font-size:0.86rem; color:var(--muted); background:var(--bg-soft); border:1px solid var(--rule); border-radius:8px; padding:8px 12px; margin:10px 0 0; line-height:1.45; }
+.adv .alts { border:1px solid var(--rule); border-radius:12px; overflow:hidden; margin:1.2em 0; }
+.adv .alts .r { display:grid; grid-template-columns:150px 1fr auto; gap:12px; padding:10px 14px; border-bottom:1px solid var(--rule); font-size:0.98rem; align-items:center; }
+.adv .alts .r:last-child { border-bottom:0; }
+.adv .alts .r b { color:var(--ink); }
+.adv .alts .r .cost { font-weight:800; color:var(--sale); white-space:nowrap; }
+.adv .alts .r.win { background:#f0fbf3; }
+.adv .alts .r.win .cost { color:var(--cta); }
+.adv .steps { counter-reset:s; list-style:none; padding:0; margin:1em 0; }
+.adv .steps li { counter-increment:s; position:relative; padding:10px 0 10px 48px; font-size:1.02rem; line-height:1.5; border-bottom:1px dashed var(--rule); }
+.adv .steps li::before { content:counter(s); position:absolute; left:0; top:8px; width:34px; height:34px; border-radius:50%; background:var(--ink); color:#fff; font-weight:900; display:grid; place-items:center; }
+.adv .verdict { border-top:3px solid var(--ink); padding-top:14px; margin-top:2.4em; }
+.adv .verdict h2 { margin-top:0; }
+.adv .photos img { display:block; width:100%; height:auto; border-radius:10px; }
+.adv .rv img.av { width:34px; height:34px; border-radius:50%; vertical-align:middle; margin-right:8px; object-fit:cover; }
+@media (max-width:640px) { .adv .alts .r { grid-template-columns:1fr; gap:4px; } .adv .reason h2 { font-size:1.3rem; } }
