@@ -13,7 +13,7 @@ export interface Props {
   title: string; description: string;
   cpvCampaign: string; cpvLp?: string;
   kicker: string; updateBar?: string;
-  atf: Record<"a" | "b" | "c", Atf>;
+  atf: Record<string, Atf>;
   byline: { name: string; role: string; photo?: string; readTime: string };
   seenOn?: { src: string; alt: string }[];
   ratingLine?: string;
