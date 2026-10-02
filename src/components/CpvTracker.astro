@@ -24,8 +24,9 @@ export interface Props {
   lp?: string;      // landing-page slot inside that CPV campaign (the 2nd checkdirect arg CPV shows you); default "1"
   root?: string;
   engsec?: string;
+  fbCapi?: boolean; // Meta campaigns: CPV One Step 2 code adds fbCapiTrack() after checkdirect (3 Oct 2026)
 }
-const { campaign, lp = "1", root = "https://track.thelifeinsider.com/", engsec = "5" } = Astro.props;
+const { campaign, lp = "1", root = "https://track.thelifeinsider.com/", engsec = "5", fbCapi = false } = Astro.props;
 ---
 <script is:inline set:html={`var clpconfig = { "clroot": "${root}", "engsec": "${engsec}" };`} />
 <script is:inline src={`${root}landing.js`}></script>
@@ -46,3 +47,4 @@ const { campaign, lp = "1", root = "https://track.thelifeinsider.com/", engsec =
   checkdirect(${campaign}, ${lp});
 })();
 `} />
+{fbCapi && <script is:inline>fbCapiTrack()</script>}

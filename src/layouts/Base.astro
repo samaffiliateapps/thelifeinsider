@@ -8,9 +8,12 @@ interface Props {
      high-traffic competitor lander runs a logo-only header so the only
      clickable things on the page are the offer buttons. 4 Sep 2026. */
   minimal?: boolean;
+  /* Meta dataset (pixel) ID for paid-social landers (1 Oct 2026). PageView only from the browser; the Purchase is sent
+     server-side by CPV One CAPI, so this page must never fire a Purchase (one Purchase source per dataset). */
+  metaPixel?: string;
 }
 
-const { title, description, minimal = false } = Astro.props;
+const { title, description, minimal = false, metaPixel = "" } = Astro.props;
 const year = new Date().getFullYear();
 
 // Set to your GA4 Measurement ID (e.g. "G-XXXXXXXXXX") to activate analytics.
@@ -44,6 +47,16 @@ const ADS_ID = "AW-18319719009";
             if (ADS_ID) gtag("config", ADS_ID);
           </script>
         </>
+      )
+    }
+    {
+      metaPixel && (
+        <script is:inline define:vars={{ metaPixel }}>
+          !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', metaPixel); fbq('track', 'PageView');
+        </script>
       )
     }
     <!-- Microsoft Clarity (heatmaps + session recordings), added 17 Sep 2026 -->

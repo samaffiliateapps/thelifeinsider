@@ -1,0 +1,323 @@
+---
+/* WOOD RANGER PORCH LISTICLE (Meta launch page) — built 2 Oct 2026 by lander-builder.
+   v2 conversion pass 2 Oct (Sam's standing orders): one damaging admission (porch tool, not the whole-lawn tool) in the lead,
+   the other admissions cut; "Is it quiet?" FAQ removed; R6 = "get the official one" (Ohio, 2-3 days, the brand's 90-day
+   guarantee, 4.8 / 27,517+ 5-star reviews per the brand); 50% off today + 2-/3-pack; one quote per reason.
+   Copy (source of truth): advertorial-system/offers/wood-ranger/pages/listicle-porch-2026-10-02.md
+   Swipe: blissy-reasons-tof (structure) + javvy-a49 (benefit links). Traffic: Meta cold, from statics S1/S2/S3.
+   ?v=a control · ?v=b / ?v=c whole-ATF swaps (H1, subhead, hero, lead lines 1-2) · ?v=d headline only. Body unchanged.
+   Every CTA carries data-cta="1…6" / "sticky" so GA4, Clarity and the Meta OfferClick event show the position.
+
+   Synced 2 Oct to the post-compliance copy (campaign/compliance-2026-10-02.md B1, B2, B4 + ruling 2): merchant-published
+   quotes (Robert J., Ryan C., Daniel W.) removed, "list price" wording replaced, noise FAQ attributed to buyers.
+   Images: hero v=a = review-4.webp (16:9 by CSS); v=b hero and R1 = tile-5.webp. tile-3.webp is banned: its battery reads
+   "MUIHTI…", another brand's pack. R3 = yard-collage patio + garage-floor
+   squares (yard-patio-garage.webp, lawn squares cut). Offer card = product-50off.webp with the wordmark strip cropped
+   (product-50off-card.webp). Not used (doctrine list in the copy §6): logos-strip, neighbor-vs-quiet, slide-1, slide-6,
+   motor-cutaway, one-tool, tile-4, compare-2, avatar-wendy, hero-woman-patio, retiree-driveway, review-photos, slide-3,
+   tile-6, tile-1, guarantee-90.png, tile-3.
+
+   BEFORE PUBLISH (Sam), from the copy file §10:
+   - Re-copy every quote (Q1b-Q17 incl. Q12b) from the live Trustpilot / brand pages and write exact dates
+     ("September 2026" dates are approximate). compliance-check decides on the 13-30 Sep Trustpilot cluster.
+   - Publish-day price check: US$69.99 / US$139.98 on the interstitial AND the saving still shown at checkout.
+   - AM: guarantee length + terms ([GUARANTEE TBC] comments below), woodranger.net provenance, demo clip,
+     (v2: the 21V look-alike sentence is gone; the 90-day guarantee is printed as the landing page states it). */
+import ListiclePage from "../../layouts/ListiclePage.astro";
+
+// TODO(Sam): create the CPV One campaign for this page. Offer URL = https://offer.woodrangertools.com/leafblower/landing
+// with your AdsBranded affiliate link (offer 905); tracking domain track.thelifeinsider.com; Direct Redirect. Then put
+// its campaign ID here, and the LP slot from the checkdirect(ID, LP) snippet CPV shows you in CPV_LP.
+// "0" is a placeholder: the page must NOT get traffic until this is a real campaign ID (data-decisions P1 item 2).
+const CPV_CAMPAIGN = "19"; // CPV One campaign "Meta - Wood Ranger" (3 Oct 2026)
+const CPV_LP = "1";
+
+// TODO(Sam): Meta dataset (pixel) ID of the fresh thelifeinsider dataset (fed by CPV One CAPI for the Purchase).
+// Empty = no pixel loads. The pixel fires PageView + OfferClick/Scroll50/Scroll75 custom events only, never a Purchase.
+const META_PIXEL = "4514987495496479"; // TLI presell - CPV CAPI dataset (created via API 2 Oct 2026)
+
+// CPV One click URL (base2.php resolves the offer from the CPV cookies set by the tracker on page load).
+const LINK = "https://track.thelifeinsider.com/base2.php";
+const A = `href="${LINK}" rel="sponsored nofollow noopener" target="_blank"`;
+const AD_NOTE = ``; // Sam 2 Oct 2026: commission note lives in the footer only
+const btn = (pos: string, label: string) => `<a class="btn" data-cta="${pos}" ${A}>${label}</a>`;
+const tlink = (pos: string, label: string) => `<a class="tlink" data-cta="${pos}" ${A}>${label}</a>`;
+const ctaBox = (pos: string, label: string, notes: string) => `<div class="cta ctabox">${btn(pos, label)}${notes}</div>`;
+const fig = (src: string, alt: string, w: number, h: number, cap?: string, cls = "") =>
+  `<figure${cls ? ` class="${cls}"` : ""}><img src="${src}" alt="${alt}" width="${w}" height="${h}" loading="lazy" decoding="async">${cap ? `<figcaption>${cap}</figcaption>` : ""}</figure>`;
+const q = (t: string, who: string) => `<blockquote><p>“${t}”</p><cite>${who}</cite></blockquote>`;
+const R = (n: number, id: string, h: string, inner: string) =>
+  `<section class="reason" id="${id}"><h2 id="h-${id}"><span class="n">${n}</span><span>${h}</span></h2>${inner}</section>`;
+const TP = (stars: number, date: string) => `Wood Ranger buyer, ${stars}-star Trustpilot review, ${date}`;
+
+const CTA_MAIN = "Check Availability &amp; the 50% Discount »";
+
+const heroA = {
+  src: "/images/wr/hero-leaves-blast.jpg",
+  alt: "The red cordless WOODRANGER blower blasting a pile of dry leaves off the ground",
+  caption: "2.1 lb, cordless, one hand. Dry leaves off the ground in seconds.",
+};
+const subA = "No pull cord, no extension cord, no waiting on anyone. Buyers aged 78 and 84 say they keep their own porch and deck clear with it.";
+const subBC = "8 reasons people who still do their own porch keep a 2-pound blower by the door. No cord, no pull-start, one hand.";
+
+const atf = {
+  a: { h1: "8 Reasons Homeowners Are Swapping the Broom and the Big Blower for This 2-Pound One", sub: subA, hero: heroA },
+  b: {
+    h1: "No More Waiting on Someone to Do the Porch",
+    sub: subBC,
+    hero: { src: "/images/wr/tile-5.webp", alt: "The WOODRANGER Power Leaf Blower held in one hand, 24V battery fitted" },
+    lead: `<p>Some porches wait for someone else to have time.</p><p>Leaves pile up on the steps until then.</p>`,
+  },
+  c: {
+    h1: "The Porch Isn't the Problem. The Tools Are.",
+    sub: subBC,
+    hero: { src: "/images/wr/gas-vs-woodranger.webp", alt: "A full-size gas blower next to the small red cordless blower on a workbench" },
+    lead: `<p>A full-size blower is built for a whole yard.</p><p>The porch is a five-minute job.</p>`,
+  },
+  // v=d: headline-only test; subhead, hero and lead = control.
+  d: { h1: "The 2-Pound Blower Homeowners Keep by the Door: 8 Reasons It Beats the Broom", sub: subA, hero: heroA },
+};
+
+const lead = `
+<div id="advLeadSwap"><p>In fall, the porch fills up again every day.</p>
+<p>Leaves on the steps. Seeds on the walk. Grit on the garage floor.</p></div>
+<p>The big blower is a lot to haul out for five minutes of work. The broom leaves the fine stuff behind. So some days the porch waits for someone else.</p>
+<p>The fix isn't a bigger blower. It's a smaller one.</p>
+<p>One thing up front: this isn't a whole-lawn blower. Keep the big one for that. This is the porch tool. It weighs 2.1 lb, it lives by the door, and the job takes minutes, not a morning.</p>
+<p>We read the brand's specs and its buyers' reviews. Here are 8 reasons people who do their own porch keep one handy. Skim the bold lines to see if it fits yours.</p>
+<div class="chip">
+  <img src="/images/wr/tile-5.webp" alt="The WOODRANGER Power Leaf Blower held in one hand, 24V battery fitted" width="1174" height="700" loading="lazy" decoding="async">
+  <div class="chip-t"><p class="chip-name"><strong>WOODRANGER Power Leaf Blower</strong> · 2.1 lb · cordless · one hand</p>
+  <p class="chip-rate"><span class="st" aria-hidden="true">★★★★★</span> 4.8 · 27,517+ 5-star reviews, per the brand</p>
+  <p class="chip-link">${tlink("1", "See it 50% off on the official site »")}</p>${AD_NOTE}</div>
+</div>
+`;
+
+const icons3 = `
+<div class="icons3" role="list">
+  <div role="listitem"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9h12l2 11H4L6 9z"/><path d="M9 9a3 3 0 0 1 6 0"/></svg><span>2.1 lb</span></div>
+  <div role="listitem"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M6.5 6.5l11 11"/><path d="M12 8v5"/></svg><span>no pull cord</span></div>
+  <div role="listitem"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h9"/><path d="M4 7h6"/><path d="M4 17h12"/><path d="M17 9l3 3-3 3"/></svg><span>squeeze for more air</span></div>
+</div>`;
+
+const body = `
+${R(1, "r1", "Do the porch yourself again, without waiting on anyone", `
+<p>Here's what most people never hear: the porch isn't the problem. The tools are. They were built for a bigger job, or a slower one.</p>
+<p>A full-size blower is made to push a whole yard of leaves. So it's heavy: 10 lb or more, by the brand's chart. Gas ones need a pull cord. A broom moves things an inch at a time. And the mess keeps changing: the doormat one minute, the driveway the next.</p>
+<p>Nobody drags the big vacuum out for crumbs on the counter. You grab the little one.</p>
+<p>This blower works the same way. We call it the grab-and-go build:</p>
+<ul>
+<li><strong>Two-pound lift.</strong> It weighs 2.1 lb. You pick it up with one hand.</li>
+<li><strong>No-start power.</strong> It runs on a 24V battery. No cord to pull, no gas, no extension cord.</li>
+<li><strong>Squeeze-to-control air.</strong> A light squeeze for the doormat. A hard squeeze for the driveway.</li>
+</ul>
+<p>It takes all three. Light but corded, you're tied to an outlet. Cordless but 10 lb, it stays on the hook. On or off only, the doormat can end up in the yard.</p>
+<p>The porch was always a five-minute job. Now it's one you do yourself.</p>
+<p>If the porch has started waiting for someone, it isn't you. It's the tool.</p>
+${ctaBox("2", CTA_MAIN, `<p class="under">Opens the brand's official site, where it's 50% off today. Pick 1, 2 or 3 there.</p>${AD_NOTE}`)}
+${q("…I am a 78 year old widow with arthritis and thought I'd never be able to blow out my garage or remove debris from my deck again. But I can easily do both with a single charge from this Woodranger tool.", TP(5, "September 2026"))}
+<!-- TODO(Sam): Q1 upgrade ("I am 78 years old and can't always get someone to help me…", Trustpilot woodranger.net, 3 Mar 2026) replaces Q1b ONLY after the AM confirms woodranger.net is the same merchant and the same 2.1 lb blower. -->
+${fig("/images/wr/tile-5.webp", "The WOODRANGER Power Leaf Blower held up in one hand, 24V battery fitted", 1174, 700)}
+${icons3}
+<!-- TODO(Sam): later swap the R1 image for the analogy photo (big vacuum vs hand vac on a charger, crumbs on a counter). -->
+`)}
+${R(2, "r2", "Nobody has to start this one for you: pick it up, squeeze, done", `
+<p>No pull cord to crank. No gas to mix. No extension cord to drag. You pick it up and squeeze.</p>
+<p>And the brand says it's quiet enough for 7am jobs, so the walk can be clear before the coffee's cold.</p>
+${q("I like the fact that I just grab it without dragging electrical cords around let alone a bulky blower.", TP(5, "21 Sep 2026"))}
+${fig("/images/wr/gas-vs-woodranger.webp", "A full-size gas blower next to the small red cordless blower on a workbench", 742, 740, "Left, the yard tool. Right, the porch tool: 2.1 lb.", "sq")}
+`)}
+${R(3, "r3", "Beat the broom: get the dust out of the cracks in minutes", `
+<p>A broom pushes leaves around and leaves dust in the cracks. Air gets into the cracks. Buyers count the job in minutes, not mornings.</p>
+${q("I was sweeping out my garage and leaving dust streaks everywhere. I pulled out my little blower and the whole garage was dust free in less than two minutes!", TP(5, "September 2026"))}
+${fig("/images/wr/yard-patio-garage.webp", "Two photos: the blower clearing pollen off a patio path, and dust off a garage floor", 728, 360, "Patio and garage floor: the jobs it's built for.")}
+`)}
+
+<h2 id="older-buyers">What older buyers wrote</h2>
+<div class="rstrip">
+  <div class="rv"><div class="st" aria-label="5 stars">★★★★★</div><p>“Light weight, powerful, easy for this 84 year old to keep backyard, front porch areas easy to keep leaf and dust free. I love it…!”</p><div class="who">Trustpilot review of Wood Ranger · 16 Sep 2026</div></div>
+  <div class="rv"><div class="st" aria-label="5 stars">★★★★★</div><p>“…is easier to handle than the full size leaf blower. I am in my 70's so definitely being smaller and lighter is a big plus.”</p><div class="who">Trustpilot review of Wood Ranger · 18 Sep 2026</div></div>
+  <div class="rv"><div class="st" aria-label="5 stars">★★★★★</div><p>“Took a chance in ordering this and have been surprised how easy it is to use. Being an older adult, I have found it not heavy and does the job I need it for.”</p><div class="who">Trustpilot review of Wood Ranger · September 2026</div></div>
+</div>
+<p class="smallprint">Trustpilot reviews, quoted word for word.</p>
+<p class="benefit-link">${tlink("3", "Get the blower these buyers wrote about, 50% off »")}</p>
+
+${R(4, "r4", "Blow the steps clean without blowing the doormat into the yard", `
+<p>Press lightly for a soft puff on the doormat. Press all the way for full air on the steps and driveway.</p>
+${q("The blower is light enough for me to use with the arthritis in my thumb.", TP(5, "September 2026"))}
+${fig("/images/wr/tile-2.webp", "Two views of the blower in a hand: a light squeeze with soft air, a full squeeze with full air", 1174, 700, "Light squeeze, soft air. Full squeeze, full air.")}
+`)}
+${R(5, "r5", "Clear wet leaves off the walk and driveway with two pounds in one hand", `
+<p>Two pounds sounds like a toy. Buyers say it isn't.</p>
+${q("I was skeptical at first, looking at the size of this equipment. … I must tell you that the power this has is like of none other, especially with its small size.", TP(5, "September 2026"))}
+<p>The brand says it powers through wet leaves, heavy grass clippings and stubborn driveway debris. One squeeze, and the walk is clear.</p>
+<!-- TODO(Sam/AM): [DEMO_VIDEO] real-speed merchant clip on a driveway or deck replaces this image, caption "Real speed, real driveway." Until then: review-5 + "Two pounds, 24V, out of the box." -->
+${fig("/images/wr/review-5.webp", "The red cordless blower standing on pavers next to its shipping box, 24V lithium battery fitted", 530, 509, "Two pounds, 24V, out of the box.", "sq")}
+<p class="benefit-link">${tlink("3b", "See it in action on the official site »")}</p>
+`)}
+${R(6, "r6", "Get the official one: shipped from Ohio, backed for 90 days", `
+<p>Every button on this page goes to the brand's official site. Per the brand, orders ship from its Ohio warehouse in 2-3 days, and you get a tracking email.</p>
+<p>You also get the brand's 90-day money-back guarantee. Its page says: try it at home for 90 days, and if you aren't happy, it refunds you.</p>
+<p>The brand reports a 4.8 rating, with 27,517+ 5-star reviews.</p>
+${q("The company was trustworthy and shipped items promptly.", TP(4, "7 Sep 2026"))}
+${fig("/images/wr/specs.webp", "The WOODRANGER Power Blower box with the blower, 24V battery and charger in front", 416, 445, "The official kit, as the brand shows it.", "sq narrow")}
+${ctaBox("4", "Go to the Official Site &amp; Check Availability »", `<p class="under">Opens the brand's page: 50% off today, 90-day guarantee. Nothing is charged until you check out.</p>`)}
+`)}
+
+${R(7, "r7", "Do the porch, the walk and the garage floor on one charge, then top it up in under an hour", `
+<p>The brand says about 30 minutes a charge: enough for a full driveway, patio or garage in one go. A porch, a walk and a garage floor take a few minutes each, so one charge covers all three. Like the little hand vac, it sits charged by the door.</p>
+${q("Charge lasted about 30-40 minutes.", TP(5, "16 Sep 2026"))}
+<p>Two doors? The 2-pack puts one by each.</p>
+${fig("/images/wr/battery.webp", "The 24V lithium-ion battery on a workbench, three green charge lights on", 740, 740, "24V battery. Full again in under an hour, per the brand.", "sq")}
+`)}
+<h2 id="fit">Where buyers use it</h2>
+<div class="fit">
+<p><strong>Made for:</strong> porches, steps, patios, decks, walks, driveways, carports, garage floors.</p>
+</div>
+
+<h2 id="first-week">Your first week with it</h2>
+<ul class="week">
+<li><strong>The day it arrives:</strong> charge it. The brand says a full charge takes under an hour.</li>
+<li><strong>First job:</strong> the porch or the patio, in a few minutes.</li>
+<li><strong>By the weekend:</strong> it lives by the door.</li>
+</ul>
+${q("I have used it 3 times in the week since I got it", TP(4, "13 Sep 2026"))}
+
+${R(8, "r8", "Get it at half price on the official site today", `
+<p>If someone does the porch for pay, the brand says one yard-service visit costs $50 to $100.</p>
+<p>On the official site today, this blower is $69.99, marked 50% off $139.98. That's about the cost of one visit, and it's yours every day after.</p>
+<p>The 2-pack and 3-pack are on the same page: one for the porch, one for the garage, or one to give. The brand calls the 50% price a limited-time offer, so check it while it shows.</p>
+<!-- TODO(Sam): publish-day check: US$69.99 / US$139.98 on the interstitial AND the saving still shown at checkout (offers-economics P4). -->
+`)}
+
+<h2 id="recap">The whole idea in three lines</h2>
+<div class="recap">
+<p>When it weighs two pounds, you grab it instead of putting the job off.</p>
+<p>When there's nothing to start, the job is the only work.</p>
+<p>When the squeeze sets the air, the porch gets clear and the mat stays put.</p>
+</div>
+
+<div class="offer" id="offer">
+  <img src="/images/wr/product-50off-card.webp" alt="The WOODRANGER Power Leaf Blower with its 24V Li-ion battery, marked 50% off" width="528" height="426" loading="lazy" decoding="async">
+  <p class="offer-name"><strong>WOODRANGER Power Leaf Blower</strong></p>
+  <ul class="tick">
+    <li>2.1 lb, one hand</li>
+    <li>24V cordless: no pull cord, no gas</li>
+    <li>Squeeze trigger, soft to full air</li>
+    <li>1600W brushless motor (brand spec)</li>
+    <li>About 30 minutes a charge; full charge in under an hour</li>
+    <li>Ships from Ohio in 2-3 days</li>
+    <li>Quiet enough for 7am jobs, per the brand</li>
+    <li>90-day money-back guarantee, per the brand</li>
+    <li>Rated 4.8 · 27,517+ 5-star reviews, per the brand</li>
+  </ul>
+  <p class="offer-price"><strong>Today: $69.99 · marked 50% off $139.98 on the official site</strong></p>
+  <div class="cta">${btn("5a", CTA_MAIN)}</div>
+  <p class="under">What happens next: the button opens the brand's official page. Pick 1, 2 or 3 there. Nothing is charged until you check out.</p>
+  ${AD_NOTE}
+</div>
+
+<h2 id="faq">Questions buyers ask</h2>
+<div class="faq2">
+<h3>Is it hard to hold?</h3>
+<p>No. It weighs 2.1 lb, and you use it with one hand. You squeeze lightly for a little air, harder for more.</p>
+<h3>Where do I get it?</h3>
+<p>On the brand's official site. That's where the 50% price, the 2- and 3-packs and the 90-day guarantee are, and it's where every button on this page goes.</p>
+<h3>What if it's not right for my porch?</h3>
+<p>Per the brand's page, you can try it at home for 90 days. If you aren't happy, it refunds you. Keep your order email.</p>
+</div>
+
+<div class="close" id="close">
+<p>This fall can go two ways.</p>
+<p>Keep waiting on the broom, or on someone's free Saturday.</p>
+<p>Or keep a 2-pound blower by the door. It's 50% off on the official site today, with the brand's 90-day guarantee.</p>
+<p>Picture next Saturday: coffee in one hand, blower in the other. A few minutes later the steps are clear, and nobody had to come over to do it.</p>
+<div class="cta">${btn("6", CTA_MAIN)}</div>
+</div>
+`;
+
+---
+<ListiclePage
+  title="8 Reasons Homeowners Are Swapping the Broom and the Big Blower for This 2-Pound One | The Life Insider"
+  description="8 reasons homeowners are swapping the broom and the big blower for a 2-pound cordless one. No cord, no pull-start, one hand."
+  cpvCampaign={CPV_CAMPAIGN}
+  cpvLp={CPV_LP}
+  metaPixel={META_PIXEL}
+  fbCapi={true}
+  kicker="Home & Yard · 8 Reasons"
+  publishedDate="October 2, 2026"
+  atf={atf}
+  byline={{ name: "The Life Insider Editors", role: "Home & Yard", readTime: "5 min read" }}
+  lead={lead}
+  body={body}
+  sticky={{ name: "WOODRANGER Power Leaf Blower", image: "/images/wr/product-50off-card.webp", url: LINK, kicker: "50% off today on the official site", buttonText: "50% Off · Check Availability", ctaId: "sticky", startAt: "r1" }}
+/>
+
+<style is:global>
+  /* Page-scoped (this route only). Mobile-first; 16:9 hero; compact ATF so lead line 1 shows in a ~375×640 FB in-app view. */
+  .site-header .container { padding-top: 6px; padding-bottom: 6px; }
+  #adv .mast { padding: 5px 0 4px; }
+  #adv .top-disc { margin: 5px 0 4px; line-height: 1.35; }
+  /* H1 30px on a 375 phone (8vw), 28px floor: 32px+ pushes lead line 1 below 640px (measured); doctrine §7 ATF: shrink headline to fit */
+  #adv h1 { font-size: clamp(1.75rem, 8vw, 1.875rem); line-height: 1.13; margin: 0 0 6px; }
+  #adv .sub { font-size: 0.95rem; line-height: 1.36; margin: 0 0 6px; }
+  #adv .byline { font-size: 0.8rem; line-height: 1.45; margin: 0 0 8px; }
+  #advHero { margin: 0 0 8px; }
+  #advHero img { aspect-ratio: 16 / 9; object-fit: cover; background: #fff; }
+  #adv[data-variant="c"] #advHero img { object-position: 50% 45%; }
+  #adv #advHeroCap { margin-top: 4px; font-size: 0.8rem; line-height: 1.35; }  /* kept small: 0.9rem wraps to 3 lines and leaves 1px of fold at 375x640 */
+  #adv figure img { background: #fff; }
+  #adv .reason h2 { font-size: 1.5rem; }                 /* 24px: doctrine subheads 24-34px (list.css drops to 1.3rem on phones) */
+  #adv figcaption { font-size: 0.9rem; color: var(--ink); line-height: 1.4; }  /* legible for 70-80-year-old readers */
+  #adv figure.sq img { max-width: 480px; margin: 0 auto; }
+  #adv figure.narrow img { max-width: 360px; }
+  #adv .prose p { margin-bottom: 0.9em; }
+  #adv .adnote { font-size: 0.78rem; color: var(--muted); margin: 4px 0 0; line-height: 1.35; }
+  #adv a.tlink { color: var(--cta); font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+  #adv .chip { display: flex; gap: 12px; align-items: center; border: 1px solid var(--rule); border-radius: 12px; padding: 10px 12px; margin: 1.1em 0 0.4em; background: var(--bg-soft); }
+  #adv .chip img { width: 84px; height: 84px; flex: none; object-fit: cover; border-radius: 8px; background: #fff; }
+  #adv .chip-t p { margin: 0; font-size: 0.95rem; line-height: 1.4; }
+  #adv .chip-t .chip-link { margin-top: 4px; font-size: 1.02rem; }
+  #adv .chip-t .chip-rate { margin-top: 2px; font-size: 0.88rem; color: var(--muted); }
+  #adv .chip-t .chip-rate .st { color: #f5a623; letter-spacing: 1px; }
+  #adv .cta a.btn { line-height: 1.3; }
+  #adv .ctabox { border: 2px solid var(--frame); border-radius: 12px; padding: 14px 14px 10px; background: #f6fdf8; }
+  #adv .cta .under { font-size: 0.86rem; color: var(--muted); margin: 8px 0 0; line-height: 1.4; }
+  #adv .cta .adnote { text-align: center; }
+  #adv .icons3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 4px 0 18px; }
+  #adv .icons3 > div { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; border: 1px solid var(--rule); border-radius: 10px; padding: 10px 6px; font-weight: 800; font-size: 0.92rem; color: var(--ink); line-height: 1.25; }
+  #adv .icons3 svg { width: 28px; height: 28px; fill: none; stroke: var(--frame); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  #adv .rstrip { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 0.8em 0 0.6em; }
+  #adv .rstrip .rv p { font-size: 0.98rem; }
+  #adv .smallprint { font-size: 0.82rem; color: var(--muted); line-height: 1.45; margin: 0 0 0.6em; }
+  #adv .benefit-link { font-size: 1.05rem; margin: 0 0 1.4em; }
+  #adv .fit { border-left: 4px solid var(--frame); background: var(--bg-soft); border-radius: 0 10px 10px 0; padding: 10px 14px; margin: 0 0 1em; }
+  #adv .fit p { margin: 0 0 6px; }
+  #adv .fit p:last-child { margin: 0; }
+  #adv .week { list-style: none; padding: 0; }
+  #adv .week li { border-bottom: 1px dashed var(--rule); padding: 8px 0; }
+  #adv .recap { border: 1px solid var(--rule); border-radius: 12px; padding: 12px 16px; background: #fffdf3; }
+  #adv .recap p { margin: 0 0 6px; font-weight: 700; color: var(--ink); }
+  #adv .recap p:last-child { margin: 0; }
+  #adv .offer { border: 2px solid var(--frame); border-radius: 14px; padding: 16px; margin: 1.8em 0; background: #fff; box-shadow: 0 6px 22px rgba(20,33,61,0.08); }
+  #adv .offer > img { display: block; width: 100%; max-width: 300px; height: auto; margin: 0 auto 8px; }
+  #adv .offer .offer-name { font-size: 1.2rem; text-align: center; margin: 0 0 8px; color: var(--ink); }
+  #adv .offer ul.tick { list-style: none; padding: 0; margin: 0 0 12px; }
+  #adv .offer ul.tick li { position: relative; padding-left: 28px; margin-bottom: 6px; font-size: 1rem; line-height: 1.45; }
+  #adv .offer ul.tick li::before { content: ""; position: absolute; left: 0; top: 4px; width: 18px; height: 18px; border-radius: 50%; background: var(--frame) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.2 4.2L19 7.5'/%3E%3C/svg%3E") center/11px 11px no-repeat; }
+  #adv .offer .offer-price { text-align: center; font-size: 1.08rem; color: var(--ink); margin: 0 0 4px; }
+  #adv .offer .cta { margin: 10px 0 0; }
+  #adv .offer .cta-alt a.btn { background: #fff; color: var(--cta) !important; border: 2px solid var(--cta); box-shadow: none; } /* global .btn sets color !important */
+  #adv .offer .under, #adv .offer .adnote { text-align: center; }
+  #adv .offer .under { font-size: 0.86rem; color: var(--muted); margin: 10px 0 0; line-height: 1.4; }
+  #adv .faq2 h3 { font-size: 1.1rem; margin: 1.1em 0 0.3em; }
+  #adv .close { border-top: 3px solid var(--ink); padding-top: 14px; margin-top: 2em; }
+  #adv .disc .disc-links { display: block; margin-top: 8px; }
+  #adv .disc .disc-links a { color: var(--muted); text-decoration: underline; }
+  @media (min-width: 720px) {
+    #adv h1 { font-size: 2.3rem; }
+    #adv .sub { font-size: 1.15rem; }
+    #adv .rstrip { grid-template-columns: repeat(3, 1fr); }
+    #adv .chip img { width: 110px; height: 110px; }
+  }
+</style>

@@ -19,3 +19,4 @@
 .adv .photos img { display:block; width:100%; height:auto; border-radius:10px; }
 .adv .rv img.av { width:34px; height:34px; border-radius:50%; vertical-align:middle; margin-right:8px; object-fit:cover; }
 @media (max-width:640px) { .adv .alts .r { grid-template-columns:1fr; gap:4px; } .adv .reason h2 { font-size:1.3rem; } }
+.adv .top-disc { font-size:0.8rem; line-height:1.4; color:var(--muted); margin:8px 0 6px; }

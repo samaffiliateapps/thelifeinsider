@@ -25,9 +25,14 @@ export interface Props {
   oldPrice?: string;
   discount?: string;
   ctaLabel?: string;
+  /* Optional (2 Oct 2026, porch listicle). Defaults keep every older page unchanged. */
+  buttonText?: string; // sticky button text (default "Visit Site"; ctaLabel is passed by ReviewPageV2 but never rendered, so it is left alone)
+  kicker?: string;   // small line above the name (default "#1 Pick": only true on pages with our own ranking)
+  ctaId?: string;    // data-cta value for GA4/Clarity/Meta OfferClick position (e.g. "sticky")
+  startAt?: string;  // element id: show the bar once that element reaches the screen (default: after 600px scroll)
 }
 
-const { name, brand, image, url, price, oldPrice, discount, ctaLabel } = Astro.props;
+const { name, brand, image, url, price, oldPrice, discount, ctaLabel, buttonText = "Visit Site", kicker = "#1 Pick", ctaId, startAt = "" } = Astro.props;
 const label = brand ?? name;
 ---
 
@@ -36,7 +41,7 @@ const label = brand ?? name;
     <img class="sc-thumb" src={image} alt="" width="48" height="48" loading="lazy" decoding="async" />
 
     <div class="sc-copy">
-      <div class="sc-kicker">#1 Pick</div>
+      <div class="sc-kicker">{kicker}</div>
       <div class="sc-name">{label}</div>
     </div>
 
@@ -45,8 +50,8 @@ const label = brand ?? name;
       {price && <span class="sc-now">{price}</span>}
     </div>
 
-    <a class="sc-btn" href={url} rel="sponsored nofollow noopener" target="_blank">
-      <span class="sc-btn-text">Visit Site</span>
+    <a class="sc-btn" href={url} rel="sponsored nofollow noopener" target="_blank" data-cta={ctaId}>
+      <span class="sc-btn-text">{buttonText}</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M5 12h13M13 6l6 6-6 6" />
       </svg>
@@ -60,7 +65,7 @@ const label = brand ?? name;
   </div>
 </div>
 
-<script is:inline>
+<script is:inline define:vars={{ startAt }}>
   (function () {
     var bar = document.getElementById("stickyCta");
     var close = document.getElementById("stickyCtaClose");
@@ -73,7 +78,8 @@ const label = brand ?? name;
 
     function sync() {
       if (dismissed) return;
-      var show = window.scrollY > TRIGGER;
+      var anchor = startAt ? document.getElementById(startAt) : null;
+      var show = anchor ? anchor.getBoundingClientRect().top < window.innerHeight : window.scrollY > TRIGGER;
       if (show) {
         bar.removeAttribute("data-hidden");
         bar.setAttribute("aria-hidden", "false");
