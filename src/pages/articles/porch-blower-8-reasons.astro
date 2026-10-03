@@ -55,13 +55,13 @@ const CTA_MAIN = "Check Availability &amp; the 50% Discount »";
 const heroA = {
   src: "/images/wr/hero-leaves-blast.jpg",
   alt: "The red cordless WOODRANGER blower blasting a pile of dry leaves off the ground",
-  caption: "2.1 lb, cordless, one hand. Dry leaves off the ground in seconds.",
+  caption: "2.1 lb, cordless, one hand.",
 };
 const subA = "No pull cord, no extension cord, no waiting on anyone. Buyers aged 78 and 84 say they keep their own porch and deck clear with it.";
 const subBC = "8 reasons people who still do their own porch keep a 2-pound blower by the door. No cord, no pull-start, one hand.";
 
 const atf = {
-  a: { h1: "8 Reasons Homeowners Are Swapping the Broom and the Big Blower for This 2-Pound One", sub: subA, hero: heroA },
+  a: { h1: "8 Reasons Homeowners Are Swapping the Broom and the Big Blower for This 2‑Pound One", sub: subA, hero: heroA },
   b: {
     h1: "No More Waiting on Someone to Do the Porch",
     sub: subBC,
@@ -256,15 +256,23 @@ ${R(8, "r8", "Get it at half price on the official site today", `
 <style is:global>
   /* Page-scoped (this route only). Mobile-first; 16:9 hero; compact ATF so lead line 1 shows in a ~375×640 FB in-app view. */
   .site-header .container { padding-top: 6px; padding-bottom: 6px; }
-  #adv .mast { padding: 5px 0 4px; }
+  #adv .mast { padding: 8px 0 7px; margin-bottom: 14px; }
   #adv .top-disc { margin: 5px 0 4px; line-height: 1.35; }
-  /* H1 30px on a 375 phone (8vw), 28px floor: 32px+ pushes lead line 1 below 640px (measured); doctrine §7 ATF: shrink headline to fit */
-  #adv h1 { font-size: clamp(1.75rem, 8vw, 1.875rem); line-height: 1.13; margin: 0 0 6px; }
-  #adv .sub { font-size: 0.95rem; line-height: 1.36; margin: 0 0 6px; }
-  #adv .byline { font-size: 0.8rem; line-height: 1.45; margin: 0 0 8px; }
-  #advHero { margin: 0 0 8px; }
-  #advHero img { aspect-ratio: 16 / 9; object-fit: cover; background: #fff; }
+  /* ATF spacing pass (Sam, 3 Oct): room to breathe, still keeps lead line 1 inside a ~375x640 FB in-app view */
+  #adv h1 { font-size: clamp(1.75rem, 7.6vw, 1.95rem); line-height: 1.18; margin: 0 0 12px; letter-spacing: -0.015em; }
+  #adv .sub { font-size: 1rem; font-weight: 600; line-height: 1.45; margin: 0 0 12px; color: #2b3445; }
+  #adv .byline { font-size: 0.8rem; line-height: 1.45; margin: 0 0 12px; padding-top: 9px; border-top: 1px solid var(--rule); }
+  #advHero { margin: 0 0 12px; }
+  #advHero img { aspect-ratio: 16 / 9; object-fit: cover; background: #fff; border-radius: 10px; }
   #adv[data-variant="c"] #advHero img { object-position: 50% 45%; }
+  @media (min-width: 768px) {
+    #adv .mast { margin-bottom: 22px; }
+    #adv h1 { font-size: 2.45rem; line-height: 1.16; margin: 0 0 18px; }
+    #adv .sub { font-size: 1.2rem; line-height: 1.5; margin: 0 0 18px; }
+    #adv .byline { font-size: 0.9rem; margin: 0 0 22px; padding-top: 14px; }
+    #advHero { margin: 0 0 16px; }
+    #adv #advHeroCap { font-size: 0.9rem !important; margin-top: 8px !important; }
+  }
   #adv #advHeroCap { margin-top: 4px; font-size: 0.8rem; line-height: 1.35; }  /* kept small: 0.9rem wraps to 3 lines and leaves 1px of fold at 375x640 */
   #adv figure img { background: #fff; }
   #adv .reason h2 { font-size: 1.5rem; }                 /* 24px: doctrine subheads 24-34px (list.css drops to 1.3rem on phones) */
