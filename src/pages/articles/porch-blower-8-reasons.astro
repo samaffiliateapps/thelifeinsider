@@ -48,7 +48,10 @@ const fig = (src: string, alt: string, w: number, h: number, cap?: string, cls =
 const q = (t: string, who: string) => `<blockquote><p>“${t}”</p><cite>${who}</cite></blockquote>`;
 const R = (n: number, id: string, h: string, inner: string) =>
   `<section class="reason" id="${id}"><h2 id="h-${id}"><span class="n">${n}</span><span>${h}</span></h2>${inner}</section>`;
-const TP = (stars: number, date: string) => `Wood Ranger buyer, ${stars}-star Trustpilot review, ${date}`;
+// Trustpilot-style green star boxes (Sam 4 Oct: show reviews the way the offer pages do). n filled, rest grey.
+const STAR = `<path d="M12 3.6l2.5 5.4 5.9.6-4.4 4 1.3 5.8L12 16.5l-5.3 2.9 1.3-5.8-4.4-4 5.9-.6z" fill="#fff"/>`;
+const TPS = (n: number, size = 18) => `<span class="tps" aria-label="${n} out of 5 stars">${[1,2,3,4,5].map((i) => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true"><rect width="24" height="24" fill="${i <= n ? "#00b67a" : "#dcdce6"}"/>${STAR}</svg>`).join("")}</span>`;
+const TP = (stars: number, date: string) => `${TPS(stars, 16)} <span class="tp-src">Wood Ranger buyer · Trustpilot · ${date}</span>`;
 
 const CTA_MAIN = "Check Availability &amp; the 50% Discount »";
 
@@ -88,7 +91,7 @@ const lead = `
 <div class="chip">
   <img src="/images/wr/tile-5.webp" alt="The WOODRANGER Power Leaf Blower held in one hand, 24V battery fitted" width="1174" height="700" loading="lazy" decoding="async">
   <div class="chip-t"><p class="chip-name"><strong>WOODRANGER Power Leaf Blower</strong> · 2.1 lb · cordless · one hand</p>
-  <p class="chip-rate"><span class="st" aria-hidden="true">★★★★★</span> 4.8 · 27,517+ 5-star reviews, per the brand</p>
+  <p class="chip-rate">${TPS(5, 15)} 4.8 · 27,517+ 5-star reviews, per the brand</p>
   <p class="chip-link">${tlink("1", "See it 50% off on the official site »")}</p>${AD_NOTE}</div>
 </div>
 `;
@@ -135,9 +138,9 @@ ${fig("/images/wr/yard-patio-garage.webp", "Two photos: the blower clearing poll
 
 <h2 id="older-buyers">What older buyers wrote</h2>
 <div class="rstrip">
-  <div class="rv"><div class="st" aria-label="5 stars">★★★★★</div><p>“Light weight, powerful, easy for this 84 year old to keep backyard, front porch areas easy to keep leaf and dust free. I love it…!”</p><div class="who">Trustpilot review of Wood Ranger · 16 Sep 2026</div></div>
-  <div class="rv"><div class="st" aria-label="5 stars">★★★★★</div><p>“…is easier to handle than the full size leaf blower. I am in my 70's so definitely being smaller and lighter is a big plus.”</p><div class="who">Trustpilot review of Wood Ranger · 18 Sep 2026</div></div>
-  <div class="rv"><div class="st" aria-label="5 stars">★★★★★</div><p>“Took a chance in ordering this and have been surprised how easy it is to use. Being an older adult, I have found it not heavy and does the job I need it for.”</p><div class="who">Trustpilot review of Wood Ranger · September 2026</div></div>
+  <div class="rv"><div class="st">${TPS(5)}</div><p>“Light weight, powerful, easy for this 84 year old to keep backyard, front porch areas easy to keep leaf and dust free. I love it…!”</p><div class="who">Trustpilot review of Wood Ranger · 16 Sep 2026</div></div>
+  <div class="rv"><div class="st">${TPS(5)}</div><p>“…is easier to handle than the full size leaf blower. I am in my 70's so definitely being smaller and lighter is a big plus.”</p><div class="who">Trustpilot review of Wood Ranger · 18 Sep 2026</div></div>
+  <div class="rv"><div class="st">${TPS(5)}</div><p>“Took a chance in ordering this and have been surprised how easy it is to use. Being an older adult, I have found it not heavy and does the job I need it for.”</p><div class="who">Trustpilot review of Wood Ranger · September 2026</div></div>
 </div>
 <p class="smallprint">Trustpilot reviews, quoted word for word.</p>
 <p class="benefit-link">${tlink("3", "Get the blower these buyers wrote about, 50% off »")}</p>
@@ -248,7 +251,7 @@ ${R(8, "r8", "Get it at half price on the official site today", `
   publishedDate="Oct 2, 2026"
   atf={atf}
   byline={{ name: "The Life Insider Editors", role: "", readTime: "5 min read" }}
-  ratingLine={`<b>4.8</b> · 27,517+ 5-star reviews`}
+  ratingLine={`${TPS(5, 19)} <b>4.8</b> · 27,517+ 5-star reviews`}
   lead={lead}
   body={body}
   sticky={{ name: "WOODRANGER Power Leaf Blower", image: "/images/wr/product-50off-card.webp", url: LINK, kicker: "50% off today on the official site", buttonText: "50% Off · Check Availability", ctaId: "sticky", startAt: "r1" }}
@@ -264,8 +267,13 @@ ${R(8, "r8", "Get it at half price on the official site today", `
   #adv .sub { font-size: 1rem; font-weight: 600; line-height: 1.45; margin: 0 0 12px; color: #2b3445; }
   #adv .byline { font-size: 0.8rem; line-height: 1.45; margin: 0 0 12px; padding-top: 9px; border-top: 1px solid var(--rule); }
   #advHero { margin: 0 0 12px; }
+  #adv .tps { display: inline-flex; gap: 2px; vertical-align: -3px; margin-right: 4px; }
+  #adv .tps svg { display: block; border-radius: 1px; }
+  #adv .rating .stars { display: none; }
+  #adv blockquote cite { display: block; margin-top: 6px; }
+  #adv .tp-src { font-style: normal; }
   #adv .rating { gap: 8px; font-size: 0.92rem; margin: -2px 0 12px; }
-  #adv .rating .stars { font-size: 1.05rem; letter-spacing: 1px; }
+  #adv .rating .stars { display: none; }
   #adv .rating .r-src { color: var(--muted); font-size: 0.8rem; }
   #advHero img { aspect-ratio: 16 / 9; object-fit: cover; background: #fff; border-radius: 10px; }
   #adv[data-variant="c"] #advHero img { object-position: 50% 45%; }
