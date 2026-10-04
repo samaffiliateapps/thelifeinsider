@@ -45,7 +45,7 @@ const A = p.atf.a;
       <p class="sub" id="advSub" set:html={A.sub} />
       <div class="byline">
         {p.byline.photo && <img src={p.byline.photo} alt={p.byline.name} width="40" height="40" loading="eager" />}
-        <div>By <b>{p.byline.name}</b>, {p.byline.role} · {fixedDate ? (<>Published <span data-published>{p.publishedDate}</span></>) : (<>Updated <span data-updated>{publishedOn}</span></>)} · {p.byline.readTime}</div>
+        <div>By <b>{p.byline.name}</b>{p.byline.role ? `, ${p.byline.role}` : ''} · {fixedDate ? (<>{p.byline.role ? 'Published ' : ''}<span data-published>{p.publishedDate}</span></>) : (<>Updated <span data-updated>{publishedOn}</span></>)} · {p.byline.readTime}</div>
       </div>
       {p.seenOn && p.seenOn.length > 0 && (<div class="seen"><span>As Advertised On</span>{p.seenOn.map((l) => <img src={l.src} alt={l.alt} loading="lazy" decoding="async" />)}</div>)}
       {p.ratingLine && <div class="rating"><span class="stars">★★★★★</span><span set:html={p.ratingLine} /></div>}
