@@ -15,7 +15,7 @@ import StickyCta from "../components/StickyCta.astro";
 export interface Atf { h1: string; sub: string; hero: { type: "img" | "video"; src: string; poster?: string; alt: string; caption?: string; width?: number; height?: number } }
 export interface Props {
   title: string; description: string;
-  cpvCampaign: string; cpvLp?: string;
+  cpvCampaign: string; cpvLp?: string; cpvRedirect?: boolean;
   kicker: string; updateBar?: string;
   atf: Record<string, Atf>;
   byline: { name: string; role?: string; photo?: string; readTime?: string };
@@ -83,7 +83,7 @@ const legacyTag = p.topTag === undefined;
   </article>
 
   <StickyCta name={p.sticky.name} brand={p.sticky.brand} image={p.sticky.image} url={p.sticky.url} price={p.sticky.price} oldPrice={p.sticky.oldPrice} discount={p.sticky.discount} kicker={p.sticky.kicker} buttonText={p.sticky.buttonText} ctaId={p.sticky.ctaId} startAt={p.sticky.startAt} startPct={p.sticky.startPct} />
-  <CpvTracker campaign={p.cpvCampaign} lp={p.cpvLp} fbCapi={p.fbCapi} />
+  <CpvTracker campaign={p.cpvCampaign} lp={p.cpvLp} fbCapi={p.fbCapi} redirect={p.cpvRedirect} />
 
   <script is:inline define:vars={{ atf: p.atf, fixedDate }}>
     (function () {
