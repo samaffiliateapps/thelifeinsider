@@ -1,0 +1,204 @@
+---
+/* WOOD RANGER BROOM ADVERTORIAL B: "quiet trend" explainer (Meta) — built 11 Oct 2026 by lander-builder. NOT LIVE until Sam approves.
+   Copy (source of truth): advertorial-system/offers/wood-ranger/pages/meta-broom-advertorial-B-trend-2026-10-11.md
+   (headline #1, deck, all sections, 5 CTAs at the file's positions, P.S., footer disclosure; internal notes, headline
+   options, claims list and self-review are not rendered). Traffic: Meta cold, from the S2 broom ads (batch-1 PT01/04/05/06).
+   Voice: the publication (third person). Footer disclosure only, no top label (Sam).
+   Every CTA carries data-cta="cta1…cta5" / "sticky" so GA4, Clarity and the Meta OfferClick event show the position.
+   Images (no people, no faces): hero = door-broom-blower (B02_N2 crop); broom-vs-gas-split (B01 S2 + S1);
+   hand-blower-porch (B02_N4); real-cost box = product-50off-card.
+
+   BEFORE PUBLISH (Sam), from the copy file's claims list:
+   - FLAG 2 (GATED): the "One Happy Old Woman" quote (3 Mar 2026) is from the woodranger.net Trustpilot profile. Keep it only
+     if the AM confirms woodranger.net is the same merchant; otherwise delete that block (marked below).
+   - Re-copy every Trustpilot quote from the live page, screenshot it, use exact dates.
+   - Publish-day price check: US$69.99 / US$139.98 on the interstitial AND at checkout. AM: guarantee length (90 vs 30). */
+import AdvertorialPage from "../../layouts/AdvertorialPage.astro";
+import "../../styles/wr-broom.css";
+
+// TODO(Sam): create the CPV One campaign "Meta - WR Broom B" (offer URL https://offer.woodrangertools.com/leafblower/landing
+// with your AdsBranded link; tracking domain track.thelifeinsider.com; Direct Redirect). Then put its campaign ID here and
+// the LP slot from the checkdirect(ID, LP) snippet in CPV_LP. "0" = placeholder: NO traffic until both are real.
+const CPV_CAMPAIGN = "21";
+const CPV_LP = "2";
+
+// Meta dataset (pixel): PageView + OfferClick/Scroll50/Scroll75 custom events only, never a Purchase (CPV One CAPI sends it).
+const META_PIXEL = "4514987495496479"; // TLI presell - CPV CAPI dataset
+
+const LINK = "https://track.thelifeinsider.com/base2.php";
+const A = `href="${LINK}" rel="sponsored nofollow noopener" target="_blank"`;
+const btn = (pos: string, label: string) => `<a class="btn" data-cta="${pos}" ${A}>${label}</a>`;
+const tlink = (pos: string, label: string) => `<a class="tlink" data-cta="${pos}" ${A}>${label}</a>`;
+const ctaBtn = (pos: string, label: string, under: string) => `<div class="cta">${btn(pos, label)}<p class="under">${under}</p></div>`;
+const ctaBox = (pos: string, label: string, under: string, img = "") => `<div class="cta ctabox">${img}${btn(pos, label)}<p class="under">${under}</p></div>`;
+const ctaText = (pos: string, label: string, under: string) => `<p class="tcta">${tlink(pos, label)}</p><p class="under-t">${under}</p>`;
+const fig = (src: string, alt: string, w: number, h: number, cap?: string, cls = "") =>
+  `<figure${cls ? ` class="${cls}"` : ""}><img src="${src}" alt="${alt}" width="${w}" height="${h}" loading="lazy" decoding="async">${cap ? `<figcaption>${cap}</figcaption>` : ""}</figure>`;
+// Trustpilot-style green star boxes (same helpers as porch-blower-8-reasons). n filled, rest grey.
+const STAR = `<path d="M12 3.6l2.5 5.4 5.9.6-4.4 4 1.3 5.8L12 16.5l-5.3 2.9 1.3-5.8-4.4-4 5.9-.6z" fill="#fff"/>`;
+const TPS = (n: number, size = 18) => `<span class="tps" aria-label="${n} out of 5 stars">${[1,2,3,4,5].map((i) => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true"><rect width="24" height="24" fill="${i <= n ? "#00b67a" : "#dcdce6"}"/>${STAR}</svg>`).join("")}</span>`;
+const TP = (stars: number, date: string) => `${TPS(stars, 16)}<span class="tp-src">${stars}-star Trustpilot review, ${date}</span>`;
+const q = (t: string, cite: string) => `<blockquote><p>“${t}”</p><cite>${cite}</cite></blockquote>`;
+// Other-brand / forum voices: no stars, labelled with their source (claims list rule).
+const qo = (t: string, src: string) => `<blockquote class="other"><p>“${t}”</p><cite><span class="tp-src">${src}</span></cite></blockquote>`;
+const OFFER_IMG = `<img src="/images/wr/product-50off-card.webp" alt="The WOODRANGER Power Leaf Blower with its 24V Li-ion battery, marked 50% off" width="528" height="426" loading="lazy" decoding="async">`;
+
+const atf = {
+  a: {
+    h1: "Homeowners Over 65 Are Quietly Putting Down the Porch Broom. The Reason Weighs 2 Pounds.",
+    sub: "It spread the old way: a daughter, a sister, a husband who won't put it down. Here's what they figured out about the broom, and why a 2.1‑pound blower is taking its place by the front door.",
+    hero: {
+      type: "img" as const,
+      src: "/images/wr/door-broom-blower.webp",
+      alt: "A straw broom leaning by an old front door, the small red cordless blower standing on the porch bench beside it, leaves on the mat",
+      caption: "The broom by the door has company now.",
+      width: 900, height: 524,
+    },
+  },
+};
+
+const lead = `
+<p>Swept at 8. Needles back by noon. Swept again before supper. That's October for a lot of homeowners over 65. And some of them have quietly stopped.</p>
+<p>Not stopped caring about the porch. Stopped sweeping it.</p>
+<p>It spread the old way. A parent buys one for a small patio, likes it so much it goes to a daughter, then buys two more. A buyer in their 70s orders four, “1 for myself and 3 for Christmas presents for my children.” Another buys “one for each man in the family.”</p>
+<p>And when you read who's writing these reviews, a pattern jumps out. A 78-year-old widow. An 84-year-old. A buyer “in my 70's.” An 80-year-old man who doubted it the second he opened the box.</p>
+<p>They're all describing the same small change.</p>
+<p><strong>They still keep up their own porch. They just stopped doing it with a broom.</strong></p>
+<p>Here's what they figured out, and why the broom never stood a chance.</p>
+`;
+
+const body = `
+<h2 id="never-done">The porch that's never done</h2>
+<p>If you still do your own porch, you know October.</p>
+<p>Oak leaves on the steps. Maple “helicopters” in the corners. And that fine grit that blows in under the mat and sinks into the cracks between the boards.</p>
+<p>You sweep again before supper. Tomorrow, the same. Miss a day and the needles end up in the front hall, carried in on shoes.</p>
+<p>It isn't hard work, exactly. It's endless work. And it adds up.</p>
+
+<h2 id="four-choices">Until recently, there were only four choices</h2>
+<p>For most of the years we've owned our homes, keeping a porch clean meant picking one of these:</p>
+<ul>
+<li><strong>The broom.</strong> Free, and slow. Twice a day in the fall.</li>
+<li><strong>The big blower.</strong> The company that makes the blower in this story puts full-size blowers at 10 pounds and up. The gas ones need fuel and a pull cord.</li>
+<li><strong>The corded blower.</strong> Lighter, but you drag an extension cord out the door and down the steps for five minutes of leaves.</li>
+<li><strong>Someone else.</strong> A son on Saturday. A neighbor's kid. A yard service, which the same company says can cost $50 to $100 a visit.</li>
+</ul>
+<p>None of them fit a job that shows up every morning and takes five minutes.</p>
+
+<h2 id="broom-mistake">The biggest mistake people make about the broom</h2>
+<p>Most of us grew up thinking the broom is the gentle, easy choice. It isn't. It's the slowest tool on the porch, and it doesn't finish the job.</p>
+<p>A broom only pushes. The big pieces move. The fine stuff, the grit and needle bits and pollen, drops into the cracks and the grain of the wood. It looks clean. By noon, it isn't.</p>
+<p>One buyer of the blower in this story found that out in the garage:</p>
+${q("I was sweeping out my garage and leaving dust streaks everywhere. I pulled out my little blower and the whole garage was dust free in less than two minutes!", TP(5, "28 Sep 2026"))}
+<p>A shopper with a pine tree over the patio wrote the same thing in a review of a different small blower:</p>
+${qo("A regular broom struggles to catch all needles + pollen and everything else", "shopper review of another brand's blower, Target, 29 Apr 2026")}
+<p>And then there's the bending. Push, step, push, step, twice a day. One shopper, reviewing another brand, put it in eleven words: “If operating a broom hurts, then I can see purchasing this.”</p>
+<p>We call it <strong>the Broom Trap</strong>: a five-minute job, done twice a day, with a tool that only moves the mess around.</p>
+
+<h2 id="big-blower">And the big blower is the opposite problem</h2>
+<p>So why not use the big blower? Because it was built for a whole yard, not a porch.</p>
+<p>It's heavy. Gas ones need a pull cord. One garage-forum post put it this way:</p>
+${qo("I have a good Echo gas powered one but my wife has a hard time cranking it.", "post on garagejournal.com, Feb 2026")}
+<p>One Wood Ranger buyer wrote about an 80-year-old man:</p>
+${q("He is 80 years old and his beginning to have problems with arthritis in his shoulder and using the huge, heavy leaf blower that he still has in the garage, was beginning to really be a problem for him.", TP(5, "27 Sep 2026"))}
+<p>Getting the big one out, started and put away takes longer than the porch. So it stays on the shelf, and the broom comes back out.</p>
+<p>It's like dragging the big vacuum out of the closet for crumbs on the counter. Nobody does that. They grab the little one off its charger.</p>
+${fig("/images/wr/broom-vs-gas-split.webp", "Left: a straw broom on porch steps covered in leaves. Right: an orange gas leaf blower on a garage floor", 900, 505, "Too slow. Too big. The two tools most porches are stuck with.")}
+
+<h2 id="what-changed">What changed: the 2-Pound Air Broom</h2>
+<p>What these homeowners switched to is, in plain words, an air broom. It sweeps with air instead of bristles. Air gets under the mess and lifts the fine stuff out of the cracks, instead of pushing it back in.</p>
+<p>For most of the years we've owned homes, a blower with real push meant an engine, a cord or a lot of weight. Small brushless motors and lithium batteries changed that.</p>
+<p>But a porch tool has to get three things right at once:</p>
+<div class="parts">
+<p><strong>1. Two-pound lift.</strong> Light enough to pick up with one hand and keep right by the door. If it weighs 10 pounds, it stays on the shelf.</p>
+<p><strong>2. No-start power.</strong> A battery. No pull cord, no gas to mix, no extension cord. Squeeze, and it's on.</p>
+<p><strong>3. Squeeze-to-control air.</strong> A light squeeze for a soft puff around the doormat. A hard squeeze for the steps and the walk. An on-or-off blower sends the doormat into the yard.</p>
+</div>
+<p>Only all three together work. Light but corded, it's tied to an outlet. Cordless but heavy, it stays on the shelf. Light and cordless but full-blast only, there goes the doormat.</p>
+<p>The one in all those reviews is the <strong>WOODRANGER Power Leaf Blower</strong>.</p>
+<p>It weighs 2.1 pounds. It runs on a 24-volt battery. The brand says it has a 1,600-watt brushless motor, a full charge in under an hour, and about 30 minutes of run time, which it calls “enough for a full driveway, patio, or garage in one session.” The trigger is pressure-sensitive: squeeze harder, get more air. On its own page, the brand says it plainly: “Faster than a broom.”</p>
+<p>The first reaction is often doubt. The 80-year-old above? The same review goes on:</p>
+${q("When he opened the box and saw the size of this blower, he really doubted that it was going to do what I told him it would do.", TP(5, "27 Sep 2026"))}
+<p>Another buyer wrote:</p>
+${q("I was skeptical at first, looking at the size of this equipment. Then in a hurry I decided to try it. I must tell you that the power this has is like of none other, especially with its small size.", TP(5, "29 Sep 2026"))}
+${ctaBtn("cta1", "See the 2-Pound Air Broom on the Official Site »", "Opens the brand's page: 50% off right now, with its 90-day money-back guarantee.")}
+${fig("/images/wr/hand-blower-porch.webp", "An older woman's hand with a wedding band holding the red cordless blower over porch boards", 720, 720, "2.1 pounds. The brand says it weighs less than a handbag.", "sq")}
+
+<h2 id="check">A 10-second check: is it for your porch?</h2>
+<div class="fit">
+<p><strong>It's for you if:</strong></p>
+<ul>
+<li>you sweep a porch, steps, deck, patio, walk, carport or garage floor in the fall,</li>
+<li>the big blower stays on the shelf because it's heavy or won't start,</li>
+<li>you've caught yourself waiting for someone to “come do the porch.”</li>
+</ul>
+<p><strong>It's not for you if</strong> you need to clear a whole lawn buried in wet leaves. Keep the big blower or the service for that. One buyer drew the line right where it belongs:</p>
+</div>
+${q("Great little blower- wouldn't want to have to do a very large yard with lots of debris but it's PERFECT for cleaning deck, driveway, walkways &amp; small yards quickly.", TP(5, "16 Sep 2026"))}
+
+<h2 id="what-happened">What they say happened</h2>
+<p>The reviews don't read like spec sheets. They read like mornings.</p>
+<p>The deck she thought she'd lost:</p>
+${q("I am a 78 year old widow with arthritis and thought I'd never be able to blow out my garage or remove debris from my deck again. But I can easily do both with a single charge from this Woodranger tool. I cannot thank you enough!!", TP(5, "27 Sep 2026"))}
+<p>The front porch at 84:</p>
+${q("Light weight, powerful, easy for this 84 year old to keep backyard, front porch areas easy to keep leaf and dust free. I love it…!", TP(5, "16 Sep 2026"))}
+<!-- FLAG 2 (GATED, claims list): woodranger.net Trustpilot profile. Delete this block (lead-in + quote) unless the AM confirms the same merchant. -->
+<p>The one who stopped waiting on others:</p>
+${q("I am 78 years old and can't always get someone to help me with leaves, bird food, etc. so I purchased the hand blower. Well, I tried it as soon as I received it and I JUST LOVE IT. It is very powerful, battery lasts a long time and very light weight. It's nice to do things for myself and not depend on others, The Wood Ranger Power Leaf Blower gave me independence. Thanks, One Happy Old Woman", TP(5, "3 Mar 2026"))}
+<!-- /FLAG 2 -->
+<p>The carport, in their 70s:</p>
+${q("I have use it a few times to blow off the carport it worked well and is easier to handle than the full size leaf blower. I am in my 70's so definitely being smaller and lighter is a big plus.", TP(5, "18 Sep 2026"))}
+<p>The ramp:</p>
+${q("It does a beautiful job blowing leaves off my handicap ramp and blacktop. I can sit in my handicapped mobility chair and still be able to help get the outside maintenance done.", TP(5, "17 Sep 2026"))}
+<p>And the husband who won't put it down:</p>
+${q("He has used this every day since It arrived. Cleaned our back porch, sidewalks, our cars filled with dog hair, as well as fallen leaves. Cuts his workload by 75%.", TP(5, "26 Sep 2026"))}
+<p>The brand says it has more than 27,517 five-star reviews. Read enough of them and the “quiet switch” stops looking like a trend. It looks like common sense.</p>
+${ctaText("cta2", "Check today's price and availability on the official site »", "Nothing is charged until you check out on the brand's page.")}
+
+<h2 id="warning">One warning before you buy any small blower</h2>
+<p>Cheap look-alikes are all over the internet. Before you buy any small blower, check three things: the weight, the battery and the trigger. This one lists 2.1 pounds, a 24-volt battery and a pressure-sensitive trigger. And buy it from the brand's own site. That's where the 50% price is, and where the brand's 90-day guarantee applies.</p>
+
+<h2 id="real-cost">The real cost</h2>
+<p>Here's what the old choices cost, using the brand's own figures.</p>
+<div class="lbl">
+<p><strong>A yard service:</strong> $50 to $100 a visit. If they come once a week for eight weeks of fall, that's $400 to $800. Every year. On their schedule.</p>
+<p><strong>A new gas blower:</strong> a decent one runs $200 to $400. Then fuel, oil and yearly upkeep. And the pull cord.</p>
+<p><strong>The broom:</strong> free. It just costs you two sweeps a day, all fall.</p>
+<p><strong>The WOODRANGER</strong> shows at <strong>$69.99</strong> on the official site, marked 50% off $139.98. That's less than one $100 visit from the yard service. You pay once.</p>
+</div>
+<p>It comes in 2-packs and 3-packs, too. That's how a lot of those reviews happened: one for the porch, one for the garage, one for a sister or a daughter.</p>
+<p>The brand ships from Ohio, with 2-3 day shipping. It gives you 90 days to try it at home. Its page says that if you aren't “completely blown away by the power and convenience, we'll refund every penny.”</p>
+<p>The brand calls this 50% price a limited-time offer. It doesn't say for how long. And the leaves are falling now.</p>
+${ctaBox("cta3", "Apply the 50% Discount and Check Availability »", "Opens the official WOODRANGER page · 90-day money-back guarantee, per the brand · ships from Ohio", OFFER_IMG)}
+
+<h2 id="wait">What does it cost to wait?</h2>
+<p>Two sweeps a day is fourteen a week. That's every week until the last leaf drops.</p>
+<p>It's needles in the front hall. It's the big blower you can't start. It's one more Saturday waiting for someone to “come do the porch.”</p>
+<p>So there are two ways to do this fall.</p>
+<p><strong>Keep the broom.</strong> Sweep at 8, sweep at noon, and watch the fine stuff settle back into the cracks.</p>
+<p><strong>Or do what these homeowners did.</strong> Put a 2-pound blower by the door. When the leaves land, squeeze, and they're gone. You keep up your own porch, on your own day, with one hand.</p>
+${ctaBtn("cta4", "Get the 2-Pound Air Broom From the Official Site »", "50% off on the brand's site today · 90-day money-back guarantee")}
+`;
+
+const ps = `<p><strong>P.S.</strong> If it looks too small to work, you're in good company. Even a 4-star reviewer, the kind who holds a star back, wrote: “This product is shockingly powerful.” You get 90 days at home to find out for yourself. ${tlink("cta5", "See it on the official site »")}</p>`;
+
+const disclosure = ``;
+---
+<AdvertorialPage
+  slimFooter
+  title="Homeowners Over 65 Are Quietly Putting Down the Porch Broom. The Reason Weighs 2 Pounds. | The Life Insider"
+  description="It spread the old way: a daughter, a sister, a husband who won't put it down. Why a 2.1-pound blower is taking the broom's place by the front door."
+  cpvCampaign={CPV_CAMPAIGN}
+  cpvLp={CPV_LP}
+  metaPixel={META_PIXEL}
+  fbCapi={true}
+  topTag=""
+  kicker="Home & Yard"
+  publishedDate="October 12, 2026"
+  atf={atf}
+  byline={{ name: "The Life Insider", role: "Home & Yard desk", readTime: "7-minute read" }}
+  lead={lead}
+  body={body}
+  ps={ps}
+  sticky={{ name: "WOODRANGER Power Leaf Blower", image: "/images/wr/product-50off-card.webp", url: LINK, kicker: "50% off today on the official site", buttonText: "50% Off · Check Availability", ctaId: "sticky", startPct: 50 }}
+  disclosure={disclosure}
+/>

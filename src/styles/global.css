@@ -655,3 +655,8 @@ body.has-sticky-cta .site-footer { padding-bottom: 84px; }
 .dt-off { display: block; font-weight: 800; font-size: 0.95rem; letter-spacing: 0.01em; }
 .dt-label { display: block; font-size: 0.82rem; opacity: 0.95; }
 .dt-date { display: block; font-size: 0.82rem; font-weight: 700; }
+
+/* Slim legal footer for paid-traffic advertorials (11 Oct 2026) */
+.slim-footer { border-top: 1px solid #e3e6ec; margin-top: 40px; padding: 18px 0 26px; font-size: 0.78rem; color: #6b7280; text-align: center; line-height: 1.6; }
+.slim-footer a { color: #6b7280; text-decoration: underline; }
+body.has-sticky-cta .slim-footer { padding-bottom: 96px; }

@@ -1,43 +1,63 @@
 ---
 /* ADVERTORIAL PAGE — 17 Sep 2026. Single-product editorial pre-sell (Nooro / RejuvaCare skeleton, product-focused
    info-lead). Three above-the-fold variants selected by ?v=a|b|c (default a) so Google ad groups can test whole ATFs.
-   Fires GA4 events: adv_variant, adv_scroll (25/50/75/100), adv_section (each h2[id] seen), adv_cta (clicks, by position). */
+   Fires GA4 events: adv_variant, adv_scroll (25/50/75/100), adv_section (each h2[id] seen), adv_cta (clicks, by position).
+   11 Oct 2026 (Wood Ranger broom advertorials): optional props added; every default keeps older pages unchanged.
+   metaPixel / fbCapi (Meta pages: pixel PageView + OfferClick/Scroll50/Scroll75 custom events, CPV One fbCapiTrack()),
+   publishedDate (fixed byline date, never rewritten client-side), topTag (label control, see below), crumb (breadcrumb),
+   hero width/height, sticky kicker/buttonText/ctaId/startAt/startPct. */
 import "../styles/v2.css";
 import "../styles/adv.css";
 import Base from "./Base.astro";
 import CpvTracker from "../components/CpvTracker.astro";
 import StickyCta from "../components/StickyCta.astro";
 
-export interface Atf { h1: string; sub: string; hero: { type: "img" | "video"; src: string; poster?: string; alt: string; caption?: string } }
+export interface Atf { h1: string; sub: string; hero: { type: "img" | "video"; src: string; poster?: string; alt: string; caption?: string; width?: number; height?: number } }
 export interface Props {
   title: string; description: string;
   cpvCampaign: string; cpvLp?: string;
   kicker: string; updateBar?: string;
   atf: Record<string, Atf>;
-  byline: { name: string; role: string; photo?: string; readTime: string };
+  byline: { name: string; role?: string; photo?: string; readTime?: string };
   seenOn?: { src: string; alt: string }[];
   ratingLine?: string;
   lead: string;            // html
   body: string;            // html (contains CTA blocks)
   faqs?: { q: string; a: string }[];
   ps?: string;             // html
-  sticky: { name: string; brand?: string; image: string; url: string; price?: string; oldPrice?: string; discount?: string };
+  sticky: { name: string; brand?: string; image: string; url: string; price?: string; oldPrice?: string; discount?: string;
+            kicker?: string; buttonText?: string; ctaId?: string; startAt?: string; startPct?: number };
   disclosure: string;      // html
+  metaPixel?: string;      // Meta dataset ID (paid social only); see Base.astro
+  fbCapi?: boolean;        // CPV One fbCapiTrack() after checkdirect (Meta traffic only)
+  publishedDate?: string;  // fixed date, e.g. "October 12, 2026": byline shows "Published <date>" and it is never rewritten
+  /* Label control. undefined = the original small "Advertorial" tag inside the masthead (older pages).
+     "" = no top label at all (Meta pages: disclosure lives in the footer only).
+     any text (e.g. "Advertorial") = a thin label bar at the very top of the page, above the logo (native/Taboola). */
+  topTag?: string;
+  slimFooter?: boolean;  // one-line legal footer instead of the site footer (paid landers)
+  crumb?: string;          // html breadcrumb line under the masthead, e.g. "Home › Home & Yard › Outdoor Tools"
 }
 const p = Astro.props;
 const publishedOn = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" });
 const A = p.atf.a;
+const fixedDate = !!p.publishedDate;
+const legacyTag = p.topTag === undefined;
 ---
-<Base title={p.title} description={p.description} minimal>
+<Base title={p.title} description={p.description} minimal metaPixel={p.metaPixel} slimFooter={p.slimFooter}>
+  {p.topTag && <div class="adv-toptag" slot="top">{p.topTag}</div>}
   <article class="adv" id="adv" data-variant="a">
     <div class="wrap">
-      <div class="mast"><span class="m-brand">The Life Insider</span><span>{p.kicker}</span><span class="m-tag">Advertorial</span></div>
+      <div class="mast"><span class="m-brand">The Life Insider</span><span>{p.kicker}</span>{legacyTag && <span class="m-tag">Advertorial</span>}</div>
+      {p.crumb && <div class="crumb" set:html={p.crumb} />}
       {p.updateBar && <div class="update" set:html={p.updateBar} />}
       <h1 id="advH1" set:html={A.h1} />
       <p class="sub" id="advSub" set:html={A.sub} />
       <div class="byline">
         {p.byline.photo && <img src={p.byline.photo} alt={p.byline.name} width="40" height="40" loading="eager" />}
-        <div>By <b>{p.byline.name}</b>, {p.byline.role} · Updated <span data-updated>{publishedOn}</span> · {p.byline.readTime}</div>
+        {fixedDate
+          ? <div>By <b>{p.byline.name}</b>{p.byline.role ? `, ${p.byline.role}` : ""} · Published <span data-published>{p.publishedDate}</span>{p.byline.readTime ? ` · ${p.byline.readTime}` : ""}</div>
+          : <div>By <b>{p.byline.name}</b>, {p.byline.role} · Updated <span data-updated>{publishedOn}</span> · {p.byline.readTime}</div>}
       </div>
       {p.seenOn && p.seenOn.length > 0 && (
         <div class="seen"><span>As Advertised On</span>{p.seenOn.map((l) => <img src={l.src} alt={l.alt} loading="lazy" decoding="async" />)}</div>
@@ -46,7 +66,7 @@ const A = p.atf.a;
       <figure id="advHero">
         {A.hero.type === "video"
           ? <video src={A.hero.src} poster={A.hero.poster} muted autoplay loop playsinline preload="auto" aria-label={A.hero.alt}></video>
-          : <img src={A.hero.src} alt={A.hero.alt} width="900" height="600" loading="eager" decoding="async" />}
+          : <img src={A.hero.src} alt={A.hero.alt} width={A.hero.width ?? 900} height={A.hero.height ?? 600} loading="eager" decoding="async" />}
         {A.hero.caption && <figcaption id="advHeroCap" set:html={A.hero.caption} />}
       </figure>
       <div class="prose lead" set:html={p.lead} />
@@ -62,10 +82,10 @@ const A = p.atf.a;
     </div>
   </article>
 
-  <StickyCta name={p.sticky.name} brand={p.sticky.brand} image={p.sticky.image} url={p.sticky.url} price={p.sticky.price} oldPrice={p.sticky.oldPrice} discount={p.sticky.discount} />
-  <CpvTracker campaign={p.cpvCampaign} lp={p.cpvLp} />
+  <StickyCta name={p.sticky.name} brand={p.sticky.brand} image={p.sticky.image} url={p.sticky.url} price={p.sticky.price} oldPrice={p.sticky.oldPrice} discount={p.sticky.discount} kicker={p.sticky.kicker} buttonText={p.sticky.buttonText} ctaId={p.sticky.ctaId} startAt={p.sticky.startAt} startPct={p.sticky.startPct} />
+  <CpvTracker campaign={p.cpvCampaign} lp={p.cpvLp} fbCapi={p.fbCapi} />
 
-  <script is:inline define:vars={{ atf: p.atf }}>
+  <script is:inline define:vars={{ atf: p.atf, fixedDate }}>
     (function () {
       /* --- ATF variant swap (?v=a|b|c) --- */
       var v = "a";
@@ -83,11 +103,13 @@ const A = p.atf.a;
           fig.innerHTML = media + (d.hero.caption ? '<figcaption id="advHeroCap">' + d.hero.caption + '</figcaption>' : '');
         }
       }
-      function ev(name, params) { try { params = params || {}; params.variant = v; if (typeof gtag === "function") gtag("event", name, params); if (window.clarity) window.clarity("set", "variant", v); } catch (e) {} }
+      function ev(name, params) { try { params = params || {}; params.variant = v; if (typeof gtag === "function") gtag("event", name, params); if (window.clarity) window.clarity("set", "variant", v);
+        /* Meta pages only (fbq exists only when metaPixel is set): offer clicks + scroll depth as custom events, never a Purchase */
+        if (typeof fbq === "function") { if (name === "adv_cta") fbq("trackCustom", "OfferClick", params); if (name === "adv_scroll" && (params.depth === 50 || params.depth === 75)) fbq("trackCustom", "Scroll" + params.depth, params); } } catch (e) {} }
       ev("adv_variant");
       /* --- dates roll to the reader's day --- */
       try { var dd = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" });
-        document.querySelectorAll("[data-updated],[data-deal-date]").forEach(function (n) { n.textContent = dd; }); } catch (e) {}
+        document.querySelectorAll(fixedDate ? "[data-deal-date]" : "[data-updated],[data-deal-date]").forEach(function (n) { n.textContent = dd; }); } catch (e) {}
       /* --- scroll depth --- */
       var marks = [25, 50, 75, 100], sent = {};
       function depth() { var h = document.documentElement, t = (h.scrollTop || document.body.scrollTop), full = h.scrollHeight - h.clientHeight; if (full <= 0) return;

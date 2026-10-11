@@ -66,3 +66,7 @@
 
 .adv .guar .badge-img { flex-shrink:0; width:112px; height:112px; filter: drop-shadow(0 4px 10px rgba(21,128,61,0.28)); }
 .adv .prose.ps { margin-bottom: 3em; }
+
+/* 11 Oct 2026: native label bar (AdvertorialPage topTag) + optional breadcrumb */
+.adv-toptag { background:#eef1f5; color:#5a6880; font-size:0.66rem; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; text-align:center; padding:3px 12px; line-height:1.4; }
+.adv .crumb { font-size:0.76rem; color:var(--muted); margin:6px 0 0; line-height:1.35; }
