@@ -1,0 +1,20 @@
+---
+/* RESQVAC MOTHER STORY · META lane — built 13 Oct 2026 by lander-builder. NOT LIVE until Sam approves.
+   Page body lives in src/components/RqMotherStory.astro (shared with the Taboola route almost-lost-my-son-n).
+   Meta pattern (as broom-porch-story): Meta dataset pixel + OfferClick/Scroll50/Scroll75 custom events, CPV One checkdirect
+   + fbCapiTrack(), no top label, footer disclosure only. */
+import RqMotherStory from "../../components/RqMotherStory.astro";
+
+// TODO(Sam): create the CPV One campaign "Meta - ResQVac Mother Story" (offer = the ResQVac interstitial
+// https://myhealiq.com/resqvac/inter, CPV offer 12, &sub1={!subid!}; tracking domain track.thelifeinsider.com; Direct Redirect).
+// Then put its campaign ID here and the LP slot from the checkdirect(ID, LP) snippet CPV shows you in CPV_LP.
+// "0" = placeholder: NO traffic until both are real (data-decisions P1 item 2).
+const CPV_CAMPAIGN = "25";
+const CPV_LP = "1";
+---
+<RqMotherStory
+  lane="meta"
+  cpvCampaign={CPV_CAMPAIGN}
+  cpvLp={CPV_LP}
+  disclosure="<p>Story dramatized. In an emergency, always call 911.</p>"
+/>

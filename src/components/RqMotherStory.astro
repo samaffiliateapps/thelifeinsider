@@ -1,0 +1,279 @@
+---
+/* RESQVAC MOTHER STORY ("I almost lost my son in seconds") — built 13 Oct 2026 by lander-builder. NOT LIVE until Sam approves.
+   One copy, two routes (so the lanes can't drift apart):
+     /articles/almost-lost-my-son    = Meta lane    (pixel + fbCapi, checkdirect, no top label)
+     /articles/almost-lost-my-son-n  = Taboola lane (cpvRedirect, thin "Advertorial" label, no pixel)
+   Copy (source of truth): advertorial-system/offers/resqvac/pages/native-advertorial-mother-story-2026-10-12.md, §2 FINAL PAGE
+   COPY (H1 #1, deck, info strip, story, 911 Gap, One-Way Pull, reveal, steps, proof, table, FAQ, cost, two paths, real-one
+   close, reviews, P.S.). Not rendered: headline options, BUILD notes, claims list, score, open items.
+   Reviews are merchant-published (myhealiq.com/resqvac/pre), so they are labelled "Review published on the official site"
+   with plain gold stars, never Trustpilot styling. Every review block keeps its visible "posted on the ResQVac site" intro.
+   No countdown, stock counter or "ends today" on our page (the copy only reports the merchant's countdown).
+   Every CTA carries data-cta="cta1…cta5" / "table" / "sticky" (GA4 + Clarity position; Meta OfferClick on the Meta route).
+   Images (public/images/rq/, from ads/img/RQ_*): hero = RQ_P1 (16:9 crop), reveal = RQ_P2 (drawer), how-it-works = RQ_M2,
+   what's different = RQ_P3 (grandma + toddler), cost = RQ_P4 (counter, keys, bag), sticky thumb = RQ_P4 crop.
+   Sticky bar from 50% on both routes (copy §6 had it as a ?v=sticky test only; built on per the build brief).
+
+   BEFORE PUBLISH (Sam), from the copy file's §9 open items:
+   - US view on publish day: US$49.99, the Black Friday banner and code BF26 on the interstitial/checkout (12 Oct check was AUD).
+   - Approve the 8 brand-published quotes for Taboola (or cut to Derek T. + Sophia W.).
+   - CDC + NEMSIS/JAMA links for Taboola review; check LifeVac's US$69.95 on publish day. */
+import AdvertorialPage from "../layouts/AdvertorialPage.astro";
+import "../styles/wr-broom.css";
+import "../styles/native-story.css";
+
+export interface Props {
+  lane: "meta" | "taboola";
+  cpvCampaign: string;
+  cpvLp?: string;
+  disclosure: string; // html
+}
+const { lane, cpvCampaign, cpvLp = "1", disclosure } = Astro.props;
+const meta = lane === "meta";
+const META_PIXEL = "4514987495496479"; // TLI presell - CPV CAPI dataset (Meta route only; never a Purchase)
+
+const LINK = "https://track.thelifeinsider.com/base2.php";
+const A = `href="${LINK}" rel="sponsored nofollow noopener" target="_blank"`;
+const btn = (pos: string, label: string) => `<a class="btn" data-cta="${pos}" ${A}>${label}</a>`;
+const tlink = (pos: string, label: string) => `<a class="tlink" data-cta="${pos}" ${A}>${label}</a>`;
+const ctaBtn = (pos: string, label: string, under: string) => `<div class="cta">${btn(pos, label)}<p class="under">${under}</p></div>`;
+const ctaText = (pos: string, label: string, under: string) => `<p class="tcta">${tlink(pos, label)}</p><p class="under-t">${under}</p>`;
+const fig = (src: string, alt: string, w: number, h: number, cap?: string, cls = "") =>
+  `<figure${cls ? ` class="${cls}"` : ""}><img src="${src}" alt="${alt}" width="${w}" height="${h}" loading="lazy" decoding="async">${cap ? `<figcaption>${cap}</figcaption>` : ""}</figure>`;
+// Merchant-published review card: plain gold stars, name as the maker gives it, source label.
+const rv = (t: string, who: string) => `<blockquote class="rq"><span class="gstars" aria-label="5 out of 5 stars">★★★★★</span><p>“${t}”</p><cite>${who} · Review published on the official site</cite></blockquote>`;
+const tcell = (html: string) => `<a data-cta="table" ${A}>${html}</a>`;
+
+const atf = {
+  a: {
+    h1: "“I Almost Lost My Son in Seconds. The Heimlich Didn’t Work — Three Times.”",
+    sub: "One grape. Forty seconds. No plan B. A mom of two on the night the Heimlich failed three times — and the under-$50 device she now keeps in every room for the moment it fails again: no strength, no training, and you can even use it on yourself.",
+    hero: {
+      type: "img" as const,
+      src: "/images/rq/hero-kitchen.webp",
+      alt: "A mom at the kitchen table beside an empty booster seat and a small bowl of cut grapes, a red-and-white ResQVac device in front of her",
+      caption: "Grapes get cut in four at our house now. That was only the first thing that changed.",
+      width: 1200, height: 675,
+    },
+  },
+};
+
+const lead = `
+<p>If you have a toddler, or a parent who eats alone, please read this before dinner tonight. I'll show you the gap nobody warned me about, and what's in our kitchen drawer now for the moment the Heimlich isn't working. It takes five minutes.</p>
+<p>It was a Tuesday. 5:52 p.m. I know the time because the oven timer had just gone off.</p>
+<p>Owen was three. He sat in his booster seat with a little bowl of grapes. I had cut them in half. I thought that was enough.</p>
+<p>His big sister was telling us about recess. I was pulling chicken out of the oven.</p>
+<p>Then the kitchen went quiet.</p>
+<p>Not loud. Quiet.</p>
+<p>Here's what nobody tells you about a child who is really choking. There's no sound. No cough. No cry. Just a look.</p>
+<p>I turned around. Owen was staring right at me with both hands at his throat. His mouth was open. Nothing was coming out.</p>
+<p>I dropped the pan.</p>
+<p>I took a CPR class five years ago. I passed it. In that moment, I could not remember one single step.</p>
+<p>So I did what my hands remembered. I pulled him out of his seat, bent him over my arm and hit his back. Five times. Hard.</p>
+<p>Nothing.</p>
+<p>I spun him around, put my fist above his belly button and pulled in and up. Once. Twice. Three times.</p>
+<p>Nothing.</p>
+<p>His lips were changing color. My husband was on the phone with 911. I heard him say our address twice. I heard the operator say the ambulance was about nine minutes away.</p>
+<p>Nine minutes.</p>
+<p>I remember thinking: he doesn't have nine minutes.</p>
+<p>My arms were shaking so hard I wasn't sure I was even doing it right. I tried again. On the fourth thrust, half a grape shot out onto the floor.</p>
+<p>Then he screamed. It was the best sound I have ever heard.</p>
+<blockquote class="pull"><p>“For about forty seconds, my son couldn't breathe — and I was running out of things to try.”</p></blockquote>
+`;
+
+const body = `
+<h2 id="forty-seconds">Forty Seconds I Can't Stop Replaying</h2>
+<p>The ambulance came and they checked him over. He was fine. He ate a popsicle on the couch and was asleep by 7:30.</p>
+<p>I didn't sleep at all.</p>
+<p>I kept playing it back. The quiet. The look. The fourth thrust.</p>
+<p>And one question would not leave me alone:</p>
+<p><strong>What if the fourth one hadn't worked?</strong></p>
+<p>What if it took six? What if I had been alone with him? What if it happened at my mom's house? She watches him every Thursday. She's 68, with a bad shoulder.</p>
+<p>I had done everything “right.” I cut the grapes. I took the class. My husband called 911 in the first ten seconds.</p>
+<p>And for forty seconds, it still wasn't enough.</p>
+<p>That's the part no one warns you about. It's not that you won't know what to do. It's that what you know might not work, and after that there's nothing.</p>
+<p>I had no plan B.</p>
+
+<h2 id="smoke-detector">We Had a Smoke Detector in Every Room. For Choking, We Had Nothing.</h2>
+<p>At 2 a.m., I was on my phone in the dark, typing “what if the Heimlich doesn't work.”</p>
+<p>Here's what I learned that night:</p>
+<ul class="stats">
+<li>Choking is the <strong>4th leading cause of accidental injury death</strong> in America (National Safety Council).</li>
+<li>More than <strong>5,500 people</strong> die from choking every year (CDC).</li>
+<li>The typical ambulance takes about <strong>7 minutes</strong> to reach you. In rural areas it's <strong>nearly twice that</strong>, and nearly 1 in 10 rural calls waits almost half an hour (<em>JAMA Surgery</em>, 2017; NEMSIS national EMS data).</li>
+<li>When oxygen is cut off, <strong>some brain cells start dying in less than 5 minutes</strong> (U.S. National Library of Medicine).</li>
+</ul>
+<p>Read those last two again.</p>
+<p>Help is about seven minutes away. Brain cells can start dying in under five. I call that space <strong>the 911 Gap.</strong> In the 911 Gap nobody is coming, so it's just you and whatever is in your hands.</p>
+<p>Then I looked around my house.</p>
+<p>A smoke detector in every bedroom. A fire extinguisher under the sink. Outlet covers. Cabinet locks. A gate on the stairs.</p>
+<p>For choking, we had nothing. Not one thing.</p>
+<p>Back blows and the Heimlich are still step one. Always. Call 911 and do them first. But they rely on things you can't control in a panic: how strong you are, where your hands land, how big the person is, and whether your arms stop shaking.</p>
+<p>I wanted something for the moment step one isn't working.</p>
+<p>It turns out I wasn't the only parent awake at 2 a.m. These reviews are posted on the ResQVac site, the device I ended up buying:</p>
+${rv("I bought one after hearing about a neighbor who used it on their toddler. I pray I never need it. But just having it in the kitchen drawer gives me peace of mind.", "Lauren P., mom of two")}
+${rv("I run a small daycare, and we keep one in every room now. It’s easy to use, and staff feel more confident knowing it’s there if needed.", "Shayna M., childcare provider")}
+
+<h2 id="pushes-pulls">The Heimlich Pushes. This Pulls.</h2>
+<p>The first thing I found was LifeVac, the name brand you may have seen on the news. It costs $69.95.</p>
+<p>The idea hit me right away.</p>
+<p>The Heimlich <strong>pushes.</strong> It uses force from below to try to pop the food up and out. That takes strength, the right spot and the right angle, in the worst minute of your life.</p>
+<p>A suction rescue device <strong>pulls.</strong> You seal a mask over the mouth and nose, push a plunger down, then pull it up hard. The suction pulls the blockage up and out from above. A one-way valve means the push doesn't drive anything deeper. Everything moves one way: out. No squeezing. No lifting. No perfect form.</p>
+<p>That's <strong>the One-Way Pull.</strong> It doesn't care how strong you are, how big they are, or how hard your hands are shaking.</p>
+<p>So I made a list. Whatever went in our drawer had to:</p>
+<ol class="plain">
+<li><strong>Work without strength</strong>, so my 68-year-old mom could use it.</li>
+<li><strong>Work without training</strong>, because I'd already proven I forget training in a panic.</li>
+<li><strong>Work on me</strong>, if I'm the one choking and I'm alone.</li>
+<li><strong>Cost little enough to put one everywhere Owen eats.</strong></li>
+</ol>
+<p>LifeVac ticked three. At $69.95 a room, it missed the fourth.</p>
+<p>Then I found the one I bought.</p>
+
+<h2 id="meet-resqvac">Meet ResQVac: The Plan B in Our Kitchen Drawer</h2>
+${fig("/images/rq/drawer.webp", "A ResQVac device with its clear mask lying in an open kitchen drawer next to scissors, dish towels and utensils", 1200, 805, "Ours lives in the kitchen drawer, next to the scissors.")}
+<p><strong>ResQVac</strong> is a small handheld suction device built to clear a blocked airway in seconds when back blows and the Heimlich aren't working.</p>
+<p>Same Place-Push-Pull idea as the name brand. But on the official site right now, it's <strong>$49.99</strong> in their Black Friday sale (50% off), not $69.95.</p>
+<p>Here's how it ticked my list:</p>
+<ul class="tick">
+<li><strong>No strength needed.</strong> It doesn't run on force. You just pull. (Mom: check.)</li>
+<li><strong>No training.</strong> Three steps: Place, Push, Pull. (Panicking me: check.)</li>
+<li><strong>You can use it on yourself.</strong> If you choke when you're alone, it's built for that too. (Check.)</li>
+<li><strong>Cheap enough for every room.</strong> $49.99 for one, and <strong>60% off when you get three.</strong> (Check.)</li>
+<li><strong>Mask sizes for kids and adults.</strong> One device for the whole family.</li>
+<li><strong>A clear one-way valve.</strong> You see the blockage come out.</li>
+<li><strong>No batteries. Nothing to charge. No expiry date.</strong> You buy it once, and it waits in the drawer.</li>
+<li><strong>Small.</strong> It fits in a kitchen drawer, a diaper bag or a glovebox.</li>
+</ul>
+${ctaBtn("cta1", "Check if the Black Friday 50% off is still on »", "Opens the official ResQVac site · Code BF26 applied automatically · 90-day money-back guarantee")}
+
+<h2 id="how-it-works">How It Works: Place. Push. Pull.</h2>
+${fig("/images/rq/mom-drawer.webp", "A mom at an open kitchen drawer holding a ResQVac device: clear mask, white tube and red plunger", 960, 1200, "Mask, tube and plunger. Small enough to hold in one hand.", "tall")}
+<ol class="plain">
+<li><strong>Place.</strong> Snap on the right-size mask. Press it over the nose and mouth to make a seal.</li>
+<li><strong>Push.</strong> Hold the mask firm with one hand. Push the handle down with the other.</li>
+<li><strong>Pull.</strong> Keep the seal. Pull the handle up, quick and hard.</li>
+</ol>
+<p>That's it. My husband and I said the three steps out loud at the counter until we could do them without thinking. It took five minutes.</p>
+
+<h2 id="does-it-work">Does It Actually Work? Ask the Families Who Used It.</h2>
+<p>I haven't had to use mine. These people did. Both reviews are posted on the ResQVac site:</p>
+${rv("Used it at a family BBQ when my niece started choking on a piece of fruit. It worked fast, no panic, no chaos. I ordered two more the next day.", "Ryan M., 49")}
+${rv("My wife used this device on our nephew when he choked during a backyard barbecue. I’ve never been more grateful for a ‘just-in-case’ item in my life.", "Victor H.")}
+<p>The official order page shows <strong>4.7 out of 5 from 21,392+ verified customers.</strong></p>
+
+<h2 id="different">What Makes It Different</h2>
+<p><strong>It works when your hands are shaking.</strong> You don't have to lift a child, wrap your arms around a grown man or find the right spot under the ribs.</p>
+<p><strong>It's built for the people the Heimlich is hardest on.</strong> Small kids. Older parents. People with limited mobility. People much bigger than you.</p>
+<p><strong>It pulls the food out instead of pushing it deeper.</strong> The suction removes the blockage without pushing it further into the airway, and the clear valve shows you when it's out.</p>
+<p><strong>You can use it on yourself.</strong> You can't do back blows on yourself. With ResQVac, if you're home alone and choking, you're not out of options.</p>
+<p><strong>It goes where your people go.</strong> The kitchen drawer. The diaper bag. The glovebox. Grandma's kitchen. The daycare bag. The office desk.</p>
+${fig("/images/rq/grandma-dinner.webp", "A grandmother laughing with her toddler grandson at the dinner table, a ResQVac device on the kitchen counter behind them", 1200, 805, "Thursday dinner at my mom's. Hers sits on the counter.")}
+
+<h2 id="name-brand">The Name Brand vs. ResQVac</h2>
+<div class="tblwrap"><table class="cmp xo">
+<thead><tr><th scope="col"><span class="sr-only">Feature</span></th><th scope="col">LifeVac (name brand)</th><th scope="col" class="win">${tcell("ResQVac")}</th></tr></thead>
+<tbody>
+<tr><th scope="row">How it works</th><td>Place, Push, Pull suction</td><td class="win">${tcell("Place, Push, Pull suction")}</td></tr>
+<tr><th scope="row">One device</th><td>$69.95</td><td class="win">${tcell("<strong>$49.99</strong> (Black Friday, 50% off)")}</td></tr>
+<tr><th scope="row">Packs</th><td>$69.95 per device at list</td><td class="win">${tcell("<strong>60% off the 3-pack.</strong> The 5-pack is the lowest price per device")}</td></tr>
+</tbody></table></div>
+<p>LifeVac is the famous one. I just couldn't pay $69.95 a room. With ResQVac's pack pricing, every place Owen eats got one.</p>
+
+<div class="qa">
+<h2 id="questions">Questions I Had (Maybe You Do Too)</h2>
+<h3>Do I need training?</h3>
+<p>No. It's three steps, Place, Push, Pull, and they fit on a sticky note.</p>
+<h3>Who can it be used on?</h3>
+<p>Young children through seniors, with different mask sizes for kids and adults. If your baby is under one, check the mask sizes on the order page first.</p>
+<h3>Can I use it on myself?</h3>
+<p>Yes. That's one of the main reasons I picked it.</p>
+<h3>Won't it push the food deeper?</h3>
+<p>No. That's the whole point of the One-Way Pull: the suction pulls the blockage out without pushing it further in, and the clear valve lets you see it come out.</p>
+<h3>Does it replace the Heimlich?</h3>
+<p>No. You call 911 and do back blows and abdominal thrusts first. ResQVac is what you reach for if they aren't working.</p>
+<h3>How fast does it ship?</h3>
+<p>It ships within 48 business hours. Standard delivery is usually 3 to 5 days.</p>
+</div>
+
+<h2 id="cost">What Does It Cost?</h2>
+<p>Here's what I had already spent on “being ready”:</p>
+<ul>
+<li>A CPR class: $50 to $100. Five years later, I couldn't remember the steps.</li>
+<li>The name brand: $69.95 for one device.</li>
+</ul>
+<p>The maker lists ResQVac at $99.98. Right now the official site is running its <strong>Black Friday sale</strong>:</p>
+<ul>
+<li><strong>1 ResQVac: 50% off, $49.99.</strong> That's about $20 less than one name-brand device.</li>
+<li><strong>3-pack: 60% off.</strong></li>
+<li><strong>5-pack:</strong> the lowest price per device on the site.</li>
+</ul>
+<p>The code, BF26, is applied for you at checkout. You don't have to type anything.</p>
+${fig("/images/rq/counter-keys.webp", "A ResQVac device on a wooden kitchen counter next to car keys, an open diaper bag and a pair of reading glasses", 1200, 805, "Next to the car keys, the diaper bag and Mom's reading glasses.")}
+<p>We got the 5-pack. Here's where our five went:</p>
+<ol class="plain">
+<li>The kitchen drawer, next to the scissors I now use on every grape.</li>
+<li>The diaper bag.</li>
+<li>The glovebox.</li>
+<li>My mom's kitchen, for Thursdays.</li>
+<li>Owen's daycare bag.</li>
+</ol>
+${ctaText("cta2", "See the Black Friday pack prices »", "Opens the official ResQVac site · Code BF26 applied automatically · 90-day money-back guarantee")}
+
+<h2 id="cheaper">Why Is It So Much Cheaper?</h2>
+<p>I wondered the same thing. They sell online only. No stores, no TV ads. They let the device and the reviews do the selling, and that's how they keep the price under the name brand's.</p>
+
+<div class="two">
+<h2 id="two-ways">Two Ways Tonight Can Go</h2>
+<p>You may never need it. I pray I never use mine. But here's how I think about it now.</p>
+<p><strong>Path one:</strong> Close this page. Keep cutting the grapes. Hope the Heimlich works on the first try, every time, for everyone you love, for the rest of their lives. And if one night it doesn't, hope the ambulance beats the 911 Gap.</p>
+<p><strong>Path two:</strong> Put a plan B in the drawer tonight, while it's half off. Learn three words: Place, Push, Pull. If you change your mind, you have 90 days to send it back for your money.</p>
+<p>I chose path two at 2:40 a.m., with Owen asleep down the hall.</p>
+<p>I'm not scared of dinner anymore. I still watch him eat. I always will. But the 911 Gap isn't empty now. There's something in my hand.</p>
+${ctaText("cta3", "Show me the Black Friday price »", "90-day money-back guarantee")}
+</div>
+
+<h2 id="real-one">How to Get the Real One (and the Black Friday Price)</h2>
+<p>Look-alike devices are all over social media right now. The maker warns that copies don't use the same suction design or the same clear one-way valve.</p>
+<p>Order from the official site, which is where the button below goes.</p>
+<p>The Black Friday sale is on there now: 50% off one, 60% off three, with code BF26 applied for you. Their page has a countdown running. I don't know what the price does when it hits zero, and I wouldn't wait to find out. Not for the thing that fills the 911 Gap.</p>
+<p>The guarantee is simple. You get 90 days. If ResQVac isn't for you, you contact the maker and ask for your money back.</p>
+${ctaBtn("cta4", "Claim the Black Friday Discount &amp; Check Availability »", "Official ResQVac site · Code BF26 auto-applied · 90-day money-back guarantee · Ships within 48 business hours")}
+
+<h2 id="reviews">What Other Buyers Say</h2>
+<p>More reviews posted on the ResQVac site:</p>
+${rv("My 6-year-old choked on a grape a few months ago. The Heimlich didn’t work right away. That’s when I realized I needed a backup plan. I bought this the next morning. Haven’t needed it (thankfully), but I’ll never be without it again.", "Derek T.")}
+${rv("We had a choking scare last year and I never want to feel that helpless again. I bought this device ‘just in case’ — and now I keep it in the kitchen drawer. It's one of those things you hope you never need, but you're so grateful to have.", "Jamie R.")}
+${rv("I live alone but my grandkids visit every weekend. This gives me a sense of control if something were to happen. I even showed them how to use it on me, just in case.", "Sophia W., 70")}
+${rv("As a first-time mom, I worry about everything. This gave me real peace. It’s one of the only ‘safety’ products that actually makes me feel like I’m doing something proactive.", "Meera S., 32")}
+`;
+
+const ps = `<p><strong>P.S.</strong> My mom's was the first one we set up. She's 68. She watches Owen every Thursday, and she eats dinner alone the rest of the week. She held it, read the three steps and said, “I'd rather have it and never touch it.” If someone you love watches your kids or eats alone, one pack covers both houses, and the Black Friday price makes the bigger packs the cheapest per device. ${tlink("cta5", "Check the Black Friday pack prices »")}</p>`;
+
+const infoStrip = `<b>Did you know?</b> Choking is the 4th leading cause of accidental injury death in the U.S. (National Safety Council)`;
+---
+<AdvertorialPage
+  slimFooter
+  cpvRedirect={!meta}
+  title="I Almost Lost My Son in Seconds. The Heimlich Didn't Work, Three Times | The Life Insider"
+  description="One grape. Forty seconds. No plan B. A mom of two on the night the Heimlich failed three times, and the under-$50 device she now keeps in every room."
+  cpvCampaign={cpvCampaign}
+  cpvLp={cpvLp}
+  metaPixel={meta ? META_PIXEL : undefined}
+  fbCapi={meta}
+  topTag={meta ? "" : "Advertorial"}
+  kicker={meta ? "Home & Family" : "Home & Family · A Reader's Story"}
+  updateBar={infoStrip}
+  publishedDate="October 13, 2026"
+  atf={atf}
+  byline={{ name: "a mom of two", role: "Home & Family", readTime: "6-minute read" }}
+  lead={lead}
+  body={body}
+  ps={ps}
+  sticky={{ name: "ResQVac", image: "/images/rq/thumb.webp", url: LINK, kicker: "Black Friday sale on the official site", buttonText: "Check if 50% off is still on", ctaId: "sticky", startPct: 50 }}
+  disclosure={disclosure}
+/>
+<style is:global>
+  /* Phones: 2:1 hero (crop of the 16:9 file) so the long deck still leaves lead line 1 above a 375x812 fold, top label included */
+  @media (max-width: 767px) { #adv figure#advHero img { aspect-ratio: 2 / 1; object-position: 50% 45%; } }
+</style>

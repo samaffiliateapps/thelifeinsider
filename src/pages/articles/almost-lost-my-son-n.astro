@@ -1,0 +1,19 @@
+---
+/* RESQVAC MOTHER STORY · TABOOLA lane — built 13 Oct 2026 by lander-builder. NOT LIVE until Sam approves.
+   Page body lives in src/components/RqMotherStory.astro (shared with the Meta route almost-lost-my-son).
+   Taboola pattern (as quietly-ditching-the-broom): cpvRedirect (no checkdirect; base.php logs the visit), thin "Advertorial"
+   label at the very top, NO Meta pixel, NO fbCapi, short footer disclosure. */
+import RqMotherStory from "../../components/RqMotherStory.astro";
+
+// TODO(Sam): create the Taboola CPV One campaign for this page (offer = https://myhealiq.com/resqvac/inter, CPV offer 12;
+// tracking domain track.thelifeinsider.com; Direct Redirect; Taboola {click_id} in the campaign tracking_code, never in the
+// item URL). Then put its campaign ID here. "0" = placeholder: NO traffic until it is real.
+const CPV_CAMPAIGN = "24";
+const CPV_LP = "1";
+---
+<RqMotherStory
+  lane="taboola"
+  cpvCampaign={CPV_CAMPAIGN}
+  cpvLp={CPV_LP}
+  disclosure="<p>Story dramatized. In an emergency, always call 911.</p>"
+/>

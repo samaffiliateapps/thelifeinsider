@@ -1,0 +1,274 @@
+---
+/* WOOD RANGER NATIVE RIP (Taboola): "I bought a 2-pound blower on a whim" garage story — built 13 Oct 2026 by lander-builder.
+   NOT LIVE until Sam approves. Copy (source of truth): advertorial-system/offers/wood-ranger/pages/native-rip-garage-story-2026-10-12.md
+   (H1 = headline #1, subhead, all §2 page copy, ✗/✓ table, 6 feature blocks, diagram panel, spec table, 8-card review grid,
+   CTA cards 1-3 + in-text CTAs 2/3/5). Not rendered: headline options, Taboola creative set, claims list, self-score, notes.
+   Taboola pattern (as quietly-ditching-the-broom): cpvRedirect (no checkdirect; base.php logs the visit), thin "Advertorial"
+   label at the very top, fixed publish date, NO Meta pixel, NO fbCapi, short footer disclosure.
+   Every CTA carries data-cta="cta1…cta6" / "sticky" (GA4 + Clarity position). Sticky bar unlocks at the "What Makes…" H2.
+   Images (public/images/gs/, from ads/img/WR_GS_P*): hero P1 (16:9 crop), P2 workbench, P3-P5 + P7 = video-slot fallbacks
+   (VS1-VS4, stills until Sam supplies real-speed footage), P6 ladder, F1 = wr/motor-cutaway (resized; P8 skipped: barrel
+   too long), P9-P13 features (P12 = real brand photo), P14 diagram. CTA card pack shot = wr/product-50off-card.
+   Desktop sidebar card (copy §3) not built: the sticky bar is phone-only, as on the other WR pages.
+
+   BEFORE PUBLISH (Sam), from the copy file's claims list:
+   - Narrator "Tom" + AI images of him = Flag 1 (grey), disclosed in the footer.
+   - Re-copy every Trustpilot quote from the live page, screenshot it, replace "Sep 2026" with exact dates.
+   - Publish-day price check: US$69.99 / US$139.98 on the interstitial AND at checkout. */
+import AdvertorialPage from "../../layouts/AdvertorialPage.astro";
+import "../../styles/wr-broom.css";
+import "../../styles/native-story.css";
+
+// TODO(Sam): create the Taboola CPV One campaign for this rip (offer https://offer.woodrangertools.com/leafblower/landing with
+// your AdsBranded link, offer 1001, &sub1={!subid!}; tracking domain track.thelifeinsider.com; Direct Redirect; Taboola
+// {click_id} in the campaign tracking_code, never in the item URL). Then put its campaign ID here.
+// "0" = placeholder: NO traffic until it is real.
+const CPV_CAMPAIGN = "23";
+const CPV_LP = "1";
+
+const LINK = "https://track.thelifeinsider.com/base2.php";
+const A = `href="${LINK}" rel="sponsored nofollow noopener" target="_blank"`;
+const btn = (pos: string, label: string) => `<a class="btn" data-cta="${pos}" ${A}>${label}</a>`;
+const plink = (pos: string, label: string) => `<a class="plink" data-cta="${pos}" ${A}>${label}</a>`;
+const tlink = (pos: string, label: string) => `<a class="tlink" data-cta="${pos}" ${A}>${label}</a>`;
+const fig = (src: string, alt: string, w: number, h: number, cap?: string, cls = "") =>
+  `<figure${cls ? ` class="${cls}"` : ""}><img src="${src}" alt="${alt}" width="${w}" height="${h}" loading="lazy" decoding="async">${cap ? `<figcaption>${cap}</figcaption>` : ""}</figure>`;
+// Trustpilot-style green star boxes (same helpers as broom-porch-story / quietly-ditching-the-broom). n filled, rest grey.
+const STAR = `<path d="M12 3.6l2.5 5.4 5.9.6-4.4 4 1.3 5.8L12 16.5l-5.3 2.9 1.3-5.8-4.4-4 5.9-.6z" fill="#fff"/>`;
+const TPS = (n: number, size = 18) => `<span class="tps" aria-label="${n} out of 5 stars">${[1,2,3,4,5].map((i) => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true"><rect width="24" height="24" fill="${i <= n ? "#00b67a" : "#dcdce6"}"/>${STAR}</svg>`).join("")}</span>`;
+const TP = (stars: number, date: string) => `${TPS(stars, 16)}<span class="tp-src">${stars}-star Trustpilot review, ${date}</span>`;
+const q = (t: string, cite: string) => `<blockquote><p>“${t}”</p><cite>${cite}</cite></blockquote>`;
+// Review grid card: our heading (styled as a heading, not a quote), verbatim quote, green stars + source line.
+const rcard = (h: string, t: string, stars: number, date: string) => `<div class="rcard"><h3>${h}</h3><p>“${t}”</p><div class="rsrc">${TP(stars, date)}</div></div>`;
+
+// Dark CTA card: pack shot left, copy right, full-width button and next-step line below.
+const PACK = `<img src="/images/wr/product-50off-card.webp" alt="The WOODRANGER Power Leaf Blower with its 24V Li-ion battery, marked 50% off" width="528" height="426" loading="lazy" decoding="async">`;
+const dcard = (pos: string, copy: string, label: string, under: string, img = PACK) =>
+  `<div class="dcard${img ? "" : " solo"}">${img}<div class="dc-copy">${copy}</div><div class="cta">${btn(pos, label)}<p class="under">${under}</p></div></div>`;
+
+const atf = {
+  a: {
+    h1: "I Bought a 2‑Pound Blower on a Whim. Now It's the Most-Used Tool in My Garage",
+    sub: "Tom, 58, figured a 2.1-pound cordless blower had to be a toy. Two weeks later it had replaced four tools in his garage, and his gas blower was sold on Facebook Marketplace.",
+    hero: {
+      type: "img" as const,
+      src: "/images/gs/hero-tom.webp",
+      alt: "A smiling man in his late fifties in a navy work shirt, standing in his garage woodshop with an orange gas leaf blower on a shelf behind him",
+      caption: "Tom's garage, which doubles as his woodshop.",
+      width: 1045, height: 588,
+    },
+  },
+};
+
+const lead = `
+<p>For eleven years, my Saturday started with a fight.</p>
+<p>Me against a 10-pound gas blower. Mix the gas and oil. Prime it. Choke it. Pull the cord. Pull it again. By the fourth pull my shoulder burned, I was sweating, and I hadn't moved one leaf.</p>
+<p>Then the noise. Half the street got woken up right along with me.</p>
+<p>I'm Tom. I'm 58, I live outside Chattanooga, and I've got two big pin oaks that drop leaves from October to Christmas. My garage doubles as my woodshop. I wash my own truck. I clean my own gutters. I'm the guy who does it himself.</p>
+<p>That gas blower was loud, heavy and hard to start. I figured that's just what a blower is.</p>
+<p>Then one night in late September I was in the recliner, scrolling my phone, and an ad stopped me. It was for the <strong>WOODRANGER Power Leaf Blower</strong>.</p>
+<p>A guy was holding the little red blower, built like a cordless drill, and clearing a driveway with one hand. The ad said it had a <strong>1,600-watt motor that spins up to 55,000 RPM</strong>. And it said the whole thing weighed <strong>2.1 pounds</strong>.</p>
+<p>I read that twice and laughed out loud.</p>
+<div class="callout"><p>💡 A 2-pound gadget replacing my 10-pound gas blower? I almost kept scrolling. I'm sure glad I didn't.</p></div>
+<p>I ordered one that night. Half curiosity. Half because the brand gives you 90 days to try it at home, and I fully planned to send it back.</p>
+<p>What happened over the next two weeks changed how I clean my yard, my garage and my truck.</p>
+`;
+
+const body = `
+<h2 id="the-box">The Box Showed Up. That's When It Got Interesting.</h2>
+<p>It landed on my porch three days later. It ships from Ohio.</p>
+<p>I opened it and laughed again. The brand says it weighs less than a handbag. It's right. The 24-volt battery slides into the handle like a drill battery.</p>
+<p>I charged it while I ate lunch. The brand says a full charge takes under an hour.</p>
+<p>Then I walked out to the driveway, pointed it at the oak leaves piled along the edge, and squeezed.</p>
+<p>The pile didn't shuffle over. It left.</p>
+${fig("/images/gs/workbench-tom.webp", "Tom leaning over a sawdust-covered workbench in his garage, aiming the small red cordless blower at the bench", 1200, 670, "Next test, indoors: sawdust off the bench in seconds. That used to be ten minutes with a shop brush.")}
+<p>Here's why something this small hits that hard. A big gas blower pushes a wide, lazy wall of air. This one squeezes its air through a narrow barrel. The brand says its 1,600-watt brushless motor spins up to 55,000 RPM and makes “a highly concentrated blast of air.”</p>
+<p>It's your thumb over the end of a garden hose: narrower, faster, harder.</p>
+<p>That's when it clicked for me. My problem was never the leaves. I'd been hauling out a lawn-sized machine for driveway-sized jobs.</p>
+<p>Turns out I wasn't the only one who doubted it. One buyer wrote:</p>
+${q("I was skeptical at first, looking at the size of this equipment. Then in a hurry I decided to try it. I must tell you that the power this has is like of none other, especially with its small size…", TP(5, "Sep 2026"))}
+
+<h2 id="five-ways">5 Ways I Use My WOODRANGER Every Single Week</h2>
+<p>By the end of the first week I'd figured something out. This isn't just a leaf blower. It's a 2-pound air broom for everything I own. Here's where mine goes to work.</p>
+
+<h3 class="use" id="use-leaves">1. Clearing leaves off the driveway, the walk and the beds</h3>
+<figure class="vid"><video src="/video/wr-demo-steps.mp4" poster="/video/wr-demo-steps-poster.jpg" autoplay muted loop playsinline preload="metadata" width="800" height="450" aria-label="The small red cordless blower clearing leaves off a paved walkway and steps"></video><figcaption>Leaves off the walk and down the steps. Real speed, one hand.</figcaption></figure>
+<p>Those two oaks bury my driveway every fall. With the gas blower, the front took most of an hour by the time I'd fueled it, fought it and put it away. Now I grab this off the hook, and the driveway, the walk and the bed edges are done on a single charge. No fuel. No pull cord. No warm-up.</p>
+<p>Will it clear an acre of soaked leaves? No. For a big lawn under wet leaves, keep the big machine. One buyer put it better than I can:</p>
+${q("Great little blower- wouldn't want to have to do a very large yard with lots of debris but it's PERFECT for cleaning deck, driveway, walkways &amp; small yards quickly. Charge lasted about 30-40 minutes…", TP(5, "16 Sep 2026"))}
+
+<h3 class="use" id="use-sawdust">2. Blasting sawdust and dust off everything</h3>
+<p>My garage is also my woodshop. After a weekend project, sawdust covers every tool, every shelf and the bench. I used to wipe it all down with rags. Now I squeeze, and it's gone. The brand's own page lists the job word for word: “Sawdust, metal shavings, and leaves blown in from outside. Gone at the push of a button.”</p>
+<p>A light touch on the trigger gives a soft puff for my keyboard. A full squeeze clears the bench in one pass. My wife Carol uses it on the patio cushions before company.</p>
+${fig("/images/gs/sawdust-bench.webp", "The small red cordless blower held over a wooden workbench covered in sawdust and shavings, a hand plane and tape measure beside it", 1200, 670, "Light squeeze for the fine stuff. Full squeeze for the bench.")}
+
+<h3 class="use" id="use-truck">3. Drying my truck after a wash</h3>
+<p>This one I never saw coming. I always dried my pickup with towels. That leaves streaks, and water drips out of the mirrors and grille for an hour after.</p>
+<p>Now I wash it, then blow it dry. The water comes out of the mirror housings, the door jambs, the grille and the gaps around the lights. I don't put a towel on the paint anymore. The brand's own page lists “Dry your car streak-free” as one of its jobs.</p>
+<p>It does the inside, too. One buyer got it for her husband and wrote:</p>
+${q("Quality tool that I surprised my husband with. He has used this every day since It arrived. Cleaned our back porch, sidewalks, our cars filled with dog hair, as well as fallen leaves. Cuts his workload by 75%.", TP(5, "Sep 2026"))}
+${fig("/images/gs/truck-mirror.webp", "A hand aiming the small red cordless blower at the side mirror of a freshly washed dark pickup covered in water beads", 1200, 670, "Water out of the mirror housing in seconds. No towel on the paint.")}
+
+<h3 class="use" id="use-gutters">4. Cleaning out the gutters</h3>
+<p>Every homeowner hates this one. I used to climb up with a garden trowel and a bucket. Now I take the blower up the ladder. At 2.1 pounds it sits in one hand while my other hand stays on the ladder, and I blow the leaves and twigs right out of the gutter and off the roof edge. The brand lists “Clear gutters &amp; roof edges” as one of the jobs it's made for.</p>
+<p>One buyer found the same thing:</p>
+${q("This little cordless blower far exceeded my expectations. I've already thought about a hundred things it could be useful for. From blowing our rain gutters to window sills and tracks. Yep. If you're thinking about getting one, do it.", TP(5, "Sep 2026"))}
+${fig("/images/gs/ladder-gutter.webp", "Tom on an aluminum ladder at the roof edge, one hand on the ladder, the other aiming the small red blower into a gutter full of leaves", 1200, 670, "2.1 pounds means one hand for the blower and one for the ladder.")}
+
+<h3 class="use" id="use-floor">5. Clearing the garage floor after a project</h3>
+<p>An oil change, a weekend in the woodshop, or just breaking down boxes: the floor ends up covered. My push broom only moved the dust around and left a gray film behind.</p>
+<p>Now I open the garage door, start at the back wall and walk the whole mess out onto the driveway. A couple of minutes and the floor is done.</p>
+<p>The first time, Carol walked in, looked at the floor and asked who I'd hired.</p>
+<p>A buyer wrote almost the same thing:</p>
+${q("This lightweight hand blower is really good. I was sweeping out my garage and leaving dust streaks everywhere. I pulled out my little blower and the whole garage was dust free in less than two minutes!", TP(5, "Sep 2026"))}
+${fig("/images/gs/garage-floor.webp", "A man in jeans and work boots aiming the small red blower low over a garage floor dusted with sawdust and leaves, the garage door open to the driveway", 1200, 670, "Back wall to driveway, one squeeze.")}
+
+${dcard("cta1", `<p class="dc-h">ONE TOOL. FIVE JOBS.</p><p><span class="dc-badge">50% OFF</span> on the official site today</p><p class="dc-sub">Leaves · sawdust · car drying · gutters · garage floor</p>`, "Check If 50% Off Is Still Available →", "Opens the official WOODRANGER site · 90-day money-back guarantee")}
+
+<h2 id="marketplace">Why I Put My Gas Blower on Facebook Marketplace</h2>
+<p>Two weeks after the ${plink("cta2", "WOODRANGER")} showed up, I wiped down the gas blower, took a picture of it and listed it on Facebook Marketplace. It sold that weekend. Here's the side-by-side that made it easy:</p>
+<div class="tblwrap"><table class="cmp xo">
+<thead><tr><th scope="col"><span class="sr-only">Feature</span></th><th scope="col">My old gas blower</th><th scope="col" class="win">WOOD&shy;RANGER</th></tr></thead>
+<tbody>
+<tr><th scope="row">Weight</th><td class="x">10+ lb (the brand's figure for full-size blowers)</td><td class="win ok">2.1 lb</td></tr>
+<tr><th scope="row">Getting it going</th><td class="x">Prime, choke, pull, pull again</td><td class="win ok">Squeeze the trigger</td></tr>
+<tr><th scope="row">Fuel</th><td class="x">Gas and 2-stroke oil mix</td><td class="win ok">24V rechargeable battery</td></tr>
+<tr><th scope="row">Upkeep</th><td class="x">Spark plugs, filters, tune-ups</td><td class="win ok">Zero maintenance (the brand's words)</td></tr>
+<tr><th scope="row">Fumes</th><td class="x">Exhaust on your clothes</td><td class="win ok">None</td></tr>
+<tr><th scope="row">Up a ladder, one-handed</th><td class="x">Not a chance</td><td class="win ok">Yes, at 2.1 lb</td></tr>
+<tr><th scope="row">Jobs</th><td class="x">Outdoor leaves and grass (the brand's chart)</td><td class="win ok">Yard, car, garage, workbench, computers</td></tr>
+<tr><th scope="row">Cost</th><td class="x">$200–$400 plus fuel and oil (the brand's figure)</td><td class="win ok">50% off on the official site today</td></tr>
+</tbody></table></div>
+<p>Then the strangest thing happened. Everybody started borrowing it.</p>
+<p>My son-in-law Danny took it to blow the dog hair out of his truck. Carol dusts off the patio furniture with it. My neighbor Ray borrowed it for his gutters, brought it back two days later and told me he'd ordered his own.</p>
+<p>That happens a lot, it turns out. One buyer wrote:</p>
+${q("…I bought it to blow leaves etc. from my small patio. It is so powerful and easy to use that I gave it to my daughter who has a large house and she immediately put it to use cleaning her front and back patios and her 2 car garage floor. So I bought another for her and a third for my other daughter who has a large rural driveway…", TP(5, "Sep 2026"))}
+<p><strong>It replaced four tools in my garage:</strong> the gas blower, the shop broom, the stack of drying towels and the can of compressed air on my workbench. All gone.</p>
+
+<h2 id="different">What Makes the WOODRANGER So Different?</h2>
+<p>You've probably seen the $10 “jet fans” online. Before I spent a dime, I wanted to know what's actually inside this one. The ${plink("cta3", "WOODRANGER")} brand prints it all, and it backs every blower with a 90-day money-back guarantee. Here's what you get:</p>
+
+<div class="feat">
+<h3 id="f-motor">High-Velocity Motor</h3>
+${fig("/images/gs/motor-cutaway.webp", "Cutaway illustration of the red blower showing the brushless motor, turbine fan and airflow inside the barrel", 1000, 923, "", "sq")}
+<p>A 1,600-watt brushless motor that spins up to 55,000 RPM, per the brand. It makes a tight, concentrated jet of air. The brand says it powers through “wet leaves, heavy grass clippings, and stubborn driveway debris.”</p>
+${q("This product is shockingly powerful. Very handy for people that may not have a lot of space to store tools.", TP(4, "21 Sep 2026"))}
+</div>
+
+<div class="feat">
+<h3 id="f-trigger">Squeeze-to-Control Trigger</h3>
+${fig("/images/gs/trigger.webp", "Two close-ups of a hand on the blower's trigger: a light squeeze and a full squeeze", 1200, 670)}
+<p>The trigger is pressure-sensitive: the harder you squeeze, the more air you get. The brand says it goes from “a soft breeze for dusting delicate electronics to a full-power blast for driveway clearing.” I feather it for the keyboard and floor it for the driveway.</p>
+</div>
+
+<div class="feat">
+<h3 id="f-cordless">Cordless Freedom</h3>
+${fig("/images/gs/cordless.webp", "A hand holding the small red cordless blower over autumn leaves on stone pavers", 1200, 670)}
+<p>A 24-volt lithium battery. No extension cord, no gas can, no fumes. Grab it off the hook and go.</p>
+${q("I like the fact that I just grab it without dragging electrical cords around let alone a bulky blower. It's powerful and makes work easier!!", TP(5, "21 Sep 2026"))}
+</div>
+
+<div class="feat">
+<h3 id="f-tight">Gets Where Big Blowers Can't</h3>
+${fig("/images/gs/tight-places.webp", "The small red blower aimed into a dusty sliding-window track beside a houseplant on the sill", 1200, 670)}
+<p>The brand says the compact size and precision nozzle make it “useful for jobs full-size blowers can't handle.” That means gutters, mirror housings, window tracks and the gap behind the workbench.</p>
+${q("Purchased two blowers and was so pleased with them I purchased three more for family Christmas presents. So much better than the large blowers for getting into high or tight places. Recommend them highly.", TP(5, "Sep 2026"))}
+</div>
+
+<div class="feat">
+<h3 id="f-carry">Easy to Carry</h3>
+${fig("/images/gs/in-hand.webp", "A hand holding the WOODRANGER blower by its black anti-slip grip against a plain light background", 1174, 660)}
+<p>2.1 pounds with an anti-slip grip, built for one hand. The brand says it's made “for comfortable, one-handed use so you can clean up without arm or back pain.”</p>
+${q("The blower is light enough for me to use with the arthritis in my thumb. My husband has two other blowers, large ones, and he was delighted to see how strong this blower is and has been using it out in the yard. The blower lives up to all the praise folk are giving to it! Thanks!", TP(5, "Sep 2026"))}
+</div>
+
+<div class="feat">
+<h3 id="f-battery">Fast-Charging Battery</h3>
+${fig("/images/gs/battery.webp", "The blower's black-and-red 24V lithium battery pack and charging cable on a wooden workbench", 1200, 670)}
+<p>A full charge in under an hour and about 30 minutes of run time. The brand says that's “enough for a full driveway, patio, or garage in one session.” Plug it in at lunch and it's ready again.</p>
+${q("Super happy. This thing is a little powerhouse with great battery life. Def five star and worth the money", TP(5, "21 Sep 2026"))}
+</div>
+
+<div class="dpanel">
+<h2 id="squeeze">Squeeze Harder, It Blows Harder</h2>
+<div class="dp-grid">
+<div>
+<p>The grip is shaped for one hand and has an anti-slip finish. The 24-volt battery slides into the base of the handle, so there's no cord trailing behind you and nothing to start.</p>
+<p>The trigger works like the gas pedal in my truck. Ease in for a soft breeze over a keyboard. Press all the way down for leaves on the driveway. The air follows your finger.</p>
+</div>
+<div>
+${fig("/images/gs/diagram.webp", "The red WOODRANGER blower standing upright on a dark background", 1200, 670)}
+<ol class="callouts">
+<li>1600W brushless motor</li>
+<li>Pressure-sensitive trigger</li>
+<li>Anti-slip grip</li>
+<li>24V battery · full charge under an hour</li>
+</ol>
+</div>
+</div>
+</div>
+
+<h2 id="specs">Technical Specifications</h2>
+<p>Here's what's under the hood, straight from the brand's spec sheet:</p>
+<div class="tblwrap"><table class="spec">
+<caption class="sr-only">WOODRANGER Power Leaf Blower specifications</caption>
+<tbody>
+<tr><th scope="row">Motor</th><td>1,600W brushless</td></tr>
+<tr><th scope="row">Motor speed</th><td>Up to 55,000 RPM</td></tr>
+<tr><th scope="row">Battery</th><td>24V lithium, rechargeable</td></tr>
+<tr><th scope="row">Charge time</th><td>Under an hour</td></tr>
+<tr><th scope="row">Run time</th><td>About 30 minutes (“enough for a full driveway, patio, or garage in one session”)</td></tr>
+<tr><th scope="row">Weight</th><td>2.1 lb</td></tr>
+<tr><th scope="row">Housing</th><td>Durable ABS plastic</td></tr>
+<tr><th scope="row">Trigger</th><td>Pressure-sensitive, multi-speed</td></tr>
+<tr><th scope="row">In the box</th><td>1 blower, 1 battery, 1 charging cable</td></tr>
+<tr><th scope="row">Use</th><td>Indoors and out: yard, driveway, patio, garage, car, computers</td></tr>
+<tr><th scope="row">Ships from</th><td>Ohio, USA (2-3 day shipping)</td></tr>
+<tr><th scope="row">Guarantee</th><td>90-day money-back</td></tr>
+</tbody></table></div>
+
+${dcard("cta4", `<p class="dc-h">WOODRANGER Power Leaf Blower</p><p>No gas. No cord. No pull-start. Just squeeze.</p>`, "Check Availability &amp; Save 50% →", "Official site · Ships from Ohio · 90-day money-back guarantee")}
+
+<h2 id="reviews">What Real Buyers Are Saying</h2>
+<p>Here's what other buyers wrote on Trustpilot, word for word (trims marked …):</p>
+<div class="rgrid">
+${rcard("Easier than a full-size blower", "…I have use it a few times to blow off the carport it worked well and is easier to handle than the full size leaf blower. I am in my 70's so definitely being smaller and lighter is a big plus.", 5, "18 Sep 2026")}
+${rcard("His old one didn't have the power", "This was an easy choice for my husband. He had complained of his old one just not producing much power so I gifted him this powerful leaf + blower. He absolutely loves it!", 5, "Sep 2026")}
+${rcard("78 and doing her own deck again", "This hand held unit is so easy and comfortable to use. I am a 78 year old widow with arthritis and thought I'd never be able to blow out my garage or remove debris from my deck again. But I can easily do both with a single charge from this Woodranger tool. I cannot thank you enough!!", 5, "Sep 2026")}
+${rcard("84 and keeping the porch clear", "Light weight, powerful, easy for this 84 year old to keep backyard, front porch areas easy to keep leaf and dust free. I love it…!", 5, "16 Sep 2026")}
+${rcard("Strong, and light", "The blower works well, strong blow. What I like most is that it is light.", 5, "21 Sep 2026")}
+${rcard("Small size, real power", "Surprisingly powerful leaf/debris blower.", 5, "16 Sep 2026")}
+${rcard("Is it loud? Yes.", "Powerful for such a small blower. I like the feel, and how it works, but I suggest ear plugs while using because it does have a loud, high pitched whine when using.", 4, "16 Sep 2026")}
+${rcard("Helping out from a mobility chair", "This is a great lil blower. It does a beautiful job blowing leaves off my handicap ramp and blacktop. I can sit in my handicapped mobility chair and still be able to help get the outside maintenance done.", 5, "17 Sep 2026")}
+</div>
+<p>Not every review is a love letter. One buyer says a charge runs closer to 20 minutes, and several say the high-pitched whine is loud. But read enough of them and two words keep showing up together: <em>light</em> and <em>powerful</em>.</p>
+
+<h2 id="how-to-get">How to Get the WOODRANGER Power Leaf Blower</h2>
+<p>Right now the brand is running its 50% price as a “Limited-Time Offer.” On the ${tlink("cta5", "official site")} the blower shows at <strong>$69.99, marked 50% off $139.98.</strong></p>
+<p>Put that next to what the alternatives cost. The brand puts a decent gas blower at $200 to $400, before fuel, oil and tune-ups. A yard service, it says, runs $50 to $100 a visit. At $69.99, the WOODRANGER costs about what one of those visits does, and you own it for good.</p>
+<p>There are 2-packs and 3-packs, too. I went back for a second one. It lives in Danny's truck now.</p>
+<p>It ships from Ohio, with 2-3 day shipping. And the brand gives you 90 days to try it at home. Use it on your own driveway, your own bench, your own truck. If you aren't “completely blown away by the power and convenience,” the brand says, “we'll refund every penny.” Order from the official site so that guarantee is the brand's.</p>
+<p>The brand says the 50% runs “while supplies last.” It doesn't say how long that is, and the leaves are coming down now.</p>
+<p>Me? My Saturdays start with coffee now, not a pull cord.</p>
+${dcard("cta6", `<p class="dc-h">🎯 Ditch the pull cord, the gas can and the shop broom.</p>`, "Get WOODRANGER at 50% Off →", "Official site · Ships from Ohio · 90-day money-back guarantee", "")}
+`;
+
+const disclosure = `<p>Story dramatized.</p>`;
+---
+<AdvertorialPage
+  slimFooter
+  cpvRedirect
+  title="I Bought a 2-Pound Blower on a Whim. Now It's the Most-Used Tool in My Garage | The Life Insider"
+  description="Tom, 58, figured a 2.1-pound cordless blower had to be a toy. Two weeks later it had replaced four tools in his garage, and his gas blower was sold on Facebook Marketplace."
+  cpvCampaign={CPV_CAMPAIGN}
+  cpvLp={CPV_LP}
+  topTag="Advertorial"
+  kicker="Home & Garage"
+  publishedDate="October 13, 2026"
+  atf={atf}
+  byline={{ name: "The Life Insider", role: "Home & Garage", readTime: "9-minute read" }}
+  lead={lead}
+  body={body}
+  sticky={{ name: "WOODRANGER", image: "/images/wr/product-50off-card.webp", url: LINK, kicker: "50% off on the official site", buttonText: "Check Availability", ctaId: "sticky", startAt: "different" }}
+  disclosure={disclosure}
+/>
