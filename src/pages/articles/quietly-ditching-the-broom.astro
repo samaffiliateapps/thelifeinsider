@@ -19,6 +19,7 @@
      native traffic OK for the offer on Taboola. Taboola {click_id} passthrough is set in the CPV campaign, not here. */
 import AdvertorialPage from "../../layouts/AdvertorialPage.astro";
 import "../../styles/wr-broom.css";
+import { NOTICE_STANDARD } from "../../data/legal";
 
 // TODO(Sam): create the Taboola CPV One campaign (offer URL https://offer.woodrangertools.com/leafblower/landing with your
 // AdsBranded link params; tracking domain track.thelifeinsider.com; Direct Redirect; pass Taboola {click_id} per
@@ -276,4 +277,5 @@ const disclosure = ``;
   ps={ps}
   sticky={{ name: "WOODRANGER blower", image: "/images/wr/product-50off-card.webp", url: LINK, kicker: "50% off on the official site", buttonText: "Check if 50% off is still available", ctaId: "sticky", startPct: 50 }}
   disclosure={disclosure}
+  footerNotice={NOTICE_STANDARD}
 />

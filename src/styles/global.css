@@ -663,3 +663,7 @@ body.has-sticky-cta .slim-footer { padding-bottom: 96px; }
 
 /* Inline demo clips on advertorials (13 Oct 2026) */
 figure.vid video { width: 100%; height: auto; display: block; border-radius: 6px; background: #eee; }
+
+/* Footer legal notice on paid advertorials (13 Oct 2026) */
+.slim-footer .legal { text-align: left; font-size: 0.72rem; line-height: 1.5; margin: 0 auto 14px; max-width: 760px; }
+.slim-footer .legal p { margin: 0 0 8px; }

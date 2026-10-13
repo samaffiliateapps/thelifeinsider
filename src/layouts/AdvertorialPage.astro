@@ -36,6 +36,7 @@ export interface Props {
      any text (e.g. "Advertorial") = a thin label bar at the very top of the page, above the logo (native/Taboola). */
   topTag?: string;
   slimFooter?: boolean;  // one-line legal footer instead of the site footer (paid landers)
+  footerNotice?: string;  // html legal block in the footer (src/data/legal.ts)
   crumb?: string;          // html breadcrumb line under the masthead, e.g. "Home › Home & Yard › Outdoor Tools"
 }
 const p = Astro.props;
@@ -44,7 +45,7 @@ const A = p.atf.a;
 const fixedDate = !!p.publishedDate;
 const legacyTag = p.topTag === undefined;
 ---
-<Base title={p.title} description={p.description} minimal metaPixel={p.metaPixel} slimFooter={p.slimFooter}>
+<Base title={p.title} description={p.description} minimal metaPixel={p.metaPixel} slimFooter={p.slimFooter} footerNotice={p.footerNotice}>
   {p.topTag && <div class="adv-toptag" slot="top">{p.topTag}</div>}
   <article class="adv" id="adv" data-variant="a">
     <div class="wrap">

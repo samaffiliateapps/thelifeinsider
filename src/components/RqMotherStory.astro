@@ -19,6 +19,7 @@
    - Approve the 8 brand-published quotes for Taboola (or cut to Derek T. + Sophia W.).
    - CDC + NEMSIS/JAMA links for Taboola review; check LifeVac's US$69.95 on publish day. */
 import AdvertorialPage from "../layouts/AdvertorialPage.astro";
+import { NOTICE_HEALTH } from "../data/legal";
 import "../styles/wr-broom.css";
 import "../styles/native-story.css";
 
@@ -108,7 +109,7 @@ const body = `
 <p>Then I looked around my house.</p>
 <p>A smoke detector in every bedroom. A fire extinguisher under the sink. Outlet covers. Cabinet locks. A gate on the stairs.</p>
 <p>For choking, we had nothing. Not one thing.</p>
-<p>Back blows and the Heimlich are still step one. Always. Call 911 and do them first. But they rely on things you can't control in a panic: how strong you are, where your hands land, how big the person is, and whether your arms stop shaking.</p>
+<p>Always call 911. Back blows and the Heimlich are still step one. But they rely on things you can't control in a panic: how strong you are, where your hands land, how big the person is, and whether your arms stop shaking.</p>
 <p>I wanted something for the moment step one isn't working.</p>
 <p>It turns out I wasn't the only parent awake at 2 a.m. These reviews are posted on the ResQVac site, the device I ended up buying:</p>
 ${rv("I bought one after hearing about a neighbor who used it on their toddler. I pray I never need it. But just having it in the kitchen drawer gives me peace of mind.", "Lauren P., mom of two")}
@@ -191,7 +192,7 @@ ${fig("/images/rq/grandma-dinner.webp", "A grandmother laughing with her toddler
 <h3>Won't it push the food deeper?</h3>
 <p>No. That's the whole point of the One-Way Pull: the suction pulls the blockage out without pushing it further in, and the clear valve lets you see it come out.</p>
 <h3>Does it replace the Heimlich?</h3>
-<p>No. You call 911 and do back blows and abdominal thrusts first. ResQVac is what you reach for if they aren't working.</p>
+<p>No. Always call 911, and do back blows and abdominal thrusts. ResQVac is what you reach for if they aren't working.</p>
 <h3>How fast does it ship?</h3>
 <p>It ships within 48 business hours. Standard delivery is usually 3 to 5 days.</p>
 </div>
@@ -253,6 +254,7 @@ const ps = `<p><strong>P.S.</strong> My mom's was the first one we set up. She's
 const infoStrip = `<b>Did you know?</b> Choking is the 4th leading cause of accidental injury death in the U.S. (National Safety Council)`;
 ---
 <AdvertorialPage
+  footerNotice={NOTICE_HEALTH}
   slimFooter
   cpvRedirect={!meta}
   title="I Almost Lost My Son in Seconds. The Heimlich Didn't Work, Three Times | The Life Insider"

@@ -18,6 +18,7 @@
 import AdvertorialPage from "../../layouts/AdvertorialPage.astro";
 import "../../styles/wr-broom.css";
 import "../../styles/native-story.css";
+import { NOTICE_STANDARD } from "../../data/legal";
 
 // TODO(Sam): create the Taboola CPV One campaign for this rip (offer https://offer.woodrangertools.com/leafblower/landing with
 // your AdsBranded link, offer 1001, &sub1={!subid!}; tracking domain track.thelifeinsider.com; Direct Redirect; Taboola
@@ -253,7 +254,7 @@ ${rcard("Helping out from a mobility chair", "This is a great lil blower. It doe
 ${dcard("cta6", `<p class="dc-h">🎯 Ditch the pull cord, the gas can and the shop broom.</p>`, "Get WOODRANGER at 50% Off →", "Official site · Ships from Ohio · 90-day money-back guarantee", "")}
 `;
 
-const disclosure = `<p>Story dramatized.</p>`;
+const disclosure = `<p></p>`.slice(0, 0); // the footer notice (src/data/legal.ts) carries the disclosure; this literal keeps Astro's frontmatter scanner in sync (it fails without a closing tag here)
 ---
 <AdvertorialPage
   slimFooter
@@ -271,4 +272,5 @@ const disclosure = `<p>Story dramatized.</p>`;
   body={body}
   sticky={{ name: "WOODRANGER", image: "/images/wr/product-50off-card.webp", url: LINK, kicker: "50% off on the official site", buttonText: "Check Availability", ctaId: "sticky", startAt: "different" }}
   disclosure={disclosure}
+  footerNotice={NOTICE_STANDARD}
 />

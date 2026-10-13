@@ -17,6 +17,7 @@
    - Publish-day price check: US$69.99 / US$139.98 on the interstitial AND at checkout. AM: guarantee length (90 vs 30). */
 import AdvertorialPage from "../../layouts/AdvertorialPage.astro";
 import "../../styles/wr-broom.css";
+import { NOTICE_STANDARD } from "../../data/legal";
 
 // TODO(Sam): create the CPV One campaign "Meta - WR Broom C" (offer URL https://offer.woodrangertools.com/leafblower/landing
 // with your AdsBranded link; tracking domain track.thelifeinsider.com; Direct Redirect). Then put its campaign ID here and
@@ -214,4 +215,5 @@ const disclosure = ``;
   ps={ps}
   sticky={{ name: "WOODRANGER Power Leaf Blower", image: "/images/wr/product-50off-card.webp", url: LINK, kicker: "50% off today on the official site", buttonText: "50% Off · Check Availability", ctaId: "sticky", startPct: 50 }}
   disclosure={disclosure}
+  footerNotice={NOTICE_STANDARD}
 />
