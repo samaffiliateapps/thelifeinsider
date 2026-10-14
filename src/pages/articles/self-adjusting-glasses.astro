@@ -1,0 +1,326 @@
+---
+/* BLUELUME NATIVE RIP (Taboola, US desktop first): "5 warning signs" — built 14 Oct 2026 by lander-builder.
+   NOT LIVE until Sam approves. Do not push (push to main = live deploy).
+   Copy (source of truth): advertorial-system/offers/bluelume/pages/native-rip-visionpro-2026-10-14.md,
+   section "PAGE COPY (US, Taboola desktop)", rendered verbatim (H1, deck, Paul K. pull-quote, qualifiers, 5 signs,
+   villain, origin, Ron + wife story cards, failed solutions, narrator, product + check list, comparison table,
+   David M. + Greg H. cards, timeline, imagine, catch, offer, guarantee, close, CTA 1, update/note, badges, CTAs 2-4).
+   Layout 1:1 with the VisionPro adv1w winner (clickcraft): navy brand bar, no in-body links before CTA 1 (~91%),
+   CTAs 2-4 stacked after the update bar. The phone-only sticky bar unlocks only when CTA 1 reaches the screen.
+   Taboola pattern (as blower-on-a-whim): cpvRedirect, thin "Advertorial" label at the very top, fixed publish date,
+   NO Meta pixel, NO fbCapi, slim footer + NOTICE_STANDARD with one vision line. No disclosure lines in the body.
+   Images: public/images/bl/bl-01 … bl-14 = [IMG n] slots (IMG 13 price badge + IMG 15 badge strip are HTML/CSS).
+   Look: src/styles/bluelume-native.css.
+
+   BEFORE PUBLISH (Sam), from the copy file's blockers/claims list:
+   - Create the Taboola CPV One campaign and put its ID in CPV_CAMPAIGN (see below).
+   - Publish-day check on the offer page: US$39.99 / US$79.98, 90-day guarantee, "Over 217,013 sold", BF26 3-pack 55%.
+   - Star ratings on the David M. / Greg H. reviews: keep ★★★★★ only if the merchant page shows 5 stars for them. */
+import AdvertorialPage from "../../layouts/AdvertorialPage.astro";
+import "../../styles/bluelume-native.css";
+import { NOTICE_STANDARD } from "../../data/legal";
+
+// TODO(Sam): the Taboola CPV One campaign for BlueLume does not exist yet. Create it (offer = the AdsBranded 1104 entry
+// page with &sub1={!subid!}; tracking domain track.thelifeinsider.com; Direct Redirect; Taboola {click_id} in the
+// campaign tracking_code, never in the item URL), then put its campaign ID here.
+// "TBD" = placeholder: NO traffic until it is real. (With a placeholder the tracker's cookie-lock fix would clear a
+// real campaign's cpvlab cookies, so base2.php could not resolve the offer.)
+const CPV_CAMPAIGN = "26"; // CPV One "Taboola - BlueLume US" (14 Oct 2026)
+const CPV_LP = "1";
+
+const LINK = "https://track.thelifeinsider.com/base2.php";
+const A = 'href="' + LINK + '" rel="sponsored nofollow noopener" target="_blank"';
+
+// Helpers use string concatenation (no nested template literals: the Astro frontmatter scanner trips on them).
+const btn = (pos: string, label: string, id = "") =>
+  '<div class="cta"' + (id ? ' id="' + id + '"' : "") + '><a class="btn" data-cta="' + pos + '" ' + A + ">" + label + "</a></div>";
+const img = (n: string, alt: string, w: number, h: number) =>
+  '<figure><img src="/images/bl/' + n + '" alt="' + alt + '" width="' + w + '" height="' + h + '" loading="lazy" decoding="async"></figure>';
+const story = (n: string, alt: string, text: string) =>
+  '<figure class="story"><img src="/images/bl/' + n + '" alt="' + alt + '" width="1200" height="800" loading="lazy" decoding="async"><figcaption>' + text + "</figcaption></figure>";
+const review = (ini: string, title: string, text: string, who: string) =>
+  '<div class="rv"><span class="ini" aria-hidden="true">' + ini + '</span><div><p class="rv-t">' + title + "</p><p>" + text + '</p><span class="who">' + who + ' <span class="stars" aria-label="5 out of 5 stars">★★★★★</span></span></div></div>';
+
+// Comparison table. Cell codes: "✓" = tick only; "ok:<text>" = tick + text; "no:<text>" = cross + text; plain = text only.
+const cell = (c: string, cls: string) => {
+  if (c === "✓") return '<td class="' + cls + '"><span class="ok solo" aria-label="Yes"></span></td>';
+  if (c.indexOf("ok:") === 0) return '<td class="' + cls + '"><span class="ok"></span>' + c.slice(3) + "</td>";
+  if (c.indexOf("no:") === 0) return '<td class="' + cls + '"><span class="no"></span>' + c.slice(3) + "</td>";
+  return '<td class="' + cls + '">' + c + "</td>";
+};
+const VS_ROWS: [string, string[]][] = [
+  ["Near, middle AND far in one pair", ["✓", "no:Chin-tilting zones", "no:One distance only", "no:No middle"]],
+  ["Works with your eyes, not against them", ["✓", "no:Head-tilt all day", "no:Blur when you look up", "no:Line jump"]],
+  ["Darkens in sunlight", ["✓", "no:Extra cost", "no:No", "no:No"]],
+  ["Blue light filtering", ["✓", "no:Extra cost", "no:No", "no:No"]],
+  ["Replaces your sunglasses", ["✓", "no:No", "no:No", "no:No"]],
+  ["Under one ounce", ["✓", "no:Often heavier", "✓", "no:Often heavier"]],
+  ["Built for bumps and drops", ["✓", "no:Repair bills", "no:Snap in a pocket", "no:Repair bills"]],
+  ["No appointment to order", ["✓", "no:Exam + fitting", "✓", "no:Exam + fitting"]],
+  ["Price", ["<b>$39.99</b>", "$400-$800", "$20-$30 a pair, for every room", "$200-$500"]],
+  ["Money-back guarantee", ["ok:90 days", "no:No refunds on custom lenses", "no:No", "no:No refunds on custom lenses"]],
+];
+const vsTable = () => {
+  let rows = "";
+  VS_ROWS.forEach((r, i) => {
+    const alt = i % 2 === 0 ? ' class="alt"' : "";
+    rows += '<tr class="rl' + (i % 2 === 0 ? " alt" : "") + '"><th colspan="4" scope="colgroup">' + r[0] + "</th></tr>";
+    rows += "<tr" + alt + '><th scope="row">' + r[0] + "</th>" + r[1].map((c, j) => cell(c, j === 0 ? "blc" : "")).join("") + "</tr>";
+  });
+  return '<div class="vswrap"><table class="vs"><caption class="sr-only">BlueLume vs. progressives, reading glasses and bifocals</caption>' +
+    '<thead><tr><th scope="col"><span class="sr-only">Feature</span></th><th scope="col" class="blc">BlueLume</th><th scope="col">Progressives</th><th scope="col">Reading Glasses</th><th scope="col">Bifocals</th></tr></thead>' +
+    "<tbody>" + rows + "</tbody></table></div>";
+};
+
+// Badge strip (IMG 15): seals in HTML/CSS, labels = the copy's line "90-Day Money-Back Guarantee · Guaranteed Safe And Secure Checkout · Express Shipping Available".
+const SVG_LOCK = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h1zm2 0h6V7a3 3 0 0 0-6 0v3zm3 4a1.5 1.5 0 0 0-.8 2.8V18h1.6v-1.2A1.5 1.5 0 0 0 12 14z"/></svg>';
+const SVG_TRUCK = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2 6a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v2h3.4a1 1 0 0 1 .8.4l2.6 3.4a1 1 0 0 1 .2.6V16a1 1 0 0 1-1 1h-1.1a2.5 2.5 0 0 1-4.8 0H9.9a2.5 2.5 0 0 1-4.8 0H3a1 1 0 0 1-1-1V6zm13 4v3h4.6l-2.3-3H15zM7.5 15.8a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8zm9.5 0a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8z"/></svg>';
+const badges =
+  '<div class="badges">' +
+  '<div><div class="seal"><span class="n">90<small>DAY</small></span></div><span class="bl-lbl">90-Day Money-Back Guarantee</span></div>' +
+  '<div><div class="seal">' + SVG_LOCK + '</div><span class="bl-lbl">Guaranteed Safe And Secure Checkout</span></div>' +
+  '<div><div class="seal">' + SVG_TRUCK + '</div><span class="bl-lbl">Express Shipping Available</span></div>' +
+  "</div>";
+
+const CTA_APPLY = "Apply 50% Discount &amp; Check Availability ›";
+const TODAY = "October 14, 2026";
+
+const atf = {
+  a: {
+    h1: "The Hidden Reason Your Vision Keeps Failing You Has Nothing To Do With Your Age… It's Sitting On Your Nose Right Now",
+    sub: "<b>5 Warning Signs</b> Your Glasses Are Quietly Working Against Your Eyes, And The Self-Adjusting Lens Built By Aerospace And Medical Optics Engineers To Replace Every Pair You Own",
+    hero: {
+      type: "img" as const,
+      src: "/images/bl/bl-01-newspaper-split.webp",
+      alt: "Split view of a man reading a newspaper: the page is blurred on the left half and razor-sharp on the right half",
+      width: 1200, height: 746,
+    },
+  },
+};
+
+const lead = `
+<blockquote class="pq"><p class="pq-t">"I No Longer Carry Two Pairs"</p><p>"I used to carry two pairs everywhere. One for reading and another for driving. Now I wear the same pair throughout the day and switch between near and far without changing glasses."</p><cite>— Paul K., 58, BlueLume customer</cite></blockquote>
+<div class="qual">
+<p>Do you hold restaurant menus at arm's length and pray nobody notices?</p>
+<p>Do you own three pairs of glasses (readers, distance, sunglasses) and still never have the right one on?</p>
+<p>Do you keep buying "stronger" readers and wonder when it will ever end?</p>
+<p>Do you dig for your sunglasses every single time you step outside?</p>
+</div>
+`;
+
+const body = `
+<h2 id="focus-fatigue">It has a name: Focus Fatigue. And the glasses on your face are feeding it.</h2>
+<p>Most people think blurry menus and tired eyes are just part of getting older.</p>
+<p>Nothing you can do. Buy another pair. Move on.</p>
+<p>But what if your age isn't the real problem at all?</p>
+<p>What if the glasses on your face right now are the real reason everything keeps going blurry?</p>
+<p>In this article, you'll see the five warning signs that your glasses are fighting your eyes from morning to night, and why nobody at the optical counter will ever tell you.</p>
+<p>Then you'll meet the self-adjusting lens, built by engineers from aerospace, that lets people over 50 see near, middle and far through ONE pair. No switching. No squinting. No three-pair juggling act.</p>
+<p>Spot these signs and you can break the cycle today. And take your eyes back.</p>
+
+<h3 id="sign-1">1. You Keep Buying "Stronger" Glasses</h3>
+${img("bl-02-readers-stronger.webp", "Three pairs of black reading glasses lined up on a bathroom counter with +1.25, +1.75 and +2.25 strength tags", 1200, 800)}
+<p>This is the number one sign your glasses are working against you.</p>
+<p>Inside your eye is a tiny ring of muscle called the ciliary muscle. It has one job: change your focus. Close up. Far away. Everything in between.</p>
+<p>Your eyes never stop shifting. Year after year.</p>
+<p>But a fixed lens never changes. It's ground for ONE distance, on ONE day.</p>
+<p>So the moment your eyes shift, your glasses are out of date. Your focusing muscle strains to cover the gap. You squint. You tire. You go back. You pay for "stronger."</p>
+<p>+1.25 this year. +1.75 next. +2.25 after that.</p>
+<p>That's not your age. That's a treadmill. And every fixed lens you buy keeps you on it.</p>
+
+<h3 id="sign-2">2. You Own Three Pairs And Never Have The Right One On</h3>
+${img("bl-03-three-pairs.webp", "Four scenes: readers on a nightstand, distance glasses on a car dashboard, sunglasses on a hat, and a man patting an empty shirt pocket", 1200, 800)}
+<p>Readers for the menu. Distance glasses for the road. Sunglasses for outside. Maybe "computer glasses" for the screen.</p>
+<p>One on your nose. One on your head. One in the car. None where you need it.</p>
+<p>If you're switching between two, three or four pairs just to get through a normal day, Focus Fatigue has already taken over.</p>
+<p>Your eyes jump from near to far hundreds of times a day without you even noticing. A fixed lens can't follow them.</p>
+<p>So every glance up from the page is a blur. And every blur is another pair to dig for.</p>
+<p>One fixed pair can't do what your eyes need. So the industry sells you three.</p>
+
+<h3 id="sign-3">3. Headaches By Lunch. Burning Eyes By Dinner.</h3>
+${img("bl-04-headache-laptop.webp", "A man in his sixties at a laptop pinching the bridge of his nose, reading glasses pushed up on his forehead", 1200, 800)}
+<p>Readers blur the second you look up. So you peer over the top of them. You tilt your head back. You lean in to the screen.</p>
+<p>Your focusing muscle strains against a lens set for the wrong distance. All. Day. Long.</p>
+<p>Then the screen piles on. Hours of blue light, straight into eyes that are already worn out.</p>
+<p>That strain turns into a throbbing ache behind the eyes. Usually by early afternoon.</p>
+<p>Most people blame screen time. Or stress. Or not drinking enough water.</p>
+<p>It's none of those. It's your glasses forcing your eyes to fight them.</p>
+
+<h3 id="sign-4">4. You've Quietly Stopped Driving At Night</h3>
+${img("bl-05-night-driving.webp", "View through a car windshield at night: oncoming headlights flaring and a blurry green exit sign", 1200, 800)}
+<p>Night driving is where the three-pair trap turns dangerous.</p>
+<p>Wear your readers and the road is a smear. Wear your distance glasses and you can't read the dashboard or the GPS.</p>
+<p>So you glance down. Glance up. Squint at the exit sign until you're right on top of it. At 60 miles an hour.</p>
+<p>Headlights flare. Street signs vanish. You start skipping the highway after dark.</p>
+<p>Then you start asking someone else to drive.</p>
+<p>That isn't old age. That's a lens that works at one distance, inside a car that needs three.</p>
+
+<h3 id="sign-5">5. You've Accepted Three Pairs, $800 A Year And Blurry Afternoons As "Normal"</h3>
+${img("bl-06-glasses-drawer.webp", "A wooden drawer stuffed with old pairs of glasses, glasses cases and receipts", 1200, 800)}
+<p>This is the most dangerous sign of all.</p>
+<p>You've been told "it's just your age" so many times that you've stopped questioning it.</p>
+<p>You expect stronger readers every year. You expect to drop six to eight hundred dollars on progressives, frames and prescription sunglasses.</p>
+<p>You expect the headaches, the switching, the squinting.</p>
+<p>You've accepted a lifetime of managed blur. That's Focus Fatigue winning.</p>
+<p>But here's what nobody at the optical counter will ever tell you.</p>
+<p>Your vision doesn't have to keep failing you.</p>
+<p>Your eyes don't need three lenses fighting them. They need one lens that adjusts with them.</p>
+<p>And it's already been built. Just not by anyone selling you $800 progressives.</p>
+${story("bl-07-ron-menu.webp", "A smiling man in his sixties at a restaurant table, reading a menu held at normal reading distance", "My brother-in-law Ron, retired four years now, dropped close to eight hundred dollars last year: new progressives, prescription sunglasses and two drugstore readers. At Sunday lunch he borrowed my BlueLume pair to read the menu, looked up across the restaurant, and went quiet. He ordered his own before dessert came.")}
+
+<h2 id="business-model">If it's not your age, why do you keep paying for more glasses?</h2>
+<p>Because every fixed lens on the market is built to go out of date.</p>
+<p>The optical chain sells you a fixed lens. Your eyes shift. The lens doesn't. The strain comes back. You go back. You pay four, six, eight hundred dollars. You get a "stronger" lens that's out of date the next time your eyes shift.</p>
+<p>The optical industry has known this for decades.</p>
+<p>Your blurry afternoons aren't a medical condition. They're a business model.</p>
+<p>Every new prescription is a subscription you never signed up for.</p>
+<p>A customer who needs three pairs is worth three times as much.</p>
+<p>Focus Fatigue keeps you coming back.</p>
+<p>A customer who sees clearly with one pair is a customer they lose forever.</p>
+
+<h2 id="aerospace">The engineers who cracked this came from aerospace.</h2>
+${img("bl-08-cockpit.webp", "View from an airliner cockpit: instrument gauges in the foreground, the horizon above the clouds in the distance", 1200, 800)}
+<p>In a cockpit, nobody switches glasses.</p>
+<p>A pilot reads a gauge at arm's length, checks a screen, then scans miles to the horizon. In a single second. Over and over. For hours.</p>
+<p>One lens has to cover all three distances. No fumbling. No second pair. No room for blur.</p>
+<p>That's the world BlueLume's engineers come from: optical engineers with medical and aerospace backgrounds.</p>
+<p>They didn't build another fixed lens. They built one that works WITH your eyes instead of against them.</p>
+<p>Near. Intermediate. Distance. One lens. The Auto-Adjust Lens System.</p>
+<p>The optical chains could sell you a do-everything pair for under forty dollars. They don't.</p>
+<p>They sell it as "premium progressives" for eight hundred, then send you back for stronger ones.</p>
+<p>They chose the lens that keeps you coming back. Because the one that sets you free would cost them a customer for life.</p>
+${story("bl-09-wife-newspaper.webp", "A laughing woman of about sixty reading a newspaper in light-tinted glasses while her husband grins and points behind her", "My wife laughed when I ordered $39.99 glasses online. \"You get what you pay for,\" she said. Three days later she stole them to read the newspaper and never gave them back. I ordered a second pair. Hers.")}
+
+<h2 id="shelf">Everything on the shelf is built to fail you.</h2>
+${img("bl-10-optical-aisle.webp", "A confused older man standing between a drugstore reading-glasses rack and an optical-store wall of frames", 1200, 800)}
+<p>You've tried progressives. Four to eight hundred dollars for a lens ground to one prescription on one day. Tilt your chin down to read. Tilt it up to see the road. And the day your eyes change, you pay again. Sunglasses? Extra.</p>
+<p>You've tried reading glasses. They work at one distance. ONE. The second you look up from the page, the room turns to soup. So you buy a pair for every room. Then stronger ones next year.</p>
+<p>You've tried blue light glasses. They filter a screen. That's it. They don't help you read a menu. They don't help you see the road. They're a screen filter with a health label.</p>
+<p>You've tried bifocals. Two distances. Close and far. The middle (your dashboard, your laptop, the face across the table) is a blur. And that hard line across the lens isn't cosmetic. It's a wall your eyes slam into every time you look down.</p>
+<p>You've tried prescription sunglasses. Another one hundred fifty to three hundred dollars. Useless the moment you walk indoors. So you swap again.</p>
+<p>Every one of them does the same thing. It fixes one distance and abandons the rest. That's why you never stop buying.</p>
+<p>Readers, distance or sunglasses? Now there's a fourth option. One lens that covers near, middle AND far, filters blue light, AND darkens in the sun.</p>
+
+<h2 id="built">That's exactly what BlueLume's engineers built.</h2>
+<p>I'm 62. Until this spring I owned four pairs of glasses.</p>
+<p>I wore BlueLume for 30 days straight. The other four haven't left the drawer since.</p>
+<p>The headline on BlueLume's launch says it outright: "Doctors are calling adaptive lenses the next evolution in everyday glasses."</p>
+<p>After a month in them, I know why. And I know why no optical chain will ever stock them.</p>
+
+<h2 id="introducing" class="center">Introducing BlueLume: Self-Adjusting Glasses With The Auto-Adjust Lens System</h2>
+${img("bl-11-zone-labels-marble.webp", "BlueLume glasses on a dark reflective surface with yellow DISTANCE, INTERMEDIATE and NEAR labels on each lens", 1200, 670)}
+<ul class="checks">
+<li>Auto-Adjust Lens System: the lens focuses itself, near, intermediate AND distance</li>
+<li>Read the menu, look across the room: no switching pairs</li>
+<li>Works with your eyes instead of fighting them</li>
+<li>Photochromic lenses darken in sunlight and clear indoors</li>
+<li>Built-in blue light filtering for screens</li>
+<li>Under one ounce: you forget they're on</li>
+<li>Tough enough for everyday bumps and drops</li>
+<li>Replaces your readers, distance glasses AND sunglasses</li>
+<li>Built by optical engineers with medical and aerospace backgrounds</li>
+<li>Sold direct: zero optical-chain markup</li>
+<li>Over 217,013 pairs sold</li>
+</ul>
+
+<h2 id="versus">BlueLume vs. Everything Else:</h2>
+${vsTable()}
+
+<h2 id="reviews">What real buyers are saying about BlueLume:</h2>
+<div class="revs">
+${review("DM", '"No More Constantly Switching Glasses"', '"My vision has changed several times over the past few years, and I was tired of buying new glasses. I use these for reading, computer work, and looking across the room. The blue light filter has also made long screen sessions more comfortable."', "— David M., 44")}
+${review("GH", '"Better Than I Expected"', '"I was skeptical at first, but they have quickly become the glasses I wear most often. They are lightweight, comfortable, and automatically darken when I go outside. I no longer need separate reading glasses and sunglasses everywhere."', "— Greg H., 51")}
+</div>
+<hr>
+<p class="aside">As for me: four pairs of glasses used to live in four different rooms of my house. Now one pair lives on my face. My wife stole the second one. I'm ordering a third for the car.</p>
+
+<h2 id="expect">Here's what to expect:</h2>
+<div class="tl">
+<p><b>Day 1:</b> You put them on. Read your phone. Look up at the TV. Step outside and watch them darken. Walk back in and watch them clear. One pair. No switching. Whether you're 60 or 85, it adjusts to you.</p>
+<p><b>Week 1:</b> You realize you haven't reached for a second pair. Not once. The pat-your-pockets habit you've had for years just stops.</p>
+<p><b>Month 1:</b> No hunting for readers. No digging for sunglasses. Long screen sessions stop wearing you out. You start noticing things you'd stopped trying to see. The fine print on the pill bottle. Street signs from a block away. Faces across the room.</p>
+<p><b>Month 3:</b> You haven't bought a single new pair. Not readers. Not sunglasses. Not a four-hundred-dollar "upgrade."</p>
+<p><b>Month 6:</b> The optical chain mails you a reminder to come in for new frames. You toss it in the trash. One pair. Every distance. Six months and counting.</p>
+</div>
+
+<h2 id="imagine">Just imagine…</h2>
+${img("bl-12-just-imagine-grid.webp", "Six photos of a woman in her sixties wearing the glasses: reading a menu, driving, watching TV, reading the paper, holding a grandchild, relaxing on a sunny patio", 1200, 800)}
+<p>Reading every word on a restaurant menu without stretching your arm out like a trombone player…</p>
+<p>Glancing from the dashboard to the road and back again without ever touching your glasses…</p>
+<p>Waking up and putting on ONE pair that handles everything from the morning paper to the evening news…</p>
+<p>Never again walking out of an optical chain eight hundred dollars lighter with a lens that's out of date by next year…</p>
+<p>Reading a bedtime story to your grandchild, then watching them play across the yard, through the same pair…</p>
+<p>Stepping out into the sunshine without ever digging for your sunglasses again…</p>
+<p>That's what BlueLume does. Every day. One pair. No compromises.</p>
+
+<h2 id="catch">Now, there's one catch.</h2>
+<p>BlueLume isn't sold at LensCrafters. Not at Warby Parker. Not at Costco or Walmart Vision Center. Not at any optical chain.</p>
+<p>And it never will be. They can't afford to let you have it.</p>
+<p>Ask yourself: why would a chain stock a $39.99 pair that makes its $800 progressives, its $200 prescription sunglasses and its whole wall of readers completely pointless?</p>
+<p>That's why BlueLume is sold direct, online only. No middleman. No markup. That's how it costs $39.99 instead of $800.</p>
+<p>But selling direct means one warehouse and one stock pile.</p>
+<p>And right now demand is outrunning supply. Stock is already running low.</p>
+<p>When this batch is gone, the 50% discount goes with it.</p>
+
+<h2 id="offer">Right now, today only, BlueLume is 50% OFF.</h2>
+<div class="deal" role="img" aria-label="50% off: was $79.98, now $39.99"><div class="pct"><b>50%</b><span>OFF</span></div><div class="px"><span class="old">$79.98</span><span class="now">$39.99</span></div></div>
+<p>Was $79.98. Today: <strong>$39.99.</strong></p>
+<p>That's less than one eye-exam bill.</p>
+<p>Less than one pair of prescription sunglasses.</p>
+<p>And less than one-tenth of what you'd pay for a single pair of progressives.</p>
+
+<h2 id="guarantee">Every pair is backed by BlueLume's 90-Day Money-Back Guarantee.</h2>
+<p>That means you get 90 full days to wear BlueLume everywhere. Reading. Driving. Screens. Sunshine. Fine print. Everything.</p>
+<p>If it doesn't replace your readers, your distance pair and your sunglasses, you send it back and get every penny refunded.</p>
+<p>You've got nothing to lose and every distance to gain.</p>
+${img("bl-14b-clean-newspaper.webp", "BlueLume self-adjusting glasses resting on a folded newspaper beside a morning cup of coffee", 1200, 669)}
+
+<h2 id="ready">Are you ready to get started?</h2>
+<p>Because a few days from now, your BlueLume arrives at your door.</p>
+<p>Then get ready.</p>
+<p>Because as you put them on for the first time and look around the room…</p>
+<p>Don't be surprised when the fine print you'd given up on snaps into focus…</p>
+<p>When the TV across the room is suddenly sharp without leaning forward…</p>
+<p>When you read your phone, look out the window, and everything stays clear…</p>
+<p>When you step outside and the lenses darken all on their own…</p>
+<p>That's Focus Fatigue letting go. Your eyes working WITH a lens for the first time in years, instead of fighting one.</p>
+<p>And it only gets better from here.</p>
+<p>Your optical chain never told you about this.</p>
+<p>LensCrafters doesn't want you to know it exists.</p>
+<p>But over 217,013 people have already made the switch.</p>
+<p>Click the button below to lock in 50% off before midnight, or before today's stock runs out.</p>
+<p>You've spent enough on glasses that leave you blind at every distance but one.</p>
+<p>It's time for the one pair that works at all of them.</p>
+${btn("cta1", CTA_APPLY, "order")}
+<p class="upd"><mark><span class="red">UPDATE:</span> <span data-deal-date>${TODAY}</span>: Demand for BlueLume is surging and stock is running low. Today's 50% OFF ends at 11:59 PM tonight. Order now to lock in <span class="red">50% OFF + express shipping</span> before it's gone.</mark></p>
+<p>Lock in your order while today's price lasts: <strong>50% OFF + EXPRESS SHIPPING.</strong></p>
+<p class="note"><strong><span class="red">NOTE:</span> This deal is ONLY available on the official BlueLume website.</strong> Not in any store. Not in any optical chain. Order 3 pairs and the discount jumps to 55% OFF (Black Friday code BF26 applies automatically).</p>
+${badges}
+<div class="ctas">
+${btn("cta2", "Get 50% Off BlueLume Now ›")}
+</div>
+`;
+
+const VISION_LINE = "<p>This product is not a substitute for an eye examination or prescription eyewear. Consult an eye-care professional about any vision concern.</p>";
+const FOOTER_NOTICE = NOTICE_STANDARD + "\n" + VISION_LINE;
+
+const disclosure = `<p></p>`.slice(0, 0); // the footer notice carries the disclosure; this balanced <p> literal keeps Astro's frontmatter scanner in sync
+---
+<AdvertorialPage
+  slimFooter
+  cpvRedirect
+  title="The Hidden Reason Your Vision Keeps Failing You Has Nothing To Do With Your Age | The Life Insider"
+  description="5 warning signs your glasses are quietly working against your eyes, and the self-adjusting lens built to replace every pair you own."
+  cpvCampaign={CPV_CAMPAIGN}
+  cpvLp={CPV_LP}
+  topTag="Advertorial"
+  kicker="Health & Tech"
+  publishedDate={TODAY}
+  atf={atf}
+  byline={{ name: "The Life Insider", role: "Health & Tech" }}
+  lead={lead}
+  body={body}
+  sticky={{ name: "BlueLume", image: "/images/bl/bl-11-zone-labels-marble.webp", url: LINK, price: "$39.99", oldPrice: "$79.98", kicker: "50% off today", buttonText: "Apply 50% Discount", ctaId: "sticky", startAt: "order" }}
+  disclosure={disclosure}
+  footerNotice={FOOTER_NOTICE}
+/>
