@@ -53,10 +53,10 @@ const VS_ROWS: [string, string[]][] = [
   ["Works with your eyes, not against them", ["✓", "no:Head-tilt all day", "no:Blur when you look up", "no:Line jump"]],
   ["Darkens in sunlight", ["✓", "no:Extra cost", "no:No", "no:No"]],
   ["Blue light filtering", ["✓", "no:Extra cost", "no:No", "no:No"]],
-  ["Replaces your sunglasses", ["✓", "no:No", "no:No", "no:No"]],
+  ["Darkens outdoors like sunglasses", ["✓", "no:No", "no:No", "no:No"]],
   ["Under one ounce", ["✓", "no:Often heavier", "✓", "no:Often heavier"]],
   ["Built for bumps and drops", ["✓", "no:Repair bills", "no:Snap in a pocket", "no:Repair bills"]],
-  ["No appointment to order", ["✓", "no:Exam + fitting", "✓", "no:Exam + fitting"]],
+  ["Order online in minutes", ["✓", "no:Exam + fitting", "✓", "no:Exam + fitting"]],
   ["Price", ["<b>$39.99</b>", "$400-$800", "$20-$30 a pair, for every room", "$200-$500"]],
   ["Money-back guarantee", ["ok:90 days", "no:No refunds on custom lenses", "no:No", "no:No refunds on custom lenses"]],
 ];
@@ -87,8 +87,8 @@ const TODAY = "October 14, 2026";
 
 const atf = {
   a: {
-    h1: "The Hidden Reason Your Vision Keeps Failing You Has Nothing To Do With Your Age… It's Sitting On Your Nose Right Now",
-    sub: "<b>5 Warning Signs</b> Your Glasses Are Quietly Working Against Your Eyes, And The Self-Adjusting Lens Built By Aerospace And Medical Optics Engineers To Replace Every Pair You Own",
+    h1: "The Hidden Reason Your Glasses Keep Letting You Down… It's Sitting On Your Nose Right Now",
+    sub: "<b>5 Warning Signs</b> Your Glasses Are Quietly Working Against Your Eyes, And The Self-Adjusting Lens Built By Aerospace And Medical Optics Engineers So You Can See Near, Middle And Far Through One Pair",
     hero: {
       type: "img" as const,
       src: "/images/bl/bl-01-newspaper-split.webp",
@@ -112,11 +112,11 @@ const body = `
 <h2 id="focus-fatigue">It has a name: Focus Fatigue. And the glasses on your face are feeding it.</h2>
 <p>Most people think blurry menus and tired eyes are just part of getting older.</p>
 <p>Nothing you can do. Buy another pair. Move on.</p>
-<p>But what if your age isn't the real problem at all?</p>
+<p>But what if the real problem is the kind of lens you're wearing?</p>
 <p>What if the glasses on your face right now are the real reason everything keeps going blurry?</p>
 <p>In this article, you'll see the five warning signs that your glasses are fighting your eyes from morning to night, and why nobody at the optical counter will ever tell you.</p>
 <p>Then you'll meet the self-adjusting lens, built by engineers from aerospace, that lets people over 50 see near, middle and far through ONE pair. No switching. No squinting. No three-pair juggling act.</p>
-<p>Spot these signs and you can break the cycle today. And take your eyes back.</p>
+<p>Spot these signs and you can break the cycle today. And stop juggling glasses for good.</p>
 
 <h3 id="sign-1">1. You Keep Buying "Stronger" Glasses</h3>
 ${img("bl-02-readers-stronger.webp", "Three pairs of black reading glasses lined up on a bathroom counter with +1.25, +1.75 and +2.25 strength tags", 1200, 800)}
@@ -126,7 +126,7 @@ ${img("bl-02-readers-stronger.webp", "Three pairs of black reading glasses lined
 <p>But a fixed lens never changes. It's ground for ONE distance, on ONE day.</p>
 <p>So the moment your eyes shift, your glasses are out of date. Your focusing muscle strains to cover the gap. You squint. You tire. You go back. You pay for "stronger."</p>
 <p>+1.25 this year. +1.75 next. +2.25 after that.</p>
-<p>That's not your age. That's a treadmill. And every fixed lens you buy keeps you on it.</p>
+<p>That's a treadmill. And every fixed lens you buy keeps you on it.</p>
 
 <h3 id="sign-2">2. You Own Three Pairs And Never Have The Right One On</h3>
 ${img("bl-03-three-pairs.webp", "Four scenes: readers on a nightstand, distance glasses on a car dashboard, sunglasses on a hat, and a man patting an empty shirt pocket", 1200, 800)}
@@ -158,7 +158,7 @@ ${img("bl-05-night-driving.webp", "View through a car windshield at night: oncom
 <h3 id="sign-5">5. You've Accepted Three Pairs, $800 A Year And Blurry Afternoons As "Normal"</h3>
 ${img("bl-06-glasses-drawer.webp", "A wooden drawer stuffed with old pairs of glasses, glasses cases and receipts", 1200, 800)}
 <p>This is the most dangerous sign of all.</p>
-<p>You've been told "it's just your age" so many times that you've stopped questioning it.</p>
+<p>You've been told "you just need another pair" so many times that you've stopped questioning it.</p>
 <p>You expect stronger readers every year. You expect to drop six to eight hundred dollars on progressives, frames and prescription sunglasses.</p>
 <p>You expect the headaches, the switching, the squinting.</p>
 <p>You've accepted a lifetime of managed blur. That's Focus Fatigue winning.</p>
@@ -168,12 +168,12 @@ ${img("bl-06-glasses-drawer.webp", "A wooden drawer stuffed with old pairs of gl
 <p>And it's already been built. Just not by anyone selling you $800 progressives.</p>
 ${story("bl-07-ron-menu.webp", "A smiling man in his sixties at a restaurant table, reading a menu held at normal reading distance", "My brother-in-law Ron, retired four years now, dropped close to eight hundred dollars last year: new progressives, prescription sunglasses and two drugstore readers. At Sunday lunch he borrowed my BlueLume pair to read the menu, looked up across the restaurant, and went quiet. He ordered his own before dessert came.")}
 
-<h2 id="business-model">If it's not your age, why do you keep paying for more glasses?</h2>
+<h2 id="business-model">So why do you keep paying for more glasses?</h2>
 <p>Because every fixed lens on the market is built to go out of date.</p>
 <p>The optical chain sells you a fixed lens. Your eyes shift. The lens doesn't. The strain comes back. You go back. You pay four, six, eight hundred dollars. You get a "stronger" lens that's out of date the next time your eyes shift.</p>
 <p>The optical industry has known this for decades.</p>
 <p>Your blurry afternoons aren't a medical condition. They're a business model.</p>
-<p>Every new prescription is a subscription you never signed up for.</p>
+<p>Every extra pair is a subscription you never signed up for.</p>
 <p>A customer who needs three pairs is worth three times as much.</p>
 <p>Focus Fatigue keeps you coming back.</p>
 <p>A customer who sees clearly with one pair is a customer they lose forever.</p>
@@ -217,7 +217,7 @@ ${img("bl-11-zone-labels-marble.webp", "BlueLume glasses on a dark reflective su
 <li>Built-in blue light filtering for screens</li>
 <li>Under one ounce: you forget they're on</li>
 <li>Tough enough for everyday bumps and drops</li>
-<li>Replaces your readers, distance glasses AND sunglasses</li>
+<li>One pair for reading, distance AND sunshine</li>
 <li>Built by optical engineers with medical and aerospace backgrounds</li>
 <li>Sold direct: zero optical-chain markup</li>
 <li>Over 217,013 pairs sold</li>
@@ -236,11 +236,11 @@ ${review("GH", '"Better Than I Expected"', '"I was skeptical at first, but they 
 
 <h2 id="expect">Here's what to expect:</h2>
 <div class="tl">
-<p><b>Day 1:</b> You put them on. Read your phone. Look up at the TV. Step outside and watch them darken. Walk back in and watch them clear. One pair. No switching. Whether you're 60 or 85, it adjusts to you.</p>
+<p><b>Day 1:</b> You put them on. Read your phone. Look up at the TV. Step outside and watch them darken. Walk back in and watch them clear. One pair. No switching. Designed to adjust as your eyes move from near to far.</p>
 <p><b>Week 1:</b> You realize you haven't reached for a second pair. Not once. The pat-your-pockets habit you've had for years just stops.</p>
-<p><b>Month 1:</b> No hunting for readers. No digging for sunglasses. Long screen sessions stop wearing you out. You start noticing things you'd stopped trying to see. The fine print on the pill bottle. Street signs from a block away. Faces across the room.</p>
+<p><b>Month 1:</b> No hunting for readers. No digging for sunglasses. Long screen sessions feel easier. You start noticing things you'd stopped trying to see. The fine print on the pill bottle. Street signs from a block away. Faces across the room.</p>
 <p><b>Month 3:</b> You haven't bought a single new pair. Not readers. Not sunglasses. Not a four-hundred-dollar "upgrade."</p>
-<p><b>Month 6:</b> The optical chain mails you a reminder to come in for new frames. You toss it in the trash. One pair. Every distance. Six months and counting.</p>
+<p><b>Month 6:</b> Still one pair on your face. Reading, driving, screens, sunshine. Six months and counting.</p>
 </div>
 
 <h2 id="imagine">Just imagine…</h2>
@@ -256,7 +256,7 @@ ${img("bl-12-just-imagine-grid.webp", "Six photos of a woman in her sixties wear
 <h2 id="catch">Now, there's one catch.</h2>
 <p>BlueLume isn't sold at LensCrafters. Not at Warby Parker. Not at Costco or Walmart Vision Center. Not at any optical chain.</p>
 <p>And it never will be. They can't afford to let you have it.</p>
-<p>Ask yourself: why would a chain stock a $39.99 pair that makes its $800 progressives, its $200 prescription sunglasses and its whole wall of readers completely pointless?</p>
+<p>Ask yourself: why would a chain stock a $39.99 pair that does the job of its $800 progressives, its $200 prescription sunglasses and its whole wall of readers in one frame?</p>
 <p>That's why BlueLume is sold direct, online only. No middleman. No markup. That's how it costs $39.99 instead of $800.</p>
 <p>But selling direct means one warehouse and one stock pile.</p>
 <p>And right now demand is outrunning supply. Stock is already running low.</p>
@@ -271,7 +271,7 @@ ${img("bl-12-just-imagine-grid.webp", "Six photos of a woman in her sixties wear
 
 <h2 id="guarantee">Every pair is backed by BlueLume's 90-Day Money-Back Guarantee.</h2>
 <p>That means you get 90 full days to wear BlueLume everywhere. Reading. Driving. Screens. Sunshine. Fine print. Everything.</p>
-<p>If it doesn't replace your readers, your distance pair and your sunglasses, you send it back and get every penny refunded.</p>
+<p>If you're not thrilled with how it handles reading, distance and sunshine, send it back within 90 days and get every penny refunded.</p>
 <p>You've got nothing to lose and every distance to gain.</p>
 ${img("bl-14b-clean-newspaper.webp", "BlueLume self-adjusting glasses resting on a folded newspaper beside a morning cup of coffee", 1200, 669)}
 
@@ -283,13 +283,13 @@ ${img("bl-14b-clean-newspaper.webp", "BlueLume self-adjusting glasses resting on
 <p>When the TV across the room is suddenly sharp without leaning forward…</p>
 <p>When you read your phone, look out the window, and everything stays clear…</p>
 <p>When you step outside and the lenses darken all on their own…</p>
-<p>That's Focus Fatigue letting go. Your eyes working WITH a lens for the first time in years, instead of fighting one.</p>
+<p>That's what a lens built to work WITH your eyes feels like. For the first time in years, you're not fighting your glasses.</p>
 <p>And it only gets better from here.</p>
 <p>Your optical chain never told you about this.</p>
 <p>LensCrafters doesn't want you to know it exists.</p>
 <p>But over 217,013 people have already made the switch.</p>
 <p>Click the button below to lock in 50% off before midnight, or before today's stock runs out.</p>
-<p>You've spent enough on glasses that leave you blind at every distance but one.</p>
+<p>You've spent enough on glasses that only work at one distance.</p>
 <p>It's time for the one pair that works at all of them.</p>
 ${btn("cta1", CTA_APPLY, "order")}
 <p class="upd"><mark><span class="red">UPDATE:</span> <span data-deal-date>${TODAY}</span>: Demand for BlueLume is surging and stock is running low. Today's 50% OFF ends at 11:59 PM tonight. Order now to lock in <span class="red">50% OFF + express shipping</span> before it's gone.</mark></p>
@@ -309,8 +309,8 @@ const disclosure = `<p></p>`.slice(0, 0); // the footer notice carries the discl
 <AdvertorialPage
   slimFooter
   cpvRedirect
-  title="The Hidden Reason Your Vision Keeps Failing You Has Nothing To Do With Your Age | The Life Insider"
-  description="5 warning signs your glasses are quietly working against your eyes, and the self-adjusting lens built to replace every pair you own."
+  title="The Hidden Reason Your Glasses Keep Letting You Down | The Life Insider"
+  description="5 warning signs your glasses are quietly working against your eyes, and the self-adjusting glasses that see near, middle and far through one pair."
   cpvCampaign={CPV_CAMPAIGN}
   cpvLp={CPV_LP}
   topTag="Advertorial"
