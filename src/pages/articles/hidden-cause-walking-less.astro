@@ -1,0 +1,272 @@
+---
+/* BACK RESTORE · PAGE B (Meta): 1:1 rip of the SmoothSpine Outbrain "cln" patient story (tfbm-coc-adv2-ss-ot-cln-2.0), built 15 Oct 2026.
+   NOT LIVE until Sam approves. Copy (source of truth): advertorial-system/offers/back-restore/pages/fb-rip-B-smoothspine-cln-2026-10-15.md
+   Offer facts: advertorial-system/offers/back-restore/research/offer-facts-2026-10-15.md (prices = US checkout config 15 Oct).
+   Narrator (Diane Mercer) and family are invented lay characters, disclosed in the footer notice only (no top label: Meta lane).
+   The original's "my daughter's doctor" is removed (no invented clinician). Reviews: verbatim from the merchant (src/data/br.ts).
+   Lifestyle images are PLACEHOLDERS (/images/br/slot-b-*.webp, see pages/IMAGE-SLOTS.md); product shots are the merchant's photos.
+   CPV One: same campaign as page A ("Meta - Back Restore"), this page = LP slot 2. "TBD" = placeholder, no traffic until real. */
+import AdvertorialPage from "../../layouts/AdvertorialPage.astro";
+import "../../styles/wr-broom.css";
+import "../../styles/br.css";
+import { NOTICE_BACK } from "../../data/legal";
+import { LINK, R, ctaBtn, ctaBox, ctaText, fig, rcard, comments, authorReply, ratingsPanel, badges, OFFER_IMG } from "../../data/br";
+
+const CPV_CAMPAIGN = "27"; // TODO(Sam): CPV One campaign ID for "Meta - Back Restore" (same as page A)
+const CPV_LP = "2";
+const META_PIXEL = "4514987495496479"; // TLI presell - CPV CAPI dataset (PageView + OfferClick/Scroll custom events only)
+
+const BTN = "GET 60% OFF Back Restore Now!";
+const UNDER = "Official Back Restore site · BF26 promo applied automatically · 90-day money-back guarantee";
+
+const atf = {
+  a: {
+    h1: "Grandmother, 71, Was Doing Everything Right and Still Walking Less Every Few Months. Here’s the Hidden Cause Nobody Was Treating: The Compression Itself.",
+    sub: "Anyone over 55 with lower-back pain, or burning, numbness or tingling down the legs, should read this short story before trying anything else, especially before agreeing to another injection or surgery.",
+    hero: {
+      type: "img" as const,
+      src: "/images/br/slot-b-hero.webp",
+      alt: "A woman in her early seventies at the kitchen sink, one hand braced on the counter and the other on her lower back",
+      width: 900, height: 450,
+    },
+  },
+};
+
+const lead = `
+<p>Hi, I'm Diane. I'm 71, and I want to share how I went from planning my day around the nearest chair to walking my granddaughter to the school bus again.</p>
+<p>For about four years, I lived with a deep ache in my lower back that turned into a sharp, burning pain shooting down my right leg.</p>
+<p>Simple things like standing at the sink to wash a few dishes, or walking out to the mailbox, wore me out.</p>
+<p>And here's what scared me most: I was doing everything right. Physical therapy. Two rounds of injections. Stretches every morning. The heating pad every night. The pills my doctor prescribed.</p>
+<p><strong>And every few months, I could still walk a little less.</strong></p>
+<p>Then I learned that a review in the British Medical Journal found about 9 in 10 cases of sciatica come from a disc pressing on a nerve root. Not tight muscles. Not "getting older." A disc. And not one thing I was doing took the pressure off it.</p>
+<p>I woke up every morning more afraid that this was simply how the rest of my life would go.</p>
+<p>Keep reading, because I did find something that worked, and I'm going to share it with you in just a moment…</p>
+`;
+
+const body = `
+<h2 id="so-bad">My Back Got So Bad I Couldn't Stand at the Sink Without My Legs Burning…</h2>
+<p>I never thought I'd tell strangers what it feels like to crawl across your own bedroom floor at 4 in the morning. But you need to understand how bad it had become.</p>
+<p>Some mornings I couldn't stand up straight at all.</p>
+<p>My lower back felt like it was being crushed in a vise, and the burning down my leg was so fierce I'd break into a cold sweat just trying to reach the bathroom.</p>
+<p>I stopped going to my granddaughter's softball games. I stopped meeting my walking group. I told everyone it was "just a bad week."</p>
+<p>Then one Sunday, my daughter Karen watched me take three tries to get out of her car.</p>
+<p>She looked at me and said, <strong>"Mom… this isn't normal."</strong></p>
+${fig("/images/br/slot-b-car.webp", "An older woman gripping a car door frame, struggling to stand up out of the passenger seat while her daughter watches", 900, 506)}
+
+<h2 id="hidden-cause">The Hidden Cause Nobody Was Treating: The Compression Itself</h2>
+<p>After that Sunday, Karen told me about a strange back therapy she'd started doing at home, lying on the floor for 15 minutes in the evening.</p>
+<p>She'd spent 20 years at a desk, and her lower back had started going the same way as mine.</p>
+<p>She'd read about why, and she showed me something that turned everything I believed about my back upside down:</p>
+<p><strong>Most of us are treating the wrong thing.</strong></p>
+<p>And the only time my own leg ever stopped burning was on the traction table at physical therapy, and it was back before I got home.</p>
+<p>The real problem starts with the discs in your spine.</p>
+<p>Those discs are your shock absorbers. They sit between each pair of bones, keeping them apart and protecting the nerves that run down your back and into your legs.</p>
+<p>And they're mostly water.</p>
+<p>All day, your body weight squeezes that water out. All night, lying flat, the discs soak some of it back up. It's why you're actually a little taller in the morning than at bedtime. (Karen made me check it against the kitchen doorframe. She was right.)</p>
+<p>But as we age, the company behind this device explains, the discs start to dry out and shrink, and the overnight refill can't keep up.</p>
+<p>Like a kitchen sponge left by the sink, they flatten, stiffen, and stop holding up anything.</p>
+<p>The bones above and below settle closer together. And the nerves running between them get squeezed.</p>
+<p>That's the burning. The stabbing. The numbness and the "dead leg" feeling.</p>
+<p>And that's why none of the things I tried ever worked.</p>
+<p>The pills, the heating pad, the injections all went after the pain.</p>
+<p><strong>Not one of them took the pressure off the discs.</strong></p>
+
+<h2 id="worse">Without Taking the Pressure Off, It Usually Keeps Getting Worse</h2>
+<p>If the space between the discs isn't restored, the bones keep settling, a little more every season.</p>
+<p>The squeeze on the nerves builds. Standing gets harder. Walking gets shorter.</p>
+<p>Your back tightens up around the pain to protect it. Your muscles clamp down so hard that every stretch or adjustment snaps right back, which is why the chiropractor's relief never lasted the drive home.</p>
+<p>Over time, even simple movements start to feel risky.</p>
+<p>I was terrified of where this was heading.</p>
+<p>Would I need a walker by 75?</p>
+<p>Would I end up watching my granddaughter's games from the car, or watching life go by from a recliner?</p>
+<p>But thankfully, there was hope…</p>
+
+<h2 id="solution">The Solution That Changed My Life</h2>
+<p>Karen had read that taking the pressure off takes three things, at the same time:</p>
+<div class="parts">
+<p><strong>1. UNLOAD:</strong> gently pull the bones of the lower spine apart, so the squeezed discs and pinched nerves get their room back.</p>
+<p><strong>2. REFILL:</strong> bring heat and blood flow to the area, so dry discs can soak fluid back up and cold, stiff muscles let go.</p>
+<p><strong>3. RELEASE:</strong> calm the muscles that clamp down and snap your spine back, so the space you open stays open.</p>
+</div>
+<p>Miss one and it doesn't hold. A heating pad only does #2. A massager only does #3. Hanging upside down tries #1 while every muscle in your back clenches. I'd tried all three, one at a time, for years.</p>
+<p>The at-home therapy Karen had found does all three at once. It's built to do the one thing nothing else I'd tried did: take the pressure off the discs, then help them refill.</p>
+<p>It's called <strong>Back Restore</strong>. The company says more than 217,000 have been sold.</p>
+<p>The results?</p>
+<p>Truly life-changing.</p>
+<p>My lower back feels lighter, looser and stronger.</p>
+<p>I can stand at the sink, sit through a whole church service, and walk around the block without stopping.</p>
+<p>By the second morning, I got out of bed without the slow "edge of the bed shuffle" I'd done for years.</p>
+<p>Now the pain that used to own my mornings is a shadow of what it was.</p>
+<p>Once the pressure between the bones started to ease, it felt like my spine could finally breathe again.</p>
+${fig("/images/br/br-product-clean-grey.webp", "The Back Restore lumbar traction pillow, top view", 900, 876, "Back Restore: a curved, cushioned pillow you lie on for 15 minutes.", "sq")}
+
+<h2 id="how-it-works">How Back Restore Works</h2>
+<p>I'm so grateful to be using Back Restore every day from the comfort of my own living room.</p>
+<p>I'm finally going after what caused so much of my pain: the squeezed, dried-out discs in my lower back.</p>
+<p>It's a curved cushion you lie on, with an air bag inside that slowly lifts and arches under your lower back. It runs three therapies at the same time:</p>
+<div class="parts">
+<p><strong>✔ Unload = Dynamic Traction:</strong> the air-lift arch gently stretches and separates the bones of the lower spine, taking pressure off squeezed discs and pinched nerves and creating a "vacuum effect" that helps draw fluid back into the discs.</p>
+<p><strong>✔ Refill = Thermal Hydro-Therapy:</strong> heat opens the blood vessels and floods the lower back with blood flow, oxygen and nutrients for dry, compressed discs.</p>
+<p><strong>✔ Release = Neuromuscular Vibration:</strong> steady vibration relaxes the tight, guarding muscles so they stop snapping your spine back, so the relief lasts.</p>
+</div>
+<p>Together, these three therapies decompress the lower spine and take the pressure off your nerves. The company calls it the Regenesis Tri-Therapy System.</p>
+${fig("/images/br/br-step1-air-lift-traction.webp", "Step 1, Dynamic Traction: the air-lift arch stretches the lower back", 900, 822, "Step 1: the air-lift arch takes the load off.", "sq")}
+${fig("/images/br/br-step2-heat.webp", "Step 2, Thermal Hydro-Therapy: heat under the lower back", 900, 822, "Step 2: heat brings the blood flow.", "sq")}
+${fig("/images/br/br-step3-vibration.webp", "Step 3, Neuromuscular Vibration: vibration relaxes tight back muscles", 900, 822, "Step 3: vibration lets the muscles let go.", "sq")}
+${ctaBtn("cta-how", "See today's 60% off price on the official Back Restore site »", "Official site · BF26 price applied · 90-day money-back guarantee")}
+
+<h2 id="experience">My Experience Using Back Restore</h2>
+<p>I started on the lowest setting, because I was nervous, and turned it up a little every few days as my back got used to it.</p>
+<p>I liked knowing I was in control, because every back is different.</p>
+<p>What matters most to me is that Back Restore doesn't just numb the pain like pills or patches. It goes after the pressure underneath it.</p>
+<p>You just lie down, press a button, and it's like a full spinal therapy session without ever leaving your house.</p>
+<p>It's simple. It runs 15 minutes and switches itself off.</p>
+<p>I use it on the living room rug in the evening while my shows are on. Some nights I use it in bed.</p>
+
+<h2 id="easy">It's So Easy To Use</h2>
+<p>The controls are right on the device.</p>
+<p>You plug it in, slide the curve under your lower back, and press "Auto" for the full program, or set the heat and the stretch yourself.</p>
+<p>I always start where it feels comfortable, then let the slow stretch, the warmth and the gentle vibration take over.</p>
+<p>The stretch creates the space. The heat brings the blood flow. The vibration loosens the muscles that used to fight every stretch I tried.</p>
+<p>Even the heat alone feels wonderful. But once all three are working together, it's like the stiffness and pressure just melt.</p>
+<p>That's when I really feel the difference.</p>
+${fig("/images/br/br-on-bed-materials.webp", "Back Restore on a bed, with its slow-rebound foam, breathable cover and one-click controls", 900, 822, "Floor or bed. One button.", "sq")}
+
+<h2 id="science">The Science Behind Back Restore</h2>
+<p>I was impressed when Karen showed me the research.</p>
+<p>Your discs lose fluid under load and regain it lying down; researchers have been measuring that since the 1980s.</p>
+<p>In clinic research from 1994, spinal decompression dropped the pressure inside patients' discs below zero, a vacuum.</p>
+<p>Heat boosts blood flow and relaxes stiff muscles. Vibration calms muscle tension.</p>
+<p>It's the combination, all three at once, that makes Back Restore different from a heating pad, a massager, or hanging upside down.</p>
+
+<h2 id="transformation">My Transformation: From Afraid to Move to Walking With My Granddaughter Again</h2>
+<p>I used to live with constant pain, stiffness and nerve flare-ups in my lower back. With Back Restore, I can finally say I feel like myself again.</p>
+<p>The difference is night and day.</p>
+<p><strong>Before Back Restore:</strong></p>
+<ul class="xs">
+<li>Walking to my neighbor's house was a struggle</li>
+<li>Standing more than a few minutes left my lower back throbbing and my leg burning</li>
+<li>I quit gardening and my walking group</li>
+<li>I was afraid to bend, lift or even sneeze</li>
+<li>I lost sleep almost every night</li>
+</ul>
+<p><strong>Now, with Back Restore:</strong></p>
+<ul class="ticks">
+<li>I move around without bracing for the next flare-up</li>
+<li>I stand at the sink, bend and stretch without fear</li>
+<li>I'm back in my garden, and back in my walking group</li>
+<li>I walk my granddaughter to the bus every morning</li>
+<li>I sleep through the night, and I'm not afraid of the next morning</li>
+</ul>
+<p>And it isn't only for people like me. Karen uses it after long days at her desk.</p>
+${fig("/images/br/slot-b-bus.webp", "A grandmother in her early seventies walking her granddaughter to a school bus stop in the morning", 900, 506)}
+
+<h3>What Others Are Saying About Back Restore</h3>
+${rcard(R.lindaH)}
+${rcard(R.elenaSocks)}
+${rcard(R.bob)}
+<p>These are just three of the 27,392+ reviews the company reports for Back Restore. People of every age are moving more freely, sleeping better and taking their lives back from back pain.</p>
+${ctaBtn("cta-rev", "Check availability at 60% off »", "Official Back Restore site · free shipping · 90-day money-back guarantee")}
+
+<h2 id="chance">Your Chance To Feel This Kind of Relief</h2>
+<p>If you're living with lower-back pain, burning down your legs, or stiffness that makes every morning a fight, I truly recommend trying Back Restore.</p>
+<p>It's helped me more than I ever expected, and I believe it could make a real difference for you too.</p>
+<p>Now, I know what you're thinking: what does something like this cost?</p>
+<p>I wondered the same thing.</p>
+<p>But after the relief I've had, I can honestly say it's worth every penny.</p>
+<p>Back Restore normally sells for $299.95.</p>
+<p>One owner, James R., wrote: "I was paying $145 a session just to get traction on my lower back." For three therapies in one device you keep at home, $299.95 would already be a bargain next to that.</p>
+<p>I've spent far more on things that did nothing but cover the pain up for a few hours.</p>
+<p>But here's the exciting news…</p>
+
+<h2 id="offer">Limited Time Offer: 60% Off Back Restore</h2>
+<p>Right now the company is running its BF26 promotion, and the discount is applied for you automatically.</p>
+<div class="pricebox">
+<p>You can get your own Back Restore for just <span class="now">$99.97</span> instead of <span class="was">$299.95</span>. That's 60% off, with free shipping.</p>
+<p>And if you want one for someone you love, it gets better: two for $95 each, or three for $90 each.</p>
+</div>
+<p>This deal won't be around forever, and when I checked, their site was already showing stock as LOW.</p>
+<p>So if you're serious about taking the pressure off your back and getting your life back, don't wait.</p>
+${ctaBox("cta1", BTN, UNDER, OFFER_IMG)}
+
+<h2 id="warning">FAIR WARNING: This Price Is For a Limited Time Only</h2>
+<p>The company only calls it a "Limited-Time Offer." When I checked today, their site showed <strong>Stock Levels: LOW</strong>, and its checkout said "only 11 left!"</p>
+<p>Their checkout even holds your order for just 10 minutes once you get there.</p>
+<p>So there's a very real chance that the next time you see this page, the price will be back to $299.95, or it will say "sold out."</p>
+<p>In short, you won't find Back Restore for less than you can get it today.</p>
+<p>So without further ado…</p>
+
+<h2 id="next">Here's What To Do Next</h2>
+<ol class="steps">
+<li>Tap the big green "GET 60% OFF Back Restore" button below.</li>
+<li>It takes you straight to the official, secure Back Restore website.</li>
+<li>Your 60% discount is already applied. No code to type.</li>
+<li>Choose one, two or three. The two-pack is their "Most Popular" (one for you, one for someone you love).</li>
+<li>Enter your shipping details on the secure checkout. Shipping is free.</li>
+</ol>
+<p>So whenever you're ready, tap the button below and claim your Back Restore at 60% OFF.</p>
+${ctaBtn("cta2", BTN, UNDER)}
+
+<h2 id="guarantee">Your Order Is Protected by Back Restore's 90-Day Money-Back Guarantee</h2>
+<p>Here's the deal:</p>
+<p>The company believes in Back Restore so much that you get a full 90 days to try it at home.</p>
+<p>Here's how it works: try it at home for a full 90 days. If it doesn't work for you, or you don't feel the relief you hoped for, send it back in the original packaging for a full refund or a replacement, less shipping and handling, exactly as their checkout states it. In the company's words: "No hassle and no questions asked."</p>
+<p>In other words, you're only keeping it if it turns out to be a life saver.</p>
+<p>And from my experience, I'd bet it will be.</p>
+
+<h2 id="choices">The Only Real Risk Is Waiting Another Season</h2>
+<p>You have three full months to try Back Restore and feel for yourself how quickly it can take the pressure off your lower back and calm the nerve pain that holds so many of us back.</p>
+<p>Remember: no pill, stretch or injection you've tried so far ever had a chance of taking the pressure off your discs. Now you know why.</p>
+<p>That gives you two choices.</p>
+<p><strong>Choice #1:</strong> Keep doing what you've been doing, spending time and money on things you already know don't last…</p>
+<p>…and walking a little less every few months, while it gets harder to sleep, harder to move, and harder to enjoy the people around you.</p>
+<p><strong>Or Choice #2:</strong> Try Back Restore today and give yourself a real shot at turning this around.</p>
+<p>Either it works and you finally get your mornings back…</p>
+<p>Or you send it back for your refund.</p>
+<p>Either way, it's better than doing nothing.</p>
+<p>I thank God every day that Karen showed me Back Restore. It gave me back my mornings, my garden and my walks to the bus stop.</p>
+<p>You owe it to yourself, and to the people who love you, to give it a try.</p>
+<p>Tap the button below to claim your discount and take back control from the pain, the pressure and the stiffness.</p>
+${ctaBtn("cta3", BTN, UNDER)}
+
+<div class="updbox">
+<p><strong>UPDATE:</strong> As of <span data-deal-date>today</span>, demand for Back Restore is climbing fast and the company's site lists stock as <strong>LOW</strong>. Order now to lock in <strong>60% OFF + FREE SHIPPING</strong> before it's gone.</p>
+<p><strong>NOTE:</strong> Order only from the official Back Restore site.</p>
+</div>
+${badges(["90-Day Money-Back Guarantee", "Secure Checkout", "No-Hassle Returns", "Free Shipping"])}
+${ctaBtn("cta4", BTN, UNDER)}
+
+${ratingsPanel()}
+<h2 id="finally">Finally, Take the Pressure Off Your Back!</h2>
+${ctaBtn("cta5", "GET 60% OFF BACK RESTORE NOW!", UNDER)}
+${comments("Comments", [
+  R.paul, R.liz, R.jason, R.patricia,
+  authorReply("Diane Mercer", "For anyone asking about shipping: the company says orders are processed in 1-2 business days and most arrive 3-7 business days after they ship, and shipping is free."),
+  R.jamesP, R.emilyM, R.anthony, R.chris, R.rebecca,
+  authorReply("Diane Mercer", "To everyone asking if it's too strong: it has several levels. Start on the lowest, like I did. The company says it should feel like a strong stretch, never pain. And if you've had back surgery, they say check with your surgeon first."),
+  R.mark, R.greg, R.marcus,
+])}
+${ctaBtn("cta6", BTN, UNDER)}
+`;
+---
+<AdvertorialPage
+  slimFooter
+  title="Grandmother, 71, Was Doing Everything Right and Still Walking Less Every Few Months | The Life Insider"
+  description="Physical therapy, injections, pills, stretches, and still walking less every season. The hidden cause nobody was treating: the compression itself."
+  cpvCampaign={CPV_CAMPAIGN}
+  cpvLp={CPV_LP}
+  metaPixel={META_PIXEL}
+  fbCapi={true}
+  cpvRedirect={true}
+  topTag=""
+  kicker="Health · Trending"
+  crumb="Home › Back &amp; Nerve Pain › Lower Back"
+  atf={atf}
+  byline={{ name: "Diane Mercer", role: "Reader story", readTime: "6-minute read" }}
+  ratingLine="4.8 · 27,392+ owner reviews"
+  lead={lead}
+  body={body}
+  sticky={{ name: "Back Restore", image: "/images/br/br-product-clean-grey.webp", url: LINK, kicker: "60% off today on the official site", price: "$99.97", oldPrice: "$299.95", buttonText: "Get 60% Off", ctaId: "sticky", startAt: "solution" }}
+  disclosure=""
+  footerNotice={NOTICE_BACK}
+/>

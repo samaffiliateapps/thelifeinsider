@@ -1,0 +1,63 @@
+/* BACK RESTORE META PRESELLS (15 Oct 2026): /articles/still-walking-less (A, ReliveX lay-letter rip) and
+   /articles/hidden-cause-walking-less (B, SmoothSpine cln rip). Loaded after wr-broom.css (shared 18px mobile-first
+   advertorial look) and adds: review cards, rating panel, owner-comment thread, update box, trust badges,
+   checklist and before/after lists, numbered steps. Placeholder lifestyle images live in /images/br/slot-*.webp. */
+
+#adv .rating { display: flex; align-items: center; gap: 8px; font-size: 0.86rem; color: var(--muted); margin: -2px 0 10px; }
+#adv .rating .stars { color: #f5a623; letter-spacing: 1px; font-size: 1rem; }
+
+/* Lead mirror lines */
+#adv .mirror p { font-weight: 700; color: var(--ink); }
+
+/* Review cards (maker-published reviews) */
+#adv .rcard { border: 1px solid var(--rule); border-radius: 12px; padding: 12px 14px 10px; margin: 0 0 12px; background: #fff; }
+#adv .rcard .rc-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-bottom: 4px; }
+#adv .rcard .rc-name { font-weight: 800; color: var(--ink); font-size: 1rem; }
+#adv .rcard .rc-stars { color: #f5a623; letter-spacing: 1px; }
+#adv .rcard .rc-title { font-weight: 800; color: var(--ink); font-size: 1.05rem; margin: 0 0 4px; }
+#adv .rcard .rc-meta { font-size: 0.8rem; color: #0f7a3a; font-weight: 700; }
+#adv .prose .rcard p { font-size: 1.04rem; margin: 0 0 4px; }
+#adv .rc-src { font-size: 0.8rem; color: var(--muted); margin: -4px 0 16px; }
+
+/* Checklist / before-after */
+#adv ul.ticks, #adv ul.xs { list-style: none; padding: 0; margin: 0 0 1em; }
+#adv ul.ticks li, #adv ul.xs li { position: relative; padding-left: 30px; margin: 0 0 0.55em; line-height: 1.5; }
+#adv ul.ticks li::before { content: "\2714"; position: absolute; left: 4px; top: 0; color: #15803d; font-weight: 900; }
+#adv ul.xs li::before { content: "\2716"; position: absolute; left: 4px; top: 0; color: #b91c1c; font-weight: 900; }
+#adv ol.steps { padding-left: 1.4em; margin: 0 0 1em; }
+#adv ol.steps li { margin: 0 0 0.5em; font-size: 1.1rem; line-height: 1.5; }
+
+/* Price box */
+#adv .pricebox { border: 2px dashed #15803d; border-radius: 12px; background: #f6fdf8; padding: 12px 14px; margin: 0 0 1.1em; }
+#adv .pricebox .was { text-decoration: line-through; color: var(--muted); }
+#adv .pricebox .now { font-size: 1.35rem; font-weight: 900; color: #15803d; }
+
+/* Update box + badges */
+#adv .updbox { border: 2px solid #f59e0b; background: #fffbeb; border-radius: 12px; padding: 12px 14px; margin: 1.6em 0 1em; }
+#adv .prose .updbox p { font-size: 1.04rem; margin: 0 0 0.5em; }
+#adv .updbox p:last-child { margin-bottom: 0; }
+#adv .badges { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 1em; }
+#adv .badges span { display: flex; align-items: center; gap: 6px; border: 1px solid var(--rule); border-radius: 10px; padding: 8px 10px; font-size: 0.86rem; font-weight: 700; color: var(--ink); background: var(--bg-soft); }
+#adv .badges span::before { content: "\2714"; color: #15803d; font-weight: 900; }
+
+/* Ratings panel */
+#adv .ratings { border: 1px solid var(--rule); border-radius: 12px; padding: 14px; margin: 1.6em 0 1em; }
+#adv .ratings .big { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+#adv .ratings .big b { font-size: 2.2rem; color: var(--ink); line-height: 1; }
+#adv .ratings .big .stars { color: #f5a623; font-size: 1.2rem; letter-spacing: 1px; }
+#adv .ratings .src { font-size: 0.8rem; color: var(--muted); margin: 4px 0 10px; }
+#adv .ratings .bar { display: grid; grid-template-columns: 9.5em 1fr 2.2em; align-items: center; gap: 8px; font-size: 0.9rem; margin: 0 0 6px; color: var(--ink); }
+#adv .ratings .bar i { display: block; height: 9px; border-radius: 6px; background: #e5e7eb; overflow: hidden; }
+#adv .ratings .bar i em { display: block; height: 100%; background: #f5a623; }
+
+/* Owner comment thread (maker-published reviews, no fake likes or timestamps) */
+#adv .comments { margin: 1.4em 0 1em; }
+#adv .comments h3 { font-size: 1.15rem; margin: 0 0 4px; }
+#adv .comments .c-src { font-size: 0.8rem; color: var(--muted); margin: 0 0 12px; }
+#adv .cmt { display: grid; grid-template-columns: 40px 1fr; gap: 10px; padding: 10px 0; border-top: 1px solid var(--rule); }
+#adv .cmt .av { width: 40px; height: 40px; border-radius: 50%; background: #dbe4f0; color: #334155; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; }
+#adv .cmt .nm { font-weight: 800; color: #1d4ed8; font-size: 0.95rem; }
+#adv .cmt .vb { font-size: 0.76rem; color: #0f7a3a; font-weight: 700; margin-left: 6px; }
+#adv .prose .cmt p { font-size: 1rem; margin: 2px 0 0; line-height: 1.5; }
+#adv .cmt.reply { margin-left: 26px; background: var(--bg-soft); border-radius: 10px; padding: 10px; border-top: 0; margin-top: 4px; }
+#adv .cmt .vb.au { color: #1d4ed8; }

@@ -1,0 +1,311 @@
+---
+/* BACK RESTORE · PAGE A (Meta): 1:1 rip of the ReliveX Facebook lander /lander/h (lay-narrator letter), built 15 Oct 2026.
+   NOT LIVE until Sam approves. Copy (source of truth): advertorial-system/offers/back-restore/pages/fb-rip-A-relivex-2026-10-15.md
+   Offer facts: advertorial-system/offers/back-restore/research/offer-facts-2026-10-15.md (prices = US checkout config 15 Oct).
+   Narrator (Ruth Ellison) and family are invented lay characters, disclosed in the footer notice only (no top label: Meta lane).
+   Reviews: verbatim from the merchant's pages (src/data/br.ts). Lifestyle images are PLACEHOLDERS (/images/br/slot-a-*.webp),
+   listed in advertorial-system/offers/back-restore/pages/IMAGE-SLOTS.md; product shots are the merchant's own photos.
+   CPV One: Sam creates the campaign "Meta - Back Restore" (Facebook source; offers 17 inter + 18 checkout, 50/50) and puts its ID
+   in CPV_CAMPAIGN. "TBD" = placeholder: the page must NOT get traffic until it is real. Page A = LP slot 1, page B = LP slot 2. */
+import AdvertorialPage from "../../layouts/AdvertorialPage.astro";
+import "../../styles/wr-broom.css";
+import "../../styles/br.css";
+import { NOTICE_BACK } from "../../data/legal";
+import { LINK, R, ctaBtn, ctaBox, ctaText, tlink, fig, rcard, comments, ratingsPanel, badges, OFFER_IMG } from "../../data/br";
+
+const CPV_CAMPAIGN = "27"; // TODO(Sam): CPV One campaign ID for "Meta - Back Restore"
+const CPV_LP = "1";
+const META_PIXEL = "4514987495496479"; // TLI presell - CPV CAPI dataset (PageView + OfferClick/Scroll custom events only)
+
+const UNDER_MAIN = "Opens the official Back Restore site · BF26 promo price applied · 90-day money-back guarantee";
+
+const atf = {
+  a: {
+    h1: "At 69, I Was Doing Everything Right and Still Walking Less Every Few Months. Then a Truck Mechanic Asked Me the One Question 12 Specialists Never Had.",
+    sub: "Physical therapy. Injections. A fusion. Not one of them treated the compression itself. A retired school librarian writes the letter she wishes she\u2019d had before the operation.",
+    hero: {
+      type: "img" as const,
+      src: "/images/br/slot-a-hero.webp",
+      alt: "A woman in her late sixties sitting on the edge of her bed at dawn, one hand pressed to her lower back",
+      width: 900, height: 450,
+    },
+  },
+};
+
+const lead = `
+<div class="mirror">
+<p>If you're reading this at 3 a.m. because your back woke you up again...</p>
+<p>If you know exactly which kitchen counter, which shopping cart, which porch railing to lean on just to get the weight off your spine for one minute...</p>
+<p>If every few months you notice you can walk a little less (the block, then half the block, then just the mailbox) even though you're doing everything they told you...</p>
+<p>If you've canceled more dinners than you've gone to this year because you can't sit through a meal anymore...</p>
+<p>If you walk into every room and find the nearest chair before you notice who's in it...</p>
+</div>
+<p>I'm writing this for you.</p>
+<p>Because I was you. For eleven years.</p>
+<p>By the fall of 2024, I was quietly getting my affairs in order.</p>
+<p>Not because I was dying. Because I had stopped expecting to get better.</p>
+<p>I gave my garden tools to the neighbor. I told my son where the important papers were. I canceled the boardwalk trip my husband Frank and I had promised our grandkids since they were in diapers.</p>
+<p>I was 67.</p>
+<p>My surgeon had already told me, very kindly, that a second operation "might not give us the result we're hoping for either."</p>
+<p>And I believed him.</p>
+<p>Because by then, I had tried everything.</p>
+`;
+
+const body = `
+<h2 id="eleven-years">Eleven Years of Walking a Little Less</h2>
+<p>It started in 2014. I was 57, a school librarian, on my feet all day, hauling stacks of returns and kneeling at the bottom shelves for the little ones. I loved it.</p>
+<p>Then one Tuesday in March, I bent to lift a box of books and couldn't straighten back up.</p>
+<p>A hot wire ran from my lower back down the back of my left leg. My legs felt like they belonged to someone else.</p>
+<p>Frank drove me to urgent care. They sent me for an MRI.</p>
+<p><strong>"Worn, compressed discs at L4-L5 and L5-S1, pressing on the nerve."</strong></p>
+${fig("/images/br/slot-a-mri.webp", "An MRI report letter on a kitchen table beside reading glasses and a coffee mug", 900, 506, "The letter that started the parade.")}
+<p>I'd never heard those words. I learned them fast.</p>
+<p>And here's what nobody warns you about. It doesn't take your life all at once. It takes it a few feet at a time.</p>
+<p>Every few months, the walk got shorter. The loop around the mall. Then the grocery store without a cart. Then the end of the block. Then just the mailbox.</p>
+<p>I was doing everything right.</p>
+<p>And I was still losing ground.</p>
+
+<h2 id="parade">The Parade</h2>
+<p>What came next, I now call the parade. Everyone in a white coat got a turn.</p>
+<div class="lbl">
+<p><strong>Physical therapy:</strong> 12 weeks, three times a week. I cried in the car after most sessions. The exercises were correct. My back got worse anyway. The therapist finally said, "Some people just don't respond." I was one of them.</p>
+<p><strong>The chiropractor:</strong> Twice a week for eight months. I'd feel wonderful for about two hours. By the time I pulled into my driveway, it was back. I did the math once: $4,100 for about 60 hours of relief.</p>
+<p><strong>Epidural injections:</strong> Three in 18 months. The first gave me seven glorious weeks. The second, three. The third did nothing at all. They wanted to try a fourth. I said no.</p>
+<p><strong>Gabapentin:</strong> Made me foggy. Put 18 pounds on me. I still had the pain. Now I had pain plus fog.</p>
+<p><strong>The medicine cabinet:</strong> You know exactly what I mean.</p>
+<p><strong>A $350 TENS unit my son ordered online:</strong> It tingled on my skin. Nothing deeper. It lived in a drawer after two weeks.</p>
+<p><strong>A back brace:</strong> Sweaty. And when I took it off, my back felt weaker than before.</p>
+<p><strong>An inversion table:</strong> Hanging upside down at 62. Terrifying. It hurt my hips and did nothing for my back. Frank sold it in the spring.</p>
+<p><strong>Yoga:</strong> Every morning for a year. I got flexible everywhere except the one place that hurt.</p>
+</div>
+<p>By 2021, I was scheduled for a fusion.</p>
+<p>My surgeon, a good man, I still believe that, said it had "a very good chance" of fixing the pain.</p>
+<p>I had the surgery in March 2022.</p>
+<p>I woke up hopeful.</p>
+<p>For about three months.</p>
+
+<h2 id="failed">The Morning I Knew It Hadn't Worked</h2>
+<p>It was a Saturday in July. Five months after the operation.</p>
+<p>I'd been sleeping in the recliner because I couldn't get comfortable in our bed.</p>
+<p>I tried to stand up.</p>
+<p>I couldn't.</p>
+<p>The same concrete in my lower back. The same hot wire down my leg. The same panic I'd felt that Tuesday in 2014.</p>
+${fig("/images/br/slot-a-recliner.webp", "An empty recliner with a folded blanket in a dim living room at dawn", 900, 506, "Where I slept for most of 2022.")}
+<p>I sat on the edge of that recliner and cried harder than I had in years.</p>
+<p>Not from the pain. From the math.</p>
+<p>I had tried everything. And I was right back where I started.</p>
+<p>Actually, no. I was worse. Now I had hardware. Scar tissue. Fewer options. And at my six-month follow-up, my surgeon said: "Ruth, the fusion looks good on the X-ray. Sometimes the pain doesn't follow the pictures. This may be your new normal."</p>
+<p>My new normal. At 65.</p>
+<p>That's when I started giving things away.</p>
+
+<h2 id="question">The Question Nobody Had Asked in Eleven Years</h2>
+<p>My son-in-law Dale is not a doctor.</p>
+<p>He has rebuilt truck suspensions for 30 years.</p>
+<p>Two Thanksgivings ago, after the dishes were done and everyone else had gone to bed, he watched me lower myself into a kitchen chair like I was getting into a cold lake.</p>
+<p>Then he asked me a question.</p>
+<p><strong>"Ruth, in eleven years, has anybody ever tried to take the weight off those discs? Not numb them. Not cut them. Not bolt them together. Just unload them?"</strong></p>
+<p>I opened my mouth. Then I closed it.</p>
+<p>A dozen specialists. Two MRIs. Physical therapy. A surgery where they opened up my spine.</p>
+<p>Not one of them had treated the compression itself.</p>
+<p>They treated the pain. They treated the inflammation. They fused two bones.</p>
+<p>Nobody ever tried to give my discs their room back.</p>
+
+<h2 id="shock-absorbers">What a Truck Mechanic Knew That My Specialists Never Mentioned</h2>
+<p>Dale drew it on a paper napkin.</p>
+${fig("/images/br/slot-a-napkin.webp", "A ballpoint sketch on a paper napkin of a truck shock absorber next to a stack of spine bones", 900, 506, "Dale's napkin. I still have it.")}
+<p>"Your discs are shock absorbers," he said. "Same as on a truck."</p>
+<p>Between every pair of bones in your spine sits a cushion. And that cushion is mostly water.</p>
+<p>"A shock that gets squeezed for years loses its fluid," Dale said. "It goes flat. And a flat shock sends every bump straight into the frame."</p>
+<p>In your back, the frame is your nerves.</p>
+${fig("/images/br/slot-a-spine.webp", "Sketch of a lower spine with flattened discs between the vertebrae and a nerve line highlighted in red", 900, 506, "Flat shocks: the cushions between the bones lose their water, and the space for the nerve closes.")}
+<p>I'm a librarian. So the next morning, I did what librarians do. I looked it up.</p>
+
+<h2 id="taller">You Are Taller in the Morning Than at Night</h2>
+<p>The first thing I found, I could test in my own hallway.</p>
+<p>All day long, the weight of your body squeezes water out of your discs. All night, lying flat, they soak some of it back up.</p>
+<p>That's why you are measurably taller when you wake up than when you go to bed, by about half an inch for most adults. Researchers have measured disc fluid rising and falling with posture since the 1980s.</p>
+<p>Frank and I tried it. A pencil mark on the pantry doorframe at 7 a.m. Another at 9 p.m.</p>
+<p>I lost almost half an inch by bedtime.</p>
+${fig("/images/br/slot-a-doorframe.webp", "Two pencil marks on a pantry doorframe, labelled 7 a.m. and 9 p.m., the evening mark slightly lower", 900, 506, "Our pantry doorframe. Morning mark on top.")}
+<p>That half inch is your discs giving up water under load and drinking it back when the load comes off.</p>
+<p>Now here's the cruel part.</p>
+<p>When you're young, the overnight refill keeps up. But the company behind the device I use now puts it plainly: after about age 30, your discs start to dry out and shrink.</p>
+<p>The night isn't long enough anymore. Every year, you get back a little less than you lost.</p>
+<p>The cushions flatten. The bones settle closer together. The space your nerves run through gets tighter.</p>
+<p>That's why I walked a little less every few months.</p>
+<p>Not my age. Not my willpower.</p>
+<p><strong>Compression, piling up a little more every season, and nobody ever taking it off.</strong></p>
+
+<h2 id="guarding">Why Your Back Muscles Lock the Squeeze in Place</h2>
+<p>The second thing I found explained the parade.</p>
+<p>When a spine is squeezed and a nerve is pinched, the muscles around it do something protective. They clamp down. Doctors call it guarding. It's a reflex. You don't choose it and you can't switch it off.</p>
+<p>It's why every stretch, every adjustment, every massage felt wonderful for an hour or two and then snapped back like a rubber band.</p>
+<p>The chiropractor pushed my bones into place. My clamped-down muscles pulled them right back before I got home.</p>
+<p>Put those two together (discs squeezed dry, and muscles clamped around them so nothing can open up) and you get what I've come to call <strong>Compression Lock</strong>.</p>
+<p>It doesn't let go on its own.</p>
+<p>Not with rest. Not with stretching. Not with pills. Not with yoga, swimming or any "core program" on earth.</p>
+<p>Because my back wasn't weak.</p>
+<p><strong>It was locked down under pressure.</strong></p>
+
+<h2 id="why-failed">Why Everything I Tried Had Failed</h2>
+<p>Sitting at that kitchen table at 11 p.m. on Thanksgiving night, the whole parade finally made sense.</p>
+<div class="lbl">
+<p><strong>Physical therapy</strong> tried to strengthen the muscles around a spine that was still being crushed. You can't exercise your way out of a squeeze.</p>
+<p><strong>The injections</strong> calmed the inflammation for a few weeks. The compression underneath never moved an inch.</p>
+<p><strong>The TENS unit</strong> buzzed my skin. It never took one ounce of pressure off one disc.</p>
+<p><strong>The chiropractor</strong> pushed my bones. My guarding muscles pulled them back by lunchtime.</p>
+<p><strong>The inversion table</strong> stretched me while every muscle in my back clenched like a fist from fear.</p>
+<p><strong>The pills</strong> muted the alarm while the fire kept burning.</p>
+<p><strong>The surgery</strong> fused two bones. The discs above and below were still being squeezed dry every single day.</p>
+</div>
+<p>I wasn't broken.</p>
+<p>I wasn't "one of the ones who don't respond."</p>
+<p>I had eleven years of compression on my spine, and nobody had ever taken it off.</p>
+
+<h2 id="unload-refill-release">The Only Thing That Opens It Back Up</h2>
+<p>Dale's point was simple. A flat shock doesn't refill while it's still under load. You have to take the load off, and you have to give it something to drink.</p>
+<p>It takes three things, at the same time:</p>
+<div class="parts">
+<p><strong>1. UNLOAD.</strong> Gently pull the bones of the lower spine apart. In clinic research published in 1994, researchers placed a pressure sensor inside patients' discs during spinal decompression and watched the pressure drop below zero. A vacuum. That vacuum is what pulls fluid back toward the disc instead of squeezing it out.</p>
+<p><strong>2. REFILL.</strong> Add heat. Warmth opens the blood vessels around the spine and floods the area with blood flow. Cold muscles fight a stretch. Warm ones let go. As the device maker puts it, stretching without heat is "pulling on cold rubber."</p>
+<p><strong>3. RELEASE.</strong> Add vibration. Steady vibration calms the guarding reflex, so the muscles stop snapping everything back and the space you open stays open.</p>
+</div>
+<p>Miss one and it doesn't hold. Stretch without heat and vibration, and you get my inversion table. Heat alone is a heating pad: lovely, and it takes no pressure off. Massage alone is my chiropractor's two hours.</p>
+<p>Clinics do this on decompression tables. One owner wrote that he was paying "$145 a session just to get traction on my lower back." Then he found a device that "gives me that exact same decompression at home, for less than the cost of two visits."</p>
+<p>Then Dale turned his phone around.</p>
+
+<h2 id="device">The Device That Gave Me My Walk Back</h2>
+<p>It's called <strong>Back Restore</strong>.</p>
+<p>It's a curved, cushioned pillow you lie on, on the floor or on your bed. Inside is an air bag that slowly lifts and arches under your lower back to stretch and decompress it, while the cushion heats up and vibrates.</p>
+<p>The company calls it the Regenesis Tri-Therapy System: <strong>Dynamic Traction</strong> to unload, <strong>Thermal Hydro-Therapy</strong> to refill, <strong>Neuromuscular Vibration</strong> to release. All three at once.</p>
+<p>You plug it in, lie back, press "Auto," and close your eyes. It runs for 15 minutes and switches itself off.</p>
+${fig("/images/br/br-three-steps-strip.webp", "Back Restore's three steps: Dynamic Traction, Thermal Hydro-Therapy and Neuromuscular Vibration", 900, 549, "Unload, refill, release: traction, heat and vibration in one 15-minute session.")}
+<p>That was the whole routine. 15 minutes.</p>
+<p>I'd spent... let me get this right. Between the surgery bills, the PT, the chiropractor, the injections, the pills and every gadget in my closet, I had spent more than $52,000 trying to fix my back in eleven years.</p>
+<p>And here was this thing on Dale's phone.</p>
+<p><strong>$99.97.</strong></p>
+${ctaBtn("cta1", "See today's price on the official Back Restore site »", "60% off right now · 90-day money-back guarantee")}
+${rcard(R.davidM)}
+${rcard(R.lindaH)}
+${rcard(R.marcus)}
+<p class="rc-src">Reviews published on the official Back Restore site.</p>
+
+<h2 id="day-1">Day 1: The Moment I Knew This Was Different</h2>
+<p>Frank ordered it for me the Friday after Thanksgiving. It arrived six days later.</p>
+<p>I'll be honest. I opened that box with almost no hope.</p>
+<p>I'd had so many "miracle" gadgets turn into closet clutter that I couldn't handle one more failure.</p>
+<p>I told Frank: "If this doesn't work, I'm done trying."</p>
+<p>I meant it.</p>
+${fig("/images/br/br-product-on-counter.webp", "The Back Restore pillow sitting on a kitchen counter", 540, 692, "The day it came. It sat on the counter for an hour before I worked up the nerve.", "sq")}
+<div class="lbl">
+<p><strong>Day 1.</strong> I laid it on the bedroom rug, set it to the lowest level and lay back. I felt the arch slowly rise under me. Then the warmth. Then a low, steady hum.</p>
+<p>At first it was strange. Almost too much. Like a stretch reaching a place nothing had reached in years.</p>
+<p>By minute ten, something in my lower back... gave. That's the only word I have. Like a fist I'd been making for eleven years had finally opened.</p>
+<p>I stood up. Walked to the kitchen. And for one full minute, I forgot about my back.</p>
+<p>I hadn't done that since 2014.</p>
+<p><strong>Week 1.</strong> My 40-minute morning warm-up shrank to ten. I slept through a whole night for the first time in three years.</p>
+<p><strong>Weeks 2-3.</strong> I caught myself washing dishes without bracing on the counter. I was just... standing there.</p>
+<p><strong>Week 4.</strong> I walked the entire grocery store without leaning on the cart.</p>
+</div>
+<p>I cried in the cereal aisle.</p>
+<p>A young woman asked if I was all right. I said, "I'm walking. I'm just walking."</p>
+<p>She probably thought I'd lost my mind.</p>
+<p>I'm not the only one. On the Back Restore page, Linda S., 62, wrote: "I stood up straighter than I have in years." And Elena M.: "I can put my own socks on again… I have my flexibility, and my independence, back."</p>
+${fig("/images/br/slot-a-walk.webp", "A woman in her late sixties walking upright down a grocery aisle, smiling, her cart beside her", 900, 506)}
+
+<h2 id="now">Where I Am Now</h2>
+<p>I'm writing this almost two years after that first session.</p>
+<p>Last month, Frank and I took the grandkids to Ocean City and walked the boardwalk. The whole thing. End to end and back to the car.</p>
+<p>Two and a half miles. At 69.</p>
+<p>The youngest asked why Grandma kept laughing. I couldn't explain it to a seven-year-old. I'd spent eleven years watching my world shrink a few feet at a time, and now it was getting bigger again.</p>
+<p>I still use Back Restore for 15 minutes most evenings while Frank watches the news.</p>
+<p>The walk doesn't get shorter anymore.</p>
+<p><strong>It gets longer.</strong></p>
+${fig("/images/br/slot-a-boardwalk.webp", "A couple around seventy walking a seaside boardwalk with two grandchildren", 900, 506)}
+
+<h2 id="know">What I Want You to Know</h2>
+<p>If you're where I was (doing every single thing they told you and still losing a little ground every few months)...</p>
+<p>Whether your surgeon just handed you a pamphlet and you're trying to decide...</p>
+<p>Or whether you already had the surgery and the pain came back anyway...</p>
+<p>I wish someone had sent me this letter in 2022. Or in 2018. Or that Tuesday in 2014.</p>
+<p>You haven't failed.</p>
+<p>Your body hasn't failed you.</p>
+<p>There is pressure on your spine that has been piling up for years, and nobody has ever taken it off.</p>
+<p>You are not broken.</p>
+<p><strong>You are compressed.</strong></p>
+<p>And there is a difference.</p>
+${ctaBtn("cta2", "Get 60% Off Back Restore Now »", UNDER_MAIN)}
+
+<h2 id="about">About Back Restore</h2>
+<p>If you want the details Dale showed me that night, here they are:</p>
+<ul class="ticks">
+<li><strong>Unloads:</strong> Dynamic Traction. An air-lift arch gently stretches and decompresses the lower spine to take pressure off the discs and nerves</li>
+<li><strong>Refills:</strong> Thermal Hydro-Therapy. Heat opens the blood vessels to bring blood flow, oxygen and nutrients to dry, compressed discs</li>
+<li><strong>Releases:</strong> Neuromuscular Vibration. Calms the muscle guarding that snaps you back, so the relief lasts</li>
+<li><strong>All three at once.</strong> One button, 15-minute Auto program, shuts itself off</li>
+<li><strong>Floor or bed.</strong> Plug it in and lie back. Adjustable heat and traction. Supports up to 300 lbs</li>
+<li><strong>90-day money-back guarantee</strong></li>
+</ul>
+<div class="pricebox">
+<p>Today it's 60% off: <span class="now">$99.97</span> instead of <span class="was">$299.95</span>, with free shipping.</p>
+<p>Two-packs drop to $95 each, three-packs to $90 each. (I bought a second one for my sister in Muncie.)</p>
+</div>
+<p>That's less than ONE of my old epidural copays.</p>
+<p>Less than two visits to my old chiropractor, and I'd made almost seventy of them.</p>
+<p>Less than the dinner Frank and I bought to celebrate my first walk around the block.</p>
+${ctaBox("cta3", "Check Availability &amp; Claim 60% Off »", "Official Back Restore site · free shipping · 90-day money-back guarantee", OFFER_IMG)}
+
+<h2 id="guarantee">The 90-Day Guarantee</h2>
+<p>Use it for 90 days. 15 minutes a day.</p>
+<p>If you don't feel what I felt (the lift, the warmth, that slow give in your lower back), send it back in the original packaging. The company's checkout spells out how it works: a full refund or a replacement, less shipping and handling. No hassle and no questions asked.</p>
+<p>You have 90 days to know if this is the thing that finally works.</p>
+<p>That's more than enough time.</p>
+<p>I knew it was different on day one. By day nine, I knew it was working.</p>
+<h2 id="two-ways">Two Ways the Next Few Months Can Go</h2>
+<p><strong>The first way:</strong> you keep doing everything right. The PT sheet, the pills, the heating pad, maybe the next injection. And every few months, the walk gets a little shorter. The block. Half the block. The mailbox. Until someone you love starts saying "maybe a walker."</p>
+<p><strong>The second way:</strong> you take the pressure off. 15 minutes a day on the bedroom rug. And the walk starts getting longer again. The grocery store without the cart. The end of the block and back. Then, one day, a whole boardwalk with your grandkids.</p>
+<p>I took the second way.</p>
+<p>The walk doesn't get shorter anymore. It gets longer.</p>
+${ctaBtn("cta4", "Get 60% Off Back Restore Now »", UNDER_MAIN)}
+
+<div class="updbox">
+<p><strong>UPDATE:</strong> As of <span data-deal-date>today</span>, demand for Back Restore is rising fast. The official site now shows <strong>Stock Levels: LOW</strong>, and its BF26 promo price (<strong>60% OFF + FREE SHIPPING</strong>) is still being applied automatically. The company calls it a "Limited-Time Offer." Lock yours in before it's gone.</p>
+<p><strong>NOTE:</strong> Order only from the official Back Restore site.</p>
+</div>
+${badges(["90-Day Money-Back Guarantee", "Secure Checkout", "Free Shipping", "US Phone Support"])}
+${ctaBtn("cta5", "Apply My 60% Discount &amp; Check Availability »", UNDER_MAIN)}
+
+<h2 id="finally">Finally, Take the Pressure Off Your Back</h2>
+<p>Since I first shared my story, people keep asking me the same few questions. Here's what the company told me, in their words where I could:</p>
+<div class="lbl">
+<p><strong>"How fast does it come?"</strong> The company says orders are usually processed in 1-2 business days, and most arrive 3-7 business days after they ship. Shipping is free.</p>
+<p><strong>"Will it be too strong for me?"</strong> It has several levels. Start on the lowest. The company says you'll feel "a strong stretching sensation, but it should not be painful." I started low and worked up.</p>
+<p><strong>"I'm a big guy. Will it hold me?"</strong> It's built to support up to 300 lbs, and the curve is shaped to fit the natural arch of the lower back.</p>
+<p><strong>"I've had back surgery. Can I use it?"</strong> The company says to check with your surgeon first, because every surgery is different. I did. Do the same.</p>
+<p><strong>"How often?"</strong> 15 minutes a day. Morning to loosen up, or at night before bed. I do evenings.</p>
+</div>
+${ctaBtn("cta6", "Get 60% Off Back Restore Now »", UNDER_MAIN)}
+${ratingsPanel()}
+${comments("What owners are saying", [R.anthony, R.chris, R.paul, R.greg, R.liz, R.bob, R.patricia, R.jason, R.jamesP, R.emilyM, R.elenaPre, R.mark])}
+${ctaBtn("cta7", "Apply Discount and Check Availability »", UNDER_MAIN)}
+`;
+---
+<AdvertorialPage
+  slimFooter
+  title="At 69, I Was Doing Everything Right and Still Walking Less Every Few Months | The Life Insider"
+  description="Eleven years, three injections and a fusion that didn't hold. A retired librarian on the one thing nobody had treated: the compression itself."
+  cpvCampaign={CPV_CAMPAIGN}
+  cpvLp={CPV_LP}
+  metaPixel={META_PIXEL}
+  fbCapi={true}
+  cpvRedirect={true}
+  topTag=""
+  kicker="Health Journal · Trending in the US"
+  atf={atf}
+  byline={{ name: "Ruth Ellison", role: "Reader letter", readTime: "9-minute read" }}
+  lead={lead}
+  body={body}
+  sticky={{ name: "Back Restore", image: "/images/br/br-product-clean-grey.webp", url: LINK, kicker: "60% off today on the official site", price: "$99.97", oldPrice: "$299.95", buttonText: "Check Availability", ctaId: "sticky", startAt: "device" }}
+  disclosure=""
+  footerNotice={NOTICE_BACK}
+/>

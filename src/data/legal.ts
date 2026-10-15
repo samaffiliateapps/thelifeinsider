@@ -9,3 +9,7 @@ export const NOTICE_STANDARD = `
 
 export const NOTICE_HEALTH = NOTICE_STANDARD + `
 <p>Not medical advice: This page is for informational and marketing purposes only. It is not a substitute for professional medical advice, first-aid or CPR training, or emergency services. In a choking emergency, always call 911. Use any first-aid device only as directed in the manufacturer's instructions, including its age and mask-size guidance. Statements on this page have not been evaluated by the Food and Drug Administration. Individual results and experiences may vary. Consult a qualified health professional with any questions about a medical condition.</p>`;
+
+/* Back Restore Meta presells (15 Oct 2026): standard notice + a short back-health line (no choking/CPR text). */
+export const NOTICE_BACK = NOTICE_STANDARD + `
+<p>Health notice: This page is for informational and marketing purposes only and is not medical advice. Back Restore is a consumer home stretching and comfort device; it is not intended to diagnose, treat, cure or prevent any disease. Statements on this page have not been evaluated by the Food and Drug Administration. Individual results vary. Talk to your doctor before use if you have a diagnosed spinal condition, recent surgery or implants, osteoporosis or are pregnant, and seek care for severe or worsening pain, numbness or weakness.</p>`;
