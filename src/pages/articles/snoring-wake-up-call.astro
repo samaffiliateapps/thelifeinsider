@@ -1,0 +1,244 @@
+---
+/* MAAS & BATH ERGO Z · PAGE A (Meta): 1:1 rip of Derila's Facebook story advertorial (promo-storytel.com/pillow/article,
+   "dead for 60 seconds every night", 2:17 a.m. cold open, early availability button ~24%, 148-day FB ads) merged with its
+   native master (dailylifeinsider derila-ergo-en-o, 452-485 days, 1,290 + 3,878 ads/30 d) and the merchant's own proven
+   snoring-marriage presell (offer.maasbath.com pre4: guest room, "Too high / too low / wrong angle", cost stack, P.S.).
+   Built 16 Oct 2026. NOT LIVE until Sam approves. Plan: advertorial-system/offers/maas-bath/NEXT-TEST-PLAN-2026-10-16.md.
+   Offer facts: advertorial-system/offers/maas-bath/research/offer-facts-2026-10-16.md (price US$69.99 / reg US$139.98 = the
+   merchant's live pre4 figures: Sam confirms the US checkout before launch).
+   Narrator (Tom Brennan) and family are invented lay characters, disclosed in the footer notice only (Meta lane: no top label).
+   No invented clinician endorses the product: Tom's doctor only explains snoring in general and orders tests.
+   Reviews: verbatim from the merchant (src/data/mb.ts). Lifestyle images: /images/mb/slot-a-*.webp (generated); product
+   and diagram images are the merchant's own. CPV One: "Meta - Maas Bath" campaign (Sam creates) → this page = LP slot A. */
+import AdvertorialPage from "../../layouts/AdvertorialPage.astro";
+import "../../styles/wr-broom.css";
+import "../../styles/br.css";
+import "../../styles/mb.css";
+import { NOTICE_SLEEP } from "../../data/legal";
+import { LINK, R, ctaBtn, ctaBox, fig, rcard, comments, authorReply, badges, availStrip, tlink, IMG } from "../../data/mb";
+
+const CPV_CAMPAIGN = "28"; // TODO(Sam): CPV One campaign ID for "Meta - Maas Bath" (no traffic until set)
+const CPV_LP = "1";
+const META_PIXEL = "4514987495496479"; // TLI presell - CPV CAPI dataset (PageView + OfferClick/Scroll custom events only)
+
+const BTN = "Check Availability: 50% Off the Ergo Z »";
+const UNDER = "Official Maas &amp; Bath site · Ships from the U.S. in 1 business day · 90-night money-back guarantee";
+
+const atf = {
+  a: {
+    h1: "“Tom, You Weren’t Breathing!” My Wife Screamed It at 2:17 A.M. After Six Years of Snoring, the Fix Wasn’t Strips or a Strap. It Was My Pillow.",
+    sub: "Six years of snoring. A stiff neck I blamed on age. Eight months in separate rooms. Here’s the strange $70 pillow that finally put us back in the same bed.",
+    hero: {
+      type: "img" as const,
+      src: "/images/mb/slot-a-hero.webp",
+      alt: "A frightened woman sitting up in a dark bedroom at night, shaking her husband who is asleep on his back with his mouth open",
+      width: 900, height: 600,
+    },
+  },
+};
+
+const lead = `
+<p><strong>December 23rd. 2:17 in the morning.</strong></p>
+<p>Linda's scream shook the whole house.</p>
+<p><strong>"TOM! Oh my God… TOM!"</strong></p>
+<p>I tried to answer her. The words came out thick and slurred, like my mouth was full of cotton.</p>
+<p>Her face was an inch from mine, lit up by her phone. She was shaking my shoulder so hard the headboard knocked the wall.</p>
+<p>"You stopped. You just… stopped. The snoring stopped and you weren't breathing. I counted, Tom. I counted to twenty."</p>
+<p>"Should I call 911? Tom, answer me. Should I call?"</p>
+<p>I shook my head and pushed myself up. The room tilted. My heart was pounding like I'd just run up the stairs.</p>
+<p>"I'm fine," I said. I wasn't.</p>
+<p>The kids were home for Christmas and needed the guest room, so for the first time in eight months, Linda was back in our bed. That's the only reason anyone was there to count.</p>
+<p>Linda didn't go back to sleep that night. She sat against the headboard until the sun came up, listening to me breathe.</p>
+<p>And somewhere around 5 a.m., lying there pretending to be asleep, I finally admitted what I'd been laughing off for six years:</p>
+<p><strong>My snoring wasn't a joke anymore. It was wrecking my marriage. And now it was scaring the woman I love.</strong></p>
+<p>I'm 61. I'm not a doctor, and I've wasted plenty of money on "snoring miracles." So I'm going to tell you exactly what happened next, including everything that failed. Because the thing that finally worked cost less than I'd already thrown away on nose strips. (It's ${tlink("cta-lead", "this pillow")}, and it's 50% off this week.)</p>
+`;
+
+const body = `
+<h2 id="guest-room">34 Years of Marriage… and a Guest Room That Was Never Supposed to Be Hers</h2>
+<p>We had a good life. 34 years married. Two grown kids, three grandkids, and a little house outside Columbus we'd finally paid off.</p>
+<p>Then, somewhere in my mid-fifties, the snoring started.</p>
+<p>At first it was a running joke at Thanksgiving. Then Linda started nudging me two, three, five times a night. Then she started sleeping with a pillow pressed over her head.</p>
+<p>We tried everything the drugstore sells. Nasal strips. A chin strap. Earplugs for her. A peppermint "anti-snore" spray that did nothing except make the bedroom smell like gum.</p>
+<p>One night I came to bed and found her side empty. She was in the guest room. She said it was "just for tonight."</p>
+<p><strong>It lasted eight months.</strong></p>
+<p>In 34 years we had never slept apart. Now we were two people who shared a kitchen and a mortgage and said goodnight in the hallway.</p>
+<p>Some nights I gave up and took the basement couch, just so she could have our bed back. At least then one of us was sleeping.</p>
+${fig("/images/mb/slot-a-couch.webp", "An older man asleep alone on an old couch in a dim basement den, under a thin blanket", 900, 600, "Eight months of this. In 34 years we had never slept apart.")}
+
+<h2 id="warning-signs">The Warning Signs I'd Been Blaming on "Getting Older"</h2>
+<p>After that night, Linda made the appointment herself and drove me there.</p>
+<p>My doctor listened for about thirty seconds before he asked the one question nobody had ever asked me: <strong>"Does she ever hear you stop breathing?"</strong></p>
+<p>Then he explained something I wish I'd known ten years earlier.</p>
+<p>When you fall asleep, the muscles in your throat relax. If your head and neck sit at the wrong angle (chin pushed down toward your chest, or head tipped back off a flat, squashed pillow), that soft tissue sags into your airway.</p>
+<p>The air has to force its way through a narrower opening. <strong>That's the rattle.</strong> And for some people, when it narrows far enough, the snoring stops for a few seconds… and so does the air.</p>
+<p>Then he went down the list, and I had every single one:</p>
+<ul class="xs">
+<li>A dull headache most mornings, gone by lunch.</li>
+<li>A mouth so dry I kept a glass of water by the bed.</li>
+<li>A fog that rolled in every afternoon around 2.</li>
+<li>Nodding off at a red light on Route 33 until the car behind me leaned on its horn.</li>
+<li>Snapping at Linda and the grandkids over nothing.</li>
+</ul>
+<p>Every one of those, I'd blamed on my age. He set me up for an overnight sleep test and handed me a stack of options.</p>
+<p>None of them were the thing that finally gave us our nights back. That came from Linda, and you can see it right here:</p>
+${availStrip("cta-early", "The pillow that finally quieted our bedroom (I explain exactly why below): the Ergo Z by Maas &amp; Bath, 50% off this week.", "Check Availability »")}
+
+<h2 id="fixes">The "Fixes" That Made Everything Worse</h2>
+<p><strong>First came the mask.</strong> Picture trying to fall asleep with a vacuum hose strapped to your face. Linda said I looked like a fighter pilot. I pulled it off in my sleep almost every night. I know it helps a lot of people, and I'm not telling anyone to quit theirs. I just never made peace with it.</p>
+<p><strong>Then a $120 mouthguard</strong> that pushed my jaw forward until my teeth ached by breakfast.</p>
+<p><strong>Then the "tennis ball trick":</strong> a ball sewn into the back of my T-shirt so I couldn't roll onto my back. I rolled anyway. I just woke up bruised.</p>
+<p><strong>Then I stacked three pillows</strong> to "prop my head up." Linda said the snoring got worse. It did. Later I learned exactly why.</p>
+<p>All of it ended up in what Linda called "the drawer of shame."</p>
+${fig("/images/mb/slot-a-drawer.webp", "An open drawer full of failed snoring fixes: nasal strips, a chin strap, a mouthguard in a case, earplugs and a folded mask with tubing", 900, 600, "The drawer of shame. Hundreds of dollars, and not one quiet night.")}
+<p>I'd spent hundreds of dollars and I felt like a patient instead of a husband.</p>
+<p>And Linda was running out of patience.</p>
+
+<h2 id="found">The Strange-Looking Pillow My Wife Found at 3 A.M.</h2>
+<p>Linda's the one who cracked it.</p>
+<p>She was up one night (of course she was), scrolling on her phone in the guest room, when she found a post she read out to me over coffee the next morning:</p>
+<p><strong>"Most people blame their snoring on their weight, their age or their nose. But for millions of people the real problem is the angle their head sits at for eight hours a night. And that angle is decided by their pillow."</strong></p>
+<p>Suddenly my three-pillow disaster made sense. I'd been cranking my chin down toward my chest all night, squeezing my own airway. And on the nights my old pillow went flat, my head tipped back and my mouth fell open. Either way: same rattle.</p>
+<p>The company behind the pillow Linda found puts it in three lines:</p>
+<ul class="xs">
+<li><strong>Too high</strong> = a squeezed airway = snoring.</li>
+<li><strong>Too low</strong> = your head tips back = snoring.</li>
+<li><strong>Wrong angle</strong> = soft tissue collapses = snoring.</li>
+</ul>
+<p>So their fix isn't a gadget. <strong>It's a shape: what I now call the "neutral-angle" shape.</strong></p>
+<p>It's called the ${tlink("cta-name", "Ergo Z")}, made by a company called Maas &amp; Bath.</p>
+<p>When Linda showed me the picture, I laughed out loud. It looked like a white butterfly somebody had sat on. "That's a pillow?"</p>
+<p>She didn't laugh. She said: <strong>"Try it, or keep the couch."</strong></p>
+<p>I ordered it before I finished my coffee.</p>
+${fig("/images/mb/mb-product-box.webp", "The Ergo Z contour memory-foam pillow by Maas & Bath next to its box", 570, 465, "The Ergo Z by Maas &amp; Bath. (Photo: Maas &amp; Bath)", "narrow")}
+
+<h2 id="why-it-works">Why a Shape Did What Strips, Straps and a $120 Mouthguard Couldn't</h2>
+<p>Here's what Linda found, and what I've since read for myself:</p>
+<ul class="ticks">
+<li><strong>A raised neck roll</strong> fills the gap under your neck, so your head can't drop back and your jaw can't fall open.</li>
+<li><strong>A scooped center</strong> cradles your head at a neutral height: not cranked forward like my three-pillow tower, not tipped back like a flat pillow.</li>
+<li><strong>Curved cut-outs on both sides</strong> make room for your shoulder, so you can sleep on your side (the position snorers keep getting told to sleep in) without your neck kinking.</li>
+<li><strong>Slow-rebound memory foam</strong> holds that position all night. It doesn't go flat at 2 a.m. like my old pillow did.</li>
+<li><strong>A breathable core</strong>, so you're not sweating into it and flipping it every hour.</li>
+</ul>
+<p>Maas &amp; Bath says it was designed with the help of chiropractors and health experts to support spinal alignment, and that it's made to <strong>"ease tension in the neck and shoulders, lessen snoring, and promote deeper, more restorative sleep."</strong></p>
+<p>And it isn't just marketing talk. Researchers have tested head-positioning pillows on snorers and found they reduced how loud the snoring was and how often it happened. (The studies are listed at the bottom of this page.)</p>
+${fig("/images/mb/mb-alignment.webp", "Illustration: an ordinary pillow bends the sleeper's neck out of line; the Ergo Z keeps it straight", 683, 391, "Left: an ordinary pillow bends the neck. Right: the Ergo Z holds it neutral. (Image: Maas &amp; Bath)")}
+<p>It's not magic. It's geometry. <strong>Your airway follows your neck, and your neck follows your pillow.</strong></p>
+${ctaBtn("cta1", BTN, UNDER)}
+
+<h2 id="first-night">The First Night</h2>
+<p>It showed up at our door two days later.</p>
+<p>The first thing I noticed when I lay down: my neck had somewhere to go. My head sank into the middle and just… stayed there. I rolled onto my side, my shoulder slid into the cut-out, and I don't remember anything after that.</p>
+<p>I woke up at 6:40. The room was quiet.</p>
+<p>Then I realized Linda was lying next to me. She'd crept back in around midnight "to test it."</p>
+<p>When I came downstairs she was in the kitchen in her robe, holding her coffee with both hands. Her eyes were wet.</p>
+<p><strong>"You didn't make a sound all night," she said. "Not one."</strong></p>
+${fig("/images/mb/slot-a-morning.webp", "A woman in a robe in a bright kitchen holding a coffee mug, smiling with tears in her eyes at her husband", 900, 600, "\"You didn't make a sound all night.\"")}
+${rcard(R.bill)}
+${ctaBtn("cta-night1", "See If the 50% Price Is Still On »", UNDER)}
+
+<h2 id="thirty-days">Our First 30 Days</h2>
+<p><strong>After night 1:</strong> No rattle. Linda slept six hours straight for the first time in a year. My mouth wasn't dry. I was skeptical, but I was hopeful.</p>
+<p><strong>After week 1:</strong> The morning headache I'd had for years was gone by day four. So was the stiff neck I'd also blamed on my age. On day five, Linda moved her things out of the guest room.</p>
+<p><strong>After week 2:</strong> No more 2 p.m. fog. I drove the whole way to our daughter's place in Dayton without that heavy-eyed feeling once.</p>
+<p><strong>After 30 days:</strong> I'm still seeing my doctor and finishing the tests he wanted, and I'd tell anyone to do the same. But at home, everything is different. We go to bed at the same time again. We talk in the dark like we used to. Linda says I'm "a lot less of a grump," and the grandkids say Grandpa is fun again.</p>
+${fig("/images/mb/slot-a-together.webp", "An older couple asleep peacefully together in morning light, the husband on his side on the Ergo Z pillow", 900, 600, "Back in our own bed. Both of us.")}
+${ctaBtn("cta-30days", BTN, UNDER)}
+
+<h2 id="owners">Owners Are Saying the Same Thing</h2>
+<p>When I told this story at our church group, half the room had a husband (or a wife) who snores. Here's what owners say on the maker's own site:</p>
+${rcard(R.denise)}
+${rcard(R.plum)}
+${rcard(R.yvvone)}
+${rcard(R.sara)}
+
+<h2 id="offer">Think About What Snoring Is Already Costing You</h2>
+<p>Here's what the company points out snoring really costs a couple:</p>
+<ul class="xs">
+<li>Chiropractor visits for a stiff neck: <strong>about $150 a month</strong></li>
+<li>Sleep aids and nose strips: <strong>about $40 a month</strong>, every month</li>
+<li>Marriage counseling: <strong>about $200 a session</strong></li>
+<li>Sleeping apart from the person you love: <strong>you can't put a price on it</strong></li>
+</ul>
+<p>Now compare that with this:</p>
+<div class="pricebox">
+<p>Right now Maas &amp; Bath has the Ergo Z for <span class="now">$69.99</span> instead of <span class="was">$139.98</span>. That's 50% off. One payment, free shipping. The more you get, the more you save (up to 61% off).</p>
+<p><strong>The 2-pack is the maker's "Most Popular" option:</strong> one for the snorer, and one for the person who's been lying awake next to him. (Linda stole mine within a week.)</p>
+</div>
+<ul class="ticks">
+<li><strong>90 nights to try it, or your money back.</strong> Sleep on it for three full months. If it's not for you, contact Maas &amp; Bath and they refund every penny. No hassle, no questions asked.</li>
+<li><strong>Ships from a U.S. warehouse within 1 business day</strong> and usually arrives in 2-3 business days.</li>
+<li><strong>Machine-washable cover</strong> and non-toxic, odor-free memory foam.</li>
+<li><strong>Works for back, side and stomach sleepers.</strong></li>
+</ul>
+<p>When I checked today, their site showed stock as <strong>LOW</strong>. So if you're going to do it, do it before the price goes back up.</p>
+<p><strong>Quick heads-up before you click:</strong> the button takes you to Maas &amp; Bath's official page. Most of their customers buy the Ergo Z for neck and back pain, so that's what their page talks about first. It's the same neutral-angle shape that quieted our bedroom. Their discount code is shown right at the top of the page, and you pick 1 or 2 pillows at checkout.</p>
+${ctaBox("cta2", BTN, UNDER, IMG.product)}
+
+<h2 id="who">Who Should Get an Ergo Z (and Who Shouldn't)</h2>
+<p><strong>Perfect for:</strong></p>
+<ul class="ticks">
+<li>Snorers, and the people lying awake next to them.</li>
+<li>Anyone who wakes up with a stiff neck, sore shoulders or a headache.</li>
+<li>Side sleepers whose shoulder always gets in the way.</li>
+<li>Couples who have ended up in separate rooms.</li>
+</ul>
+<p><strong>Maybe skip it if:</strong></p>
+<ul class="xs">
+<li>Both of you already sleep through the night and wake up with no aches.</li>
+<li>You only like sinking into a soft, fluffy down pillow.</li>
+</ul>
+${ctaBtn("cta3", BTN, UNDER)}
+
+<h2 id="last-night">What Linda Said Last Night</h2>
+<p>Last night, as we turned out the light, Linda put her hand on my chest and said something I'll never forget:</p>
+<p><strong>"I forgot what it was like to fall asleep next to you without listening for your next breath."</strong></p>
+<p>That's what a $70 pillow gave us back. Not just quiet. Our bed. Our marriage the way it's supposed to be.</p>
+<p>Don't let snoring steal one more night from you, or from the person lying next to you.</p>
+
+<div class="updbox">
+<p><strong>UPDATE:</strong> As of <span data-deal-date>today</span>, the maker's site lists stock as <strong>LOW</strong> and the 50% price is a limited-time offer. If the button below still works, the discount is still on.</p>
+<p><strong>NOTE:</strong> Order only from the official Maas &amp; Bath site.</p>
+</div>
+${badges(["90-Night Money-Back Guarantee", "Ships From the U.S.", "Secure Checkout", "Free Shipping"])}
+${ctaBtn("cta4", BTN, UNDER)}
+
+${comments("Comments", [
+  R.bill, R.plum,
+  authorReply("Tom Brennan", "For everyone asking about shipping: Maas &amp; Bath ships from U.S. warehouses by USPS within one business day, and it usually arrives in 2-3 business days. Ours came in two."),
+  R.yvvone, R.denise, R.sara,
+  authorReply("Tom Brennan", "To the folks asking \"what if it doesn't work for me?\" They give you 90 nights. If you're not happy, you get a full refund, no questions asked. That's what made Linda's ultimatum an easy yes."),
+  R.jhon, R.damon, R.arthur, R.lydia,
+])}
+${ctaBtn("cta5", BTN, UNDER)}
+`;
+
+const ps = `
+<p><strong>P.S.</strong> Linda asked me to add this: <em>"If your husband snores, don't discuss it. Don't negotiate. Order it, swap out his pillow, and thank me later. The guest room is for guests."</em></p>
+${ctaBtn("cta6", "YES, I WANT 50% OFF THE ERGO Z »", UNDER)}
+`;
+---
+<AdvertorialPage
+  slimFooter
+  title="“Tom, You Weren’t Breathing!” The $70 Pillow That Put Us Back in the Same Bed | The Life Insider"
+  description="After six years of snoring, a guest room and a scare at 2:17 a.m., the fix wasn't a strip, a strap or a mask. It was the angle of his pillow."
+  cpvCampaign={CPV_CAMPAIGN}
+  cpvLp={CPV_LP}
+  metaPixel={META_PIXEL}
+  fbCapi={true}
+  cpvRedirect={true}
+  topTag=""
+  kicker="Health · Sleep"
+  crumb="Home › Sleep › Snoring"
+  updateBar="<b>Update:</b> The Ergo Z is 50% off today ($69.99, reg. $139.98). The maker lists stock as LOW."
+  atf={atf}
+  byline={{ name: "Tom Brennan", role: "Reader story", readTime: "6-minute read" }}
+  ratingLine="27,517+ five-star reviews on the maker’s site"
+  lead={lead}
+  body={body}
+  ps={ps}
+  sticky={{ name: "Ergo Z Pillow", image: "/images/mb/mb-product-clean.webp", url: LINK, kicker: "50% off today on the official site", price: "$69.99", oldPrice: "$139.98", buttonText: "Get 50% Off", ctaId: "sticky", startAt: "found" }}
+  disclosure=""
+  footerNotice={NOTICE_SLEEP}
+/>

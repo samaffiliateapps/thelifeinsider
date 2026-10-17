@@ -104,7 +104,12 @@ const legacyTag = p.topTag === undefined;
           fig.innerHTML = media + (d.hero.caption ? '<figcaption id="advHeroCap">' + d.hero.caption + '</figcaption>' : '');
         }
       }
+      var t0 = Date.now();
       function ev(name, params) { try { params = params || {}; params.variant = v; if (typeof gtag === "function") gtag("event", name, params); if (window.clarity) window.clarity("set", "variant", v);
+        /* 17 Oct 2026 (Back Restore post-mortem): Clarity custom events so the Clarity API/dashboard can split sessions by CTA position,
+           scroll depth and seconds-before-click (fast "price-checker" clicks vs readers who finished the story). */
+        if (window.clarity) { if (name === "adv_cta") { var s = Math.round((Date.now() - t0) / 1000); window.clarity("event", "cta_" + (params.position || "x")); window.clarity("set", "cta_clicked", "yes"); window.clarity("set", "cta_secs", s < 30 ? "lt30" : s < 90 ? "30-90" : "90plus"); }
+          if (name === "adv_scroll") window.clarity("event", "scroll_" + params.depth); }
         /* Meta pages only (fbq exists only when metaPixel is set): offer clicks + scroll depth as custom events, never a Purchase */
         if (typeof fbq === "function") { if (name === "adv_cta") fbq("trackCustom", "OfferClick", params); if (name === "adv_scroll" && (params.depth === 50 || params.depth === 75)) fbq("trackCustom", "Scroll" + params.depth, params); } } catch (e) {} }
       ev("adv_variant");
