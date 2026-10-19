@@ -162,3 +162,20 @@
 .rip-pre .strip { background: #f2f8ff; border: 1px solid #d6e4fb; border-radius: 8px; padding: 9px 12px; font-size: 0.95rem; }
 /* Herz pages only (pages with the rolling top bar): rival Amazon buttons demoted to a quiet text link (reviewer fix, 19 Oct 2026) */
 .rip:has(.rip-topbar) .c-btn.amz { background: none; border: 0; box-shadow: none; color: #555; font-size: 0.9rem; font-weight: 600; text-decoration: underline; padding: 4px; }
+
+/* compact rival cards on mobile (Sam, 19 Oct): image beside name + bullets, score row inline */
+@media (max-width: 859px) {
+  .rip .card:not(.top) { grid-template-columns: 92px 1fr; column-gap: 12px; padding: 18px 12px 12px; margin-bottom: 22px; }
+  .rip .card:not(.top) .c-media { align-self: start; }
+  .rip .card:not(.top) .c-media img { max-width: 92px; max-height: 92px; }
+  .rip .card:not(.top) .c-media img + img { display: none; }
+  .rip .card:not(.top) .c-name { text-align: left; font-size: 1.12rem; margin: 0 0 6px; }
+  .rip .card:not(.top) .c-list li { font-size: 0.86rem; margin-bottom: 5px; padding-left: 22px; }
+  .rip .card:not(.top) .c-list li::before { width: 16px; height: 16px; font-size: 0.65rem; }
+  .rip .card:not(.top) .c-side { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 2px 10px; margin-top: 8px; padding-top: 8px; border-top: 1px solid #eee; }
+  .rip .card:not(.top) .c-cap { display: none; }
+  .rip .card:not(.top) .c-score { font-size: 1.7rem; }
+  .rip .card:not(.top) .c-stars { font-size: 1rem; }
+  .rip .card:not(.top) .c-rating, .rip .card:not(.top) .c-ship { flex-basis: 100%; }
+  .rip .card:not(.top) .c-btn, .rip .card:not(.top) .c-sale { max-width: none; }
+}
