@@ -1,428 +1,55 @@
 ---
-import ReviewPageV2 from "../../layouts/ReviewPageV2.astro";
-import type { ProductV2 } from "../../components/RankCardV2.astro";
-import CpvTracker from "../../components/CpvTracker.astro";
-
 /* =========================================================================
-   HERO: Grounded Footwear® Freedom — AdsBranded offer 568, $64 USD CPA, US.
-   Network CVR 8.34% (AM, 4 Aug 2026). Top offer on the network, evergreen.
-
-   REBUILT 4 Sep 2026 on ReviewPageV2 — the proven affiliate-lander shape from
-   the visual teardown of eight competitor pages (competitor-visual-teardown-3sep.md).
-   Why: relaunch pass-through ran 18–42%/day (~32% cumulative) and offer-click
-   CVR ~2% against the network's 8.34%. The keyword set has QS 8–10; the page
-   was the leak. This version: logo-only header, pain-question open, dense
-   #1 card (10 ticks, 9.8, stars, 13,427+ ratings, price struck, one hot
-   button, red sale block, shipping line), Amazon rivals with slower shipping
-   printed, repeat card with trust strip, HOW WE RATE, two-column editorial
-   under a byline with a sticky sub-score sidebar, urgency box + wide CTA,
-   verbatim customer quotes, where-to-buy, final card, author, FAQ.
-
-   ⚠️ CLAIMS — verified 4 Sep 2026 against the AFFILIATE funnel we send to
-   (landing1), re-fetched today:
-   4.8/5 "Based on reviews from 13,427+ customers" · 90-day money-back ·
-   free size exchanges · "Order Now & Save Up To 60% Off" (bundles; $69.99
-   single from $139.98) · "70% Lighter Than Any Other Shoe" (page now says 70%,
-   not the 60% recorded in August — updated) · wide toe box · zero/minimal heel
-   drop · thin flexible sole · "Slip-Resistant Traction Grip" · breathable ·
-   machine washable (customer reviews + our earlier verification) · 9 colourways
-   (Black Orca, White Citrus, Tan Sandstone, White Glacier, Navy Tide, Pink
-   Magnolia, Midnight Spark, Black Onyx, Aqua Reef) · ships USPS within 48
-   hours, 2–5 business days · sizing: "select the size you typically wear;
-   between sizes / half size → size up" · customer sub-ratings: Worth the
-   money 4.8, Reduces Foot & Joint Pain 4.9, Improves Stability 4.7, Better
-   Posture 4.8, Comfortable All-Day Wear 4.9.
-
-   We do NOT repeat the merchant's medical claims (neuropathy, circulation,
-   orthopedist-recommended, pain relief) in OUR voice. Customer quotes are
-   verbatim from the maker's review page, attributed as such.
-
-   AMAZON: ranks 2-5 ASINs resolved 4 Aug 2026 and titles confirmed. Amazon
-   ToS forbids static prices → "Check price on Amazon". Rivals link to Amazon,
-   never to maker sites (lesson 0c-n, brand-anchor leak).
-
-   RESEARCH APPLIED 6 Sep 2026 (grounded-copy-document-6sep.md): lead mechanism = "wide ≠ wide toe box" with the
-   ten-second home check; second axis = "you tried the same shape"; score 9.2 with sub-scores 9.4/9.4/8.9/9.1/9.0 (a 9.8
-   with all 9.6–9.9 reads as the tell of a paid ranking); "real brand?" section + FAQ; grounding-vs-barefoot clarification.
-
-   COPY RULE (Sam, 2 Sep): Claude builds the full structure and writes the
-   editorial from research; verbatim customer quotes as testimonials; live
-   offer facts as urgency. `dealLabel` below is the one word Sam can flip.
+   CORE PAGE — rebuilt 19 Oct 2026 as a 1:1 structural rip of
+   consumertopreviews.com/best-barefoot-shoes3.html (~US$93k/mo, same offer 568).
+   Rip map: advertorial-system/offers/grounded/research/RIP-TEARDOWNS-2026-10-19.md
+   Google ad group "Core" (exact): barefoot shoes · best barefoot shoes · best barefoot shoe · barefoot sneakers.
+   Persona: "Daniel Strutgate" is an editorial persona (Sam, 19 Oct). He COMPARED and RANKED;
+   nowhere does he say he bought, tested or wore the shoes (held line).
+   Author photo: AI-generated (Higgsfield nano_banana_pro), see img-raw/IMAGE-QA.
    ========================================================================= */
+import ReviewPageRip from "../../layouts/ReviewPageRip.astro";
+import CpvTracker from "../../components/CpvTracker.astro";
+import { CPV_CAMPAIGN, GF_LINK, UPDATED, DEAL_CALENDAR, DISCLOSURE, ROLLING_SALE_END, products, where, side, sticky, reviewHtml } from "../../data/grounded";
 
-/* CPV ONE TRACKING (unchanged from V1) */
-const CPV_ROOT = "https://track.thelifeinsider.com/";
-const CPV_CAMPAIGN = "10"; // Grounded Footwear — CPV One campaign 10
-const GF_DIRECT =
-  "https://offer.groundedfootwear.co/freedom/en/us/landing1?uid=83&oid=60&affid=23&uid=1722&oidab=568&affidab=1241";
-const GF_LINK = CPV_CAMPAIGN ? `${CPV_ROOT}base2.php` : GF_DIRECT;
-const AMZ = (asin: string, sub: string) =>
-  `https://www.amazon.com/dp/${asin}?tag=thelifeinside-20&ascsubtag=gf_${sub}&language=en_US`;
-
-const CTA = `<p style="text-align:center"><a class="v2-btn inline" href="${GF_LINK}" rel="sponsored nofollow noopener" target="_blank">Check Availability &amp; Discount →</a></p>`;
-
-const products: ProductV2[] = [
-  {
-    rank: 1,
-    name: "Grounded Footwear Freedom",
-    brand: "Grounded Footwear",
-    ribbon: "#1 Best in 2026",
-    score: 9.2,
-    scoreLabel: "Excellent",
-    starRating: 4.8,
-    ratingLine: "4.8/5 from 13,427+ customer reviews",
-    price: "$69.99",
-    oldPrice: "$139.98",
-    discount: "Up to 60% OFF",
-    dealLabel: "Sale Ends",
-    shipNote: "Ships within 48 hrs · USPS 2–5 days",
-    shipFast: true,
-    image: "/images/gf2-hero.webp",
-    logo: "/images/gf2-logo.png",
-    stickyImage: "/images/gf-grounded.webp",
-    trustNote: "13,427+ customers · 90-day money-back guarantee · free size exchanges",
-    url: GF_LINK,
-    ctaLabel: "Visit Site →",
-    pros: [
-      "<strong>Widest at the toes, not the ball</strong> — toes spread instead of stacking",
-      "<strong>Zero heel drop</strong> — heel and forefoot sit level, nothing tips you forward",
-      "<strong>70% lighter</strong> than a conventional shoe (Grounded Footwear's published figure)",
-      "Thin, flexible sole that bends and grips like a foot does",
-      "Slip-resistant rubber traction grip",
-      "Machine washable",
-      "Unisex sizing · 9 colourways",
-      "<strong>Free size exchanges</strong> if the fit is wrong",
-      "<strong>90-day money-back guarantee</strong>",
-      "Breathable, quick-dry knit upper",
-    ],
-    cons: [
-      "Sold only on the official Grounded Footwear site — not on Amazon or in stores",
-      "Allow 1–2 weeks to adjust if you are coming out of cushioned shoes",
-    ],
-  },
-  {
-    rank: 2,
-    name: "WHITIN Women's Barefoot Shoes W81",
-    brand: "WHITIN",
-    score: 8.6,
-    scoreLabel: "Very Good",
-    starRating: 4.3,
-    ratingLine: "Amazon customer rating",
-    image: "/images/gf-whitin-w81.webp",
-    url: AMZ("B0D1JSSXJX", "whitin81"),
-    ctaLabel: "Visit Amazon",
-    shipNote: "Standard shipping · 30-day Amazon returns",
-    pros: [
-      "Zero drop sole and a wide fit in a sneaker shape",
-      "Machine washable",
-      "The established name in budget barefoot shoes",
-    ],
-    cons: [
-      "Sizing runs inconsistent across WHITIN models — no free exchanges, a wrong guess costs return postage",
-      "30-day returns against 90 days on our #1",
-    ],
-  },
-  {
-    rank: 3,
-    name: "WHITIN Men's Minimalist Trail Runner W30",
-    brand: "WHITIN",
-    score: 8.4,
-    scoreLabel: "Very Good",
-    starRating: 4.3,
-    ratingLine: "Amazon customer rating",
-    image: "/images/gf-whitin-w30.webp",
-    url: AMZ("B07KN41PGH", "whitin30"),
-    ctaLabel: "Visit Amazon",
-    shipNote: "Standard shipping · 30-day Amazon returns",
-    pros: [
-      "Wide toe box with a proper trail outsole",
-      "Very light for a shoe with this much tread",
-      "Often recommended by people deep in the barefoot category",
-    ],
-    cons: [
-      "Men's sizing only — our #1 is unisex",
-      "Aggressive tread is unnecessary, and noisier, indoors on hard floors",
-    ],
-  },
-  {
-    rank: 4,
-    name: "HOBIBEAR Wide Minimalist Barefoot Sneakers",
-    brand: "HOBIBEAR",
-    score: 7.9,
-    scoreLabel: "Good",
-    starRating: 4.2,
-    ratingLine: "Amazon customer rating",
-    image: "/images/gf-hobibear.webp",
-    url: AMZ("B0CD6R33W6", "hobibear"),
-    ctaLabel: "Visit Amazon",
-    shipNote: "Standard shipping · 30-day Amazon returns",
-    pros: [
-      "Zero drop and a wide forefoot at the lowest price on this list",
-      "Unisex sizing",
-      "Light and flexible",
-    ],
-    cons: [
-      "Build quality is where the savings come from — reviews mention wear after a few months",
-      "Less toe room than our #1 or either WHITIN",
-    ],
-  },
-  {
-    rank: 5,
-    name: "Zureto Grounding Shoes with Copper",
-    brand: "Zureto",
-    score: 7.2,
-    scoreLabel: "Decent",
-    starRating: 4.0,
-    ratingLine: "Amazon customer rating",
-    image: "/images/gf-zureto.webp",
-    url: AMZ("B0DSCF7995", "zureto"),
-    ctaLabel: "Visit Amazon",
-    shipNote: "Standard shipping · 30-day Amazon returns",
-    pros: [
-      "Genuine barefoot construction — thin sole, wide forefoot, no heel lift",
-      "Copper grounding plug through the sole",
-    ],
-    cons: [
-      "Narrower toe box and less comfortable over long days than anything above it",
-      "Costs more than better-fitting shoes on this list",
-    ],
-  },
-];
-
-const subhead =
-  "We compared 2026's best-selling barefoot shoes on the four things that decide whether a pair gets worn. Only one is widest where your foot is widest — and it is the only one that takes the sizing risk off you.";
-
-const painQuestions = [
-  "Do your feet ache by the end of a shift, no matter which “comfortable” shoes you buy?",
-  "Do you kick your shoes off the second you sit down because your toes feel crushed?",
-  "Have orthotics, cushioned trainers and insoles each helped for a while and then stopped?",
-  "Worried a barefoot shoe will arrive in the wrong size and cost you a return?",
-];
-
-const intro = [
-  "If you nodded at any of those, the problem is probably not your feet. It is the shape of the shoe they spend sixteen hours a day inside. Almost every shoe you have ever owned is widest at the ball of your foot and then narrows to a point — and your foot is the opposite shape. It is widest at the ends of your toes. That is also why buying “wide” never fixed it: a wide shoe makes the whole shoe bigger and still comes to a point at the front.",
-  "One owner below put it plainly: <em>“Shoes always seem too crowded for my toes.”</em> Another, a retail manager on concrete all shift, said the pair he expected nothing from <em>“get me through the day pain free.”</em> We ranked five on the four things that decide whether a pair actually gets worn: real toe room, a flat sole, weight, and what happens when the size is wrong.",
-];
-
-const listLede =
-  "<strong>Here are our top 5 barefoot shoes of 2026</strong>, with the full review of our #1 pick further down the page.";
-
-const trust = [
-  "<strong>90-day money-back guarantee.</strong> Not satisfied, return it for a full refund — no questions asked.",
-  "<strong>Fast US shipping.</strong> Dispatched by USPS within 48 hours, 2–5 business days to your door.",
-  "<strong>Free size exchanges.</strong> Wrong size? Grounded Footwear sends the replacement pair free.",
-];
-
-/* Editorial headline. Alternative Sam may prefer (one-line swap):
-   "We Bought & Tested the Best-Selling Barefoot Shoes of 2026. Here's Why Grounded Footwear Freedom Is #1" */
-const EDITORIAL_HEADLINE = "We Bought & Tested the Best-Selling Barefoot Shoes of 2026. Here's Why Grounded Footwear Freedom Is #1"; // Sam's switch, applied 11 Sep 2026 (was "We Compared…")
-/* Sam: first-hand testing narrative goes here (HTML). Rendered directly after "How we ranked the five". */
-const TESTING_NOTES = ``;
-
-const editorial = {
-  heading: EDITORIAL_HEADLINE,
-  byline: "Daniel Strutgate",
-  bylineRole: "Footwear & Everyday Comfort Editor",
-  html: `
-<p><strong>Nothing else on this list came close.</strong> If you are on your feet and your feet hurt, the <a href="${GF_LINK}" rel="sponsored nofollow noopener" target="_blank"><strong>Grounded Footwear Freedom</strong></a> is the pair I would buy — and it was not a close call. Here is exactly why.</p>
-
-<figure>
-  <img src="/images/gf2-compare.webp" alt="Diagram comparing a tapered conventional shoe sole with pressure hot-spots against the wide, foot-shaped Grounded barefoot sole" width="900" height="921" loading="lazy" decoding="async" />
-  <figcaption>Left: a conventional sole, widest at the ball and tapering to a point. Right: the Grounded sole, widest at the toes. Grounded Footwear diagram.</figcaption>
-</figure>
-
-<h3>How we ranked the five</h3>
-<p>We lined the five up side by side and scored them on the four things that decide whether a pair actually gets worn: <strong>toe room</strong> (is the outsole widest at the toes, or at the ball like an ordinary sneaker?), <strong>heel drop</strong> (are heel and forefoot level?), <strong>weight and sole flex</strong> (does it bend where a foot bends?), and <strong>buyer protection</strong> (what happens when the size is wrong — return window, exchange policy, who pays the postage). We went through each brand's published specifications and sizing charts, the return and shipping policies word for word, and the customer reviews for every pair, looking for the complaints that repeat: sizing, bead-thin durability, cold spots of pressure, and the adjustment period.</p>
-<p>Only one shoe led on all four criteria, and it is also the only one whose sizing risk is carried by the brand rather than by you.</p>
-${TESTING_NOTES}
-
-<h3>Every shoe you have ever owned was built around the wrong shape</h3>
-<p>Shoes are made on a last: a standardised mould that is widest at the ball of the foot and then tapers to a point. Your foot is the opposite shape. It is widest at the ends of your toes.</p>
-<div class="callout"><strong>Check it yourself in ten seconds.</strong> Take off the shoe you are wearing, stand it sole-down next to your bare foot, and look at where each one is widest. The shoe is widest at the ball and narrows to the toe. Your foot is widest at the toes. Every pair in your closet will show you the same thing.</div>
-<p><strong>This is why “wide” never fixed it.</strong> A wide or 2E shoe scales the whole shoe up and keeps the point at the front, so the ball of your foot finally has room and your toes are still jammed together at the tip. A wide toe box is a different thing: the shoe is widest where your toes are. If you have bought “wide” and it still pinched, you did not try the wrong brand. You tried the same shape again.</p>
-<p>So every pair you have worn has been squeezing the widest part of your foot into the narrowest part of the shoe — then lifting the heel so your weight tips forward onto it. Do that for thirty years, in nine different brands, and you get exactly what most people over fifty are living with: toes pushed inward, pressure concentrated where the joint bulges out, and a foot that has slowly forgotten how to spread and grip. You did not try everything. You tried the same tapered shape over and over.</p>
-<p><a href="${GF_LINK}" rel="sponsored nofollow noopener" target="_blank"><strong>Grounded Footwear</strong></a> is built the other way round. <strong>Widest at the toes. Flat from heel to forefoot. Thin enough to bend.</strong> That is the entire mechanism, and it is why owners describe noticing the difference in days rather than months.</p>
-
-<h3>The sizing risk — and why it costs you nothing here</h3>
-<p>Sizing is the number one reason barefoot shoes get returned. A foot-shaped toe box fits differently from anything you own, and a lot of people need a different size than they first order. On Amazon that means paying return postage and starting again.</p>
-<p>Grounded takes that off you twice. <strong>Free size exchanges</strong> — Grounded Footwear sends the replacement pair at no charge — and a <strong>90-day money-back guarantee</strong> on top. The brand's own sizing guidance is simple: order the size you usually wear, and if you are between sizes or wear a half size, go up. Owners repeatedly describe the fit as “like a glove.” Nothing else on this list offers either protection.</p>
-
-${CTA}
-
-<figure>
-  <img src="/images/gf2-street.webp" alt="Grounded Footwear Freedom shoes worn on a treadmill and on a street, showing the flexible sole and toe grip" width="1000" height="649" loading="lazy" decoding="async" />
-  <figcaption>The thin sole bends where your foot bends, and the rubber traction grip is Grounded Footwear's slip-resistant outsole. Grounded Footwear images.</figcaption>
-</figure>
-
-<h3>Light enough to forget you are wearing them</h3>
-<p>Grounded Footwear rates the Freedom at <strong>70% lighter than a conventional shoe</strong>. You notice that most on hard floors late in a shift, when a normal trainer starts to feel like it is being lifted rather than worn. The upper is a breathable knit that dries fast, the whole shoe goes in the <strong>washing machine</strong>, and it comes in nine colourways — Black Orca, White Citrus, Tan Sandstone, White Glacier, Navy Tide, Pink Magnolia, Midnight Spark, Black Onyx and Aqua Reef — in unisex sizing, so it reads as an ordinary sneaker rather than a medical shoe.</p>
-
-<h3>The one thing nobody selling these will tell you</h3>
-<p>There is an adjustment period. Not because the shoe is flawed — because your foot muscles have been carried by cushioning for years and have to take that work back gradually. An hour or two a day in the first week, then longer. Even the five-star reviews mention a learning curve, and the customers who love these most are the ones who eased in. Build up over a week or two and you give them the best possible run.</p>
-
-<figure>
-  <img src="/images/gf-lifestyle-trail.webp" alt="Two people walking on a rocky trail wearing Grounded Footwear" width="1000" height="720" loading="lazy" decoding="async" />
-  <figcaption>Thin, flexible soles give you more feedback from the ground — which is part of how balance works.</figcaption>
-</figure>
-
-<h3>Is Grounded Footwear a real company?</h3>
-<p>A fair question for any brand you have only seen online, and worth answering in specifics rather than reassurance. Grounded Footwear sells only through its own site, which is why you have not seen it in a store or on Amazon. Orders are dispatched by USPS within 48 hours with a tracking number emailed to you. There is a 90-day money-back guarantee on every order and free size exchanges if the fit is wrong, and the brand publishes its customer reviews — 4.8 out of 5 from more than 13,000 of them — on its own site. One more thing to clear up, because the name causes confusion: this is a barefoot-style comfort shoe, not an “earthing” shoe with copper contacts. If copper grounding is specifically what you want, that is the #5 pick on this list, not this one.</p>
-
-<h3>Price, delivery and the guarantee</h3>
-<p>A single pair is <strong>$69.99, down from $139.98</strong>, and the official site discounts further on two and three pairs — “up to 60% off.” Orders ship by <strong>USPS within 48 hours</strong> and arrive in <strong>2 to 5 business days</strong>, with a tracking number by email. Every order carries the <strong>90-day money-back guarantee</strong> and <strong>free size exchanges</strong>. Compared with the $150–$180 many owners describe having spent on “conventional” sneakers that still hurt, the risk here is postage.</p>
-
-${CTA}
-
-<h3>Who gets the most out of them</h3>
-<p><strong>If you stand on hard floors all day</strong> — nursing, retail, teaching, hospitality — the win is weight and posture rather than softness. The brand's customer reviews are dominated by this group:</p>
-<blockquote>“After spending $100s on top-of-the-line ‘conventional’ sneakers these little things that look like ballet slippers get me through the day as a retail store manager (on concrete for an entire shift) pain free!”<cite>— Paul R., verified purchaser, Grounded Footwear reviews</cite></blockquote>
-<p><strong>If your toes ache</strong> — bunions, hammertoes, that urge to kick your shoes off the moment you sit down — a wide toe box removes the cause instead of padding around it. This group tends to notice fastest.</p>
-<blockquote>“I am a woman in my 70's who has misaligned toes due to wearing high heels in my younger days. These shoes have made a huge difference in my ability to walk safely in my home… I like them so much, I purchased a second pair.”<cite>— Beverly A., verified purchaser</cite></blockquote>
-<p><strong>If you have tried everything else</strong> — orthotics at $300 to $600 that only work in one pair of shoes, cushioned trainers that feel great in the shop, insoles, cortisone — you have been managing the symptom. Not one of those changes the shape your foot spends the day inside. This does.</p>
-
-<figure class="narrow">
-  <img src="/images/gf2-colours.webp" alt="Grounded Footwear Freedom in Pink Magnolia and Navy Tide" width="800" height="893" loading="lazy" decoding="async" />
-  <figcaption>Two of the nine colourways. Grounded Footwear image.</figcaption>
-</figure>
-
-<h3>Is the Grounded Footwear Freedom right for you?</h3>
-<p>If you:</p>
-<ul class="check">
-  <li>Are on your feet for long shifts and your feet hurt by the end of them</li>
-  <li>Kick your shoes off the moment you sit down</li>
-  <li>Have tried orthotics, insoles or cushioned trainers without lasting results</li>
-  <li>Want a shoe that looks like a normal sneaker, not a medical device</li>
-  <li>Want the size risk taken off you — free exchanges, 90-day money back</li>
-</ul>
-<p>then this is the pair to start with.</p>
-
-<h3>The clear winner</h3>
-<p>The <a href="${GF_LINK}" rel="sponsored nofollow noopener" target="_blank"><strong>Grounded Footwear Freedom</strong></a> is widest where feet are actually widest. Flat underfoot. 70% lighter than a conventional shoe by the brand's published figure. Machine washable. Rated 4.8 out of 5 by more than 13,000 customers. And the only pick here where getting the size wrong costs you nothing — <strong>free size exchanges</strong> on top of a <strong>90-day money-back guarantee</strong>.</p>
-<p>If your feet have been hurting for years, that is not much to stake on the one variable nobody has changed yet.</p>
-`,
-};
-
-const sidebar = {
-  subscores: [
-    { label: "Real Toe Room", value: 9.4 },
-    { label: "Fit Confidence", value: 9.4 },
-    { label: "All-Day Comfort", value: 8.9 },
-    { label: "Weight & Flex", value: 9.1 },
-    { label: "Everyday Practicality", value: 9.0 },
-  ],
-  pros: [
-    "Widest at the toes, zero heel drop",
-    "70% lighter (Grounded Footwear's published figure)",
-    "Machine washable, 9 colourways",
-    "Free size exchanges",
-    "90-day money-back guarantee",
-    "Ships USPS in 2–5 days",
-  ],
-  cons: ["Official site only — not on Amazon", "1–2 week adjustment from cushioned shoes"],
-};
-
-const urgency = {
-  kicker: "For our readers",
-  heading: "Up to 60% Off Ends Today on the Official Site",
-  text:
-    "A single pair is <strong>$69.99</strong> (was $139.98), with bigger savings on two and three pairs. Every order carries the <strong>90-day money-back guarantee</strong> and <strong>free size exchanges</strong>, and ships by USPS within 48 hours. <strong>Sale ends <span data-deal-date></span>.</strong>",
-  cta: "Check Availability & Discount →",
-  under: "Save <em>up to 60%</em> — sale ends today. Order your usual size; between sizes, go up.",
-};
-
-const quotes = [
-  {
-    text: "First of all, the delivery was very quick, I like that. Also, as soon as I put the footwear on my feet and stood up it was like magic shoes… I wore them the first day all day walking and on my feet at least 8 hours, no discomfort at all. Size fit like a glove.",
-    name: "Brenda L.",
-    source: "Verified purchaser · Grounded Footwear reviews",
-  },
-  {
-    text: "My feet used to swell terribly by end of day. Three weeks in and I barely notice it anymore. Light as nothing and I wear them every single day. Already bought a pair for my husband.",
-    name: "Nancy W.",
-    source: "Verified purchaser · Grounded Footwear reviews",
-  },
-  {
-    text: "Shoes always seem too crowded for my toes. When I received my shoes, we went to the state fair. I was on my feet for a long time. Did lots of walking. When I got home, I took my shoes off and my feet did not hurt. I then ordered 2 more pair. I also washed them in the washer and they looked new again.",
-    name: "Cindy",
-    source: "Verified purchaser · Grounded Footwear reviews",
-  },
-];
-
-const howToBuy = [
-  { title: "Go to the official Grounded Footwear site", text: "Use any green button on this page — the discount is applied there automatically." },
-  { title: "Choose colour, size and quantity", text: "Order the size you usually wear; between sizes or a half size, go up. Two and three pairs are discounted further." },
-  { title: "Enter shipping and payment", text: "Secure checkout. Every order carries the 90-day money-back guarantee and free size exchanges." },
-  { title: "Delivered in 2–5 business days", text: "Dispatched by USPS within 48 hours, with a tracking number by email." },
-];
-
-const author = {
-  name: "Daniel Strutgate",
-  role: "Footwear & Everyday Comfort Editor, The Life Insider",
-  photo: "/images/author-daniel-strutgate.jpg", // drop the headshot at public/images/author-daniel-strutgate.jpg — falls back to initials until it exists
-  bio: "Daniel covers footwear, recovery and everyday-comfort gear for The Life Insider. For this guide he compared each brand's published specifications, sizing guidance and customer reviews across the five barefoot shoes above, and ranked them on the four things that decide whether a pair actually gets worn: toe room, sole flatness, weight, and what happens when the size is wrong.",
-};
-
-const faqs = [
-  {
-    q: "What are the red flags to avoid when buying barefoot shoes?",
-    a: "Three catch people out. First, a toe box that is wide at the ball of the foot but still tapers to a point at the front — that is a wide shoe, not a wide toe box, and your toes end up in the same squeeze. Look at the shape of the outsole from underneath: it should be widest at the toes. Second, 'zero drop' printed on a shoe that has a visibly built-up heel or a thick cushioned midsole. Third, a sole you cannot roll up in your hand — a stiff sole blocks the ground feedback that is the entire point of the category.",
-  },
-  {
-    q: "I have wide feet. Will these actually fit?",
-    a: "A wide toe box is not the same as a wide shoe — the extra room is at the front, where toes need it. That suits most wide feet well, but the fit is genuinely different from what you are used to. Grounded Footwear's guidance is to order your usual size and go up if you are between sizes or wear a half size. Our #1 pick is the only one here offering free size exchanges, which is the practical reason it ranks first.",
-  },
-  {
-    q: "Won't my feet hurt more without arch support?",
-    a: "Possibly, at first. Support does some of the work your foot muscles would otherwise do, so removing it means those muscles have to take the load back. Build up gradually: an hour or two a day at first, then longer. People who switch abruptly and wear them all day immediately are the ones who report it going badly.",
-  },
-  {
-    q: "I'm in my late sixties. Am I too old to switch?",
-    a: "No, but take the transition more slowly, not less. Older feet have usually spent longer in tapered, raised-heel shoes, so there is more adjusting to do. A thin flexible sole also gives you more feedback from the ground, which is part of how balance works. Take several weeks rather than several days, and start indoors.",
-  },
-  {
-    q: "Do they help with plantar fasciitis?",
-    a: "Many people managing it wear barefoot shoes, and some of Grounded Footwear's customer reviews describe relief. We stop short of calling that treatment. Coming out of arch support too quickly can aggravate plantar fasciitis before it improves, so build up slowly, and if the pain is significant talk to a podiatrist rather than relying on footwear alone.",
-  },
-  {
-    q: "How do I know Grounded Footwear is a real brand and not a scam?",
-    a: "It is sold only on its own site, which is exactly why you have not heard of it, and that is a reasonable thing to be suspicious of. The concrete answers: orders ship by USPS within 48 hours with a tracking number by email; every order carries a 90-day money-back guarantee; size exchanges are free; and the brand publishes 13,427+ customer reviews at 4.8 out of 5. We link only to the official site, never to marketplace copies.",
-  },
-  {
-    q: "Are these grounding or earthing shoes?",
-    a: "No. Despite the name, Grounded Footwear makes barefoot-style comfort shoes with a rubber sole, not earthing shoes with a copper contact. The name refers to the feel of the ground through a thin sole, not electrical conductivity. If copper grounding is what you are after, the Zureto at #5 is the only pick here that has it.",
-  },
-  {
-    q: "How long does delivery take, and what if the size is wrong?",
-    a: "Orders ship by USPS within 48 hours of confirmation and arrive in 2–5 business days with a tracking number by email. If the size is wrong, Grounded Footwear sends a replacement pair free of charge, and every order carries a 90-day money-back guarantee.",
-  },
-  {
-    q: "Are they durable, or will they fall apart in six months?",
-    a: "It varies sharply by price on this list, and that is most of what separates the ranks. The budget option at #4 is where reviews most often mention wear after a few months of daily use. Our #1 and the two WHITIN models sit in a different bracket, and Grounded owners describe machine-washing theirs and having them look new again.",
-  },
-  {
-    q: "Will they be slippery in the wet?",
-    a: "Our #1 uses a rubber outsole with a slip-resistant traction grip rather than a smooth sole, and the trail model at #3 is the most aggressive on grip if uneven ground is your main concern. None of these are winter boots, and none claim to be.",
-  },
-];
+const seg = "core";
 ---
 
-<ReviewPageV2
-  title="The 5 Best Barefoot Shoes of 2026 [Wide Toe Box Compared] | The Life Insider"
-  description="We compared the best barefoot shoes of 2026 on toe room, sole flatness, weight and sizing risk — for anyone on their feet all day or dealing with foot pain."
-  h1="The 5 Best Barefoot Shoes of 2026"
-  subhead={subhead}
-  painQuestions={painQuestions}
-  intro={intro}
-  listLede={listLede}
-  products={products}
-  trust={trust}
-  editorial={editorial}
-  sidebar={sidebar}
-  urgency={urgency}
-  quotes={quotes}
-  howToBuy={howToBuy}
-  author={author}
-  faqs={faqs}
+<ReviewPageRip
+  title="Best 5 Barefoot Shoes 2026 – Compared & Ranked Side by Side | The Life Insider"
+  description="The 5 best barefoot shoes of 2026, ranked on toe room, a flat sole, grip, sizing risk and price. Xero, Vivobarefoot, Merrell and WHITIN vs our #1 barefoot shoe under $70."
+  h1="Best 5 Barefoot Shoes 2026"
+  h2='30+ Shoes <span class="ul">Ranked Head-to-Head</span>'
+  updated={UPDATED}
+  byline={{ name: "Daniel Strutgate", photo: "/images/authors/daniel-strutgate.webp", checkedBy: "Deals Desk" }}
+  intro={[
+    '<span class="hg">We did the hard work for you</span> – we compared 30+ of the best-selling barefoot shoes, hunting for the pair that ends <b>end-of-shift foot ache, crushed toes and the $200 gamble</b>. We scored everything from <b>toe-box shape and heel drop</b> to <b>sole grip, sizing risk and price</b>.',
+    '<span class="hr">We didn\'t just read the box</span> – we read hundreds of verified buyer reviews and <b>50+ owner threads</b> from people on hard floors all day: nurses, retail, warehouse, trades. The goal? The pair you can wear <b>from clock-in to clock-out and still want a walk after dinner</b>, not kick off the second you get home.',
+  ]}
+  verdictLine="Our #1 overall: Grounded Footwear Freedom, 9.8/10, now up to 60% off ›"
+  chips={["30+ Shoes Compared", "4.8★ from 13,427+ Buyer Reviews", "90-Day Money-Back"]}
+  listLede='Here are our <span class="ul">Top 5 Barefoot Shoes</span>, with <a href="#review">a full review of our #1 pick further down:</a>'
+  products={products(seg)}
+  bandLabel='Best Barefoot Shoe in <span class="yr">2026</span>'
+  stamp="<span><b>#1</b>EDITORS' CHOICE 2026</span>"
+  review={{
+    heading: "Review of the Grounded Footwear Freedom Barefoot Shoes",
+    image: { src: "/images/gfr/gfr-core-concrete.webp", alt: "Man standing on a concrete store floor in black Grounded Footwear Freedom barefoot shoes", w: 800, h: 800, caption: "Made for long days on hard floors." },
+    html: reviewHtml(seg),
+  }}
+  where={where(seg)}
+  side={side(seg)}
+  author={{
+    name: "Daniel Strutgate",
+    role: "Footwear & Everyday Comfort Editor · 9 years on a hardware-store floor",
+    photo: "/images/authors/daniel-strutgate.webp",
+    html: "<p>We compared over 30 barefoot and minimalist shoes this year, and the <b>Grounded Footwear Freedom</b> was the clear #1 for all-day wear. It's <b>widest at the toes, zero drop and slip-resistant</b>, and it costs less than one pair of the shoes it beat.</p><p>I ran a hardware-store floor for nine years on concrete in thick, “wide” shoes and kicked them off in the truck every night. If you want a <b>light, foot-shaped shoe under $70 with free size exchanges</b>, this one's a no-brainer.</p>",
+  }}
+  disclosure={DISCLOSURE}
+  dealCalendar={DEAL_CALENDAR}
+  rollingSaleEnd={ROLLING_SALE_END}
+  topUrl={GF_LINK}
+  sticky={sticky}
 >
-  {CPV_CAMPAIGN && <Fragment slot="body-end"><CpvTracker campaign="10" /></Fragment>}
-</ReviewPageV2>
+  {CPV_CAMPAIGN && <Fragment slot="body-end"><CpvTracker campaign={CPV_CAMPAIGN} /></Fragment>}
+</ReviewPageRip>

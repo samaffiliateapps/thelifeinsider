@@ -37,13 +37,30 @@ export interface Props {
   author: { name: string; role: string; bio: string; photo?: string };
   faqs?: { q: string; a: string }[];
   visibleRivals?: number;          // rivals shown before the toggle (default 2)
+  /* ---- 19 Oct 2026 (GOOGLE-PAGES-BLUEPRINT §3/§6.3). All optional: older pages render unchanged. ---- */
+  updated?: string;                // fixed real edit date ("October 19, 2026"); when set, dates no longer roll to "today"
+  topByline?: { name: string; role: string };  // byline in the first screen, under the H1
+  verdict?: {                      // verdict box in the first mobile screen
+    kicker: string; name: string; image?: string; score: number; ratingLine?: string;
+    line: string; price: string; oldPrice?: string; bundle?: string; facts: string[]; cta: string; stock?: string;
+  };
+  compareTable?: { title: string; intro?: string; columns: string[]; rows: { cells: string[]; top?: boolean }[]; note?: string };
+  dealCalendar?: { label: string; startISO: string; endISO: string; timer?: boolean }[]; // merchant's own sale calendar (local time, as the merchant's banner computes it)
+  bandLabel?: string;              // repeat-band text override
+  stickyButton?: string;           // sticky bar button text
+  disclosure?: string;             // html; overrides the default disclosure paragraph
 }
-const { title, description, h1, subhead, painQuestions, intro, listLede, products, trust, howWeRate, editorial, sidebar, urgency, quotes, howToBuy, author, faqs, visibleRivals = 2 } = Astro.props;
+const { title, description, h1, subhead, painQuestions, intro, listLede, products, trust, howWeRate, editorial, sidebar, urgency, quotes, howToBuy, author, faqs, visibleRivals = 2, updated, topByline, verdict, compareTable, dealCalendar, bandLabel, stickyButton, disclosure } = Astro.props;
+/* Build-time fallback for the deal label/clock (the inline script replaces it on load). */
+const nowBuild = new Date();
+const activeSale = dealCalendar?.find((d) => nowBuild >= new Date(d.startISO) && nowBuild <= new Date(d.endISO));
+const saleLabel = activeSale?.label ?? "Today's Offer";
+const saleWhen = activeSale && activeSale.timer !== false ? `ends ${new Date(activeSale.endISO).toLocaleDateString("en-US", { month: "short", day: "numeric" })}` : "on now";
 const top = products.find((p) => p.rank === 1)!;
 const rivals = products.filter((p) => p.rank !== 1).sort((a, b) => a.rank - b.rank);
 const shown = rivals.slice(0, visibleRivals);
 const hidden = rivals.slice(visibleRivals);
-const publishedOn = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" });
+const publishedOn = updated ?? new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" });
 const stars = top.starRating ? "★".repeat(Math.round(top.starRating)) + "☆".repeat(5 - Math.round(top.starRating)) : null;
 const initials = author.name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();
 const photoOk = author.photo ? fs.existsSync(path.join(process.cwd(), "public", author.photo)) : false; // build-time check from the project root
@@ -59,9 +76,49 @@ const photoOk = author.photo ? fs.existsSync(path.join(process.cwd(), "public", 
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1.2 14.2-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4-7 7Z" /></svg>
           Last Updated: <span id="lastUpdated">{publishedOn}</span>
         </div>
+        {topByline && (
+          <p class="v2-topbyline">By <strong>{topByline.name}</strong>, {topByline.role}</p>
+        )}
+        {verdict && (
+          <div class="v2-verdict" id="verdict">
+            <div class="vd-kicker">{verdict.kicker}</div>
+            <div class="vd-row">
+              {verdict.image && <img class="vd-img" src={verdict.image} alt={verdict.name} width="96" height="88" loading="eager" decoding="async" />}
+              <div class="vd-main">
+                <div class="vd-name">{verdict.name}</div>
+                <div class="vd-score"><span class="vd-num">{verdict.score.toFixed(1)}</span><span class="vd-of">/10</span> <span class="vd-stars">★★★★★</span></div>
+                {verdict.ratingLine && <div class="vd-rating">{verdict.ratingLine}</div>}
+              </div>
+            </div>
+            <p class="vd-line" set:html={verdict.line} />
+            <div class="vd-price"><span class="now">{verdict.price}</span>{verdict.oldPrice && <span class="was">{verdict.oldPrice}</span>}{verdict.bundle && <span class="bundle" set:html={verdict.bundle} />}</div>
+            <ul class="vd-facts">{verdict.facts.map((f) => <li set:html={f} />)}</ul>
+            {dealCalendar && (
+              <div class="vd-deal"><strong data-deal-label>{saleLabel}</strong>: up to 60% off · <span class="deal-clock" data-deal-when>{saleWhen}</span>{verdict.stock && <span class="vd-stock" set:html={verdict.stock} />}</div>
+            )}
+            <a href={top.url} class="v2-btn vd-btn" rel="sponsored nofollow noopener" target="_blank" data-cta="verdict">{verdict.cta}</a>
+          </div>
+        )}
         <p class="v2-subhead" set:html={subhead} />
         <div class="v2-pain">{painQuestions.map((q) => <p set:html={q} />)}</div>
         <div class="v2-intro">{intro.map((t) => <p set:html={t} />)}</div>
+        {compareTable && (
+          <section class="v2-compare" id="compare">
+            <h2 class="v2-section-title" style="margin-top:18px;" set:html={compareTable.title} />
+            {compareTable.intro && <p class="cmp-intro" set:html={compareTable.intro} />}
+            <div class="cmp-wrap">
+              <table class="cmp">
+                <thead><tr>{compareTable.columns.map((c) => <th scope="col" set:html={c} />)}</tr></thead>
+                <tbody>
+                  {compareTable.rows.map((r) => (
+                    <tr class:list={{ "is-top": r.top }}>{r.cells.map((c, i) => (i === 0 ? <th scope="row" set:html={c} /> : <td set:html={c} />))}</tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {compareTable.note && <p class="cmp-note" set:html={compareTable.note} />}
+          </section>
+        )}
         <p class="v2-list-lede" set:html={listLede} />
       </header>
 
@@ -81,7 +138,7 @@ const photoOk = author.photo ? fs.existsSync(path.join(process.cwd(), "public", 
       )}
 
       <!-- 4. Repeat band + #1 with trust strip -->
-      <div class="v2-band">Best Overall {h1.replace(/^The \d+ Best /i, "").replace(/ of \d{4}$/i, "")} — {new Date().getFullYear()}</div>
+      <div class="v2-band">{bandLabel ?? <>Best Overall {h1.replace(/^The \d+ Best /i, "").replace(/ of \d{4}$/i, "")} — {new Date().getFullYear()}</>}</div>
       <RankCardV2 product={top} repeat trust={trust} />
 
       {howWeRate && (
@@ -101,7 +158,7 @@ const photoOk = author.photo ? fs.existsSync(path.join(process.cwd(), "public", 
           <!-- 7. Urgency + wide CTA -->
           <div class="v2-urgent">
             <div class="u-kicker">{urgency.kicker}</div>
-            <h3>{urgency.heading}</h3>
+            <h3 set:html={urgency.heading} />
             <p set:html={urgency.text} />
           </div>
           <a href={top.url} class="v2-wide-btn" rel="sponsored nofollow noopener" target="_blank">{urgency.cta}</a>
@@ -185,19 +242,60 @@ const photoOk = author.photo ? fs.existsSync(path.join(process.cwd(), "public", 
 
       <details class="v2-disclosure">
         <summary>Advertising disclosure</summary>
-        <p>The Life Insider is reader-supported. We may earn a commission if you buy through links on this page, at no extra cost to you. This never influences our rankings, scores or what we write — see <a href="/how-we-rate/">how we rate</a> and our <a href="/advertising-disclosure/">advertising disclosure</a>. Product claims are the brand's own and are attributed as such. This page is not medical advice.</p>
+        {disclosure ? <p set:html={disclosure} /> : <p>The Life Insider is reader-supported. We earn a commission from some links on this page, at no extra cost to you; this may affect which products we feature and in what order — see <a href="/how-we-rate/">how we rate</a> and our <a href="/advertising-disclosure/">advertising disclosure</a>. Product claims are the brand's own and are attributed as such. This page is not medical advice.</p>}
       </details>
     </div>
 
     <EmailCapture />
   </article>
 
-  <StickyCta name={top.name} brand={top.brand} image={top.stickyImage ?? top.image} url={top.url} price={top.price} oldPrice={top.oldPrice} discount={top.discount} ctaLabel={top.ctaLabel} />
+  <StickyCta name={top.name} brand={top.brand} image={top.stickyImage ?? top.image} url={top.url} price={top.price} oldPrice={top.oldPrice} discount={top.discount} ctaLabel={top.ctaLabel} buttonText={stickyButton} ctaId="sticky" />
   <ExitOffer name={top.name} image={top.image} url={top.url} price={top.price} oldPrice={top.oldPrice} discount={top.discount} trustNote={top.trustNote} />
 
-  <script is:inline>
-    /* Roll every date on the page to the reader's own current date (US locale). */
-    (function () {
+  {dealCalendar && (
+    <script is:inline define:vars={{ dealCalendar }}>
+      /* Merchant sale calendar (19 Oct 2026): label + live countdown to the REAL end date of the
+         sale the merchant's own banner shows today. Local time, exactly as the merchant computes it. */
+      (function () {
+        function parse(s) { var p = s.split(/[-T:]/).map(Number); return new Date(p[0], p[1] - 1, p[2], p[3] || 0, p[4] || 0, p[5] || 0); }
+        function pad(n) { return (n < 10 ? "0" : "") + n; }
+        function current() {
+          var now = new Date();
+          for (var i = 0; i < dealCalendar.length; i++) {
+            var d = dealCalendar[i];
+            if (now >= parse(d.startISO) && now <= parse(d.endISO)) return { label: d.label, end: parse(d.endISO), timer: d.timer !== false };
+          }
+          return null;
+        }
+        function tick() {
+          var s = current();
+          var labels = document.querySelectorAll("[data-deal-label]");
+          var clocks = document.querySelectorAll("[data-deal-timer]");
+          var ends = document.querySelectorAll("[data-deal-end]");
+          var whens = document.querySelectorAll("[data-deal-when]");
+          if (!s || !s.timer) {
+            /* No named sale with a real end date right now (the merchant shows no timer either): label only, no clock. */
+            labels.forEach(function (n) { n.textContent = s ? s.label : "Today's Offer"; });
+            whens.forEach(function (n) { n.textContent = "on now"; });
+            return;
+          }
+          var ms = Math.max(0, s.end - new Date());
+          var t = Math.floor(ms / 1000), dd = Math.floor(t / 86400), hh = Math.floor((t % 86400) / 3600), mm = Math.floor((t % 3600) / 60), ss = t % 60;
+          var txt = (dd > 0 ? dd + "d " : "") + pad(hh) + ":" + pad(mm) + ":" + pad(ss);
+          labels.forEach(function (n) { n.textContent = s.label; });
+          clocks.forEach(function (n) { n.textContent = txt; });
+          whens.forEach(function (n) { n.textContent = "ends in " + txt; });
+          var endTxt = s.end.toLocaleDateString("en-US", { month: "long", day: "numeric" });
+          ends.forEach(function (n) { n.textContent = endTxt; });
+        }
+        try { tick(); setInterval(tick, 1000); } catch (e) {}
+      })();
+    </script>
+  )}
+
+  <script is:inline define:vars={{ fixedDate: updated ?? "" }}>
+    /* Roll every date on the page to the reader's own current date (US locale) — only on pages without a fixed `updated` date. */
+    if (!fixedDate) (function () {
       try {
         var d = new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" });
         var el = document.getElementById("lastUpdated"); if (el) el.textContent = d;

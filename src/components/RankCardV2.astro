@@ -12,6 +12,9 @@ export interface ProductV2 extends Product {
   shipFast?: boolean;     // render shipNote in green (the #1's advantage)
   dealLabel?: string;     // "Deal verified" | "Sale ends" — the label under the sale %
   logo?: string;          // brand logo under the product image
+  dealTimer?: boolean;    // 19 Oct 2026: deal block shows the merchant-calendar sale label + live countdown (ReviewPageV2 dealCalendar) instead of a rolling "today" date
+  priceNote?: string;     // small line under the price, e.g. "3 pairs: $55.99 each (60% off)"
+  noImageLabel?: string;  // text tile when a rival has no licensed image
 }
 const { product, repeat = false, trust } = Astro.props as { product: ProductV2; repeat?: boolean; trust?: string[] };
 const p = product;
@@ -28,7 +31,9 @@ const dealDate = new Date().toLocaleDateString("en-US", { month: "long", day: "n
     : <span class="rc-ribbon num">#{p.rank}</span>}
   <div class="rc-grid">
     <div class="rc-media">
-      {p.image && <img class="rc-img" src={p.image} alt={p.name} width="210" height="190" loading={p.rank === 1 ? "eager" : "lazy"} decoding="async" />}
+      {p.image
+        ? <img class="rc-img" src={p.image} alt={p.name} width="210" height="190" loading={p.rank === 1 ? "eager" : "lazy"} decoding="async" />
+        : <div class="rc-noimg">{p.noImageLabel ?? p.brand ?? p.name}</div>}
       {p.logo && <img class="rc-logo" src={p.logo} alt={p.brand ?? ""} loading="lazy" decoding="async" />}
     </div>
     <div class="rc-body">
@@ -50,15 +55,21 @@ const dealDate = new Date().toLocaleDateString("en-US", { month: "long", day: "n
           {p.oldPrice && <span class="was">{p.oldPrice}</span>}
         </div>
       )}
+      {p.priceNote && <div class="rc-price-note" set:html={p.priceNote} />}
       <a href={p.url} class:list={["rc-btn", { "is-alt": p.rank !== 1 }]} rel="sponsored nofollow noopener" target="_blank">
         {p.ctaLabel ?? "Visit Site →"}
       </a>
-      {p.rank === 1 && p.discount && (
+      {p.rank === 1 && p.discount && (p.dealTimer ? (
+        <div class="rc-sale">
+          <strong><span data-deal-label>Limited-Time Offer</span>: {p.discount}</strong>
+          <span class="deal-clock" data-deal-when>on now</span>
+        </div>
+      ) : (
         <div class="rc-sale">
           <strong>{p.discount}</strong>
           {p.dealLabel ?? "Deal verified"}: <span data-deal-date>{dealDate}</span>
         </div>
-      )}
+      ))}
       {p.shipNote && <div class:list={["rc-ship", { "is-fast": p.shipFast }]}>{p.shipNote}</div>}
     </div>
     {trust && trust.length > 0 && (

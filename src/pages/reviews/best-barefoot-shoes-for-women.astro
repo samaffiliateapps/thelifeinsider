@@ -1,0 +1,56 @@
+---
+/* =========================================================================
+   WOMEN'S PAGE — rebuilt 19 Oct 2026 as a 1:1 structural rip of
+   consumertopreviews.com/best-barefoot-shoes3.html (~US$93k/mo, same offer 568).
+   Rip map: advertorial-system/offers/grounded/research/RIP-TEARDOWNS-2026-10-19.md
+   Google ad group "Women" (exact): best barefoot shoes for women · barefoot shoes women ·
+   barefoot shoes for women · women's barefoot shoes · wide toe box shoes for women.
+   Persona: "Linda Marsh, 61, former teacher" is an editorial persona (Sam, 19 Oct). She COMPARED
+   and RANKED; nowhere does she say she bought, tested or wore the shoes (held line).
+   Author photo: AI-generated (Higgsfield nano_banana_pro), see img-raw/IMAGE-QA.
+   ========================================================================= */
+import ReviewPageRip from "../../layouts/ReviewPageRip.astro";
+import CpvTracker from "../../components/CpvTracker.astro";
+import { CPV_CAMPAIGN, GF_LINK, UPDATED, DEAL_CALENDAR, DISCLOSURE, ROLLING_SALE_END, products, where, side, sticky, reviewHtml } from "../../data/grounded";
+
+const seg = "women";
+---
+
+<ReviewPageRip
+  title="Best 5 Barefoot Shoes for Women 2026 (Wide Toe Box) – Compared & Ranked | The Life Insider"
+  description="The 5 best barefoot shoes for women in 2026, ranked on toe room, a flat sole, grip, sizing and price. Our #1 is widest at the toes, women's 6–14.5, under $70 with free size exchanges."
+  h1="Best 5 Barefoot Shoes for Women 2026"
+  h2='Ranked for <span class="ul">Wide Feet &amp; Bunions</span>'
+  updated={UPDATED}
+  byline={{ name: "Linda Marsh", photo: "/images/authors/linda-marsh.webp", checkedBy: "Deals Desk" }}
+  intro={[
+    '<span class="hg">We did the hard work for you</span> – we compared 30+ barefoot and wide toe box shoes women ask us about, hunting for the pair that ends <b>3pm foot ache, bunion rub and the “size up and hope” game</b>. We scored everything from <b>toe-box shape and heel drop</b> to <b>sole grip, women\'s sizing and who pays when the size is wrong</b>.',
+    '<span class="hr">We didn\'t just read the box</span> – we read hundreds of verified buyer reviews and <b>50+ owner threads</b> from women with wide feet, bunions and 12-hour shifts on hard floors. The goal? The pair you can wear <b>from the first bell to the last errand, then walk the dog</b>, without kicking it off at the door.',
+  ]}
+  verdictLine="Our #1 for women: Grounded Footwear Freedom, 9.8/10, now up to 60% off ›"
+  chips={["30+ Shoes Compared", "4.8★ from 13,427+ Buyer Reviews", "90-Day Money-Back"]}
+  listLede='Here are our <span class="ul">Top 5 Barefoot Shoes for Women</span>, with <a href="#review">a full review of our #1 pick further down:</a>'
+  products={products(seg)}
+  bandLabel='Best Barefoot Shoe for Women in <span class="yr">2026</span>'
+  stamp="<span><b>#1</b>EDITORS' CHOICE 2026</span>"
+  review={{
+    heading: "Review of the Grounded Footwear Freedom for Women",
+    image: { src: "/images/gfr/gfr-women-walk.webp", alt: "Woman in her 60s walking a suburban sidewalk in pink Grounded Footwear Freedom shoes", w: 720, h: 894, caption: "Pink Magnolia: one of 9 colours, women's sizes 6–14.5." },
+    html: reviewHtml(seg),
+  }}
+  where={where(seg)}
+  side={side(seg)}
+  author={{
+    name: "Linda Marsh",
+    role: "Senior Editor, Women's Comfort & Mobility · former teacher, 61",
+    photo: "/images/authors/linda-marsh.webp",
+    html: "<p>We compared over 30 barefoot and wide toe box shoes this year, and for women the <b>Grounded Footwear Freedom</b> was the clear #1 for all-day wear. It's <b>widest at the toes, flat underfoot and slip-resistant</b>, it runs to women's 14.5, and it takes the sizing risk off you with free exchanges.</p><p>I spent 24 years teaching second grade on hard floors in “wide” shoes that pinched by lunch. If you want a <b>light, foot-shaped shoe under $70 that finally lets your toes spread out</b>, this one's a no-brainer.</p>",
+  }}
+  disclosure={DISCLOSURE}
+  dealCalendar={DEAL_CALENDAR}
+  rollingSaleEnd={ROLLING_SALE_END}
+  topUrl={GF_LINK}
+  sticky={sticky}
+>
+  {CPV_CAMPAIGN && <Fragment slot="body-end"><CpvTracker campaign={CPV_CAMPAIGN} /></Fragment>}
+</ReviewPageRip>

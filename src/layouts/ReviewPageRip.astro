@@ -1,0 +1,273 @@
+---
+/* REVIEW PAGE "RIP" — 19 Oct 2026.
+   Structural 1:1 rip of consumertopreviews.com/best-barefoot-shoes3.html (~US$93k/mo Google spend,
+   16 months, same offer 568 → landing1). Teardown + rip map:
+   advertorial-system/offers/grounded/research/RIP-TEARDOWNS-2026-10-19.md
+   Their order (= ours):
+     nav (Top Pick · Best Deal · Ad Disclosure) → grey "Last update" bar → H1 + H2 + byline (avatar,
+     "Written by … – Checked by …") → 2 centred highlight paragraphs → 3-chip trust strip →
+     list lede ("…full review of our top pick at the bottom") + Advertiser Disclosure link →
+     #1 card (whole card clickable; 2 images, 10 ✓ + 2 ✗ bullets, OVERALL SCORE, star line,
+     red SALE box, VISIT SITE, shipping line) → #2–#5 cards (image, mixed ✓/✗, score, VISIT SITE,
+     shipping) → band "BEST … IN 2026" + #1 card repeat with stamp → "Review of …" (image + copy) →
+     "Where To Get The Real …?" (dashed UPDATE box, official-site paragraph, offer image, big CTA,
+     sale line) + gradient side card (sticky on desktop) → author box → footer disclosures.
+   Additions kept from our V2 build (not on CTP): sticky bottom bar, exit offer, CPV tracker. */
+import "../styles/rip.css";
+import Base from "./Base.astro";
+import StickyCta from "../components/StickyCta.astro";
+import ExitOffer from "../components/ExitOffer.astro";
+
+export interface RipBullet { t: string; x?: boolean }
+export interface RipProduct {
+  rank: number;
+  badge?: string;
+  name: string;
+  images: { src: string; alt: string; w: number; h: number }[];
+  bullets: RipBullet[];
+  score: number;
+  scoreLabel: string;
+  ratingLine: string;          // under the stars
+  sale?: boolean;              // red sale box (only #1)
+  cta: string;
+  url: string;
+  shipLine: string;
+  price?: string;
+  oldPrice?: string;
+  external?: boolean;          // Amazon card
+}
+export interface Props {
+  title: string;
+  description: string;
+  h1: string;
+  h2: string;
+  updated: string;
+  byline: { name: string; photo: string; checkedBy: string };
+  intro: [string, string];
+  verdictLine?: string;         // one-line #1 verdict link shown under the first lead paragraph      // [green-highlight para, red-highlight para]
+  chips: [string, string, string];
+  listLede: string;
+  products: RipProduct[];
+  bandLabel: string;
+  stamp: string;
+  review: { heading: string; image: { src: string; alt: string; w: number; h: number; caption?: string }; html: string };
+  where: { heading: string; update: string; html: string; image: { src: string; alt: string; w: number; h: number }; cta: string; saleLine: string };
+  side: { name: string; ratingLine: string; image: string; bullets: string[]; cta: string; foot: string };
+  author: { name: string; role: string; photo: string; html: string };
+  disclosure: string;
+  dealCalendar: { label: string; startISO: string; endISO: string; timer?: boolean }[];
+  rollingSaleEnd?: boolean;     // true = CTP's "SALE ENDS: <today>" device; false = merchant's real sale calendar
+  topUrl: string;
+  sticky: { name: string; image: string; price: string; oldPrice: string; discount: string; trustNote: string; button: string };
+}
+const p = Astro.props;
+const top = p.products.find((x) => x.rank === 1)!;
+const rivals = p.products.filter((x) => x.rank !== 1).sort((a, b) => a.rank - b.rank);
+const nowBuild = new Date();
+const activeSale = p.dealCalendar.find((d) => nowBuild >= new Date(d.startISO) && nowBuild <= new Date(d.endISO));
+const saleLabel = activeSale?.label ?? "Limited-Time Offer";
+const saleWhen = activeSale && activeSale.timer !== false ? `ends ${new Date(activeSale.endISO).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}` : "on now · Stock LOW · extra 10% at checkout";
+const starRow = (n = 5) => "★".repeat(n);
+const rel = "sponsored nofollow noopener";
+---
+
+<Base title={p.title} description={p.description} minimal>
+  <article class="rip">
+    <!-- 0. nav: two offer links, like CTP -->
+    <nav class="rip-nav" aria-label="Quick links">
+      <div class="rip-wrap">
+        <a href={p.topUrl} rel={rel} target="_blank" data-cta="nav-top">Top Pick</a>
+        <a href={p.topUrl} rel={rel} target="_blank" data-cta="nav-deal">Best Deal</a>
+        <a href="#disclosure">Ad Disclosure</a>
+      </div>
+    </nav>
+
+    <!-- 1. grey date bar -->
+    <div class="rip-date">Last update: <b>{p.updated}</b></div>
+
+    <!-- 2. H1 / H2 / byline -->
+    <header class="rip-head rip-wrap">
+      <h1 set:html={p.h1} />
+      <h2 class="rip-h2" set:html={p.h2} />
+      <div class="rip-by">
+        <img src={p.byline.photo} alt={p.byline.name} width="36" height="36" loading="eager" decoding="async" />
+        <span>Written by <b><u>{p.byline.name}</u></b></span>
+        <span class="dash">–</span>
+        <span>Checked by <b><u>{p.byline.checkedBy}</u></b></span>
+      </div>
+
+      <!-- 3. two centred highlight paragraphs -->
+      <p class="rip-lead" set:html={p.intro[0]} />
+      {p.verdictLine && <p class="rip-verdict"><a href={p.topUrl} rel="sponsored nofollow noopener" target="_blank" data-cta="verdict-line" set:html={p.verdictLine} /></p>}
+      <p class="rip-lead" set:html={p.intro[1]} />
+
+      <!-- 4. trust strip -->
+      <div class="rip-chips">
+        <a href="#top5"><span class="ic s">🔍</span><b set:html={p.chips[0]} /></a>
+        <a href="#top5"><span class="ic">★</span><b set:html={p.chips[1]} /></a>
+        <a href="#top5"><span class="ic c">✓</span><b set:html={p.chips[2]} /></a>
+      </div>
+    </header>
+
+    <!-- 5. list lede -->
+    <section id="top5" class="rip-list">
+      <div class="rip-wrap">
+        <h2 class="rip-lede" set:html={p.listLede} />
+        <p class="rip-adv"><a href="#disclosure">ⓘ Advertiser Disclosure</a></p>
+
+        <!-- 6–7. ranked cards -->
+        {[top, ...rivals].map((x) => (
+          <a class:list={["card", { top: x.rank === 1 }]} href={x.url} rel={rel} target="_blank" data-cta={x.rank === 1 ? "card1" : `card${x.rank}`}>
+            <span class="badge">{x.badge ?? `#${x.rank}`}</span>
+            <span class="c-media">
+              {x.images.map((im, i) => <img src={im.src} alt={im.alt} width={im.w} height={im.h} loading={x.rank === 1 && i === 0 ? "eager" : "lazy"} decoding="async" />)}
+            </span>
+            <span class="c-body">
+              <span class="c-name">{x.name}</span>
+              <ul class="c-list">{x.bullets.map((b) => <li class:list={{ x: b.x }} set:html={b.t} />)}</ul>
+            </span>
+            <span class="c-side">
+              <span class="c-cap">OVERALL SCORE</span>
+              <span class="c-score">{x.score.toFixed(1)}</span>
+              <span class="c-label">{x.scoreLabel}</span>
+              <span class="c-stars" aria-hidden="true">{starRow(x.rank === 1 ? 5 : x.score >= 7 ? 4 : 3)}</span>
+              <span class="c-rating" set:html={x.ratingLine} />
+              {x.price && <span class="c-price"><b>{x.price}</b>{x.oldPrice && <s>{x.oldPrice}</s>}</span>}
+              {x.sale && (
+                <span class="c-sale">
+                  <strong>UP TO 60% OFF</strong>
+                  {p.rollingSaleEnd
+                    ? <span>SALE ENDS: <span data-today-long>{p.updated}</span></span>
+                    : <span><span data-deal-label>{saleLabel}</span>: <span data-deal-when>{saleWhen}</span></span>}
+                  <em>Stock levels: LOW</em>
+                </span>
+              )}
+              <span class:list={["c-btn", { amz: x.external }]}>{x.cta} ›</span>
+              <span class="c-ship" set:html={x.shipLine} />
+            </span>
+          </a>
+        ))}
+
+        <!-- 8. band + #1 repeat with stamp -->
+        <div class="rip-band" set:html={p.bandLabel} />
+        <a class="card top repeat" href={top.url} rel={rel} target="_blank" data-cta="card1-repeat">
+          <span class="stamp" set:html={p.stamp} />
+          <span class="c-media">
+            {top.images.map((im) => <img src={im.src} alt={im.alt} width={im.w} height={im.h} loading="lazy" decoding="async" />)}
+          </span>
+          <span class="c-body">
+            <span class="c-name">{top.name}</span>
+            <ul class="c-list">{top.bullets.map((b) => <li class:list={{ x: b.x }} set:html={b.t} />)}</ul>
+          </span>
+          <span class="c-side">
+            <span class="c-cap">OVERALL SCORE</span>
+            <span class="c-score">{top.score.toFixed(1)}</span>
+            <span class="c-label">{top.scoreLabel}</span>
+            <span class="c-stars" aria-hidden="true">★★★★★</span>
+            <span class="c-rating" set:html={top.ratingLine} />
+            {top.price && <span class="c-price"><b>{top.price}</b>{top.oldPrice && <s>{top.oldPrice}</s>}</span>}
+            <span class="c-sale">
+              <strong>UP TO 60% OFF</strong>
+              {p.rollingSaleEnd
+                ? <span>SALE ENDS: <span data-today-long>{p.updated}</span></span>
+                : <span><span data-deal-label>{saleLabel}</span>: <span data-deal-when>{saleWhen}</span></span>}
+              <em>Stock levels: LOW</em>
+            </span>
+            <span class="c-btn">{top.cta} ›</span>
+            <span class="c-ship" set:html={top.shipLine} />
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 9–10. review + where-to-get, with side card -->
+    <section id="review" class="rip-review">
+      <div class="rip-wrap rip-cols">
+        <div class="rv-main">
+          <h2 class="rv-h" set:html={p.review.heading} />
+          <figure class="rv-fig">
+            <img src={p.review.image.src} alt={p.review.image.alt} width={p.review.image.w} height={p.review.image.h} loading="lazy" decoding="async" />
+            {p.review.image.caption && <figcaption set:html={p.review.image.caption} />}
+          </figure>
+          <div class="prose" set:html={p.review.html} />
+
+          <h2 class="rv-h" id="where" set:html={p.where.heading} />
+          <div class="rv-update" set:html={p.where.update} />
+          <div class="prose big" set:html={p.where.html} />
+          <figure class="rv-fig"><img src={p.where.image.src} alt={p.where.image.alt} width={p.where.image.w} height={p.where.image.h} loading="lazy" decoding="async" /></figure>
+          <a class="rv-cta" href={p.topUrl} rel={rel} target="_blank" data-cta="where">{p.where.cta}</a>
+          <p class="rv-saleline">
+            {p.rollingSaleEnd
+              ? <b>Save up to <span class="r">60%</span> OFF – Sale Ends: <span data-today-long>{p.updated}</span></b>
+              : <b>Save up to <span class="r">60%</span> OFF – <span data-deal-label>{saleLabel}</span> <span data-deal-when>{saleWhen}</span></b>}
+          </p>
+        </div>
+
+        <aside class="rv-side">
+          <a class="side-card" href={p.topUrl} rel={rel} target="_blank" data-cta="side">
+            <span class="sd-stars">★★★★★ <span set:html={p.side.ratingLine} /></span>
+            <span class="sd-name">{p.side.name}</span>
+            <img src={p.side.image} alt={p.side.name} width="600" height="600" loading="lazy" decoding="async" />
+            <ul>{p.side.bullets.map((b) => <li set:html={b} />)}</ul>
+            <span class="sd-btn">{p.side.cta} →</span>
+            <span class="sd-foot" set:html={p.side.foot} />
+          </a>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 11. author box -->
+    <section class="rip-author">
+      <div class="rip-wrap au">
+        <img src={p.author.photo} alt={p.author.name} width="96" height="96" loading="lazy" decoding="async" />
+        <div>
+          <div class="au-n">Written by <b>{p.author.name}</b></div>
+          <div class="au-r">{p.author.role}</div>
+          <div class="au-t" set:html={p.author.html} />
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. disclosures (footer only) -->
+    <section id="disclosure" class="rip-disc">
+      <div class="rip-wrap" set:html={p.disclosure} />
+    </section>
+  </article>
+
+  <StickyCta name={p.sticky.name} image={p.sticky.image} url={p.topUrl} price={p.sticky.price} oldPrice={p.sticky.oldPrice} discount={p.sticky.discount} buttonText={p.sticky.button} ctaId="sticky" />
+  <ExitOffer name={p.sticky.name} image={top.images[0].src} url={p.topUrl} price={p.sticky.price} oldPrice={p.sticky.oldPrice} discount={p.sticky.discount} trustNote={p.sticky.trustNote} />
+
+  <script is:inline define:vars={{ dealCalendar: p.dealCalendar, rolling: !!p.rollingSaleEnd }}>
+    /* Sale label + clock from the merchant's own promo calendar (promo-banner.js, read 19 Oct 2026).
+       19 Oct–2 Nov: "Limited-Time Offer", no end date → "on now". From 3 Nov each named sale counts down
+       to its real end date. rolling=true switches the red box to CTP's "SALE ENDS: <today>" device. */
+    (function () {
+      function parse(s) { var q = s.split(/[-T:]/).map(Number); return new Date(q[0], q[1] - 1, q[2], q[3] || 0, q[4] || 0, q[5] || 0); }
+      function pad(n) { return (n < 10 ? "0" : "") + n; }
+      try {
+        var long = new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+        if (rolling) document.querySelectorAll("[data-today-long]").forEach(function (n) { n.textContent = long; });
+      } catch (e) {}
+      function cur() {
+        var now = new Date();
+        for (var i = 0; i < dealCalendar.length; i++) { var d = dealCalendar[i]; if (now >= parse(d.startISO) && now <= parse(d.endISO)) return { label: d.label, end: parse(d.endISO), timer: d.timer !== false }; }
+        return null;
+      }
+      function tick() {
+        var s = cur();
+        var labels = document.querySelectorAll("[data-deal-label]"), whens = document.querySelectorAll("[data-deal-when]");
+        if (!s || !s.timer) {
+          labels.forEach(function (n) { n.textContent = s ? s.label : "Limited-Time Offer"; });
+          whens.forEach(function (n) { n.textContent = "on now · Stock LOW · extra 10% at checkout"; });
+          return;
+        }
+        var t = Math.floor(Math.max(0, s.end - new Date()) / 1000), dd = Math.floor(t / 86400), hh = Math.floor((t % 86400) / 3600), mm = Math.floor((t % 3600) / 60), ss = t % 60;
+        labels.forEach(function (n) { n.textContent = s.label; });
+        whens.forEach(function (n) { n.textContent = "ends in " + (dd > 0 ? dd + "d " : "") + pad(hh) + ":" + pad(mm) + ":" + pad(ss); });
+      }
+      try { tick(); setInterval(tick, 1000); } catch (e) {}
+    })();
+  </script>
+
+  <slot name="body-end" slot="body-end" />
+</Base>

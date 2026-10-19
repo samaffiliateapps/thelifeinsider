@@ -210,3 +210,68 @@
 
 /* ---- Inline video (heated vest, 8 Sep 2026) ---- */
 .v2 .prose figure.hv-video video { display: block; width: 100%; height: auto; border-radius: 10px; background: #000; }
+
+/* ---- 19 Oct 2026: verdict box, first-screen byline, scored comparison table, deal clock, no-image tile ---- */
+.v2 .v2-topbyline { font-size: 0.9rem; color: var(--muted); margin: -8px 0 12px; }
+.v2 .v2-topbyline strong { color: var(--ink); }
+.v2 .v2-verdict { border: 2px solid var(--v2-frame); border-radius: 12px; background: #fff; box-shadow: 0 6px 24px rgba(22,163,74,0.12); padding: 12px 14px 14px; margin: 0 0 18px; max-width: 640px; }
+.v2 .vd-kicker { display: inline-block; background: var(--v2-frame); color: #fff; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; border-radius: 6px; margin-bottom: 8px; }
+.v2 .vd-row { display: flex; gap: 12px; align-items: center; }
+.v2 .vd-img { width: 96px; height: auto; object-fit: contain; flex-shrink: 0; }
+.v2 .vd-name { font-weight: 900; color: var(--ink); font-size: 1.12rem; line-height: 1.2; }
+.v2 .vd-score { margin-top: 2px; }
+.v2 .vd-num { font-size: 1.6rem; font-weight: 900; color: var(--ink); letter-spacing: -0.02em; }
+.v2 .vd-of { font-weight: 700; color: var(--muted); }
+.v2 .vd-stars { color: var(--gold); letter-spacing: 1px; }
+.v2 .vd-rating { font-size: 0.78rem; color: var(--muted); }
+.v2 .vd-line { margin: 8px 0 6px; font-size: 0.98rem; line-height: 1.45; color: var(--ink); }
+.v2 .vd-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin: 2px 0 6px; }
+.v2 .vd-price .now { font-size: 1.45rem; font-weight: 900; color: var(--ink); }
+.v2 .vd-price .was { color: var(--muted); text-decoration: line-through; }
+.v2 .vd-price .bundle { font-size: 0.85rem; font-weight: 800; color: var(--v2-sale); }
+.v2 .vd-facts { list-style: none; padding: 0; margin: 0 0 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 2px 10px; }
+.v2 .vd-facts li { position: relative; padding-left: 20px; font-size: 0.84rem; line-height: 1.35; color: var(--ink); margin-bottom: 3px; }
+.v2 .vd-facts li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--v2-frame); font-weight: 900; }
+.v2 .vd-deal { background: var(--v2-sale); color: #fff; border-radius: 6px; padding: 7px 10px; font-size: 0.86rem; line-height: 1.35; margin-bottom: 8px; }
+.v2 .vd-stock { display: block; font-weight: 700; font-size: 0.8rem; opacity: 0.95; }
+.v2 .deal-clock { font-variant-numeric: tabular-nums; font-weight: 900; }
+.v2 .vd-btn { max-width: none; font-size: 1.08rem; padding: 14px 18px; }
+.v2 .rc-price-note { font-size: 0.8rem; font-weight: 800; color: var(--v2-sale); }
+.v2 .rc-noimg { width: 100%; max-width: 104px; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; text-align: center; background: #f1f5f9; border: 1px dashed #cbd5e1; border-radius: 8px; color: #475569; font-weight: 800; font-size: 0.82rem; line-height: 1.2; padding: 6px; }
+.v2 .v2-compare { margin: 6px 0 4px; }
+.v2 .cmp-intro { margin: 0 0 10px; font-size: 0.98rem; }
+.v2 .cmp-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border); border-radius: 10px; background: #fff; }
+.v2 table.cmp { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 0.86rem; }
+.v2 table.cmp th, .v2 table.cmp td { padding: 9px 10px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; line-height: 1.35; }
+.v2 table.cmp thead th { background: #f1f5f9; font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink); }
+.v2 table.cmp tbody th { position: sticky; left: 0; background: #fff; font-weight: 800; color: var(--ink); min-width: 118px; box-shadow: 1px 0 0 var(--border); }
+.v2 table.cmp tr.is-top td, .v2 table.cmp tr.is-top th { background: #ecfdf3; }
+.v2 table.cmp .y { color: var(--v2-frame); font-weight: 900; }
+.v2 table.cmp .n { color: var(--v2-cross); font-weight: 900; }
+.v2 table.cmp .sc { font-weight: 900; font-size: 1rem; color: var(--ink); }
+.v2 .cmp-note { font-size: 0.76rem; color: var(--muted); margin: 6px 0 0; }
+@media (max-width: 760px) {
+  .v2 .v2-head { padding-top: 14px; }
+  .v2 .v2-head h1 { font-size: 1.6rem; line-height: 1.18; }
+  .v2 .v2-updated { margin-bottom: 10px; font-size: 0.84rem; }
+  .v2 .vd-facts { grid-template-columns: 1fr 1fr; gap: 0 8px; }
+  .v2 .vd-facts li { font-size: 0.78rem; padding-left: 15px; }
+  .v2 .vd-img { width: 72px; }
+  .v2 .vd-line { font-size: 0.92rem; margin: 6px 0 4px; }
+  .v2 .vd-name { font-size: 1.02rem; }
+  .v2 .vd-num { font-size: 1.35rem; }
+  .v2 .v2-verdict { padding: 10px 12px 12px; }
+  .v2 .vd-kicker { margin-bottom: 6px; }
+  .v2 .vd-deal { font-size: 0.8rem; padding: 6px 9px; margin-bottom: 7px; }
+  .v2 .v2-topbyline { font-size: 0.82rem; margin-bottom: 10px; }
+}
+.v2 table.cmp td { min-width: 92px; }
+.v2 table.cmp td:nth-child(3) { min-width: 150px; }
+.v2 table.cmp td:nth-child(4) { min-width: 120px; }
+@media (max-width: 480px) {
+  .v2 table.cmp { min-width: 0; font-size: 0.76rem; }
+  .v2 table.cmp th, .v2 table.cmp td { padding: 7px 5px; min-width: 0 !important; }
+  .v2 table.cmp tbody th { min-width: 0; position: static; box-shadow: none; }
+  .v2 table.cmp thead th { font-size: 0.64rem; letter-spacing: 0; }
+  .v2 table.cmp .sc { font-size: 0.86rem; }
+}
