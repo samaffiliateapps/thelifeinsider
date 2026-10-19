@@ -13,10 +13,11 @@ interface Props {
   metaPixel?: string;
   /* slimFooter = one-line legal footer for paid-traffic advertorials (Sam, 11 Oct 2026): no company/blog links that leak clicks. */
   slimFooter?: boolean;
+  noFooter?: boolean;   // 19 Oct 2026: page renders its own disclosure + Privacy/Terms/Contact (ReviewPageRip), so no site footer
   footerNotice?: string; // html legal notice shown above the slim footer line (paid advertorials)
 }
 
-const { title, description, minimal = false, metaPixel = "", slimFooter = false, footerNotice = "" } = Astro.props;
+const { title, description, minimal = false, metaPixel = "", slimFooter = false, footerNotice = "", noFooter = false } = Astro.props;
 const year = new Date().getFullYear();
 
 // Set to your GA4 Measurement ID (e.g. "G-XXXXXXXXXX") to activate analytics.
@@ -101,7 +102,7 @@ const ADS_ID = "AW-18319719009";
       <slot />
     </main>
 
-    {slimFooter ? (
+    {noFooter ? null : slimFooter ? (
     <footer class="slim-footer"><div class="container">{footerNotice && <div class="legal" set:html={footerNotice} />}Advertisement. We may earn a commission from purchases made through links on this page. · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="/contact/">Contact</a> · © {year} The Life Insider</div></footer>
     ) : (
     <footer class="site-footer">
