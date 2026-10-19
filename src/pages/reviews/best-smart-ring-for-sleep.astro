@@ -1,0 +1,65 @@
+---
+/* =========================================================================
+   HERZ P1 — SLEEP PAGE (19 Oct 2026). Same rip structure as /reviews/best-smart-rings/ (theconsumerpick body,
+   consumeradvisoryreport top-5 + 3-CTA rhythm) with sleep-led H1/lead/#1 bullets/sections.
+   Google ad group "Sleep" (exact): smart ring for sleep · sleep ring · sleep tracking ring · sleep ring tracker …
+   ("smart ring for sleep" = 74k/mo in Planner, 0 advertisers in SpyFu).
+   Persona "Mark Ellison" = editorial pen name (disclosed in footer). He COMPARED and RANKED; nowhere does the
+   page say we bought, tested or wore a ring (held line). Headshot + sleep image: AI (Higgsfield nano_banana_pro).
+   ========================================================================= */
+import ReviewPageRip from "../../layouts/ReviewPageRip.astro";
+import CpvTracker from "../../components/CpvTracker.astro";
+import { CPV_CAMPAIGN, HZ_LINK, UPDATED, DEAL_CALENDAR, DISCLOSURE, ROLLING_SALE_END, DEFAULT_CODE, topBar, stats, preList, products, where, side, sticky, reviewHtml } from "../../data/herz";
+
+const seg = "sleep";
+const author = { name: "Mark Ellison", photo: "/images/authors/mark-ellison.webp" };
+---
+
+<ReviewPageRip
+  title="Best Smart Ring for Sleep 2026 – Top 5 Ranked, No Subscription | The Life Insider"
+  description="The 5 best smart rings for sleep in 2026, ranked on sleep data, battery at month 6, monthly fees and guarantee. Oura, RingConn, Samsung and RENPHO vs our #1 sleep ring with no subscription."
+  h1="Best Smart Ring for Sleep 2026"
+  h2='Top 5 Ranked: <span class="ul">Which Rings Still Last the Night at Month 6, With No Monthly Fee</span>'
+  updated={UPDATED}
+  byline={{ name: author.name, photo: author.photo, checkedBy: "Deals Desk" }}
+  intro={[
+    '<span class="hg">On night one, every ring on this list reads your sleep.</span> Deep, light, REM, overnight HRV, blood oxygen: easy. What separates them is <b>night 180</b>: whether the ring still lasts until morning, whether you’re paying <b>$5.99 a month to see your own sleep chart</b>, and whether a phone left in the kitchen <b>wipes out the night</b>.',
+    '<span class="hr">Most sleepers find out too late</span> – a ring that needs charging every night, so it’s on the charger when you need it most. A membership that locks your sleep insights. A return window that closed long before the battery faded. We compared <b>12+ smart rings for sleep</b> on specs, prices, fees, warranties and long-term owner reports, and <b>one ring beat them all</b>.',
+  ]}
+  verdictLine="Our #1 for sleep: Herz P1, 9.8/10 · rated 4.9★ for sleep tracking · no subscription · up to 69% off today ›"
+  chips={["No Subscription Required", "Sleep Stages, HRV &amp; SpO2", "12+ Rings Compared"]}
+  listLede='Here are our <span class="ul">Top 5 Smart Rings for Sleep</span>, with <a href="#review">why our #1 won further down:</a>'
+  products={products(seg)}
+  bandLabel='Best Smart Ring for Sleep in <span class="yr">2026</span>'
+  stamp="<span><b>#1</b>BEST FOR SLEEP 2026</span>"
+  review={{
+    heading: "Why the Herz P1 Is the Best Smart Ring for Sleep",
+    image: { src: "/images/herz/herz-app-sleep.webp", alt: "Herz app sleep screen showing sleep stages through the night", w: 287, h: 370, caption: "The Herz app’s sleep screen: restful, light, REM and awake, night by night. Free, with no membership." },
+    html: reviewHtml(seg),
+  }}
+  where={where(seg)}
+  side={side(seg)}
+  author={{
+    name: author.name,
+    role: "Sleep & Recovery Editor",
+    photo: author.photo,
+    html: "<p>We compared 12+ smart rings for sleep this year, and the <b>Herz P1</b> was the clear #1. It reads <b>sleep stages, HRV and blood oxygen every night for $0 a month</b>, keeps 7 nights on the ring if your phone wanders off, and backs it all with a <b>90-day refund and a 2-year warranty</b>.</p><p>I’ve written about sleep gadgets for years, and the complaint I hear most isn’t bad data. It’s a ring that’s on the charger, or behind a paywall, the night you need it. If you want a <b>sleep tracker you forget you’re wearing and never pay for twice</b>, this is the one.</p>",
+  }}
+  disclosure={DISCLOSURE}
+  dealCalendar={DEAL_CALENDAR}
+  rollingSaleEnd={ROLLING_SALE_END}
+  topUrl={HZ_LINK}
+  sticky={sticky}
+  saleHeadline="UP TO 69% OFF"
+  salePct="69%"
+  topBar={topBar}
+  hero={{ image: { src: "/images/herz/herz-sleep-hand.webp", alt: "Woman asleep with a black smart ring on her finger", w: 900, h: 672 }, anchorCta: "See Our Top 5 Picks ↓", caption: "A ring, not a watch: nothing on your wrist, no screen glow in bed. (Illustration.)" }}
+  stats={stats}
+  preList={preList(seg)}
+  hideRepeat
+  quietRivals
+  checkedLine="Prices checked Oct 19, 2026"
+  defaultCode={DEFAULT_CODE}
+>
+  {CPV_CAMPAIGN !== "TBD" && <Fragment slot="body-end"><CpvTracker campaign={CPV_CAMPAIGN} /></Fragment>}
+</ReviewPageRip>

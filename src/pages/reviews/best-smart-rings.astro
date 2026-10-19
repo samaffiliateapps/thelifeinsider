@@ -1,0 +1,65 @@
+---
+/* =========================================================================
+   HERZ P1 — CORE PAGE (19 Oct 2026). Body = rip of theconsumerpick.com/best-smart-rings/ (month-6 battery +
+   90-day/2-year guarantee angle, 6 criteria, x/5 scorecard, verdict, where to buy); top-5 cards, chips,
+   hero anchor + offer-linked hero image and 3-CTA rhythm = review.consumeradvisoryreport.com/best-smart-rings.
+   Google ad groups: Core (smart ring · best smart ring …), No-subscription/Oura-alternative, Health & Fitness.
+   Persona "Rachel Dunmore" = editorial pen name (disclosed in footer). She COMPARED and RANKED; nowhere does
+   the page say we bought, tested or wore a ring (held line). Headshot: AI (Higgsfield nano_banana_pro).
+   ========================================================================= */
+import ReviewPageRip from "../../layouts/ReviewPageRip.astro";
+import CpvTracker from "../../components/CpvTracker.astro";
+import { CPV_CAMPAIGN, HZ_LINK, UPDATED, DEAL_CALENDAR, DISCLOSURE, ROLLING_SALE_END, DEFAULT_CODE, topBar, stats, preList, products, where, side, sticky, reviewHtml } from "../../data/herz";
+
+const seg = "core";
+const author = { name: "Rachel Dunmore", photo: "/images/authors/rachel-dunmore.webp" };
+---
+
+<ReviewPageRip
+  title="Best 5 Smart Rings 2026 – No Subscription, Ranked Side by Side | The Life Insider"
+  description="The 5 best smart rings of 2026, ranked on battery at month 6, monthly fees, sleep data, water rating and guarantee. Oura, RingConn, Samsung and RENPHO vs our #1 ring with no subscription."
+  h1="Best 5 Smart Rings of 2026"
+  h2='Sleep, HRV &amp; Heart Rate, Ranked: <span class="ul">No Subscription, No Dead Battery at Month 6</span>'
+  updated={UPDATED}
+  byline={{ name: author.name, photo: author.photo, checkedBy: "Deals Desk" }}
+  intro={[
+    '<span class="hg">On night one, every ring on this list gets your sleep right.</span> That part is easy. What separates them is <b>month 6</b>: whether the ring still lasts the night, whether you’re paying <b>$5.99 a month to read your own heart rate</b>, and <b>who’s on the hook when the battery fades</b>.',
+    '<span class="hr">Most buyers find out too late</span> – a membership they didn’t know about until the app asked for a card. A “premium” ring that dies by lunch after a year. A return window that closed months before the battery did. We compared <b>12+ smart rings</b> on specs, prices, fees, warranties and long-term owner reports, and <b>one ring beat them all</b>.',
+  ]}
+  verdictLine="Our #1: Herz P1, 9.8/10 · 4.7★ from 5,127+ buyers · no subscription · up to 69% off today ›"
+  chips={["No Subscription Required", "Sleep, HRV &amp; Recovery", "12+ Rings Compared"]}
+  listLede='Here are our <span class="ul">Top 5 Smart Rings of 2026</span>, with <a href="#review">why our #1 won further down:</a>'
+  products={products(seg)}
+  bandLabel='Best Smart Ring in <span class="yr">2026</span>'
+  stamp="<span><b>#1</b>EDITOR'S CHOICE 2026</span>"
+  review={{
+    heading: "Why the Herz P1 Won: Our Full Breakdown",
+    image: { src: "/images/herz/herz-ring-black.webp", alt: "Herz P1 smart ring in Midnight Black, sensors on the inside", w: 618, h: 602, caption: "Herz P1 in Midnight Black: up to 6 days per charge, no monthly fee." },
+    html: reviewHtml(seg),
+  }}
+  where={where(seg)}
+  side={side(seg)}
+  author={{
+    name: author.name,
+    role: "Senior Wearables Editor",
+    photo: author.photo,
+    html: "<p>We compared 12+ smart rings this year, and the <b>Herz P1</b> was the clear #1. It’s the only one that pairs <b>every metric free, forever</b> with a <b>90-day refund and a 2-year warranty</b>, and it costs less than two years of a rival’s membership.</p><p>I’ve covered fitness trackers and smartwatches for over a decade, and I’ve watched readers pay $300+ for a ring, then a monthly fee, then find out the warranty ended right when the battery did. If you want a <b>smart ring you never pay for twice</b>, this is the one.</p>",
+  }}
+  disclosure={DISCLOSURE}
+  dealCalendar={DEAL_CALENDAR}
+  rollingSaleEnd={ROLLING_SALE_END}
+  topUrl={HZ_LINK}
+  sticky={sticky}
+  saleHeadline="UP TO 69% OFF"
+  salePct="69%"
+  topBar={topBar}
+  hero={{ image: { src: "/images/herz/herz-hands.webp", alt: "Two hands wearing Herz P1 smart rings in black and gold", w: 900, h: 558 }, anchorCta: "See Our Top 5 Picks ↓", caption: "Herz P1: sleep, HRV, heart rate and SpO2 from your finger, with no monthly fee." }}
+  stats={stats}
+  preList={preList(seg)}
+  hideRepeat
+  quietRivals
+  checkedLine="Prices checked Oct 19, 2026"
+  defaultCode={DEFAULT_CODE}
+>
+  {CPV_CAMPAIGN !== "TBD" && <Fragment slot="body-end"><CpvTracker campaign={CPV_CAMPAIGN} /></Fragment>}
+</ReviewPageRip>

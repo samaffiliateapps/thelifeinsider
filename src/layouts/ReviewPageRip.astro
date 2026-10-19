@@ -55,10 +55,21 @@ export interface Props {
   side: { name: string; ratingLine: string; image: string; bullets: string[]; cta: string; foot: string };
   author: { name: string; role: string; photo: string; html: string };
   disclosure: string;
-  dealCalendar: { label: string; startISO: string; endISO: string; timer?: boolean }[];
+  dealCalendar: { label: string; startISO: string; endISO: string; timer?: boolean; code?: string }[];
   rollingSaleEnd?: boolean;     // true = CTP's "SALE ENDS: <today>" device; false = merchant's real sale calendar
   topUrl: string;
   sticky: { name: string; image: string; price: string; oldPrice: string; discount: string; trustNote: string; button: string };
+  /* Optional (19 Oct 2026, Herz smart-ring rip). All default OFF, so the Grounded pages render unchanged. */
+  saleHeadline?: string;        // red sale box headline (default "UP TO 60% OFF")
+  salePct?: string;             // % in the where-block sale line (default "60%")
+  topBar?: string;              // html for a rolling red bar above the nav ([data-today-long], [data-deal-code] are filled live)
+  hero?: { image: { src: string; alt: string; w: number; h: number }; anchorCta: string; caption?: string }; // CAR: anchor CTA + offer-linked hero image
+  stats?: { n: string; l: string }[];   // theconsumerpick trust stats row
+  preList?: string;             // html sections between the header and the ranked list (e.g. "How we ranked")
+  hideRepeat?: boolean;         // drop the band + #1 repeat card (not on the CAR / theconsumerpick layouts)
+  defaultCode?: string;
+  quietRivals?: boolean;        // rival cards are plain boxes; only a small "See on Amazon" link is clickable
+  checkedLine?: string;         // replaces "Checked by …" in the byline (e.g. "Prices checked Oct 19, 2026")         // promo code shown in [data-deal-code] when no dated sale is active
 }
 const p = Astro.props;
 const top = p.products.find((x) => x.rank === 1)!;
@@ -73,6 +84,7 @@ const rel = "sponsored nofollow noopener";
 
 <Base title={p.title} description={p.description} minimal noFooter>
   <article class="rip">
+    {p.topBar && <div class="rip-topbar" set:html={p.topBar} />}
     <!-- 0. nav: two offer links, like CTP -->
     <nav class="rip-nav" aria-label="Quick links">
       <div class="rip-wrap">
@@ -93,7 +105,7 @@ const rel = "sponsored nofollow noopener";
         <img src={p.byline.photo} alt={p.byline.name} width="36" height="36" loading="eager" decoding="async" />
         <span>Written by <b><u>{p.byline.name}</u></b></span>
         <span class="dash">–</span>
-        <span>Checked by <b><u>{p.byline.checkedBy}</u></b></span>
+        {p.checkedLine ? <span>{p.checkedLine}</span> : <span>Checked by <b><u>{p.byline.checkedBy}</u></b></span>}
       </div>
 
       <!-- 3. two centred highlight paragraphs -->
@@ -107,7 +119,21 @@ const rel = "sponsored nofollow noopener";
         <a href="#top5"><span class="ic">★</span><b set:html={p.chips[1]} /></a>
         <a href="#top5"><span class="ic c">✓</span><b set:html={p.chips[2]} /></a>
       </div>
+      {p.hero && (
+        <>
+          <a class="rip-anchor" href="#top5" data-cta="hero-anchor">{p.hero.anchorCta}</a>
+          <a class="rip-hero" href={p.topUrl} rel={rel} target="_blank" data-cta="hero-img">
+            <img src={p.hero.image.src} alt={p.hero.image.alt} width={p.hero.image.w} height={p.hero.image.h} loading="eager" decoding="async" fetchpriority="high" />
+            {p.hero.caption && <span class="cap" set:html={p.hero.caption} />}
+          </a>
+        </>
+      )}
+      {p.stats && (
+        <div class="rip-stats">{p.stats.map((x) => <div><b set:html={x.n} /><span set:html={x.l} /></div>)}</div>
+      )}
     </header>
+
+    {p.preList && <section class="rip-pre"><div class="rip-wrap prose" set:html={p.preList} /></section>}
 
     <!-- 5. list lede -->
     <section id="top5" class="rip-list">
@@ -116,8 +142,11 @@ const rel = "sponsored nofollow noopener";
         <p class="rip-adv"><a href="#disclosure">ⓘ Advertiser Disclosure</a></p>
 
         <!-- 6–7. ranked cards -->
-        {[top, ...rivals].map((x) => (
-          <a class:list={["card", { top: x.rank === 1 }]} href={x.url} rel={rel} target="_blank" data-cta={x.rank === 1 ? "card1" : `card${x.rank}`}>
+        {[top, ...rivals].map((x) => {
+          const quiet = !!p.quietRivals && x.rank !== 1;
+          const Tag = quiet ? "div" : "a";
+          return (
+          <Tag class:list={["card", { top: x.rank === 1 }]} href={quiet ? undefined : x.url} rel={quiet ? undefined : rel} target={quiet ? undefined : "_blank"} data-cta={quiet ? undefined : x.rank === 1 ? "card1" : `card${x.rank}`}>
             <span class="badge">{x.badge ?? `#${x.rank}`}</span>
             <span class="c-media">
               {x.images.map((im, i) => <img src={im.src} alt={im.alt} width={im.w} height={im.h} loading={x.rank === 1 && i === 0 ? "eager" : "lazy"} decoding="async" />)}
@@ -135,20 +164,24 @@ const rel = "sponsored nofollow noopener";
               {x.price && <span class="c-price"><b>{x.price}</b>{x.oldPrice && <s>{x.oldPrice}</s>}</span>}
               {x.sale && (
                 <span class="c-sale">
-                  <strong>UP TO 60% OFF</strong>
+                  <strong>{p.saleHeadline ?? "UP TO 60% OFF"}</strong>
                   {p.rollingSaleEnd
                     ? <span>SALE ENDS: <span data-today-long>{p.updated}</span></span>
                     : <span><span data-deal-label>{saleLabel}</span>: <span data-deal-when>{saleWhen}</span></span>}
                   <em>Stock levels: LOW</em>
                 </span>
               )}
-              <span class:list={["c-btn", { amz: x.external }]}>{x.cta} ›</span>
+              {quiet
+                ? <a class="c-btn amz" href={x.url} rel={rel} target="_blank" data-cta={`card${x.rank}`}>{x.cta} ›</a>
+                : <span class:list={["c-btn", { amz: x.external }]}>{x.cta} ›</span>}
               <span class="c-ship" set:html={x.shipLine} />
             </span>
-          </a>
-        ))}
+          </Tag>
+          );
+        })}
 
         <!-- 8. band + #1 repeat with stamp -->
+        {!p.hideRepeat && <>
         <div class="rip-band" set:html={p.bandLabel} />
         <a class="card top repeat" href={top.url} rel={rel} target="_blank" data-cta="card1-repeat">
           <span class="stamp" set:html={p.stamp} />
@@ -167,7 +200,7 @@ const rel = "sponsored nofollow noopener";
             <span class="c-rating" set:html={top.ratingLine} />
             {top.price && <span class="c-price"><b>{top.price}</b>{top.oldPrice && <s>{top.oldPrice}</s>}</span>}
             <span class="c-sale">
-              <strong>UP TO 60% OFF</strong>
+              <strong>{p.saleHeadline ?? "UP TO 60% OFF"}</strong>
               {p.rollingSaleEnd
                 ? <span>SALE ENDS: <span data-today-long>{p.updated}</span></span>
                 : <span><span data-deal-label>{saleLabel}</span>: <span data-deal-when>{saleWhen}</span></span>}
@@ -177,6 +210,7 @@ const rel = "sponsored nofollow noopener";
             <span class="c-ship" set:html={top.shipLine} />
           </span>
         </a>
+        </>}
       </div>
     </section>
 
@@ -198,8 +232,8 @@ const rel = "sponsored nofollow noopener";
           <a class="rv-cta" href={p.topUrl} rel={rel} target="_blank" data-cta="where">{p.where.cta}</a>
           <p class="rv-saleline">
             {p.rollingSaleEnd
-              ? <b>Save up to <span class="r">60%</span> OFF – Sale Ends: <span data-today-long>{p.updated}</span></b>
-              : <b>Save up to <span class="r">60%</span> OFF – <span data-deal-label>{saleLabel}</span> <span data-deal-when>{saleWhen}</span></b>}
+              ? <b>Save up to <span class="r">{p.salePct ?? "60%"}</span> OFF – Sale Ends: <span data-today-long>{p.updated}</span></b>
+              : <b>Save up to <span class="r">{p.salePct ?? "60%"}</span> OFF – <span data-deal-label>{saleLabel}</span> <span data-deal-when>{saleWhen}</span></b>}
           </p>
         </div>
 
@@ -237,7 +271,7 @@ const rel = "sponsored nofollow noopener";
   <StickyCta name={p.sticky.name} image={p.sticky.image} url={p.topUrl} price={p.sticky.price} oldPrice={p.sticky.oldPrice} discount={p.sticky.discount} buttonText={p.sticky.button} ctaId="sticky" />
   <ExitOffer name={p.sticky.name} image={top.images[0].src} url={p.topUrl} price={p.sticky.price} oldPrice={p.sticky.oldPrice} discount={p.sticky.discount} trustNote={p.sticky.trustNote} />
 
-  <script is:inline define:vars={{ dealCalendar: p.dealCalendar, rolling: !!p.rollingSaleEnd }}>
+  <script is:inline define:vars={{ dealCalendar: p.dealCalendar, rolling: !!p.rollingSaleEnd, defaultCode: p.defaultCode ?? "" }}>
     /* Sale label + clock from the merchant's own promo calendar (promo-banner.js, read 19 Oct 2026).
        19 Oct–2 Nov: "Limited-Time Offer", no end date → "on now". From 3 Nov each named sale counts down
        to its real end date. rolling=true switches the red box to CTP's "SALE ENDS: <today>" device. */
@@ -247,6 +281,13 @@ const rel = "sponsored nofollow noopener";
       try {
         var long = new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
         if (rolling) document.querySelectorAll("[data-today-long]").forEach(function (n) { n.textContent = long; });
+      } catch (e) {}
+      try {
+        if (defaultCode) {
+          var nowC = new Date(), code = defaultCode;
+          for (var j = 0; j < dealCalendar.length; j++) { var dc = dealCalendar[j]; if (dc.code && nowC >= parse(dc.startISO) && nowC <= parse(dc.endISO)) code = dc.code; }
+          document.querySelectorAll("[data-deal-code]").forEach(function (n) { n.textContent = code; });
+        }
       } catch (e) {}
       function cur() {
         var now = new Date();
