@@ -46,7 +46,7 @@
    ========================================================================= */
 import type { RipProduct } from "../layouts/ReviewPageRip.astro";
 
-export const CPV_CAMPAIGN = "TBD"; // Sam creates "Google - Herz Smart Ring" in CPV One (offer 21 = int2)
+export const CPV_CAMPAIGN = "30"; // CPV One "Google - Herz Smart Ring" (offer 21 = int2, LP 26)
 export const CPV_ROOT = "https://track.thelifeinsider.com/";
 export const HZ_LINK = `${CPV_ROOT}base2.php`;
 export const UPDATED = "October 19, 2026";
