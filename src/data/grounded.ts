@@ -33,7 +33,7 @@ export const UPDATED = "October 19, 2026";
 
 /* CTP's red box reads "SALE ENDS: <today's date>" (rolling). Default here = the merchant's REAL sale calendar
    (label + real end date). Flip to true to mirror CTP's rolling date 1:1 (Sam / compliance officer call). */
-export const ROLLING_SALE_END = false;
+export const ROLLING_SALE_END = true; // Sam 19 Oct: rolling 'Sale ends today' banner like consumertopreviews
 
 export type Seg = "core" | "women" | "wtb";
 
