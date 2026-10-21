@@ -1,0 +1,148 @@
+/* Review page v2, rip look (ReviewPageRipV2.astro), 22 Oct 2026. Layered over rip.css and scoped to .rv2:
+   same fonts, sizes, greens, red, card frame and buttons as the v1 pages. Rules: whitespace over density,
+   centred hero, max 2 badge styles per screen (green #1 badge + A+ tile), green/red accents only,
+   body text ≥16px, H1 within 10% of v1 (28px at 375 wide). Target: card #1 CTA bottom ≤660px at 375×812. */
+
+/* logo header: v1's centred logo, slimmer */
+body:has(.rv2) .site-header { position: static; }
+body:has(.rv2) .site-header .container { flex-direction: column; justify-content: center; padding-top: 8px; padding-bottom: 8px; }
+
+/* one slim red sale bar, single line */
+.rv2-bar { display: block; background: #c81e1e; color: #fff !important; text-align: center; font-size: 0.86rem; font-weight: 700; line-height: 1.3; padding: 6px 10px; text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* hero: centred H1, one-line hook, small author line */
+.rv2-head { text-align: center; padding-top: 12px; padding-bottom: 2px; }
+.rv2-head h1 { font-size: clamp(1.575rem, 6.72vw, 2.6rem); line-height: 1.13; margin: 0; font-weight: 900; letter-spacing: -0.025em; } /* 25.2px at 375 = v1's 28px − 10% */
+.rv2-head h1 .nw { white-space: nowrap; }
+.rv2-hook { font-size: 1rem; font-weight: 700; color: #318069; margin: 7px 0 7px; line-height: 1.35; letter-spacing: -0.005em; }
+.rv2-by { display: inline-flex; align-items: center; justify-content: center; gap: 7px; color: var(--mut); font-size: 0.8rem; line-height: 1.3; }
+.rv2-by img { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; flex: none; }
+.rv2-by a { color: var(--mut); }
+
+/* list background, as v1 */
+.rv2-list { background: #f7f8fa; padding: 22px 0 8px; margin-top: 10px; }
+.rv2-lede { margin: 6px 0 22px; }
+
+/* CARD #1 (v1 frame: 3px green border, green badge on the edge) */
+.rv2-top { position: relative; background: #fff; border: 3px solid var(--g); border-radius: 10px; padding: 18px 16px 16px; margin: 0 0 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); cursor: pointer; }
+.rv2-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); white-space: nowrap; background: var(--g); color: #fff; font-weight: 800; font-size: 0.95rem; padding: 3px 12px; border-radius: 6px; }
+.rv2-hero { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.rv2-img { display: block; }
+.rv2-img img { display: block; width: auto; max-width: 100%; height: 150px; object-fit: contain; margin: 0 auto; }
+.rv2-img.crop img { width: 250px; height: 112px; object-fit: cover; margin-top: 4px; } /* square shot with white margins (Cozy): show the product band only */
+.rv2-buy { display: flex; flex-direction: column; align-items: center; width: 100%; }
+.rv2-name { display: block; font-size: 1.35rem; font-weight: 800; line-height: 1.2; margin: 6px 0 6px; color: var(--ink) !important; text-decoration: none; }
+.rv2-score { display: flex; align-items: center; justify-content: center; gap: 9px; flex-wrap: nowrap; }
+.rv2-tile { display: inline-grid; place-items: center; min-width: 46px; height: 40px; padding: 0 6px; border-radius: 8px; background: var(--g2); color: #fff; font: 900 1.45rem/1 Georgia, "Times New Roman", serif; }
+.rv2-num { font-size: 1rem; color: #333; }
+.rv2-num b { font-size: 1.75rem; font-weight: 900; color: var(--ink); }
+.rv2-stars { font-size: 0.95rem; color: #333; white-space: nowrap; }
+.rv2-stars span { color: #f5a623; letter-spacing: 1px; font-size: 1.05rem; }
+.rv2-price { margin-top: 6px; font-size: 1.05rem; }
+.rv2-price b { font-size: 1.5rem; font-weight: 900; color: var(--ink); }
+.rv2-price s { color: #888; margin: 0 4px; }
+.rv2-off { color: var(--red); font-weight: 800; }
+.rv2-ends { color: var(--red); font-weight: 700; font-size: 0.95rem; margin-top: 2px; }
+.rv2-cta { display: block; width: 100%; max-width: 420px; margin: 12px auto 0; background: var(--g2); color: #fff !important; border: 2px solid #00a549; border-radius: 7px; font-weight: 800; font-size: 1.15rem; line-height: 1.25; padding: 13px 10px; text-align: center; text-decoration: none; box-shadow: 1px 2px 3px rgba(0,0,0,0.45); }
+.rv2-cta:hover { filter: brightness(1.05); }
+
+/* below the button */
+.rv2-below { max-width: 620px; margin: 0 auto; }
+.rv2-trust { list-style: none; padding: 0; margin: 14px 0 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; font-size: 0.92rem; font-weight: 700; color: #16794a; }
+.rv2-rating { text-align: center; font-size: 0.92rem; color: #444; margin: 10px 0 0; }
+.rv2-code { text-align: center; font-size: 0.92rem; color: #444; margin: 8px 0 0; line-height: 1.45; }
+.rv2-con { margin: 16px 0 14px; font-size: 1rem; line-height: 1.45; text-align: center; color: #333; }
+.rv2-con .x { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: #fe2f2f; color: #fff; font-size: 0.66rem; font-weight: 900; vertical-align: 1px; }
+.rv2 .rv2-bul li { font-size: 1rem; line-height: 1.5; margin-bottom: 10px; }
+.rv2-more summary { cursor: pointer; font-weight: 700; color: var(--blue); margin: 2px 0 12px; font-size: 0.98rem; list-style-position: inside; }
+.rv2-bars { margin: 16px 0 6px; padding-top: 14px; border-top: 1px solid #eee; }
+.rv2-bars .bar { display: grid; grid-template-columns: 128px 1fr 30px; gap: 10px; align-items: center; font-size: 0.92rem; margin-bottom: 8px; }
+.rv2-bars .bt { height: 10px; background: #e7ece9; border-radius: 6px; overflow: hidden; }
+.rv2-bars .bf { display: block; height: 100%; width: 0; background: var(--g3); transition: width .8s ease-out; }
+.rv2-bars.on .bf { width: var(--v); }
+@media (prefers-reduced-motion: reduce) { .rv2-bars .bf { transition: none; } }
+.rv2-bars .bv { font-weight: 800; text-align: right; }
+.rv2-revs { margin-top: 14px; }
+.rv2-revs blockquote { margin: 0 0 12px; padding: 12px 14px; background: #f3fbf7; border-left: 4px solid var(--g); border-radius: 0 8px 8px 0; font-size: 1rem; line-height: 1.5; }
+.rv2-revs .rs { display: block; color: #f5a623; font-size: 0.9rem; letter-spacing: 1px; }
+.rv2-revs .rt { display: block; margin-bottom: 2px; }
+.rv2-revs cite { display: block; font-style: normal; font-size: 0.82rem; color: #555; margin-top: 6px; }
+.rv2-ship { text-align: center; font-size: 0.88rem; color: #444; margin: 8px 0 0; }
+.rv2-full { display: block; text-align: center; font-weight: 700; color: var(--blue) !important; margin-top: 10px; }
+
+/* rival cards: rip.css .card (compact on mobile); placeholder tile when we have no rival photo */
+.rv2 .card { cursor: pointer; }
+.rv2-ph { display: grid; place-items: center; width: 92px; height: 92px; border-radius: 8px; background: #f1f3f5; color: #9aa3ad; }
+.rv2-rv { display: block; font-size: 0.92rem; line-height: 1.45; color: #333; margin-top: 4px; }
+.rv2 .card .c-btn.amz { font-weight: 700; }
+.rv2-seemore { display: block; width: 100%; margin: -6px 0 10px; padding: 12px; border: 1px dashed #9aa3ad; border-radius: 8px; background: #fff; font-weight: 800; font-size: 1rem; color: var(--blue); cursor: pointer; }
+
+/* intro (moved below the list) + review body */
+.rv2-narrow { max-width: 780px; }
+.rv2-intro { text-align: center; margin-bottom: 18px; }
+.rv2-intro .rip-lead { text-align: left; max-width: none; }
+.rv2-pas { list-style: none; padding: 0; margin: 0 0 12px; font-size: 1.08rem; font-weight: 700; line-height: 1.5; }
+.rv2-byfig { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; font-size: 0.92rem; color: #555; border-top: 1px solid var(--line); padding-top: 16px; }
+.rv2-byfig img { border-radius: 50%; width: 44px; height: 44px; object-fit: cover; }
+.rv2 .prose h2 { font-size: clamp(1.45rem, 5.6vw, 2.1rem); line-height: 1.18; margin: 22px 0 12px; font-weight: 900; }
+.rv2 .prose h4 { font-size: 1.12rem; margin: 18px 0 6px; font-weight: 800; }
+.rv2 .prose ul, .rv2 .prose ol { padding-left: 1.2em; }
+.rv2 .prose li { font-size: 1.04rem; line-height: 1.55; margin-bottom: 6px; }
+.rv2 .prose ul.check { padding-left: 0; }
+.rv2 .prose ul.check.red li::before { content: "⚠"; color: #d12; }
+.rv2 .prose figure a { display: block; }
+.rv2-adimg { display: block; margin: 8px 0 18px; }
+.rv2-adimg img { width: 100%; height: auto; border-radius: 8px; display: block; }
+.rv2-tablewrap { overflow-x: auto; margin-bottom: 14px; }
+.rv2-table { border-collapse: collapse; width: 100%; font-size: 0.9rem; line-height: 1.4; }
+.rv2-table th, .rv2-table td { border: 1px solid #e3e3e3; padding: 7px 6px; text-align: left; }
+.rv2-table th { background: #f2f2f2; }
+.rv2-table tr.win td { background: #eefaf4; font-weight: 700; }
+.rv2-update { background: #f4d1d1; border: 4px dashed red; padding: 14px; font-size: 1.08rem; line-height: 1.4; margin: 0 0 16px; }
+.rv2-important { background: #fff7d6; border: 1px solid #f2d98a; border-radius: 8px; padding: 12px 14px; margin: 0 0 16px; line-height: 1.5; }
+.rv2-offerbox { border: 3px solid var(--g); border-radius: 10px; padding: 14px; margin: 0 0 18px; background: #f3fbf7; }
+.rv2 .prose .rv2-offerbox ul { list-style: none; padding: 0; margin: 0 0 12px; }
+.rv2-bigbtn { display: block; text-align: center; background: var(--g3); color: #fff !important; text-decoration: none !important; font-weight: 800; font-size: 1.25rem; padding: 15px 10px; border-radius: 8px; box-shadow: 2px 3px 4px rgba(0,0,0,0.45); margin: 8px 0 14px; line-height: 1.3; }
+.rv2-saleline { text-align: center; margin: 0 !important; }
+.rv2-saleline .r { color: red; }
+.rv2 .prose ul.rv2-nomore { list-style: none; padding-left: 0; }
+.rv2 .prose ul.rv2-nomore li::before { content: "✓ "; color: var(--g3); font-weight: 900; }
+.rv2-bhead { line-height: 1.5; }
+.rv2-small { font-size: 0.85rem !important; color: #666; }
+.rv2-faq details { border: 1px solid var(--line); border-radius: 8px; margin-bottom: 10px; padding: 0 14px; background: #fff; }
+.rv2-faq summary { cursor: pointer; font-weight: 800; padding: 12px 0; line-height: 1.4; font-size: 1.04rem; }
+.rv2-faq p { margin: 0 0 12px; font-size: 1.02rem; line-height: 1.6; }
+
+/* exit popup: clean, centred */
+.rv2-exit { position: fixed; inset: 0; z-index: 80; display: flex; align-items: center; justify-content: center; padding: 16px; --g2: #02b04f; --red: #e14e4e; }
+.rv2-exit[hidden] { display: none; }
+.rv2-exit .bd { position: absolute; inset: 0; background: rgba(0,0,0,.6); }
+.rv2-exit .pn { position: relative; background: #fff; border-radius: 12px; max-width: 380px; width: 100%; padding: 22px 18px 14px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,.3); color: #111; }
+.rv2-exit .x { position: absolute; right: 6px; top: 4px; width: 40px; height: 40px; border: 0; background: transparent; font-size: 30px; line-height: 1; color: #444; cursor: pointer; }
+.rv2-exit .k { color: var(--red); font-weight: 800; font-size: 0.95rem; margin: 0 26px 6px; }
+.rv2-exit .t { font-size: 1.3rem; font-weight: 900; line-height: 1.25; margin: 0 0 8px; }
+.rv2-exit img { display: block; width: auto; height: 140px; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.rv2-exit .pr { font-size: 1.05rem; margin-top: 4px; }
+.rv2-exit .pr b { font-size: 1.4rem; font-weight: 900; }
+.rv2-exit .pr s { color: #888; margin-left: 4px; }
+.rv2-exit p { font-size: 0.95rem; margin: 6px 0 12px; line-height: 1.45; }
+.rv2-exit .go { display: block; background: var(--g2); color: #fff; font-weight: 800; font-size: 1.15rem; padding: 14px; border-radius: 8px; text-decoration: none; box-shadow: 1px 2px 3px rgba(0,0,0,0.45); }
+.rv2-exit .no { margin-top: 8px; border: 0; background: transparent; color: #666; font-size: 0.9rem; text-decoration: underline; cursor: pointer; padding: 8px; }
+
+/* sticky: v1 bar (global.css .sticky-cta); just the green button */
+.rv2-sticky .sc-btn { background: #02b04f; }
+
+/* desktop: card #1 image left, buy box right */
+@media (min-width: 860px) {
+  .rv2-head { padding-top: 22px; }
+  .rv2-hook { font-size: 1.2rem; }
+  .rv2-top { padding: 30px 28px 24px; max-width: 900px; margin-left: auto; margin-right: auto; }
+  .rv2-badge { left: 22px; transform: none; font-size: 1.05rem; }
+  .rv2-hero { flex-direction: row; gap: 30px; align-items: center; text-align: center; }
+  .rv2-img { flex: 0 0 42%; }
+  .rv2-img img { height: auto; width: 100%; max-height: 300px; }
+  .rv2-buy { flex: 1; }
+  .rv2-name { font-size: 1.6rem; }
+  .rv2-list .card, .rv2-list .rip-band, .rv2-list .rv2-seemore, .rv2-list .rv2-lede { max-width: 900px; margin-left: auto; margin-right: auto; }
+  .rv2-list .card { margin-bottom: 26px; }
+}

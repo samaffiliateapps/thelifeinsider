@@ -1,46 +1,77 @@
 ---
 /* =========================================================================
-   CORE PAGE v2 (21 Oct 2026): review-page v2 formula, A/B against v1 (/reviews/best-barefoot-shoes/).
-   Spec: research/overnight-2026-10-21/synth/S2-PAGES.md §3 + HANDOFF-2026-10-21.md §A5.
+   CORE PAGE v2 (21 Oct 2026; redesigned 22 Oct 2026 in the v1 rip look): review-page v2 formula,
+   A/B against v1 (/reviews/best-barefoot-shoes/).
+   Layout: ReviewPageRipV2.astro (shared with Cozy Cove). Redesign report:
+   advertorial-system/offers/design-v2/REDESIGN-2026-10-22.md
    Build notes + rotation plan: advertorial-system/offers/grounded/V2-BUILD-2026-10-21.md
    Same CPV One campaign 10. Offer links: base2.php?sub2=<slot>&sub3=gv2 (see grounded-v2.ts).
    Persona "Daniel Strutgate" COMPARED and RANKED; never "tested". Never "official" for us.
    ========================================================================= */
-import ReviewPageGroundedV2 from "../../layouts/ReviewPageGroundedV2.astro";
+import ReviewPageRipV2 from "../../layouts/ReviewPageRipV2.astro";
 import CpvTracker from "../../components/CpvTracker.astro";
 import {
   CPV_CAMPAIGN, GV2_CPV_LP, ROLLING_SALE_END, UPDATED_V2, MONTH_STAMP, gv2Link,
-  top, card1Reviews, rivals, pas, introMore, verdictLine, advertorial, where, faq, side, sticky, exit, author, DISCLOSURE_V2,
+  top, card1Reviews, rivals, pas, introMore, verdictLine, advertorial, whereHtml, faq, side, sticky, exit, author, DISCLOSURE_V2,
 } from "../../data/grounded-v2";
+
+const gTop = {
+  badge: top.ribbon,
+  name: top.name,
+  image: top.image,
+  grade: top.grade,
+  score: top.score.toFixed(1),
+  scoreLabel: top.scoreLabel,
+  stars: top.stars,
+  ratingLine: `★ ${top.stars}/5 · ${top.ratingLine}`,
+  oldPrice: top.oldPrice,
+  price: top.price,
+  off: "up to 60% off",
+  saleEnd: ROLLING_SALE_END ? `Sale ends: <span data-today-day>today</span>` : "Limited-time offer",
+  saleHeadline: top.off,
+  cta: top.cta,
+  trust: top.trust,
+  codeLine: "No code needed: discount applied at checkout · 2 pairs $62.99 each · 3 pairs $55.99 each",
+  con: top.con,
+  bullets: top.pros.slice(0, 4),
+  moreBullets: top.pros.slice(4),
+  bars: top.bars.map((b) => [b.l, b.v] as [string, number]),
+  reviews: card1Reviews.map((r) => ({ q: r.text, who: r.name, title: r.title })),
+  reviewSource: "Verified Purchaser, Grounded’s review page",
+  ship: top.ship,
+};
+const gRivals = rivals.map((r) => ({
+  rank: r.rank, name: r.name, image: r.image, grade: r.grade, score: r.score.toFixed(1), label: r.scoreLabel,
+  ratingLine: r.ratingLine, bullets: r.bullets.slice(0, 4), verdict: r.verdict, url: r.url,
+}));
+const h1 = `Best Barefoot Shoes <span class="nw">(<span data-month>${MONTH_STAMP}</span>)</span>`;
 ---
 
-<ReviewPageGroundedV2
+<ReviewPageRipV2
   title={`Best Barefoot Shoes (${MONTH_STAMP}) – 30+ Compared & Ranked | The Life Insider`}
   description="The best barefoot shoes, compared and ranked on toe room, a flat sole, grip, sizing risk and price. Our #1 barefoot shoe is under $70 with a 90-day money-back guarantee."
-  h1={`Best Barefoot Shoes <span class="nw">(<span data-month>${MONTH_STAMP}</span>)</span>`}
-  h2='30+ Shoes <span class="ul">Compared Head-to-Head</span>'
+  h1Map={{ core: h1 }}
+  hookMap={{ core: "30+ shoes compared. One clear #1." }}
+  verdictMap={{ core: verdictLine }}
+  saleBar={ROLLING_SALE_END ? `🔥 Up to 60% off · Sale ends today, <span data-today-md>Oct 21</span> ›` : "🔥 Up to 60% off · limited-time offer ›"}
   updated={UPDATED_V2}
-  byline={{ name: "Daniel Strutgate", photo: "/images/authors/daniel-strutgate.webp" }}
-  pas={pas}
-  verdictLine={verdictLine}
-  introMore={introMore}
-  chips={["30+ Shoes Compared", "4.8★ from 13,427+ Buyer Reviews", "90-Day Money-Back"]}
-  listLede='Here are our <span class="ul">Top 5 Barefoot Shoes</span>, with <a href="#review">a full review of our #1 pick further down:</a>'
+  rolling={ROLLING_SALE_END}
+  author={author}
   link={gv2Link}
-  top={top}
-  reviews={card1Reviews}
-  rivals={rivals}
+  exitUrl={gv2Link("exit")}
+  top={gTop}
+  rivals={gRivals}
+  listLede='Here are our <span class="ul">Top 5 Barefoot Shoes</span>, with <a href="#review">a full review of our #1 pick further down:</a>'
   bandLabel='Best Barefoot Shoe in <span class="yr">2026</span>'
-  advertHeading="We Compared the Best-Selling Barefoot Shoes. Here's Why Grounded Is #1"
-  advertorial={advertorial}
-  where={where}
+  stamp="<b>#1</b>Most Popular in the US"
+  intro={{ h2: '30+ Shoes <span class="ul">Compared Head-to-Head</span>', pas, more: introMore }}
+  reviewHtml={`<h2 id="review">We Compared the Best-Selling Barefoot Shoes. Here's Why Grounded Is #1</h2>${advertorial}`}
+  whereHtml={whereHtml}
   faq={faq}
   side={side}
-  sticky={sticky}
-  exit={exit}
-  author={author}
   disclosure={DISCLOSURE_V2}
-  rollingSaleEnd={ROLLING_SALE_END}
+  sticky={{ name: sticky.name, image: sticky.image, price: sticky.price, oldPrice: sticky.oldPrice, button: sticky.button }}
+  exit={{ kicker: exit.kicker, title: exit.title, body: exit.trust, button: exit.button, dismiss: exit.dismiss }}
 >
   {CPV_CAMPAIGN && <Fragment slot="body-end"><CpvTracker campaign={CPV_CAMPAIGN} lp={GV2_CPV_LP} /></Fragment>}
-</ReviewPageGroundedV2>
+</ReviewPageRipV2>

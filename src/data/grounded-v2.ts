@@ -1,6 +1,6 @@
 /* =========================================================================
    GROUNDED FOOTWEAR: REVIEW PAGE v2 data (21 Oct 2026). v2-only; v1 (grounded.ts) is untouched.
-   Page:   /reviews/best-barefoot-shoes-v2/   Layout: src/layouts/ReviewPageGroundedV2.astro
+   Page:   /reviews/best-barefoot-shoes-v2/   Layout: src/layouts/ReviewPageRipV2.astro (shared v2 layout in the v1 rip look, 22 Oct 2026)
    Spec:   research/overnight-2026-10-21/synth/S2-PAGES.md §3 + HANDOFF-2026-10-21.md §A5
    Report: advertorial-system/offers/grounded/V2-BUILD-2026-10-21.md
 
@@ -215,6 +215,24 @@ export const where = {
   ps: `<p><strong>P.S.</strong> You have 90 days. If they're not for you, Grounded refunds you. Wrong size? They send the new pair free.</p>
 <p><strong>P.P.S.</strong> The best value is the 3-pair bundle at $55.99 each: one for work, one for walks, one by the door.</p>`,
 };
+
+/* "Where" block as one html string for the shared layout (22 Oct 2026 redesign). Same copy as the where object;
+   #offerbox hides the sticky bar while it is on screen. data-today-long is filled with the reader's date (rolling). */
+export const whereHtml = `
+<h2 id="where">${where.heading}</h2>
+<div class="rv2-update">${where.update}</div>
+${where.html}
+<a class="rv2-adimg" href="${gv2Link("where-img")}" ${REL} data-cta="where-img"><img src="${where.image.src}" alt="${where.image.alt}" width="${where.image.w}" height="${where.image.h}" loading="lazy" decoding="async" /></a>
+<div class="rv2-offerbox" id="offerbox">
+<ul>${where.offerBox.map((x) => `<li>✅ ${x}</li>`).join("")}</ul>
+<a class="rv2-bigbtn" href="${gv2Link("where")}" ${REL} data-cta="where">${where.cta}</a>
+<p class="rv2-saleline"><b>Save up to <span class="r">60%</span> OFF – Sale Ends: <span data-today-long>${UPDATED_V2}</span></b></p>
+</div>
+<h3>How to order</h3>
+<ol class="rv2-steps">${where.howTo.map((x) => `<li>${x}</li>`).join("")}</ol>
+${where.verdict}
+<a class="rv2-bigbtn" href="${gv2Link("verdict-cta")}" ${REL} data-cta="verdict-cta">${top.cta} 👉</a>
+${where.ps}`;
 
 /* ---------- FAQ ---------- */
 export const faq: { q: string; a: string }[] = [
