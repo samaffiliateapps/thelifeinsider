@@ -2,7 +2,7 @@
    COZY COVE PRO HEATER: data for the Google Search review page v2 (21 Oct 2026).
      /reviews/best-space-heaters/   (one page for every ad group; ?v= swaps the H1 only)
        default = Core (small / plug-in / bedroom) · ?v=wall · ?v=energy · ?v=review (brand)
-   Layout: src/layouts/ReviewPageV3.astro (S2-PAGES §3 v2 spec).
+   Layout: src/layouts/ReviewPageRipV2.astro (shared v2 layout in the v1 rip look, 22 Oct 2026).
    Copy: advertorial-system/offers/cozy-cove/DRAFT-2026-10-21/page-copy.md (W6-FIX reviewed version).
    AdsBranded offer 1133, US$95. CPV One: landing page 28, offer 22 ("Cozy Cove Pro - pre",
    entry cozycovepro.com/cozycovepro/pre … &sub1={!subid!}). CPV campaign: TBD (Sam creates
@@ -40,7 +40,7 @@ const REL = 'rel="sponsored nofollow noopener" target="_blank"';
 const go = (label: string, slot: string, cls = "") => `<a ${cls ? `class="${cls}" ` : ""}href="${CC_LINK}" ${REL} data-cta="${slot}">${label}</a>`;
 const amz = (q: string) => `https://www.amazon.com/s?k=${q}`;
 const img = (src: string, alt: string, w: number, h: number, slot = "advert") =>
-  `<a class="v3-adimg" href="${CC_LINK}" ${REL} data-cta="${slot}"><img src="${src}" alt="${alt}" width="${w}" height="${h}" loading="lazy" decoding="async" /></a>`;
+  `<a class="rv2-adimg" href="${CC_LINK}" ${REL} data-cta="${slot}"><img src="${src}" alt="${alt}" width="${w}" height="${h}" loading="lazy" decoding="async" /></a>`;
 
 export const IMG = {
   pro: { src: "/images/cozy/cozy-pro.webp", alt: "Cozy Cove Pro plug-in wall heater", w: 480, h: 480 },
@@ -49,6 +49,22 @@ export const IMG = {
 
 export const SALE_END = "Dec 6"; // merchant promo config "black-friday-2026": startDate 2026-10-08, endDate/timerEndDate 2026-12-06, code BF26 (fixed calendar date, not per-visitor)
 export const topBar = `🔥 Black Friday price ends ${SALE_END} · up to 70% off ›`;
+export const saleBar = `🔥 Black Friday: up to 70% off · ends ${SALE_END} ›`; // one line at 375 wide (redesign 22 Oct)
+
+/* One-line hook under the H1 + the verdict link, per ad group (REVIEW-2026-10-21 Fix 4: message match).
+   Default renders in the HTML; ?v= swaps them client-side with the H1. Keep each hook to one line at 375 wide. */
+export const HOOK: Record<string, string> = {
+  core: "We compared 5. One won’t wreck your bill.",
+  wall: "One hangs on the wall. No electrician.",
+  energy: "Uses 400–800W, not the usual 1500W.",
+  review: "Compared with 4 best-selling heaters.",
+};
+export const VERDICT: Record<string, string> = {
+  core: "Our #1 overall: Cozy Cove Pro, 9.6/10, now 50% off (Black Friday pricing) ›",
+  wall: "Our #1 plug-in wall heater: Cozy Cove Pro, 9.6/10, now 50% off ›",
+  energy: "Lowest running cost on our list: Cozy Cove Pro, about 7¢/hour on low, now 50% off ›",
+  review: "Our verdict: Cozy Cove Pro is our #1 overall, 9.6/10, now 50% off ›",
+};
 
 export const intro = {
   pas: [
@@ -194,7 +210,7 @@ ${img("/images/cozy/cozy-remote-chair.webp", "Couple adjusting the Cozy Cove Pro
 
 <h3 id="cost">What Does It Actually Cost to Run?</h3>
 <p>This is the maths nobody in this category puts in front of you. It’s at roughly <b>17¢ per kWh</b>, about the US residential average (check your own bill). Real costs are lower whenever a thermostat cycles the heater off.</p>
-<div class="v3-tablewrap"><table class="v3-table">
+<div class="rv2-tablewrap"><table class="rv2-table">
 <thead><tr><th>Heater draw</th><th>Per hour</th><th>Per 5-hour evening</th><th>30 evenings</th></tr></thead>
 <tbody>
 <tr class="win"><td>Cozy Cove Pro, low (400W)</td><td>~7¢</td><td>~$0.34</td><td>~$10</td></tr>
@@ -211,7 +227,7 @@ ${img("/images/cozy/cozy-remote-chair.webp", "Couple adjusting the Cozy Cove Pro
 </ul>
 
 <h3>Red Flags: How to Spot a Bad Space Heater</h3>
-<ul class="v3-flags">
+<ul class="rv2-flags">
 <li><b>“Heats your whole house!”</b> No plug-in heater does. Buy for the room you actually use.</li>
 <li><b>No automatic shut-off.</b> Overheat protection is the bare minimum. Walk away from any heater without it.</li>
 <li><b>A 14- or 30-day return window.</b> Heaters get judged on the first cold snap, which can be a month away. Insist on 90 days.</li>
@@ -221,15 +237,15 @@ ${img("/images/cozy/cozy-remote-chair.webp", "Couple adjusting the Cozy Cove Pro
 /* ---------- where to buy (anchor #where) ---------- */
 export const whereHtml = `
 <h2 id="where">Where to Buy Cozy Cove Pro (at the Black Friday Price)</h2>
-<div class="v3-update"><b>UPDATE:</b> Demand jumps with every cold snap, and Cozy Cove’s order page currently shows <b>“Stock Levels Low”</b>. Buy through Cozy Cove’s website so the 90-day guarantee and the BF26 price apply. Its Black Friday price runs until <b>Dec 6</b>, and the code <b>BF26</b> is applied for you at checkout.</div>
-<div class="v3-important"><b>IMPORTANT INFORMATION:</b> As of October 21, 2026, Cozy Cove Pro is available at <b>50% off ($99.99)</b>, or <b>up to 70% off when you buy 3</b>, through the link below, until Cozy Cove’s Black Friday sale ends (Dec 6).</div>
+<div class="rv2-update"><b>UPDATE:</b> Demand jumps with every cold snap, and Cozy Cove’s order page currently shows <b>“Stock Levels Low”</b>. Buy through Cozy Cove’s website so the 90-day guarantee and the BF26 price apply. Its Black Friday price runs until <b>Dec 6</b>, and the code <b>BF26</b> is applied for you at checkout.</div>
+<div class="rv2-important"><b>IMPORTANT INFORMATION:</b> As of October 21, 2026, Cozy Cove Pro is available at <b>50% off ($99.99)</b>, or <b>up to 70% off when you buy 3</b>, through the link below, until Cozy Cove’s Black Friday sale ends (Dec 6).</div>
 ${img("/images/cozy/cozy-in-the-box.webp", "What's in the box: Cozy Cove Pro heater, remote and wall-mount kit", 640, 557, "where")}
-<div class="v3-offerbox" id="offerbox">
+<div class="rv2-offerbox" id="offerbox">
 <ul><li>✅ Up to 70% off, code BF26 applied at checkout</li><li>✅ 90-day money-back guarantee</li><li>✅ Ships from the USA in 2–3 days</li></ul>
-${go("CLAIM 50% OFF NOW →", "where", "v3-bigbtn")}
+${go("CLAIM 50% OFF NOW →", "where", "rv2-bigbtn")}
 </div>
 <h3>How to order (3 steps)</h3>
-<ol class="v3-steps">
+<ol class="rv2-steps">
 <li>Click the button above to go to Cozy Cove’s website.</li>
 <li>Continue to the order page: your Black Friday discount (BF26) is applied there automatically.</li>
 <li>Choose your pack: <b>1 for $99.99 · 2 for $79.99 each (most popular) · 3 for $59.99 each (best deal).</b> Shipping is $8.99.</li>
@@ -237,15 +253,15 @@ ${go("CLAIM 50% OFF NOW →", "where", "v3-bigbtn")}
 ${img("/images/cozy/cozy-plug-in.webp", "Plugging the Cozy Cove Pro into a standard wall outlet", 640, 560, "where")}
 
 <h3>The Verdict</h3>
-<ul class="v3-nomore">
+<ul class="rv2-nomore">
 <li><b>No more sitting in a sweater while the furnace heats empty rooms.</b></li>
 <li><b>No more 1500W bill shock.</b></li>
 <li><b>No more tripping over a hot box on the floor.</b></li>
 </ul>
 <p>For the bedroom, the home office, or the one room the furnace never quite reaches, the Cozy Cove Pro is the heater I’d buy, and at Black Friday pricing it costs about half the price of the premium panel on this list, and about half as much per hour to run on high.</p>
-${go("APPLY BF26 DISCOUNT &amp; CHECK AVAILABILITY →", "where", "v3-bigbtn")}
-<p class="v3-ps"><b>P.S.</b> You get 90 days to try it through the coldest weeks of the year. If it doesn’t keep your room comfortable, send it back for a refund (less shipping).</p>
-<p class="v3-ps"><b>P.P.S.</b> Three rooms that need warmth? The 3-pack works out to <b>$59.99 each</b>, the lowest per-heater price Cozy Cove offers.</p>
+${go("APPLY BF26 DISCOUNT &amp; CHECK AVAILABILITY →", "where", "rv2-bigbtn")}
+<p class="rv2-ps"><b>P.S.</b> You get 90 days to try it through the coldest weeks of the year. If it doesn’t keep your room comfortable, send it back for a refund (less shipping).</p>
+<p class="rv2-ps"><b>P.P.S.</b> Three rooms that need warmth? The 3-pack works out to <b>$59.99 each</b>, the lowest per-heater price Cozy Cove offers.</p>
 `;
 
 /* ---------- what buyers say (verbatim, maker's site) ---------- */
@@ -275,14 +291,14 @@ export const faq: [string, string][] = [
 
 export const guideHtml = `
 <h2 id="guide">Space Heater Safety Check: 5 Checks Before You Buy</h2>
-<ol class="v3-steps">
+<ol class="rv2-steps">
 <li>Automatic overheat shut-off.</li>
 <li>The right size: match the watts to the room, not the house.</li>
 <li>Placement: wall-mount or a stable surface, at least 3 ft from curtains and bedding.</li>
 <li>Plug it straight into the wall, never into an extension cord or power strip.</li>
 <li>A return window long enough to cover a cold snap (90 days beats 30).</li>
 </ol>
-<p class="v3-small">General safety guidance. Not a claim about any product.</p>
+<p class="rv2-small">General safety guidance. Not a claim about any product.</p>
 `;
 
 export const author = {
