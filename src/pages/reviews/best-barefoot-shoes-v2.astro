@@ -6,7 +6,7 @@
    Same CPV One campaign 10. Offer links: base2.php?sub2=<slot>&sub3=gv2 (see grounded-v2.ts).
    Persona "Daniel Strutgate" COMPARED and RANKED; never "tested". Never "official" for us.
    ========================================================================= */
-import ReviewPageV3 from "../../layouts/ReviewPageV3.astro";
+import ReviewPageGroundedV2 from "../../layouts/ReviewPageGroundedV2.astro";
 import CpvTracker from "../../components/CpvTracker.astro";
 import {
   CPV_CAMPAIGN, GV2_CPV_LP, ROLLING_SALE_END, UPDATED_V2, MONTH_STAMP, gv2Link,
@@ -14,7 +14,7 @@ import {
 } from "../../data/grounded-v2";
 ---
 
-<ReviewPageV3
+<ReviewPageGroundedV2
   title={`Best Barefoot Shoes (${MONTH_STAMP}) – 30+ Compared & Ranked | The Life Insider`}
   description="The best barefoot shoes, compared and ranked on toe room, a flat sole, grip, sizing risk and price. Our #1 barefoot shoe is under $70 with a 90-day money-back guarantee."
   h1={`Best Barefoot Shoes <span class="nw">(<span data-month>${MONTH_STAMP}</span>)</span>`}
@@ -43,4 +43,4 @@ import {
   rollingSaleEnd={ROLLING_SALE_END}
 >
   {CPV_CAMPAIGN && <Fragment slot="body-end"><CpvTracker campaign={CPV_CAMPAIGN} lp={GV2_CPV_LP} /></Fragment>}
-</ReviewPageV3>
+</ReviewPageGroundedV2>

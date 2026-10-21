@@ -1,6 +1,6 @@
 /* =========================================================================
    GROUNDED FOOTWEAR: REVIEW PAGE v2 data (21 Oct 2026). v2-only; v1 (grounded.ts) is untouched.
-   Page:   /reviews/best-barefoot-shoes-v2/   Layout: src/layouts/ReviewPageV3.astro
+   Page:   /reviews/best-barefoot-shoes-v2/   Layout: src/layouts/ReviewPageGroundedV2.astro
    Spec:   research/overnight-2026-10-21/synth/S2-PAGES.md §3 + HANDOFF-2026-10-21.md §A5
    Report: advertorial-system/offers/grounded/V2-BUILD-2026-10-21.md
 
