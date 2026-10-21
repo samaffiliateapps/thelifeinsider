@@ -79,7 +79,7 @@ export const top = {
   scoreLabel: "Exceptional",
   stars: "4.8",
   ratingLine: "13,427+ buyer reviews",
-  con: "Often sells out: the order page shows “Stock Levels LOW”",
+  con: "Stock runs low at sale prices: the order page shows “Stock Levels LOW”",
   price: "$69.99",
   oldPrice: "$139.98",
   off: "UP TO 60% OFF",
