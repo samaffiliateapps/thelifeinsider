@@ -1,0 +1,100 @@
+---
+/* =========================================================================
+   WALLA SOUND BOOM+ — Google Search review page v2 (22 Oct 2026, agent N3-WALLA).
+   Data: src/data/walla.ts. Layout: ReviewPageRipV2.astro (shared with Cozy Cove and Grounded v2).
+   One page for all ad groups; ?v=loud|outdoor|water|gift|review swaps the H1, the hook, the verdict link
+   the card #1 ribbon and the PAS questions. The old /reviews/best-bluetooth-party-speakers/ stays unpaid.
+   Persona "Daniel Strutgate" = existing editorial pen name (disclosed in footer). We COMPARED; nowhere do we
+   say we tested, and nothing is called "official" or "independent".
+   Sale lines: dateless by default; the script below swaps in the maker's own calendar sale + fixed end date
+   (offer.wallasound.com/boom/js/promo-banner.js, read 22 Oct 2026). No rolling or per-visitor deadline.
+   ========================================================================= */
+import ReviewPageRipV2 from "../../layouts/ReviewPageRipV2.astro";
+import CpvTracker from "../../components/CpvTracker.astro";
+import { CPV_CAMPAIGN, WS_LINK, WS_EXIT_LINK, UPDATED, H1, HOOK, VERDICT, RIBBON, PAS, IMG, saleBar, saleEndDefault, PROMOS, intro, top, rivals, sticky, exitPop, reviewHtml, whereHtml, buyers, faq, author, DISCLOSURE } from "../../data/walla";
+
+const wsTop = {
+  badge: RIBBON.core,
+  name: top.name,
+  image: IMG.boom,
+  grade: "",
+  score: top.score,
+  scoreLabel: top.scoreLabel,
+  stars: "4.9",
+  ratingLine: "★ 4.9/5 · 23,000+ verified reviews (maker’s site)*",
+  oldPrice: top.oldPrice,
+  price: top.price,
+  off: "50% off",
+  saleEnd: saleEndDefault,
+  saleHeadline: "UP TO 60% OFF",
+  cta: top.cta,
+  trust: top.trust,
+  codeLine: top.bundleLine,
+  con: top.con,
+  bullets: top.bullets,
+  moreBullets: top.moreBullets,
+  bars: top.bars,
+  reviews: top.reviews,
+  reviewSource: "Verified customer, from Walla Sound’s website",
+  ship: "Free shipping · sent the same or next business day (US)",
+};
+const wsRivals = rivals.map((r) => ({
+  rank: r.rank, name: r.name, grade: "", score: r.score, label: r.label, ratingLine: "Editor’s score",
+  bullets: [...r.pros.map((t) => ({ t })), ...r.cons.map((t) => ({ t, x: true }))],
+  verdict: r.verdict, url: r.url,
+}));
+---
+
+<ReviewPageRipV2
+  title="Best Bluetooth Speakers 2026: 5 Compared – One Clear Winner | The Life Insider"
+  description="We compared 5 popular Bluetooth speakers on sound at volume, coverage, battery, water resistance and price. One two-driver speaker under $100 stood out."
+  h1Map={H1}
+  hookMap={HOOK}
+  verdictMap={VERDICT}
+  saleBar={saleBar}
+  updated={UPDATED}
+  author={author}
+  link={() => WS_LINK}
+  exitUrl={WS_EXIT_LINK}
+  top={wsTop}
+  rivals={wsRivals}
+  rivalPlaceholder
+  listLede='Here are our <span class="ul">Top 5 Bluetooth Speakers for 2026</span>, with <a href="#review">a full review of our #1 pick further down:</a>'
+  bandLabel='Best Bluetooth Speaker for the Backyard in <span class="yr">2026</span>'
+  stamp="<b>#1</b>Best Overall 2026"
+  intro={{ h2: intro.h2, pas: intro.pas, more: intro.more }}
+  reviewHtml={reviewHtml}
+  whereHtml={whereHtml}
+  buyers={{ ...buyers, source: "Walla Sound’s website" }}
+  faq={faq.map(([q, a]) => ({ q, a }))}
+  disclosure={DISCLOSURE}
+  sticky={{ name: sticky.name, image: IMG.thumb, price: sticky.price, oldPrice: sticky.oldPrice, button: sticky.button }}
+  exit={{ kicker: exitPop.kicker, title: exitPop.title, body: exitPop.body, button: exitPop.button, dismiss: exitPop.dismiss }}
+>
+  <Fragment slot="body-end">
+    <script is:inline define:vars={{ promos: PROMOS, ribbon: RIBBON, pas: PAS }}>
+      (function () {
+        /* card #1 ribbon per ad group */
+        try { var v = new URLSearchParams(location.search).get("v"), b = document.querySelector(".rv2-badge");
+          if (v && ribbon[v] && b) b.textContent = ribbon[v];
+          var ul = document.querySelector(".rv2-pas");
+          if (v && pas[v] && ul) ul.innerHTML = pas[v].map(function (x) { return "<li>" + x + "</li>"; }).join(""); } catch (e) {}
+        /* the maker's own sale calendar (fixed dates; visitor's local date, as on the maker's checkout) */
+        try {
+          var now = new Date(), cur = null;
+          for (var i = 0; i < promos.length; i++) {
+            var p = promos[i], s = new Date(p[1][0], p[1][1], p[1][2]), e = new Date(p[2][0], p[2][1], p[2][2], 23, 59, 59);
+            if (now >= s && now <= e) { cur = { name: p[0], end: e.toLocaleDateString("en-US", { month: "short", day: "numeric" }), emoji: p[3] }; break; }
+          }
+          if (!cur) return;
+          var set = function (sel, html) { document.querySelectorAll(sel).forEach(function (n) { n.innerHTML = html; }); };
+          set("[data-wsale-bar]", cur.emoji + " " + cur.name + ": up to 60% off · ends " + cur.end);
+          set("[data-wsale-end]", cur.name + " ends " + cur.end);
+          set("[data-wsale-update]", "Walla Sound’s <b>" + cur.name + "</b> runs until <b>" + cur.end + "</b>, and the discount is applied for you at checkout.");
+          var k = document.querySelector("#rv2exit .k"); if (k) k.textContent = "⏳ Wait, Walla Sound’s " + cur.name + " ends " + cur.end;
+        } catch (e) {}
+      })();
+    </script>
+    {CPV_CAMPAIGN !== "TBD" && <CpvTracker campaign={CPV_CAMPAIGN} />}
+  </Fragment>
+</ReviewPageRipV2>
