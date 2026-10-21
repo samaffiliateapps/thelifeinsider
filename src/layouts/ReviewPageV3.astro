@@ -73,7 +73,7 @@ const gradeCls = (g: string) => (g.startsWith("A") ? "ga" : g === "B+" ? "gbp" :
       <p class="v3-sub" set:html={p.sub} />
       <div class="v3-by">
         <img src={p.author.photo} alt={p.author.name} width="28" height="28" loading="eager" decoding="async" />
-        <span>Written by <b>{p.author.name}</b> · Checked by <b>{p.checkedBy}</b></span>
+        <span>Written by <b>{p.author.name}</b><span class="dk"> · Checked by <b>{p.checkedBy}</b></span><span class="mb"> · Updated {p.updated.replace(/^(\w{3})\w*/, "$1")} · <a href="#disclosure">Ad Disclosure</a></span></span>
       </div>
       <div class="v3-chips">
         <span><i>🔍</i><b set:html={p.chips[0]} /></span>
@@ -93,7 +93,7 @@ const gradeCls = (g: string) => (g.startsWith("A") ? "ga" : g === "B+" ? "gbp" :
 
     <section id="top5" class="v3-list v3-wrap">
       <!-- card #1 -->
-      <div class="v3-card v3-top" id="card1">
+      <div class="v3-card v3-top" id="card1" data-href={p.url}>
         <div class="v3-ribbon">{t.ribbon}</div>
         <div class="v3-row">
           <a class="v3-img" href={p.url} rel={rel} target="_blank" data-cta="card1img">
@@ -107,8 +107,8 @@ const gradeCls = (g: string) => (g.startsWith("A") ? "ga" : g === "B+" ? "gbp" :
         </div>
         <a class="v3-name" href={p.url} rel={rel} target="_blank" data-cta="card1">{t.name}</a>
         <div class="v3-price"><s>{t.oldPrice}</s> <b>{t.price}</b> <span class="v3-salebox" set:html={t.saleBox} /></div>
-        <div class="v3-bundle">{t.bundleLine}</div>
         <a class="v3-cta" id="card1cta" href={p.url} rel={rel} target="_blank" data-cta="card1"><span set:html={t.cta} /> →</a>
+        <div class="v3-bundle">{t.bundleLine}</div>
         <ul class="v3-trust">{t.trust.map((x: string) => <li>✓ {x}</li>)}</ul>
         <p class="v3-con">✗ <span set:html={t.con} /></p>
         <ul class="v3-bul">{t.bullets.map((x: string) => <li set:html={x} />)}</ul>
@@ -170,6 +170,7 @@ const gradeCls = (g: string) => (g.startsWith("A") ? "ga" : g === "B+" ? "gbp" :
         <span class="v3-name">{t.name}</span>
         <span class="v3-price"><s>{t.oldPrice}</s> <b>{t.price}</b> <span class="v3-salebox">Black Friday price · BF26 applied</span></span>
         <span class="v3-cta"><span set:html={t.cta} /> →</span>
+        <span class="v3-ship">✓ 90-day money-back · Ships in 2–3 days</span>
       </a>
     </section>
 
@@ -251,6 +252,14 @@ const gradeCls = (g: string) => (g.startsWith("A") ? "ga" : g === "B+" ? "gbp" :
       } catch (e) {}
 
       var clicked = false;
+      /* whole card #1 clickable: taps outside its own links/toggles open the same offer link */
+      var c1 = document.getElementById("card1");
+      if (c1) c1.addEventListener("click", function (e) {
+        if (e.target.closest("a, summary, details, button")) return;
+        clicked = true;
+        try { if (window.gtag) gtag("event", "offer_click", { cta: "card1_body" }); } catch (x) {}
+        window.open(c1.getAttribute("data-href"), "_blank", "noopener");
+      });
       document.addEventListener("click", function (e) {
         var a = e.target.closest && e.target.closest('a[rel~="sponsored"]');
         if (a && a.href.indexOf("thelifeinsider.com/base2") > -1) clicked = true;

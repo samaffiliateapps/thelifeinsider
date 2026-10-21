@@ -159,3 +159,13 @@ body.v3-has-sticky { padding-bottom: 66px; }
 .v3-rm-t { display: none !important; }
 .v3-head .v3-rm-l { display: block; margin-top: 2px; }
 @media (min-width: 768px) { .v3-head .v3-rm-l { display: none; } }
+
+/* Fixes 21 Oct (REVIEW-2026-10-21 Fix 1/3): mobile first screen ≤640px to card #1 CTA bottom; whole card #1 clickable */
+.v3-top { cursor: pointer; }
+.v3-by .mb { display: none; }
+.v3-top .v3-bundle { margin: 6px 0 0; text-align: center; }
+@media (max-width: 767px) {
+  .v3-nav, .v3-date, .v3-leadin { display: none; }
+  .v3-by .dk { display: none; }
+  .v3-by .mb { display: inline; }
+}

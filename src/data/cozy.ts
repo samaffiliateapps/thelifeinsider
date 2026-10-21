@@ -32,7 +32,7 @@ export const MONTH = "October 2026"; // H1 month stamp: bump on 1 Nov and 1 Dec 
 export const H1: Record<string, string> = {
   core: `Best Space Heaters, ${MONTH}: One Clear Winner`,
   wall: `Best Wall Heaters (${MONTH}): No Wiring Needed`,
-  energy: `Most Energy-Efficient Space Heaters, ${MONTH}`,
+  energy: `Space Heaters That Use Less Power (${MONTH})`,
   review: `Cozy Cove Pro Review (${MONTH}): Is It Legit?`,
 };
 
@@ -47,7 +47,8 @@ export const IMG = {
   thumb: "/images/cozy/cozy-thumb.webp",
 };
 
-export const topBar = `🔥 Black Friday prices live: up to 70% off our #1 pick ›`;
+export const SALE_END = "Dec 6"; // merchant promo config "black-friday-2026": startDate 2026-10-08, endDate/timerEndDate 2026-12-06, code BF26 (fixed calendar date, not per-visitor)
+export const topBar = `🔥 Black Friday price ends ${SALE_END}: up to 70% off our #1 pick ›`;
 
 export const intro = {
   pas: [
@@ -81,11 +82,11 @@ export const top: Top = {
   stars: "4.8 (17,673+)*",
   oldPrice: "$199.98",
   price: "$99.99",
-  saleBox: "Black Friday · 50% off",
+  saleBox: "Black Friday price ends Dec 6",
   bundleLine: "Code BF26 auto-applied · 2 for $79.99 each · 3 for $59.99 each (70% off)",
   cta: "Apply BF26 Discount &amp; Check Availability",
   trust: ["90-day money-back", "Ships from the USA in 2–3 days", "No electrician needed"],
-  con: "<b>Often sells out in cold snaps:</b> Cozy Cove’s order page shows “Stock Levels LOW”",
+  con: "<b>Stock runs low at sale prices:</b> Cozy Cove’s order page shows “Stock Levels Low”",
   bullets: [
     "<b>Warm air in 3 seconds, a cozy room in ~5 minutes:</b> PTC ceramic plates + “RapidHeat™” fan (maker’s figures)",
     "<b>400–800W, not the usual 1500W:</b> two power settings sized for one room",
@@ -139,10 +140,10 @@ export const rivals: Rival[] = [
   },
 ];
 
-export const sticky = { name: "Cozy Cove Pro", price: "$99.99", oldPrice: "$199.98", discount: "50% OFF", button: "CHECK PRICE →" };
+export const sticky = { name: "Cozy Cove Pro", price: "$99.99", oldPrice: "$199.98", discount: "50% OFF · ends Dec 6", button: "GET 50% OFF →" };
 
 export const exitPop = {
-  kicker: "⏳ Wait, the Black Friday heater price is still live",
+  kicker: "⏳ Wait, the Black Friday price ends Dec 6",
   title: "Get Cozy Cove Pro for $99.99 (Was $199.98)",
   body: "Or 3 for $59.99 each · 4.8★ from 17,673+ reviews on Cozy Cove’s site · 90-day money-back",
   button: "SAVE 50% NOW →",
@@ -175,7 +176,7 @@ ${img("/images/cozy/cozy-reading.webp", "Woman reading on a sofa under a wall-mo
 <blockquote>“My master bathroom is always freezing in the mornings. I turn this on right when I wake up, and by the time I am ready to shower, the room is completely toasty.” <cite>Gary T., verified customer, Cozy Cove’s site</cite></blockquote>
 
 <h4>3. It gets your floor back, and the hot parts up off it</h4>
-<p>Three of the four other heaters on this list live on the floor, where they get kicked, knocked and tripped over. The one that mounts takes up about four times the wall space. Cozy Cove goes on the wall, so cords and hot elements sit up and out of reach of toddlers and pets.</p>
+<p>Three of the four other heaters on this list live on the floor, where they get kicked, knocked and tripped over. The one that mounts takes up about four times the wall space. Cozy Cove goes on the wall, and the maker says that keeps cords and hot elements up and out of reach of toddlers and pets.</p>
 <blockquote>“We have two toddlers over at the house every weekend. I used to be a nervous wreck with the floor heater because they touch absolutely everything. Now it is up on the wall and out of the way. I can actually relax while they play in the living room.” <cite>Patricia D., verified customer, Cozy Cove’s site</cite></blockquote>
 ${img("/images/cozy/cozy-wall-or-shelf.webp", "Cozy Cove Pro mounted on a wall, or placed on a shelf", 640, 640)}
 
@@ -205,7 +206,7 @@ ${img("/images/cozy/cozy-remote-chair.webp", "Couple adjusting the Cozy Cove Pro
 <h3>How Can It Be So Affordable?</h3>
 <ul>
 <li>The full-room panels on this list cost <b>$160–260</b>, and then they cost you again on every bill.</li>
-<li>Cozy Cove sells <b>direct from its own website only</b>: not on Amazon, not in stores, shipped from its US warehouse in Ohio. That cuts out the retail markup.</li>
+<li>We found it sold <b>direct on Cozy Cove’s website</b>, shipped from its US warehouse in Ohio.</li>
 <li>Right now its <b>Black Friday pricing is live: $99.99 for one (was $199.98)</b>, dropping to <b>$59.99 each when you get three</b>. That’s enough to cover the bedroom, the office and the den for less than one premium panel heater.</li>
 </ul>
 
@@ -214,15 +215,14 @@ ${img("/images/cozy/cozy-remote-chair.webp", "Couple adjusting the Cozy Cove Pro
 <li><b>“Heats your whole house!”</b> No plug-in heater does. Buy for the room you actually use.</li>
 <li><b>No automatic shut-off.</b> Overheat protection is the bare minimum. Walk away from any heater without it.</li>
 <li><b>A 14- or 30-day return window.</b> Heaters get judged on the first cold snap, which can be a month away. Insist on 90 days.</li>
-<li><b>Knock-offs and look-alike listings.</b> Popular heaters get copied. Cozy Cove sells only through its own website.</li>
 </ul>
 `;
 
 /* ---------- where to buy (anchor #where) ---------- */
 export const whereHtml = `
 <h2 id="where">Where to Buy Cozy Cove Pro (at the Black Friday Price)</h2>
-<div class="v3-update"><b>UPDATE:</b> Demand jumps with every cold snap, and Cozy Cove’s order page currently shows <b>“Stock Levels LOW”</b>. Cozy Cove sells only through its own website, so avoid marketplace listings that borrow the name. Its Black Friday price is live right now and the code <b>BF26</b> is applied for you at checkout.</div>
-<div class="v3-important"><b>IMPORTANT INFORMATION:</b> As of October 21, 2026, Cozy Cove Pro is available at <b>50% off ($99.99)</b>, or <b>up to 70% off when you buy 3</b>, through the link below.</div>
+<div class="v3-update"><b>UPDATE:</b> Demand jumps with every cold snap, and Cozy Cove’s order page currently shows <b>“Stock Levels Low”</b>. Buy through Cozy Cove’s website so the 90-day guarantee and the BF26 price apply. Its Black Friday price runs until <b>Dec 6</b>, and the code <b>BF26</b> is applied for you at checkout.</div>
+<div class="v3-important"><b>IMPORTANT INFORMATION:</b> As of October 21, 2026, Cozy Cove Pro is available at <b>50% off ($99.99)</b>, or <b>up to 70% off when you buy 3</b>, through the link below, until Cozy Cove’s Black Friday sale ends (Dec 6).</div>
 ${img("/images/cozy/cozy-in-the-box.webp", "What's in the box: Cozy Cove Pro heater, remote and wall-mount kit", 640, 557, "where")}
 <div class="v3-offerbox" id="offerbox">
 <ul><li>✅ Up to 70% off, code BF26 applied at checkout</li><li>✅ 90-day money-back guarantee</li><li>✅ Ships from the USA in 2–3 days</li></ul>
@@ -231,7 +231,7 @@ ${go("CLAIM 50% OFF NOW →", "where", "v3-bigbtn")}
 <h3>How to order (3 steps)</h3>
 <ol class="v3-steps">
 <li>Click the button above to go to Cozy Cove’s website.</li>
-<li>Your Black Friday discount (BF26) is already applied.</li>
+<li>Continue to the order page: your Black Friday discount (BF26) is applied there automatically.</li>
 <li>Choose your pack: <b>1 for $99.99 · 2 for $79.99 each (most popular) · 3 for $59.99 each (best deal).</b> Shipping is $8.99.</li>
 </ol>
 ${img("/images/cozy/cozy-plug-in.webp", "Plugging the Cozy Cove Pro into a standard wall outlet", 640, 560, "where")}
@@ -250,7 +250,7 @@ ${go("APPLY BF26 DISCOUNT &amp; CHECK AVAILABILITY →", "where", "v3-bigbtn")}
 
 /* ---------- what buyers say (verbatim, maker's site) ---------- */
 export const buyers = {
-  header: "Rated 4.8/5 from 17,673+ five-star reviews on Cozy Cove’s site",
+  header: "Rated 4.8/5 from 17,673+ reviews on Cozy Cove’s site",
   sub: "Maker’s sub-scores: Heating 4.8 · Ease of Use 4.9 · Noise 4.9 · Portability 4.7 · Value 4.9",
   quotes: [
     { q: "Our golden retriever used to constantly trip over the cord for our floor fan. A few times he even knocked the whole thing over. Having this unit mounted up on the wall is just so much [better] for all of us.", who: "Ed R." },
@@ -270,7 +270,7 @@ export const faq: [string, string][] = [
   ["Is it safe around kids and pets?", "It has automatic overheat shut-off. Mounted on the wall, the hot parts and cord sit up out of reach. Like any heater, keep it clear of curtains and bedding, and follow the manual’s clearance guidance."],
   ["What if I don’t like it?", "You have 90 days. Return it in the original packaging for a full refund or replacement, less shipping and handling (the maker’s terms)."],
   ["How fast does it ship, and what does shipping cost?", "It ships from the USA. The maker quotes 2–3 day delivery. Shipping is $8.99 at checkout."],
-  ["Can I buy it on Amazon or in stores?", "No. The maker sells it only through its own website."],
+  ["Where can I buy it?", "We found it sold direct on Cozy Cove’s website; that’s where the 90-day guarantee and the Black Friday price (until Dec 6) apply."],
 ];
 
 export const guideHtml = `
