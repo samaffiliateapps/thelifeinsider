@@ -1,0 +1,325 @@
+---
+/* REVIEW PAGE v2 FORMULA ("V3" template) — 21 Oct 2026.
+   Spec: research/overnight-2026-10-21/synth/S2-PAGES.md §3 + §4 (HANDOFF-2026-10-21 A5). First used by Cozy Cove.
+   Order: red top bar → nav → date → H1 (query + month; ?v= swaps it) → sub-line → byline → 3 trust chips →
+     3 PAS lines + verdict link → "Read more ▾" (mobile cap; desktop shows all) → lead-in →
+     #1 card (ribbon, image | A+ grade tile + score + stars, name, price + red sale box, CTA naming the offer,
+     trust strip, ONE disguised-positive con, 4 bullets + "+6 more", 5 score bars, 2 verbatim merchant reviews) →
+     #2–#3 visible, #4–#5 behind "See Rest Of List ▾" (Amazon SEARCH links only) → repeat #1 band →
+     editor-persona advertorial (#review, #cost) → where-to-buy (#where, offer box) → what buyers say → FAQ (#faq)
+     → safety check (#guide) → author box → footer disclosure.
+   Behaviour: sticky mobile CTA once card #1's CTA scrolls away (hidden while the offer box or exit modal shows);
+     exit popup v2 (desktop mouse-leave at the top; touch: tab/app switch then return, or a fast flick up near the top
+     after card #1 was seen; armed after 3 s; once per session; never after an offer click; ×/backdrop/ESC/"No thanks").
+   NEVER: history.pushState / popstate / back-button interference (Google destination policy). */
+import "../styles/v3.css";
+import Base from "./Base.astro";
+
+export interface Props {
+  title: string;
+  description: string;
+  h1Map: Record<string, string>;
+  defaultV?: string;
+  sub: string;
+  h2: string;
+  updated: string;
+  author: { name: string; role: string; photo: string; html: string };
+  checkedBy: string;
+  chips: [string, string, string];
+  topBar?: string;
+  pas: string[];
+  verdictLine: string;
+  introMore: string[];
+  leadIn: string;
+  top: any;
+  topImg: { src: string; alt: string; w: number; h: number };
+  thumb: string;
+  rivals: any[];
+  bandLabel: string;
+  repeatStamp: string;
+  reviewHtml: string;
+  whereHtml: string;
+  buyers: { header: string; sub: string; quotes: { q: string; who: string }[]; foot: string };
+  faq: [string, string][];
+  guideHtml: string;
+  disclosure: string;
+  url: string;
+  exitUrl: string;
+  sticky: { name: string; price: string; oldPrice: string; discount: string; button: string };
+  exitPop: { kicker: string; title: string; body: string; button: string; dismiss: string };
+}
+const p = Astro.props;
+const t = p.top;
+const rel = "sponsored nofollow noopener";
+const dv = p.defaultV ?? "core";
+const gradeCls = (g: string) => (g.startsWith("A") ? "ga" : g === "B+" ? "gbp" : g.startsWith("B") ? "gb" : "gc");
+---
+
+<Base title={p.title} description={p.description} minimal noFooter>
+  <article class="v3">
+    {p.topBar && <a class="v3-topbar" href={p.url} rel={rel} target="_blank" data-cta="nav" set:html={p.topBar} />}
+    <nav class="v3-nav" aria-label="Quick links">
+      <a href={p.url} rel={rel} target="_blank" data-cta="nav">Top Pick</a>
+      <a href={p.url} rel={rel} target="_blank" data-cta="nav">Best Deal</a>
+      <a href="#disclosure">Ad Disclosure</a>
+    </nav>
+    <div class="v3-date">Last updated: <b>{p.updated}</b></div>
+
+    <header class="v3-head v3-wrap">
+      <h1 id="v3h1" set:html={p.h1Map[dv]} />
+      <script is:inline define:vars={{ map: p.h1Map }}>
+        try { var v = new URLSearchParams(location.search).get("v"); if (v && map[v]) document.getElementById("v3h1").textContent = map[v]; } catch (e) {}
+      </script>
+      <p class="v3-sub" set:html={p.sub} />
+      <div class="v3-by">
+        <img src={p.author.photo} alt={p.author.name} width="28" height="28" loading="eager" decoding="async" />
+        <span>Written by <b>{p.author.name}</b> · Checked by <b>{p.checkedBy}</b></span>
+      </div>
+      <div class="v3-chips">
+        <span><i>🔍</i><b set:html={p.chips[0]} /></span>
+        <span><i>⭐</i><b set:html={p.chips[1]} /></span>
+        <span><i>✅</i><b set:html={p.chips[2]} /></span>
+      </div>
+      <div class="v3-pas">{p.pas.map((x) => <p set:html={x} />)}</div>
+      <p class="v3-verdict"><a href={p.url} rel={rel} target="_blank" data-cta="card1" set:html={p.verdictLine} /></p>
+      <input type="checkbox" id="v3rm" class="v3-rm-t" hidden />
+      <div class="v3-more">
+        <h2 class="v3-h2" set:html={p.h2} />
+        {p.introMore.map((x) => <p set:html={x} />)}
+      </div>
+      <label for="v3rm" class="v3-rm-l"><span class="o">Read more ▾</span><span class="c">Show less ▴</span></label>
+      <p class="v3-leadin" set:html={p.leadIn} />
+    </header>
+
+    <section id="top5" class="v3-list v3-wrap">
+      <!-- card #1 -->
+      <div class="v3-card v3-top" id="card1">
+        <div class="v3-ribbon">{t.ribbon}</div>
+        <div class="v3-row">
+          <a class="v3-img" href={p.url} rel={rel} target="_blank" data-cta="card1img">
+            <img src={p.topImg.src} alt={p.topImg.alt} width={p.topImg.w} height={p.topImg.h} loading="eager" fetchpriority="high" decoding="async" />
+          </a>
+          <div class="v3-grade">
+            <span class:list={["v3-gl", gradeCls(t.grade)]}>{t.grade}</span>
+            <span class="v3-sc"><b>{t.score}</b>/10 · {t.scoreLabel}</span>
+            <span class="v3-st"><span aria-hidden="true">★★★★★</span> {t.stars}</span>
+          </div>
+        </div>
+        <a class="v3-name" href={p.url} rel={rel} target="_blank" data-cta="card1">{t.name}</a>
+        <div class="v3-price"><s>{t.oldPrice}</s> <b>{t.price}</b> <span class="v3-salebox" set:html={t.saleBox} /></div>
+        <div class="v3-bundle">{t.bundleLine}</div>
+        <a class="v3-cta" id="card1cta" href={p.url} rel={rel} target="_blank" data-cta="card1"><span set:html={t.cta} /> →</a>
+        <ul class="v3-trust">{t.trust.map((x: string) => <li>✓ {x}</li>)}</ul>
+        <p class="v3-con">✗ <span set:html={t.con} /></p>
+        <ul class="v3-bul">{t.bullets.map((x: string) => <li set:html={x} />)}</ul>
+        <details class="v3-morebul">
+          <summary>+{t.moreBullets.length} more reasons ▾</summary>
+          <ul class="v3-bul">{t.moreBullets.map((x: string) => <li set:html={x} />)}</ul>
+        </details>
+        <div class="v3-bars">
+          {t.bars.map(([l, v]: [string, number]) => (
+            <div class="v3-bar"><span class="l">{l}</span><span class="t"><span class="f" style={`--v:${v}%`} /></span><span class="n">{v}</span></div>
+          ))}
+        </div>
+        <div class="v3-revs">
+          {t.reviews.map((r: { q: string; who: string }) => (
+            <blockquote><span aria-hidden="true" class="s">★★★★★</span> “{r.q}” <cite>{r.who} · Verified customer, from Cozy Cove’s website</cite></blockquote>
+          ))}
+        </div>
+        <a class="v3-readfull" href="#review">Read our full review ↓</a>
+      </div>
+
+      <!-- cards #2–#5 -->
+      {p.rivals.map((r) => (
+        <div class:list={["v3-card v3-rival", { "v3-hidden": r.rank > 3 }]} data-rest={r.rank > 3 ? "" : undefined}>
+          <div class="v3-rk">#{r.rank}</div>
+          <div class="v3-row">
+            <div class="v3-ph" aria-hidden="true">
+              <svg viewBox="0 0 64 64" width="56" height="56"><rect x="8" y="14" width="48" height="36" rx="6" fill="none" stroke="currentColor" stroke-width="3"/><path d="M16 26h32M16 33h32M16 40h32" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M18 50v6M46 50v6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+            </div>
+            <div class="v3-grade sm">
+              <span class:list={["v3-gl", gradeCls(r.grade)]}>{r.grade}</span>
+              <span class="v3-sc"><b>{r.score}</b>/10 · {r.label}</span>
+              <span class="v3-st">Amazon listing</span>
+            </div>
+          </div>
+          <div class="v3-name">{r.name}</div>
+          <ul class="v3-bul pc">
+            {r.pros.map((x: string) => <li class="y">{x}</li>)}
+            {r.cons.map((x: string) => <li class="x">{x}</li>)}
+          </ul>
+          <p class="v3-rv"><b>Verdict:</b> {r.verdict}</p>
+          <a class="v3-amz" href={r.url} rel={rel} target="_blank" data-cta={`card${r.rank}`}>Check Price on Amazon ›</a>
+          <span class="v3-ship">Amazon shipping times vary</span>
+        </div>
+      ))}
+      <button type="button" class="v3-rest" id="v3rest" aria-expanded="false" aria-controls="top5">See Rest Of List ▾</button>
+
+      <!-- repeat #1 -->
+      <div class="v3-band" set:html={p.bandLabel} />
+      <a class="v3-card v3-repeat" href={p.url} rel={rel} target="_blank" data-cta="repeat">
+        <span class="v3-stamp" set:html={p.repeatStamp} />
+        <span class="v3-row">
+          <span class="v3-img"><img src={p.topImg.src} alt={p.topImg.alt} width={p.topImg.w} height={p.topImg.h} loading="lazy" decoding="async" /></span>
+          <span class="v3-grade">
+            <span class="v3-gl ga">{t.grade}</span>
+            <span class="v3-sc"><b>{t.score}</b>/10 · {t.scoreLabel}</span>
+            <span class="v3-st"><span aria-hidden="true">★★★★★</span> {t.stars}</span>
+          </span>
+        </span>
+        <span class="v3-name">{t.name}</span>
+        <span class="v3-price"><s>{t.oldPrice}</s> <b>{t.price}</b> <span class="v3-salebox">Black Friday price · BF26 applied</span></span>
+        <span class="v3-cta"><span set:html={t.cta} /> →</span>
+      </a>
+    </section>
+
+    <section class="v3-body v3-wrap prose">
+      <figure class="v3-byfig">
+        <img src={p.author.photo} alt={p.author.name} width="44" height="44" loading="lazy" decoding="async" />
+        <figcaption>By <b>{p.author.name}</b>, {p.author.role.replace("&amp;", "&")}</figcaption>
+      </figure>
+      <Fragment set:html={p.reviewHtml} />
+      <Fragment set:html={p.whereHtml} />
+
+      <h2>What Buyers Say</h2>
+      <p class="v3-bhead"><b set:html={p.buyers.header} /><br /><span set:html={p.buyers.sub} /></p>
+      <div class="v3-revs wide">
+        {p.buyers.quotes.map((r) => <blockquote><span aria-hidden="true" class="s">★★★★★</span> “{r.q}” <cite>{r.who} · Verified customer, from Cozy Cove’s website</cite></blockquote>)}
+      </div>
+      <p class="v3-small" set:html={p.buyers.foot} />
+
+      <h2 id="faq">Frequently Asked Questions</h2>
+      <div class="v3-faq">
+        {p.faq.map(([q, a], i) => <details open={i === 0}><summary>{q}</summary><p set:html={a} /></details>)}
+      </div>
+
+      <Fragment set:html={p.guideHtml} />
+    </section>
+
+    <section class="v3-author v3-wrap">
+      <img src={p.author.photo} alt={p.author.name} width="88" height="88" loading="lazy" decoding="async" />
+      <div>
+        <div class="n">Written by <b>{p.author.name}</b></div>
+        <div class="r" set:html={p.author.role} />
+        <div class="h" set:html={p.author.html} />
+      </div>
+    </section>
+
+    <footer id="disclosure" class="v3-disc"><div class="v3-wrap" set:html={p.disclosure} /></footer>
+  </article>
+
+  <!-- sticky mobile CTA -->
+  <div class="v3-sticky" id="v3sticky" hidden>
+    <img src={p.thumb} alt="" width="44" height="44" loading="lazy" decoding="async" />
+    <span class="txt"><span class="k">#1 Pick</span><b>{p.sticky.name}</b><span class="pr"><s>{p.sticky.oldPrice}</s> <b>{p.sticky.price}</b> · {p.sticky.discount}</span></span>
+    <a class="btn" href={p.url} rel={rel} target="_blank" data-cta="sticky">{p.sticky.button}</a>
+    <button type="button" class="x" id="v3stickyx" aria-label="Dismiss">×</button>
+  </div>
+
+  <!-- exit popup -->
+  <div class="v3-exit" id="v3exit" hidden role="dialog" aria-modal="true" aria-labelledby="v3exitT">
+    <div class="bd" data-close></div>
+    <div class="pn">
+      <button type="button" class="x" data-close aria-label="Close">×</button>
+      <div class="k">{p.exitPop.kicker}</div>
+      <h2 id="v3exitT">{p.exitPop.title}</h2>
+      <a href={p.exitUrl} rel={rel} target="_blank" data-cta="exit" data-go><img src={p.topImg.src} alt={p.topImg.alt} width="160" height="160" loading="lazy" decoding="async" /></a>
+      <p>{p.exitPop.body}</p>
+      <a class="go" href={p.exitUrl} rel={rel} target="_blank" data-cta="exit" data-go>{p.exitPop.button}</a>
+      <button type="button" class="no" data-close>{p.exitPop.dismiss}</button>
+    </div>
+  </div>
+
+  <script is:inline>
+    (function () {
+      /* See rest of list */
+      var rb = document.getElementById("v3rest");
+      if (rb) rb.addEventListener("click", function () {
+        var open = rb.getAttribute("aria-expanded") === "true";
+        document.querySelectorAll("[data-rest]").forEach(function (n) { n.classList.toggle("v3-hidden", open); });
+        rb.setAttribute("aria-expanded", open ? "false" : "true");
+        rb.textContent = open ? "See Rest Of List ▾" : "Hide Rest Of List ▴";
+      });
+
+      /* score bars fill on view */
+      try {
+        var bars = document.querySelector(".v3-bars");
+        if (bars && "IntersectionObserver" in window) {
+          var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { bars.classList.add("on"); io.disconnect(); } }); }, { threshold: 0.4 });
+          io.observe(bars);
+        } else if (bars) bars.classList.add("on");
+      } catch (e) {}
+
+      var clicked = false;
+      document.addEventListener("click", function (e) {
+        var a = e.target.closest && e.target.closest('a[rel~="sponsored"]');
+        if (a && a.href.indexOf("thelifeinsider.com/base2") > -1) clicked = true;
+      }, true);
+
+      /* sticky mobile CTA: once card #1's CTA has scrolled away; hidden over the offer box and while the exit modal is open */
+      var st = document.getElementById("v3sticky"), cta = document.getElementById("card1cta"), ob = document.getElementById("offerbox");
+      var ex = document.getElementById("v3exit"), dismissed = false;
+      function sync() {
+        if (!st || !cta) return;
+        var mob = window.matchMedia("(max-width: 767px)").matches;
+        var past = cta.getBoundingClientRect().bottom < 0;
+        var r = ob ? ob.getBoundingClientRect() : null;
+        var overBox = r && r.top < window.innerHeight && r.bottom > 0;
+        var show = mob && !dismissed && past && !overBox && ex.hidden;
+        st.hidden = !show;
+        document.body.classList.toggle("v3-has-sticky", show);
+      }
+      var tk = false;
+      window.addEventListener("scroll", function () { if (tk) return; tk = true; requestAnimationFrame(function () { sync(); tk = false; }); }, { passive: true });
+      window.addEventListener("resize", sync);
+      var sx = document.getElementById("v3stickyx");
+      if (sx) sx.addEventListener("click", function () { dismissed = true; sync(); });
+      sync();
+
+      /* exit popup v2 */
+      if (!ex) return;
+      var KEY = "tli_exit_offer_seen", armed = false, shown = false;
+      try { if (sessionStorage.getItem(KEY)) shown = true; } catch (e) {}
+      setTimeout(function () { armed = true; }, 3000);
+      var card1 = document.getElementById("card1");
+      function seenCard1() { return card1 && card1.getBoundingClientRect().bottom < window.innerHeight; }
+      function show(reason) {
+        if (shown || !armed || clicked) return;
+        shown = true;
+        try { sessionStorage.setItem(KEY, "1"); } catch (e) {}
+        ex.hidden = false; document.body.style.overflow = "hidden"; ex.setAttribute("data-reason", reason);
+        try { if (window.gtag) gtag("event", "exit_popup_show", { reason: reason }); } catch (e) {}
+        try { if (window.clarity) clarity("event", "exit_popup_" + reason); } catch (e) {}
+        sync();
+      }
+      function hide() { ex.hidden = true; document.body.style.overflow = ""; sync(); }
+      ex.addEventListener("click", function (e) {
+        if (e.target.closest("[data-close]")) hide();
+        else if (e.target.closest("[data-go]")) { clicked = true; setTimeout(hide, 50); }
+      });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !ex.hidden) hide(); });
+
+      var touch = window.matchMedia("(hover: none)").matches;
+      if (!touch) {
+        document.addEventListener("mouseout", function (e) { if (!e.relatedTarget && e.clientY <= 10) show("mouse"); });
+      } else {
+        var wasHidden = false;
+        document.addEventListener("visibilitychange", function () {
+          if (document.hidden) { if (armed && seenCard1()) wasHidden = true; }
+          else if (wasHidden) { wasHidden = false; show("tabreturn"); }
+        });
+        var hist = [];
+        window.addEventListener("scroll", function () {
+          var now = Date.now(), y = window.scrollY;
+          hist.push([now, y]);
+          while (hist.length && now - hist[0][0] > 400) hist.shift();
+          var maxY = document.documentElement.scrollHeight - window.innerHeight;
+          var peak = Math.max.apply(null, hist.map(function (h) { return h[1]; }));
+          if (peak - y >= 120 && y < 0.25 * maxY && card1 && (card1.offsetTop + card1.offsetHeight) < peak + window.innerHeight) show("flick");
+        }, { passive: true });
+      }
+    })();
+  </script>
+
+  <slot name="body-end" slot="body-end" />
+</Base>
