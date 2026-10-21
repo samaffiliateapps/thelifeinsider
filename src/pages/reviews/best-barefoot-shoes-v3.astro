@@ -1,0 +1,55 @@
+---
+/* =========================================================================
+   CORE PAGE v3 (22 Oct 2026, PREVIEW ONLY): v2 + N1-FUNNEL's v3 changes (pain-led H1 + story, "what happens when
+   you tap" pre-frame, CTA wording that matches every rotated entry page, real merchant deadlines only, data-driven #2).
+   Spec: research/overnight-2026-10-22/agents/N1-FUNNEL.md §6 · Report: research/overnight-2026-10-22/agents/N5-V3.md
+   Layout: ReviewPageRipV3.astro (v2 layout untouched). Same CPV One campaign 10.
+   Offer links: base2.php?sub2=<slot>&sub3=gv3. ?v=wide (AG3 wide-toe / zero-drop), ?v=women.
+   ========================================================================= */
+import ReviewPageRipV3 from "../../layouts/ReviewPageRipV3.astro";
+import CpvTracker from "../../components/CpvTracker.astro";
+import {
+  CPV_CAMPAIGN, GV3_CPV_LP, UPDATED_V3, ROLLING_BYLINE, gv3Link, DEALS, DEAL_DEFAULT, dealAt,
+  top, rivals, H1, HOOK, VERDICT, VARIANTS, pas, introMore, bodyHtml, faq, side, sticky, exit, author, DISCLOSURE_V3,
+} from "../../data/grounded-v3";
+
+const t = {
+  badge: top.ribbon, name: top.name, image: top.image, score: top.score.toFixed(1), scoreLabel: top.scoreLabel, stars: top.stars,
+  ratingLine: top.ratingLine, oldPrice: top.oldPrice, price: top.price, off: top.off, cta: top.cta, trust: top.trust,
+  howtoHtml: top.howtoHtml, con: top.con, bullets: top.pros.slice(0, 4), moreBullets: top.pros.slice(4),
+  bars: top.bars.map((b) => [b.l, b.v] as [string, number]),
+  reviews: top.reviews.map((r) => ({ q: r.text, who: r.name, title: r.title })),
+  reviewSource: "Verified Purchaser, Grounded's review page", ship: top.ship, repeatCta: top.repeatCta,
+};
+---
+
+<ReviewPageRipV3
+  title="Best Barefoot Shoes 2026: The One Pair for Foot, Knee & Back Pain | The Life Insider"
+  description="We compared 30+ barefoot shoes on toe room, a flat sole, grip, sizing and price. Our #1 is under $70, 50% off with free US shipping and a 90-day money-back guarantee."
+  vs={VARIANTS}
+  deals={DEALS}
+  dealDefault={DEAL_DEFAULT}
+  dealNow={dealAt(new Date())}
+  h1={H1}
+  hook={HOOK}
+  verdict={VERDICT}
+  updated={UPDATED_V3}
+  rollingByline={ROLLING_BYLINE}
+  author={author}
+  link={gv3Link}
+  exitUrl={gv3Link("exit")}
+  top={t}
+  rivals={rivals}
+  listLede='Here are our <span class="ul">Top 5 Barefoot Shoes</span>, with <a href="#story">the full story behind our #1 pick further down:</a>'
+  bandLabel='Best Barefoot Shoe in <span class="yr">2026</span>'
+  stamp="<b>#1</b>Most Popular in the US"
+  intro={{ h2: '30+ Shoes <span class="ul">Compared Head-to-Head</span>', pas, more: introMore }}
+  bodyHtml={bodyHtml}
+  faq={faq}
+  side={side}
+  disclosure={DISCLOSURE_V3}
+  sticky={sticky}
+  exit={exit}
+>
+  {CPV_CAMPAIGN && <Fragment slot="body-end"><CpvTracker campaign={CPV_CAMPAIGN} lp={GV3_CPV_LP} /></Fragment>}
+</ReviewPageRipV3>
