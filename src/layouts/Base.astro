@@ -26,6 +26,9 @@ const GA4_ID = "G-M9LT53YQDS";
 // remarketing lists ("Barefoot page visitors", "Heated vest page visitors") need the Ads tag itself so each page
 // visit is recorded against its URL. Conversion tracking id from the account (customer.conversion_tracking_setting).
 const ADS_ID = "AW-18319719009";
+// "Offer click-out" SECONDARY conversion (id 7860609273, created 21 Oct 2026): fires once per page view when a visitor
+// clicks through to the offer (any link to the CPV One base2.php hop). Not primary, not in any custom goal.
+const CLICKOUT_SEND_TO = "AW-18319719009/k63GCPnBnaQdEOH0wp9E";
 ---
 
 <!doctype html>
@@ -49,6 +52,17 @@ const ADS_ID = "AW-18319719009";
             gtag("js", new Date());
             gtag("config", GA4_ID);
             if (ADS_ID) gtag("config", ADS_ID);
+          </script>
+          <script is:inline define:vars={{ CLICKOUT_SEND_TO }}>
+            (function () {
+              var sent = false;
+              document.addEventListener("click", function (e) {
+                var a = e.target && e.target.closest ? e.target.closest('a[href*="base2.php"]') : null;
+                if (!a || sent) return;
+                sent = true;
+                try { gtag("event", "conversion", { send_to: CLICKOUT_SEND_TO, transport_type: "beacon" }); } catch (err) {}
+              }, true);
+            })();
           </script>
         </>
       )
