@@ -109,7 +109,7 @@ const D = p.dealNow;
           </div>
 
           <div class="rv2-below">
-            <div class="rv3-howto" set:html={t.howtoHtml} />
+            {t.howtoHtml && <div class="rv3-howto" set:html={t.howtoHtml} />}
             <p class="rv2-rating" set:html={t.ratingLine} />
             <p class="rv2-con"><span class="x" aria-hidden="true">✕</span> <span set:html={t.con} /></p>
             <ul class="c-list rv2-bul">{t.bullets.map((x, i) => <li data-vs={`b${i}`} set:html={x} />)}</ul>

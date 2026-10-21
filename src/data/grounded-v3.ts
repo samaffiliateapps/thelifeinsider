@@ -332,7 +332,7 @@ ${bq(Q.scot)}
 ${bq(Q.paulCurve)}`;
 
 const where = `
-<h2 id="where">Where To Get The Real Grounded Footwear?</h2>
+<h2 id="where">Where To Get Grounded Footwear at 50% Off</h2>
 <div class="rv2-update"><b>**UPDATE:</b> Since the Freedom took off, Grounded's order page shows <b>“Stock Levels LOW.”</b> The sale is on now: <b>${OFF_LONG}</b>, applied automatically at checkout. Orders ship free within 48 hours.</div>
 <p><strong>Buy only from <a href="${gv3Link("where-text")}" ${REL} data-cta="where-text">Grounded Footwear's own website</a>.</strong> Look-alike knit shoes sell on Temu and AliExpress for $10–$20, and Amazon is full of look-alikes too, with no 90-day guarantee, no free size exchanges and weeks on a boat.</p>
 <p class="rv3-found">✅ Good news: Grounded's discount is applied automatically at checkout when you go through our link. No code needed.</p>
@@ -354,7 +354,8 @@ ${btn("Get 50% Off & Check Availability 👉", "verdict-cta")}
 <p><strong>P.S.</strong> You have 90 days. If they're not for you, Grounded refunds you. Wrong size? They send the new pair free.</p>
 <div data-deal="pps">${DEAL_DEFAULT.pps}</div>`;
 
-export const bodyHtml = story + review + where;
+/* 23 Oct (Sam): the "what happens when you tap" box sits at the end of the advertorial, just before where-to-buy, not in card #1. */
+export const bodyHtml = story + review + `<div class="rv3-howto">${howtoHtml}</div>` + where;
 
 /* ---------- FAQ ---------- */
 export const faq: { q: string; a: string }[] = [
