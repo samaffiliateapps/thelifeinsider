@@ -49,6 +49,7 @@ const CLICKOUT_SEND_TO = "AW-18319719009/k63GCPnBnaQdEOH0wp9E";
           <script is:inline define:vars={{ GA4_ID, ADS_ID }}>
             window.dataLayer = window.dataLayer || [];
             function gtag() { dataLayer.push(arguments); }
+            window.gtag = gtag; // define:vars wraps this script in a function, so expose gtag globally for event/conversion calls
             gtag("js", new Date());
             gtag("config", GA4_ID);
             if (ADS_ID) gtag("config", ADS_ID);
