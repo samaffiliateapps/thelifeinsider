@@ -73,7 +73,7 @@ const gradeCls = (g: string) => (g.startsWith("A") ? "ga" : g === "B+" ? "gbp" :
       <p class="v3-sub" set:html={p.sub} />
       <div class="v3-by">
         <img src={p.author.photo} alt={p.author.name} width="28" height="28" loading="eager" decoding="async" />
-        <span>Written by <b>{p.author.name}</b><span class="dk"> · Checked by <b>{p.checkedBy}</b></span><span class="mb"> · Updated {p.updated.replace(/^(\w{3})\w*/, "$1")} · <a href="#disclosure">Ad Disclosure</a></span></span>
+        <span>Written by <b>{p.author.name}</b><span class="dk"> · Checked by <b>{p.checkedBy}</b></span><span class="mb"> · Updated {p.updated.replace(/^(\w{3})\w*/, "$1").replace(/, \d{4}$/, "")} · <a href="#disclosure">Ad</a></span></span>
       </div>
       <div class="v3-chips">
         <span><i>🔍</i><b set:html={p.chips[0]} /></span>

@@ -48,7 +48,7 @@ export const IMG = {
 };
 
 export const SALE_END = "Dec 6"; // merchant promo config "black-friday-2026": startDate 2026-10-08, endDate/timerEndDate 2026-12-06, code BF26 (fixed calendar date, not per-visitor)
-export const topBar = `🔥 Black Friday price ends ${SALE_END}: up to 70% off our #1 pick ›`;
+export const topBar = `🔥 Black Friday price ends ${SALE_END} · up to 70% off ›`;
 
 export const intro = {
   pas: [
@@ -66,7 +66,7 @@ export const intro = {
   h2: "Warm the room you’re actually in, not the whole house.",
 };
 
-export const chips: [string, string, string] = ["5 Heaters Compared", "4.8★ from 17,673+ reviews*", "90-Day Money-Back"];
+export const chips: [string, string, string] = ["5 Heaters Compared", "4.8★ · 17,673+ reviews*", "90-Day Money-Back"];
 
 export interface Top {
   ribbon: string; name: string; grade: string; score: string; scoreLabel: string; stars: string;

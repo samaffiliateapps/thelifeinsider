@@ -168,4 +168,7 @@ body.v3-has-sticky { padding-bottom: 66px; }
   .v3-nav, .v3-date, .v3-leadin { display: none; }
   .v3-by .dk { display: none; }
   .v3-by .mb { display: inline; }
+  .v3-pas p:nth-child(3) { display: none; }
+  .v3-chips span { font-size: .62rem; }
+  .v3-topbar { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 }
