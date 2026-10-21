@@ -104,7 +104,6 @@ const byDate = p.updated.replace(/^(\w{3})\w*/, "$1").replace(/, \d{4}$/, "");
             <div class="rv2-buy">
               <a class="rv2-name" href={L("card1name")} rel={rel} target="_blank" data-cta="card1name">{t.name}</a>
               <div class="rv2-score">
-                <span class="rv2-tile">{t.grade}</span>
                 <span class="rv2-num"><b>{t.score}</b>/10</span>
                 <span class="rv2-stars"><span aria-hidden="true">{starRow()}</span> {t.stars}</span>
               </div>
@@ -167,7 +166,7 @@ const byDate = p.updated.replace(/^(\w{3})\w*/, "$1").replace(/, \d{4}$/, "");
                 <span class="c-side">
                   <span class="c-cap">OVERALL SCORE</span>
                   <span class="c-score">{r.score}</span>
-                  <span class="c-label">{r.grade} · {r.label}</span>
+                  <span class="c-label">{r.label}</span>
                   <span class="c-stars" aria-hidden="true">{starRow(parseFloat(r.score) >= 8 ? 4 : 3)}</span>
                   <span class="c-rating" set:html={r.ratingLine} />
                   <span class="c-btn amz">Check Price on Amazon ›</span>
@@ -190,7 +189,7 @@ const byDate = p.updated.replace(/^(\w{3})\w*/, "$1").replace(/, \d{4}$/, "");
           <span class="c-side">
             <span class="c-cap">OVERALL SCORE</span>
             <span class="c-score">{t.score}</span>
-            <span class="c-label">{t.grade} · {t.scoreLabel}</span>
+            <span class="c-label">{t.scoreLabel}</span>
             <span class="c-stars" aria-hidden="true">★★★★★</span>
             <span class="c-rating" set:html={t.ratingLine} />
             <span class="c-price"><b>{t.price}</b><s>{t.oldPrice}</s></span>
