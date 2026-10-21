@@ -123,7 +123,7 @@ const gradeCls = (g: string) => (g.startsWith("A") ? "ga" : g === "B+" ? "gbp" :
         </div>
         <div class="v3-revs">
           {t.reviews.map((r: { q: string; who: string }) => (
-            <blockquote><span aria-hidden="true" class="s">★★★★★</span> “{r.q}” <cite>{r.who} · Verified customer, from Cozy Cove’s website</cite></blockquote>
+            <blockquote>“{r.q}” <cite>{r.who} · Verified customer, from Cozy Cove’s website</cite></blockquote>
           ))}
         </div>
         <a class="v3-readfull" href="#review">Read our full review ↓</a>
@@ -184,7 +184,7 @@ const gradeCls = (g: string) => (g.startsWith("A") ? "ga" : g === "B+" ? "gbp" :
       <h2>What Buyers Say</h2>
       <p class="v3-bhead"><b set:html={p.buyers.header} /><br /><span set:html={p.buyers.sub} /></p>
       <div class="v3-revs wide">
-        {p.buyers.quotes.map((r) => <blockquote><span aria-hidden="true" class="s">★★★★★</span> “{r.q}” <cite>{r.who} · Verified customer, from Cozy Cove’s website</cite></blockquote>)}
+        {p.buyers.quotes.map((r) => <blockquote>“{r.q}” <cite>{r.who} · Verified customer, from Cozy Cove’s website</cite></blockquote>)}
       </div>
       <p class="v3-small" set:html={p.buyers.foot} />
 
