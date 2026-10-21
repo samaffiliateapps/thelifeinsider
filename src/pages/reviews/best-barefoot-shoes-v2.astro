@@ -1,0 +1,46 @@
+---
+/* =========================================================================
+   CORE PAGE v2 (21 Oct 2026): review-page v2 formula, A/B against v1 (/reviews/best-barefoot-shoes/).
+   Spec: research/overnight-2026-10-21/synth/S2-PAGES.md §3 + HANDOFF-2026-10-21.md §A5.
+   Build notes + rotation plan: advertorial-system/offers/grounded/V2-BUILD-2026-10-21.md
+   Same CPV One campaign 10. Offer links: base2.php?sub2=<slot>&sub3=gv2 (see grounded-v2.ts).
+   Persona "Daniel Strutgate" COMPARED and RANKED; never "tested". Never "official" for us.
+   ========================================================================= */
+import ReviewPageV3 from "../../layouts/ReviewPageV3.astro";
+import CpvTracker from "../../components/CpvTracker.astro";
+import {
+  CPV_CAMPAIGN, GV2_CPV_LP, ROLLING_SALE_END, UPDATED_V2, MONTH_STAMP, gv2Link,
+  top, card1Reviews, rivals, pas, introMore, verdictLine, advertorial, where, faq, side, sticky, exit, author, DISCLOSURE_V2,
+} from "../../data/grounded-v2";
+---
+
+<ReviewPageV3
+  title={`Best Barefoot Shoes (${MONTH_STAMP}) – 30+ Compared & Ranked | The Life Insider`}
+  description="The best barefoot shoes, compared and ranked on toe room, a flat sole, grip, sizing risk and price. Our #1 barefoot shoe is under $70 with a 90-day money-back guarantee."
+  h1={`Best Barefoot Shoes <span class="nw">(<span data-month>${MONTH_STAMP}</span>)</span>`}
+  h2='30+ Shoes <span class="ul">Compared Head-to-Head</span>'
+  updated={UPDATED_V2}
+  byline={{ name: "Daniel Strutgate", photo: "/images/authors/daniel-strutgate.webp" }}
+  pas={pas}
+  verdictLine={verdictLine}
+  introMore={introMore}
+  chips={["30+ Shoes Compared", "4.8★ from 13,427+ Buyer Reviews", "90-Day Money-Back"]}
+  listLede='Here are our <span class="ul">Top 5 Barefoot Shoes</span>, with <a href="#review">a full review of our #1 pick further down:</a>'
+  link={gv2Link}
+  top={top}
+  reviews={card1Reviews}
+  rivals={rivals}
+  bandLabel='Best Barefoot Shoe in <span class="yr">2026</span>'
+  advertHeading="We Compared the Best-Selling Barefoot Shoes. Here's Why Grounded Is #1"
+  advertorial={advertorial}
+  where={where}
+  faq={faq}
+  side={side}
+  sticky={sticky}
+  exit={exit}
+  author={author}
+  disclosure={DISCLOSURE_V2}
+  rollingSaleEnd={ROLLING_SALE_END}
+>
+  {CPV_CAMPAIGN && <Fragment slot="body-end"><CpvTracker campaign={CPV_CAMPAIGN} lp={GV2_CPV_LP} /></Fragment>}
+</ReviewPageV3>

@@ -1,0 +1,384 @@
+---
+/* REVIEW PAGE v2 FORMULA ("V3" file name: ReviewPageV2.astro was already taken by the Sep build). 21 Oct 2026.
+   Spec: research/overnight-2026-10-21/synth/S2-PAGES.md §3 + HANDOFF-2026-10-21.md §A5.
+   New layout so the live v1 pages (ReviewPageRip) don't change. Reuses rip.css for the lower sections.
+   Order: nav → H1 (query + month) + byline → capped PAS intro → card #1 (first mobile screen: A+ tile, score,
+   stars, ONE disguised-positive con, price, named-offer CTA, trust strip) → pros, score bars, 2 verbatim
+   reviews → cards #2–#3 → "See rest of list" (#4–#5) → repeat #1 → advertorial → where/offer box/how to
+   order/verdict/P.S. → FAQ → author → footer disclosure.
+   Behaviour: mobile sticky CTA once card #1's CTA has scrolled away; exit popup (desktop mouse-leave at the
+   top; touch: tab/app switch then return, or a fast flick to the top), armed after 3 s and after card #1 has
+   been seen, once per session, never after an offer click, link tagged sub2=exit. NO history/back-button
+   manipulation. */
+import "../styles/rip.css";
+import "../styles/gv2.css";
+import Base from "./Base.astro";
+
+export interface V3Quote { title?: string; text: string; name: string }
+export interface V3Rival { rank: number; name: string; image: { src: string; alt: string; w: number; h: number }; bullets: { t: string; x?: boolean }[]; grade: string; score: number; scoreLabel: string; ratingLine: string; verdict: string; url: string; cta: string }
+export interface Props {
+  title: string;
+  description: string;
+  h1: string;                 // contains <span data-month>…</span>
+  h2: string;                 // desktop only
+  updated: string;
+  byline: { name: string; photo: string };
+  pas: string[];
+  verdictLine: string;
+  introMore: string[];
+  chips: string[];
+  listLede: string;
+  link: (slot: string) => string;
+  top: {
+    ribbon: string; name: string; image: { src: string; alt: string; w: number; h: number };
+    grade: string; score: number; scoreLabel: string; stars: string; ratingLine: string; con: string;
+    price: string; oldPrice: string; off: string; cta: string; trust: string[]; pros: string[];
+    bars: { l: string; v: number }[]; ship: string;
+  };
+  reviews: V3Quote[];
+  rivals: V3Rival[];
+  visibleRivals?: number;     // rivals shown before "See rest of list" (default 2 → cards #2–#3)
+  bandLabel: string;
+  advertHeading: string;
+  advertorial: string;
+  where: { heading: string; update: string; html: string; offerBox: string[]; cta: string; howTo: string[]; image: { src: string; alt: string; w: number; h: number }; verdict: string; ps: string };
+  faq: { q: string; a: string }[];
+  side: { name: string; ratingLine: string; image: string; bullets: string[]; cta: string; foot: string };
+  sticky: { name: string; image: string; price: string; oldPrice: string; off: string; button: string };
+  exit: { kicker: string; title: string; image: string; trust: string; button: string; dismiss: string };
+  author: { name: string; role: string; photo: string; html: string };
+  disclosure: string;
+  rollingSaleEnd?: boolean;
+}
+const p = Astro.props;
+const L = p.link;
+const rel = "sponsored nofollow noopener";
+const nVis = p.visibleRivals ?? 2;
+const shown = p.rivals.slice(0, nVis);
+const hiddenR = p.rivals.slice(nVis);
+const gradeClass = (g: string) => (g.startsWith("A") ? "ga" : g.startsWith("B+") ? "gbp" : g.startsWith("B") ? "gb" : "gc");
+const stars = (s: string) => {
+  const n = parseFloat(s);
+  return n >= 4.75 ? "★★★★★" : n >= 4.25 ? "★★★★½" : "★★★★";
+};
+const esc = (t: string) => t.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+/* Rival card as an HTML string (rendered in two places: visible #2–#3 and the hidden #4–#5). */
+const rivalHtml = (r: V3Rival) => `
+<a class="gr card-r" href="${esc(r.url)}" rel="sponsored nofollow noopener" target="_blank" data-cta="card${r.rank}">
+  <span class="gr-badge">#${r.rank}</span>
+  <span class="gr-top">
+    <img src="${esc(r.image.src)}" alt="${esc(r.image.alt)}" width="${r.image.w}" height="${r.image.h}" loading="lazy" decoding="async" />
+    <span class="gr-g"><span class="tile sm ${gradeClass(r.grade)}">${r.grade}</span><span class="sc"><b>${r.score.toFixed(1)}</b>/10</span><span class="lbl">${r.scoreLabel}</span></span>
+  </span>
+  <span class="gr-name">${esc(r.name)}</span>
+  <span class="gr-rate">${r.ratingLine}</span>
+  <ul class="c-list">${r.bullets.slice(0, 4).map((b) => `<li${b.x ? ' class="x"' : ""}>${b.t}</li>`).join("")}</ul>
+  <span class="gr-v">${r.verdict}</span>
+  <span class="gr-btn">${r.cta} ›</span>
+</a>`;
+---
+
+<Base title={p.title} description={p.description} minimal noFooter>
+  <article class="rip gv2">
+    <nav class="rip-nav gv2-nav" aria-label="Quick links">
+      <div class="rip-wrap">
+        <a href={L("nav")} rel={rel} target="_blank" data-cta="nav">Top Pick</a>
+        <a href={L("nav")} rel={rel} target="_blank" data-cta="nav-deal">Best Deal</a>
+        <a href="#disclosure">Ad Disclosure</a>
+      </div>
+    </nav>
+
+    <header class="gv2-head rip-wrap">
+      <h1 set:html={p.h1} />
+      <h2 class="gv2-h2" set:html={p.h2} />
+      <div class="gv2-by">
+        <img src={p.byline.photo} alt="" width="26" height="26" decoding="async" fetchpriority="low" />
+        <span>By <b>{p.byline.name}</b> · Updated <span data-today-short>{p.updated}</span></span>
+      </div>
+
+      <div class="gv2-intro">
+        <ul class="gv2-pas">{p.pas.map((x) => <li set:html={x} />)}</ul>
+        <p class="gv2-verdict"><a href={L("verdict")} rel={rel} target="_blank" data-cta="verdict" set:html={p.verdictLine} /></p>
+        <input type="checkbox" id="gv2rm" class="gv2-rm-t" hidden />
+        <div class="gv2-more">
+          {p.introMore.map((x) => <p class="rip-lead" set:html={x} />)}
+          <div class="rip-chips">
+            <a href="#top5"><span class="ic s">🔍</span><b set:html={p.chips[0]} /></a>
+            <a href="#top5"><span class="ic">★</span><b set:html={p.chips[1]} /></a>
+            <a href="#top5"><span class="ic c">✓</span><b set:html={p.chips[2]} /></a>
+          </div>
+        </div>
+        <label for="gv2rm" class="gv2-rm-l">Read more <span aria-hidden="true">▾</span></label>
+      </div>
+    </header>
+
+    <section id="top5" class="gv2-list">
+      <div class="rip-wrap">
+        <h2 class="rip-lede gv2-lede" set:html={p.listLede} />
+
+        <!-- CARD #1 -->
+        <div class="g1" id="card1">
+          <div class="g1-rib">{p.top.ribbon}</div>
+          <div class="g1-grid">
+            <a class="g1-img" href={L("card1img")} rel={rel} target="_blank" data-cta="card1img">
+              <img src={p.top.image.src} alt={p.top.image.alt} width={p.top.image.w} height={p.top.image.h} loading="eager" fetchpriority="high" decoding="async" />
+            </a>
+            <div class="g1-grade">
+              <span class:list={["tile", gradeClass(p.top.grade)]}>{p.top.grade}</span>
+              <span class="sc"><b>{p.top.score.toFixed(1)}</b>/10</span>
+              <span class="lbl">{p.top.scoreLabel}</span>
+            </div>
+            <div class="g1-main">
+              <a class="g1-name" href={L("card1name")} rel={rel} target="_blank" data-cta="card1name">{p.top.name}</a>
+              <div class="g1-stars"><span class="st" aria-hidden="true">{stars(p.top.stars)}</span> <b>{p.top.stars}</b> · {p.top.ratingLine}</div>
+              <div class="g1-con"><span class="x" aria-hidden="true">✕</span> <span set:html={p.top.con} /></div>
+              <div class="g1-price">
+                <s>{p.top.oldPrice}</s> <b>{p.top.price}</b> <span class="off">{p.top.off}</span>
+                <span class="ends">{p.rollingSaleEnd ? <>Sale ends: <span data-today-day>today</span></> : "Limited-time offer"}</span>
+              </div>
+            </div>
+          </div>
+          <a class="g1-cta" id="card1cta" href={L("card1")} rel={rel} target="_blank" data-cta="card1">{p.top.cta} <span aria-hidden="true">›</span></a>
+          <ul class="g1-trust">{p.top.trust.map((t) => <li>✓ {t}</li>)}</ul>
+
+          <div class="g1-detail">
+            <ul class="c-list g1-pros">{p.top.pros.map((t) => <li set:html={t} />)}</ul>
+            <div class="g1-bars" aria-label="Our scores">
+              {p.top.bars.map((b) => (
+                <div class="bar"><span class="bl">{b.l}</span><span class="bt"><span class="bf" style={`--v:${b.v}%`} /></span><span class="bv">{b.v}</span></div>
+              ))}
+            </div>
+            <div class="g1-revs">
+              <div class="g1-revh">What buyers say on Grounded's review page</div>
+              {p.reviews.map((r) => (
+                <blockquote class="g1-rev">
+                  <span class="rs" aria-hidden="true">★★★★★</span>
+                  {r.title && <b class="rt">{r.title}</b>}
+                  <span class="rx">“{r.text}”</span>
+                  <cite>— {r.name} · Verified Purchaser</cite>
+                </blockquote>
+              ))}
+            </div>
+            <p class="g1-ship">{p.top.ship}</p>
+            <a class="g1-full" href="#review">Read our full review ↓</a>
+          </div>
+        </div>
+
+        <!-- CARDS #2–#5 -->
+        {shown.map((r) => <Fragment set:html={rivalHtml(r)} />)}
+        {hiddenR.length > 0 && (
+          <>
+            <div id="gv2rest" class="gv2-rest" hidden>
+              {hiddenR.map((r) => <Fragment set:html={rivalHtml(r)} />)}
+            </div>
+            <button type="button" class="gv2-seemore" aria-expanded="false" aria-controls="gv2rest" data-open="Hide Rest Of List ▴" data-closed="See Rest Of List ▾">See Rest Of List ▾</button>
+          </>
+        )}
+
+        <!-- REPEAT #1 band -->
+        <div class="rip-band" set:html={p.bandLabel} />
+        <a class="g1-repeat" href={L("repeat")} rel={rel} target="_blank" data-cta="repeat">
+          <img src={p.top.image.src} alt="" width={p.top.image.w} height={p.top.image.h} loading="lazy" decoding="async" />
+          <span class="rp-b">
+            <span class="rp-stamp">Most Popular Choice in the US</span>
+            <span class="rp-n">{p.top.name}</span>
+            <span class="rp-s"><span class:list={["tile", "sm", gradeClass(p.top.grade)]}>{p.top.grade}</span> {p.top.score.toFixed(1)}/10 · ★ {p.top.stars} ({p.top.ratingLine})</span>
+            <span class="rp-p"><s>{p.top.oldPrice}</s> <b>{p.top.price}</b> <span class="off">{p.top.off}</span></span>
+            <span class="rp-btn">{p.top.cta} ›</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ADVERTORIAL + WHERE, desktop side card -->
+    <section id="review" class="rip-review">
+      <div class="rip-wrap rip-cols">
+        <div class="rv-main">
+          <h2 class="rv-h" set:html={p.advertHeading} />
+          <div class="prose" set:html={p.advertorial} />
+
+          <h2 class="rv-h" id="where" set:html={p.where.heading} />
+          <div class="rv-update" set:html={p.where.update} />
+          <div class="prose big" set:html={p.where.html} />
+          <a class="gv2-fig" href={L("where-img")} rel={rel} target="_blank" data-cta="where-img"><img src={p.where.image.src} alt={p.where.image.alt} width={p.where.image.w} height={p.where.image.h} loading="lazy" decoding="async" /></a>
+          <div class="gv2-offer" id="offerbox">
+            <ul>{p.where.offerBox.map((x) => <li>✅ {x}</li>)}</ul>
+            <a class="rv-cta" href={L("where")} rel={rel} target="_blank" data-cta="where">{p.where.cta}</a>
+            <p class="rv-saleline">
+              {p.rollingSaleEnd
+                ? <b>Save up to <span class="r">60%</span> OFF – Sale Ends: <span data-today-long>{p.updated}</span></b>
+                : <b>Save up to <span class="r">60%</span> OFF – limited-time offer</b>}
+            </p>
+          </div>
+          <h3 class="gv2-h3">How to order</h3>
+          <ol class="gv2-how">{p.where.howTo.map((x) => <li set:html={x} />)}</ol>
+          <div class="prose" set:html={p.where.verdict} />
+          <a class="rv-cta" href={L("verdict-cta")} rel={rel} target="_blank" data-cta="verdict-cta">{p.top.cta} 👉</a>
+          <div class="prose gv2-ps" set:html={p.where.ps} />
+
+          <h2 class="rv-h" id="faq">Frequently Asked Questions</h2>
+          <div class="gv2-faq">
+            {p.faq.map((f) => (
+              <details><summary>{f.q}</summary><p set:html={f.a} /></details>
+            ))}
+          </div>
+        </div>
+
+        <aside class="rv-side">
+          <a class="side-card" href={L("side")} rel={rel} target="_blank" data-cta="side">
+            <span class="sd-stars">★★★★★ <span set:html={p.side.ratingLine} /></span>
+            <span class="sd-name">{p.side.name}</span>
+            <img src={p.side.image} alt={p.side.name} width="633" height="574" loading="lazy" decoding="async" />
+            <ul>{p.side.bullets.map((b) => <li set:html={b} />)}</ul>
+            <span class="sd-btn">{p.side.cta} →</span>
+            <span class="sd-foot" set:html={p.side.foot} />
+          </a>
+        </aside>
+      </div>
+    </section>
+
+    <section class="rip-author">
+      <div class="rip-wrap au">
+        <img src={p.author.photo} alt={p.author.name} width="96" height="96" loading="lazy" decoding="async" />
+        <div>
+          <div class="au-n">Written by <b>{p.author.name}</b></div>
+          <div class="au-r">{p.author.role}</div>
+          <div class="au-t" set:html={p.author.html} />
+        </div>
+      </div>
+    </section>
+
+    <section id="disclosure" class="rip-disc">
+      <div class="rip-wrap" set:html={p.disclosure} />
+    </section>
+  </article>
+
+  <!-- STICKY (mobile only, from when card #1's CTA has scrolled away) -->
+  <div class="gv2-sticky" id="gv2Sticky" hidden>
+    <img src={p.sticky.image} alt="" width="44" height="44" loading="lazy" decoding="async" />
+    <span class="ss-c"><span class="ss-k">#1 Pick · {p.sticky.name}</span><span class="ss-p"><s>{p.sticky.oldPrice}</s> <b>{p.sticky.price}</b> <span class="off">{p.sticky.off}</span></span></span>
+    <a class="ss-btn" href={L("sticky")} rel={rel} target="_blank" data-cta="sticky">{p.sticky.button}</a>
+    <button type="button" class="ss-x" aria-label="Dismiss">×</button>
+  </div>
+
+  <!-- EXIT POPUP -->
+  <div class="gv2-exit" id="gv2Exit" hidden role="dialog" aria-modal="true" aria-labelledby="gv2ExitT">
+    <div class="ex-bg" data-x></div>
+    <div class="ex-p">
+      <button type="button" class="ex-close" data-x aria-label="Close">×</button>
+      <div class="ex-k">{p.exit.kicker}</div>
+      <div class="ex-t" id="gv2ExitT">{p.exit.title}</div>
+      <img src={p.exit.image} alt={p.top.name} width="633" height="574" loading="lazy" decoding="async" />
+      <div class="ex-pr"><s>{p.top.oldPrice}</s> <b>{p.top.price}</b> <span class="off">{p.top.off}</span></div>
+      <div class="ex-tr">{p.exit.trust}</div>
+      <a class="ex-btn" href={L("exit")} rel={rel} data-cta="exit">{p.exit.button}</a>
+      <button type="button" class="ex-no" data-x>{p.exit.dismiss}</button>
+    </div>
+  </div>
+
+  <script is:inline define:vars={{ rolling: !!p.rollingSaleEnd }}>
+    (function () {
+      /* --- dates: month stamp in H1, byline date, rolling sale day (rolling = Sam's 19 Oct call on v1) --- */
+      try {
+        var d = new Date();
+        var month = d.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+        document.querySelectorAll("[data-month]").forEach(function (n) { n.textContent = month; });
+        var short = d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+        document.querySelectorAll("[data-today-short]").forEach(function (n) { n.textContent = short; });
+        if (rolling) {
+          var long = d.toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+          document.querySelectorAll("[data-today-long]").forEach(function (n) { n.textContent = long; });
+          var day = d.toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" });
+          document.querySelectorAll("[data-today-day]").forEach(function (n) { n.textContent = day; });
+        }
+      } catch (e) {}
+
+      /* --- see rest of list --- */
+      var sm = document.querySelector(".gv2-seemore"), rest = document.getElementById("gv2rest");
+      if (sm && rest) sm.addEventListener("click", function () {
+        var open = rest.hidden;
+        rest.hidden = !open;
+        sm.setAttribute("aria-expanded", open ? "true" : "false");
+        sm.textContent = open ? sm.getAttribute("data-open") : sm.getAttribute("data-closed");
+      });
+
+      /* --- score bars fill once visible --- */
+      var bars = document.querySelector(".g1-bars");
+      if (bars && "IntersectionObserver" in window) {
+        var bo = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { bars.classList.add("on"); bo.disconnect(); } }); }, { threshold: 0.4 });
+        bo.observe(bars);
+      } else if (bars) bars.classList.add("on");
+
+      var KEY = "tli_exit_offer_seen", CLICKED = "tli_offer_clicked";
+      function ss(k, v) { try { if (v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); } catch (e) { return null; } }
+
+      /* any offer click: no exit popup afterwards */
+      document.addEventListener("click", function (e) {
+        var a = e.target.closest && e.target.closest('a[href*="base2.php"]');
+        if (a) { ss(CLICKED, "1"); clickedNow = true; }
+      }, true);
+      var clickedNow = !!ss(CLICKED);
+
+      /* --- sticky (mobile CSS-only visibility; JS decides when) --- */
+      var st = document.getElementById("gv2Sticky"), cta = document.getElementById("card1cta"), offer = document.getElementById("offerbox");
+      var stDismissed = false, exitOpen = false, ctaGone = false, offerOn = false;
+      function syncSticky() {
+        if (!st) return;
+        var show = ctaGone && !offerOn && !stDismissed && !exitOpen;
+        st.hidden = !show;
+        document.body.classList.toggle("gv2-has-sticky", show);
+      }
+      if (st && cta && "IntersectionObserver" in window) {
+        new IntersectionObserver(function (es) { es.forEach(function (e) { ctaGone = !e.isIntersecting && e.boundingClientRect.top < 0; syncSticky(); }); }).observe(cta);
+        if (offer) new IntersectionObserver(function (es) { es.forEach(function (e) { offerOn = e.isIntersecting; syncSticky(); }); }).observe(offer);
+        st.querySelector(".ss-x").addEventListener("click", function () { stDismissed = true; syncSticky(); });
+      }
+
+      /* --- exit popup --- */
+      var ex = document.getElementById("gv2Exit");
+      if (!ex || ss(KEY)) return;
+      var armed = false, shown = false, passedCard1 = false;
+      setTimeout(function () { armed = true; }, 3000);
+      var card1 = document.getElementById("card1");
+      function card1Bottom() { return card1 ? card1.getBoundingClientRect().bottom + window.scrollY : 0; }
+      function show(reason) {
+        if (shown || !armed || clickedNow || ss(KEY)) return;
+        shown = true; ss(KEY, "1");
+        ex.hidden = false; exitOpen = true; syncSticky();
+        document.body.style.overflow = "hidden";
+        try { if (window.gtag) gtag("event", "exit_popup_show", { reason: reason }); if (window.clarity) clarity("event", "exit_popup_" + reason); } catch (e) {}
+        var b = ex.querySelector(".ex-btn"); if (b) b.focus({ preventScroll: true });
+      }
+      function hide() { ex.hidden = true; exitOpen = false; document.body.style.overflow = ""; syncSticky(); }
+      ex.addEventListener("click", function (e) { if (e.target.closest("[data-x]")) hide(); });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !ex.hidden) hide(); });
+
+      var touch = window.matchMedia("(hover: none)").matches;
+      if (!touch) {
+        /* desktop: pointer leaves through the top of the window */
+        document.addEventListener("mouseout", function (e) { if (!e.relatedTarget && e.clientY <= 10) show("mouse"); });
+      } else {
+        /* touch: only after card #1 has been seen */
+        var buf = [];
+        window.addEventListener("scroll", function () {
+          var y = window.scrollY, t = Date.now();
+          if (!passedCard1 && y + window.innerHeight >= card1Bottom()) passedCard1 = true;
+          buf.push([t, y]);
+          while (buf.length && t - buf[0][0] > 400) buf.shift();
+          var hi = y; for (var i = 0; i < buf.length; i++) if (buf[i][1] > hi) hi = buf[i][1];
+          var maxY = document.documentElement.scrollHeight - window.innerHeight;
+          /* fast flick: >=120px upward within 400 ms, ending in the top quarter of the page */
+          if (passedCard1 && hi - y >= 120 && y < 0.25 * maxY) show("flick");
+        }, { passive: true });
+        /* tab/app switch, then coming back */
+        var wentAway = false;
+        document.addEventListener("visibilitychange", function () {
+          if (document.hidden) { if (armed && passedCard1) wentAway = true; }
+          else if (wentAway) { wentAway = false; show("tabreturn"); }
+        });
+      }
+    })();
+  </script>
+
+  <slot name="body-end" slot="body-end" />
+</Base>
