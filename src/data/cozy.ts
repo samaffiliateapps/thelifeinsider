@@ -47,7 +47,7 @@ export const IMG = {
   thumb: "/images/cozy/cozy-thumb.webp",
 };
 
-export const topBar = `🔥 Black Friday heater prices are live: up to 70% off our #1 pick ›`;
+export const topBar = `🔥 Black Friday prices live: up to 70% off our #1 pick ›`;
 
 export const intro = {
   pas: [
