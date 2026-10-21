@@ -35,7 +35,7 @@
    IMAGES: merchant offer-page assets (offer.wallasound.com/boom/img/int1/*) + Aug merchant pack.
    ========================================================================= */
 
-export const CPV_CAMPAIGN = "TBD"; // Sam creates "Google - Walla Sound" in CPV One (int1 entry + &sub1={!subid!}), then set the id here
+export const CPV_CAMPAIGN = "32"; // Sam creates "Google - Walla Sound" in CPV One (int1 entry + &sub1={!subid!}), then set the id here
 export const CPV_ROOT = "https://track.thelifeinsider.com/";
 export const WS_LINK = `${CPV_ROOT}base2.php`;
 export const WS_EXIT_LINK = `${CPV_ROOT}base2.php?sub2=exit`;
