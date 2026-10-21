@@ -22,7 +22,7 @@ body:has(.v3) .logo .mark { width: 24px; height: 24px; font-size: .7rem; }
 .v3-chips span { flex: 1; background: #f4f7fb; border: 1px solid var(--line); border-radius: 6px; padding: 3px 3px; font-size: .64rem; line-height: 1.2; text-align: center; display: flex; align-items: center; justify-content: center; gap: 3px; }
 .v3-chips i { font-style: normal; }
 .v3-pas p { margin: 0 0 1px; font-size: .82rem; line-height: 1.3; }
-.v3-verdict { margin: 4px 0 2px; font-size: .85rem; font-weight: 700; line-height: 1.35; }
+.v3-verdict { margin: 4px 0 0; font-size: .85rem; font-weight: 700; line-height: 1.35; }
 .v3-more p { font-size: 1rem; line-height: 1.7; margin: 0 0 1em; }
 .v3-h2 { font-size: 1.15rem; margin: .4em 0 .6em; color: #14213d; }
 .v3-rm-l { display: inline-block; font-size: .8rem; font-weight: 700; color: #0f4c81; cursor: pointer; margin: 0; line-height: 1.4; }
@@ -155,3 +155,7 @@ body.v3-has-sticky { padding-bottom: 66px; }
   .v3-pas p, .v3-verdict { font-size: 1.02rem; }
   .v3-cta { font-size: 1.12rem; }
 }
+
+.v3-rm-t { display: none !important; }
+.v3-head .v3-rm-l { display: block; margin-top: 2px; }
+@media (min-width: 768px) { .v3-head .v3-rm-l { display: none; } }
