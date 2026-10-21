@@ -1,0 +1,75 @@
+---
+/* =========================================================================
+   COZY COVE PRO — Google Search review page v2 (21 Oct 2026; redesigned 22 Oct 2026 in the v1 rip look).
+   Copy: advertorial-system/offers/cozy-cove/DRAFT-2026-10-21/page-copy.md (W6-FIX). Data: src/data/cozy.ts.
+   Layout: ReviewPageRipV2.astro (shared with Grounded v2). One page for all ad groups;
+   ?v=wall|energy|review swaps the H1, the one-line hook and the verdict link.
+   Persona "Mark Ellison" = editorial pen name (disclosed in footer). We COMPARED; nowhere do we say we tested.
+   Redesign report: advertorial-system/offers/design-v2/REDESIGN-2026-10-22.md
+   ========================================================================= */
+import ReviewPageRipV2 from "../../layouts/ReviewPageRipV2.astro";
+import CpvTracker from "../../components/CpvTracker.astro";
+import { CPV_CAMPAIGN, CC_LINK, CC_EXIT_LINK, UPDATED, H1, HOOK, VERDICT, IMG, SALE_END, saleBar, intro, top, rivals, sticky, exitPop, reviewHtml, whereHtml, buyers, faq, guideHtml, author, DISCLOSURE } from "../../data/cozy";
+
+const cozyTop = {
+  badge: "#1 Best Overall Space Heater 2026",
+  name: top.name,
+  image: IMG.pro,
+  imageCrop: true,
+  grade: top.grade,
+  score: top.score,
+  scoreLabel: top.scoreLabel,
+  stars: "4.8",
+  ratingLine: "★ 4.8/5 · 17,673+ reviews (maker’s site)*",
+  oldPrice: top.oldPrice,
+  price: top.price,
+  off: "50% off",
+  saleEnd: `Black Friday price ends ${SALE_END}`,
+  saleHeadline: "UP TO 70% OFF",
+  cta: top.cta,
+  trust: top.trust,
+  codeLine: top.bundleLine,
+  con: top.con,
+  bullets: top.bullets,
+  moreBullets: top.moreBullets,
+  bars: top.bars,
+  reviews: top.reviews,
+  reviewSource: "Verified customer, from Cozy Cove’s website",
+  ship: "Ships from the USA in 2–3 days · shipping $8.99",
+};
+const cozyRivals = rivals.map((r) => ({
+  rank: r.rank, name: r.name, grade: r.grade, score: r.score, label: r.label, ratingLine: "Amazon listing",
+  bullets: [...r.pros.map((t) => ({ t })), ...r.cons.map((t) => ({ t, x: true }))],
+  verdict: r.verdict, url: r.url,
+}));
+---
+
+<ReviewPageRipV2
+  title="Best Space Heaters 2026: 5 Compared – One Clear Winner | The Life Insider"
+  description="We compared 5 popular space heaters on heat-up speed, running cost, safety and noise. One plug-in wall heater stood out. Black Friday pricing live now."
+  h1Map={H1}
+  hookMap={HOOK}
+  verdictMap={VERDICT}
+  saleBar={saleBar}
+  updated={UPDATED}
+  author={author}
+  link={() => CC_LINK}
+  exitUrl={CC_EXIT_LINK}
+  top={cozyTop}
+  rivals={cozyRivals}
+  rivalPlaceholder
+  listLede='Here are our <span class="ul">Top 5 Space Heaters for 2026</span>, with <a href="#review">a full review of our #1 pick further down:</a>'
+  bandLabel='Best Space Heater for One Room in <span class="yr">2026</span>'
+  stamp="<b>#1</b>Best Overall 2026"
+  intro={{ h2: intro.h2, pas: intro.pas, more: intro.more }}
+  reviewHtml={reviewHtml}
+  whereHtml={whereHtml}
+  buyers={{ ...buyers, source: "Verified customer, from Cozy Cove’s website" }}
+  faq={faq.map(([q, a]) => ({ q, a }))}
+  afterFaqHtml={guideHtml}
+  disclosure={DISCLOSURE}
+  sticky={{ name: sticky.name, image: IMG.thumb, price: sticky.price, oldPrice: sticky.oldPrice, button: sticky.button }}
+  exit={{ kicker: exitPop.kicker, title: exitPop.title, body: exitPop.body, button: exitPop.button, dismiss: exitPop.dismiss }}
+>
+  {CPV_CAMPAIGN !== "TBD" && <Fragment slot="body-end"><CpvTracker campaign={CPV_CAMPAIGN} /></Fragment>}
+</ReviewPageRipV2>
