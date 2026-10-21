@@ -38,8 +38,15 @@ const wsTop = {
   reviewSource: "Verified customer, from Walla Sound’s website",
   ship: "Free shipping · sent the same or next business day (US)",
 };
+const RIVAL_IMG: Record<string, string> = {
+  "Bose SoundLink Max": "/images/walla/rival-bose-soundlink-max.webp",
+  "Turtlebox Ranger": "/images/walla/rival-turtlebox-ranger.webp",
+  "JBL Charge 6": "/images/walla/rival-jbl-charge-6.webp",
+  "Sonos Roam 2": "/images/walla/rival-sonos-roam-2.webp",
+};
 const wsRivals = rivals.map((r) => ({
-  rank: r.rank, name: r.name, grade: "", score: r.score, label: r.label, ratingLine: "Editor’s score",
+  rank: r.rank, name: r.name,
+  image: RIVAL_IMG[r.name] ? { src: RIVAL_IMG[r.name], alt: r.name, w: 400, h: 400 } : undefined, grade: "", score: r.score, label: r.label, ratingLine: "Editor’s score",
   bullets: [...r.pros.map((t) => ({ t })), ...r.cons.map((t) => ({ t, x: true }))],
   verdict: r.verdict, url: r.url,
 }));
@@ -58,7 +65,6 @@ const wsRivals = rivals.map((r) => ({
   exitUrl={WS_EXIT_LINK}
   top={wsTop}
   rivals={wsRivals}
-  rivalPlaceholder
   listLede='Here are our <span class="ul">Top 5 Bluetooth Speakers for 2026</span>, with <a href="#review">a full review of our #1 pick further down:</a>'
   bandLabel='Best Bluetooth Speaker for the Backyard in <span class="yr">2026</span>'
   stamp="<b>#1</b>Best Overall 2026"

@@ -31,7 +31,7 @@
    QUOTES: verbatim from Walla Sound's checkout (Dan T., John K.) and its own advertorial (Mike R., Sarah T.,
      Jennifer M.), attributed to the maker's site, never as our buyers. Chelsea S. skipped (cites IP67).
    RIVALS: maker pages read 22 Oct 2026 (bose.com, sonos.com, turtleboxaudio.com, jbl.com via reader).
-     Decoy links = untagged Amazon SEARCH urls (never a rival brand's site), no rival photos.
+     Decoy links = untagged Amazon SEARCH urls (never a rival brand's site). Rival photos: makers' own product shots (23 Oct), shown with the rival name.
    IMAGES: merchant offer-page assets (offer.wallasound.com/boom/img/int1/*) + Aug merchant pack.
    ========================================================================= */
 
