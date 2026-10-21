@@ -21,7 +21,7 @@
    IMAGES: merchant offer-page assets (cozycovepro.com/cozycovepro/images/inter/*), product shot flattened on white.
    ========================================================================= */
 
-export const CPV_CAMPAIGN = "TBD"; // Sam creates "Google - Cozy Cove" in CPV One (LP 28 + offer 22), then set the id here
+export const CPV_CAMPAIGN = "31"; // Sam creates "Google - Cozy Cove" in CPV One (LP 28 + offer 22), then set the id here
 export const CPV_ROOT = "https://track.thelifeinsider.com/";
 export const CC_LINK = `${CPV_ROOT}base2.php`;
 export const CC_EXIT_LINK = `${CPV_ROOT}base2.php?sub2=exit`;

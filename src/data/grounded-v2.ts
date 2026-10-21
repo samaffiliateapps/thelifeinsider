@@ -27,7 +27,7 @@ export { CPV_CAMPAIGN, DEAL_CALENDAR, ROLLING_SALE_END } from "./grounded";
    "1" = same slot as v1 (safe: the visit and the click always resolve to campaign 10).
    Switch to the v2 slot number ONLY after Sam has attached the v2 LP to campaign 10 in CPV One
    (see V2-BUILD-2026-10-21.md §Rotation). */
-export const GV2_CPV_LP = "1";
+export const GV2_CPV_LP = "2";
 
 export const UPDATED_V2 = "October 21, 2026";
 export const MONTH_STAMP = "October 2026"; // build-time; the page refreshes it to the reader's current month
