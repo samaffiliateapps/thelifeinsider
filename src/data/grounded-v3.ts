@@ -24,7 +24,7 @@ export { CPV_CAMPAIGN } from "./grounded";
 /* CPV One landing-page slot passed to checkdirect(10, <slot>).
    "1" = v1's slot: safe, the visit and the click always resolve to campaign 10.
    Switch to the v3 slot number ONLY after Sam has attached the v3 LP to campaign 10 in CPV One. */
-export const GV3_CPV_LP = "1";
+export const GV3_CPV_LP = "2"; // 22 Oct: campaign 10 now has only slot 2 (old slot 1 removed in CPV)
 
 export const UPDATED_V3 = "October 22, 2026";
 export const ROLLING_BYLINE = true; // byline "Updated <reader's date>" like v1/v2. Deadlines are never rolling on v3.
