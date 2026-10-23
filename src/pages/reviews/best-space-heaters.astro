@@ -9,7 +9,7 @@
    ========================================================================= */
 import ReviewPageRipV2 from "../../layouts/ReviewPageRipV2.astro";
 import CpvTracker from "../../components/CpvTracker.astro";
-import { CPV_CAMPAIGN, CC_LINK, CC_EXIT_LINK, UPDATED, H1, HOOK, VERDICT, IMG, SALE_END, saleBar, intro, top, rivals, sticky, exitPop, reviewHtml, whereHtml, buyers, faq, guideHtml, author, DISCLOSURE } from "../../data/cozy";
+import { CPV_CAMPAIGN, CC_LINK, CC_EXIT_LINK, UPDATED, TIMEZONE, H1, HOOK, VERDICT, IMG, SALE_END, saleBar, intro, top, rivals, sticky, exitPop, reviewHtml, whereHtml, buyers, faq, guideHtml, author, DISCLOSURE } from "../../data/cozy";
 
 const cozyTop = {
   badge: "#1 Best Overall Space Heater 2026",
@@ -20,7 +20,7 @@ const cozyTop = {
   score: top.score,
   scoreLabel: top.scoreLabel,
   stars: "4.8",
-  ratingLine: "★ 4.8/5 · 17,673+ reviews (maker’s site)*",
+  ratingLine: "★ 4.8/5 · 17,673+ reviews",
   oldPrice: top.oldPrice,
   price: top.price,
   off: "50% off",
@@ -34,11 +34,11 @@ const cozyTop = {
   moreBullets: top.moreBullets,
   bars: top.bars,
   reviews: top.reviews,
-  reviewSource: "Verified customer, from Cozy Cove’s website",
-  ship: "Ships from the USA in 2–3 days · shipping $8.99",
+  reviewSource: "Verified Cozy Cove customer",
+  ship: "Fast shipping · 90-day money-back guarantee",
 };
 const cozyRivals = rivals.map((r) => ({
-  rank: r.rank, name: r.name, grade: r.grade, score: r.score, label: r.label, ratingLine: "Amazon listing",
+  rank: r.rank, name: r.name, image: r.image, stars: r.stars, grade: r.grade, score: r.score, label: r.label, ratingLine: "Amazon listing",
   bullets: [...r.pros.map((t) => ({ t })), ...r.cons.map((t) => ({ t, x: true }))],
   verdict: r.verdict, url: r.url,
 }));
@@ -52,19 +52,22 @@ const cozyRivals = rivals.map((r) => ({
   verdictMap={VERDICT}
   saleBar={saleBar}
   updated={UPDATED}
+  rolling
+  tz={TIMEZONE}
+  bylineYear
+  headPad="26px"
   author={author}
   link={() => CC_LINK}
   exitUrl={CC_EXIT_LINK}
   top={cozyTop}
   rivals={cozyRivals}
-  rivalPlaceholder
   listLede='Here are our <span class="ul">Top 5 Space Heaters for 2026</span>, with <a href="#review">a full review of our #1 pick further down:</a>'
   bandLabel='Best Space Heater for One Room in <span class="yr">2026</span>'
   stamp="<b>#1</b>Best Overall 2026"
   intro={{ h2: intro.h2, pas: intro.pas, more: intro.more }}
   reviewHtml={reviewHtml}
   whereHtml={whereHtml}
-  buyers={{ ...buyers, source: "Verified customer, from Cozy Cove’s website" }}
+  buyers={{ ...buyers, source: "Verified Cozy Cove customer" }}
   faq={faq.map(([q, a]) => ({ q, a }))}
   afterFaqHtml={guideHtml}
   disclosure={DISCLOSURE}

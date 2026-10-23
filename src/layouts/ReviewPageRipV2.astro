@@ -28,6 +28,7 @@ export interface Img { src: string; alt: string; w: number; h: number }
 export interface RV2Rival {
   rank: number; name: string; image?: Img; grade: string; score: string; label: string; ratingLine: string;
   bullets: { t: string; x?: boolean }[]; verdict: string; url: string;
+  stars?: number;                    // optional star count (default: 4 if score ≥ 8, else 3)
 }
 export interface Props {
   title: string;
@@ -38,6 +39,9 @@ export interface Props {
   saleBar: string;                   // html, one line
   updated: string;                   // shown in the author line
   rolling?: boolean;                 // fill [data-today-*] / [data-month] with the reader's date
+  tz?: string;                       // optional IANA time zone for the rolling date (e.g. "America/New_York"); default = reader's own
+  bylineYear?: boolean;              // byline date as "Oct 24, 2026" (default "Oct 24")
+  headPad?: string;                  // optional padding-top for the H1 block (e.g. "26px"); default = ripv2.css
   author: { name: string; role: string; photo: string; html: string };
   link: (slot: string) => string;    // offer link per CTA slot
   exitUrl: string;
@@ -78,7 +82,7 @@ const byDate = p.updated.replace(/^(\w{3})\w*/, "$1").replace(/, \d{4}$/, "");
   <article class="rip rv2">
     <a class="rv2-bar" href={L("salebar")} rel={rel} target="_blank" data-cta="salebar" set:html={p.saleBar} />
 
-    <header class="rv2-head rip-wrap">
+    <header class="rv2-head rip-wrap" style={p.headPad ? `padding-top:${p.headPad}` : undefined}>
       <h1 id="rv2h1" set:html={p.h1Map.core} />
       <p class="rv2-hook" id="rv2hook" set:html={p.hookMap.core} />
       <script is:inline define:vars={{ h1: p.h1Map, hook: p.hookMap }}>
@@ -88,7 +92,7 @@ const byDate = p.updated.replace(/^(\w{3})\w*/, "$1").replace(/, \d{4}$/, "");
       </script>
       <div class="rv2-by">
         <img src={p.author.photo} alt="" width="26" height="26" decoding="async" />
-        <span>By <b>{p.author.name}</b> · Updated <span data-today-short>{byDate}</span> </span>
+        <span>By <b>{p.author.name}</b> · Updated {p.bylineYear ? <span data-today-mdy>{p.updated.replace(/^(\w{3})\w*/, "$1")}</span> : <span data-today-short>{byDate}</span>} </span>
       </div>
     </header>
 
@@ -167,7 +171,7 @@ const byDate = p.updated.replace(/^(\w{3})\w*/, "$1").replace(/, \d{4}$/, "");
                   <span class="c-cap">OVERALL SCORE</span>
                   <span class="c-score">{r.score}</span>
                   <span class="c-label">{r.label}</span>
-                  <span class="c-stars" aria-hidden="true">{starRow(parseFloat(r.score) >= 8 ? 4 : 3)}</span>
+                  <span class="c-stars" aria-hidden="true">{starRow(r.stars ?? (parseFloat(r.score) >= 8 ? 4 : 3))}</span>
                   <span class="c-rating" set:html={r.ratingLine} />
                   <span class="c-btn amz">Check Price on Amazon ›</span>
                 </span>
@@ -297,14 +301,15 @@ const byDate = p.updated.replace(/^(\w{3})\w*/, "$1").replace(/, \d{4}$/, "");
     </div>
   </div>
 
-  <script is:inline define:vars={{ rolling: !!p.rolling }}>
+  <script is:inline define:vars={{ rolling: !!p.rolling, tz: p.tz ?? "" }}>
     (function () {
       /* reader's date (rolling pages only: month stamp, byline date, "sale ends today") */
       if (rolling) try {
         var d = new Date();
-        var set = function (sel, opts) { var s = d.toLocaleDateString("en-US", opts); document.querySelectorAll(sel).forEach(function (n) { n.textContent = s; }); };
+        var set = function (sel, opts) { if (tz) opts.timeZone = tz; var s = d.toLocaleDateString("en-US", opts); document.querySelectorAll(sel).forEach(function (n) { n.textContent = s; }); };
         set("[data-month]", { month: "long", year: "numeric" });
         set("[data-today-short]", { month: "short", day: "numeric" });
+        set("[data-today-mdy]", { month: "short", day: "numeric", year: "numeric" });
         set("[data-today-md]", { month: "short", day: "numeric" });
         set("[data-today-day]", { weekday: "long", month: "short", day: "numeric" });
         set("[data-today-long]", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
