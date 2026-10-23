@@ -103,7 +103,7 @@ export interface Top {
 }
 export const top: Top = {
   ribbon: "#1 Best Overall Space Heater 2026",
-  name: "Cozy Cove Pro™ Plug-In Wall Heater",
+  name: "Cozy Cove Pro™ Wall Heater",
   grade: "A+",
   score: "9.6",
   scoreLabel: "Exceptional",
